@@ -70,7 +70,7 @@
 				<select class="mask_style" id="selcregvent" onchange = "select_base_list('selcregvent');"></select>
 			</div>
 			<div class="cajas_style">Buscara productos: 
-				<input class="mask_style" type="search" id="buscar_rv" placeholder="Ingrese Nombre de Producto" list="listproducts">
+				<input class="mask_style" type="search" id="buscar_rv" placeholder="Ingrese Nombre de Producto" list="listproducts" onfocus="el_selec('buscar_rv');">
 			</div>
 			<div class="cajas_style">Precio Dolar: 
 				<input class="mask_style" type="text" id="dolar_rv" readonly>
@@ -112,7 +112,7 @@
 							<input class="input_style_td" type="text" id="rvinput0103" value="" disabled>
 						</td>
 						<td class="celda_style" id="rvcelda0104">
-							<input class="input_style_visible" type="number" min="1" id="rvinput0104" value="1" >
+							<input class="input_style_visible" type="number" min="1" id="rvinput0104" value="1"  onfocus="el_selec('rvinput0104');" >
 						</td>
 						<td class="button_style_r" id="rvcelda0105">
 							<button class="mask_style" type="button" id="buttrv05" onclick="button_reg_venta(0);">Registrar</button>
@@ -132,7 +132,7 @@
 							<input class="input_style_td" type="text" id="rvinput0113" value="" disabled>
 						</td>
 						<td class="celda_style" id="rvcelda0114">
-							<input class="input_style_visible" type="number" min="1" id="rvinput0114" value="1">
+							<input class="input_style_visible" type="number" min="1" id="rvinput0114" value="1" onfocus="el_selec('rvinput0114');" >
 						</td>
 						<td class="button_style_r" id="rvcelda0115">
 							<button class="mask_style" type="button" id="buttrv15" onclick="button_reg_venta(1);">Registrar</button>
@@ -152,7 +152,7 @@
 							<input class="input_style_td" type="text" id="rvinput0123" value="" disabled>
 						</td>
 						<td class="celda_style" id="rvcelda0124">
-							<input class="input_style_visible" type="number" min="1" id="rvinput0124" value="1">
+							<input class="input_style_visible" type="number" min="1" id="rvinput0124" value="1" onfocus="el_selec('rvinput0124');" >
 						</td>
 						<td class="button_style_r" id="rvcelda0125">
 							<button class="mask_style" type="button" id="buttrv25" onclick="button_reg_venta(2);">Registrar</button>
@@ -172,7 +172,7 @@
 							<input class="input_style_td" type="text" id="rvinput0133" value="" disabled>
 						</td>
 						<td class="celda_style" id="rvcelda0134">
-							<input class="input_style_visible" type="number" min="1" id="rvinput0134" value="1">
+							<input class="input_style_visible" type="number" min="1" id="rvinput0134" value="1" onfocus="el_selec('rvinput0134');" >
 						</td>
 						<td class="button_style_r" id="rvcelda0135">
 							<button class="mask_style" type="button" id="buttrv35" onclick="button_reg_venta(3);">Registrar</button>
@@ -192,7 +192,7 @@
 							<input class="input_style_td" type="text" id="rvinput0143" value="" disabled>
 						</td>
 						<td class="celda_style" id="rvcelda0144">
-							<input class="input_style_visible" type="number" min="1" id="rvinput0144" value="1">
+							<input class="input_style_visible" type="number" min="1" id="rvinput0144" value="1" onfocus="el_selec('rvinput0144');" >
 						</td>
 						<td class="button_style_r" id="rvcelda0145">
 							<button class="mask_style" type="button" id="buttrv45" onclick="button_reg_venta(4);">Registrar</button>
@@ -242,9 +242,9 @@
 					<option id="opt4" value="5">Lista 6</option>
 
 				</select>
-				<input class="element_style_hidden" type="text" id="inputlistaname" onClick="chlistnameinput_a();" onBlur="chlistnameinput_b();">
+				<input class="element_style_hidden" type="text" id="inputlistaname" onClick="chlistnameinput_a();" onBlur="chlistnameinput_b();" onfocus="el_selec('inputlistaname');">
 			</div>
-			<div class="cajas_style">Buscara productos: <input class="mask_style" type="search" id="buscar" placeholder="Buscar Productos" list="listproducts"></div>
+			<div class="cajas_style">Buscara productos: <input class="mask_style" type="search" id="buscar" placeholder="Buscar Productos" list="listproducts" onfocus="el_selec('buscar');"></div>
 			<datalist id="listproducts"></datalist>
 			<section id="tablproductos"></section>
 			<section class="label_style" id="listageneral"></section>
@@ -335,7 +335,7 @@
 						</td>
 					</tr><tr class="fila_style" id="fila011">
 						<td class="celda_style_name" id="exceldafil0">
-							<div>[F1]: 
+							<div id="divf01" onclick="focus_celda_ex('radio0');">[F1]: 
 								<input type="radio" class="input_style" id="radio0" name="fila" onfocus="cursor_en_fila_ex(1);" onBlur="cursor_no_fila_ex(1);">
 							</div>
 						</td>
@@ -348,7 +348,7 @@
 						<td class="celda_style" id="celda0106"></td>
 					</tr><tr class="fila_style" id="fila012">
 						<td class="celda_style_name" id="exceldafil1">
-							<div>[F2]: 
+							<div id="divf02" onclick="focus_celda_ex('radio1');">[F2]: 
 								<input type="radio" class="input_style" id="radio1"  name="fila" onfocus="cursor_en_fila_ex(2);" onBlur="cursor_no_fila_ex(2);">
 							</div>
 						</td>
@@ -361,7 +361,7 @@
 						<td class="celda_style" id="celda0116"></td>
 					</tr><tr class="fila_style" id="fila013">
 						<td class="celda_style_name" id="exceldafil2">
-							<div>[F3]: 
+							<div id="divf03" onclick="focus_celda_ex('radio2');">[F3]: 
 								<input type="radio" class="input_style" id="radio2"  name="fila" onfocus="cursor_en_fila_ex(3);" onBlur="cursor_no_fila_ex(3);">
 							</div>
 						</td>
@@ -374,7 +374,7 @@
 						<td class="celda_style" id="celda0126"></td>
 					</tr><tr class="fila_style" id="fila014">
 						<td class="celda_style_name" id="exceldafil3">
-							<div>[F4]: 
+							<div id="divf04" onclick="focus_celda_ex('radio3');">[F4]: 
 								<input type="radio" class="input_style" id="radio3"  name="fila" onfocus="cursor_en_fila_ex(4);" onBlur="cursor_no_fila_ex(4);">
 							</div>
 						</td>

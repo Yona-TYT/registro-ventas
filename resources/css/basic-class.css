@@ -240,15 +240,11 @@
 	font-weight: bold;
 	font-size: 100%;
 
-	color: #0000ff;
+	color: #ffffff;
 	width: 100%;
 	height: auto;
 
-	border-style: solid;
-	border-color: #000000;
-	border-width: 2px;
-
-	background: rgba(225, 225, 225, 0.9);
+	background: rgba(128, 148, 158, 0.8);
 	overflow: hidden;
 
 }
@@ -421,8 +417,7 @@ tr, .fila_style:hover {
 	background-color: rgba(206, 24, 30, 0.5);
 }
 .input_style_edicion_td:hover {
-	background-color: #47bafc;
-	color: #ffffff;
+	background-color: rgba(206, 24, 30, 0.5);
 }
 
 .logo_style {

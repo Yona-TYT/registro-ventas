@@ -143,6 +143,7 @@ function buscar_lista(text) {
 
 function mostrar_input() {
 	var mask = document.activeElement;
+	mask.setAttribute("placeholder", "");
 	var id_name = mask.id;
 	var id_input = id_name.replace("text_mask", "input"); //remplaza  palabaras en cadenas de texto
 
@@ -170,6 +171,8 @@ function ocultar_input()
 	var current_input = document.activeElement;
 	var current_id_name = current_input.id;
 	var input_old = current_element;
+
+	el_selec(current_id_name);
 	if(input_old){
 		var id_name_old = input_old.id;
 		var id_mask_old = id_name_old.replace("input", "text_mask"); //remplaza  palabaras en cadenas de texto

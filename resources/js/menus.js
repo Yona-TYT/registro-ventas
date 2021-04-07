@@ -238,4 +238,8 @@ function preloder_selec_list(id) {
 	//selec.setAttribute("onclick","selec_fechas('selchisfec');");
 }
 
+function el_selec(id){
+	var elm = document.getElementById(id);
+	elm.select();
+}
 

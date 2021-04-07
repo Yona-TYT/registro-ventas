@@ -31,7 +31,7 @@ function create_table(){
 		var fila = document.createElement("tr");
 
 		fila.setAttribute("id", "fila"+j);
-		//fila.setAttribute("class","fila_style");
+		fila.setAttribute("class","label_style");
 
 		//fila.setAttribute("onmouseover", "cursor_en_fila("+j+");" );
 		//fila.setAttribute("onmouseout", "cursor_no_fila("+j+");" );
@@ -145,6 +145,7 @@ function create_table(){
 				var celda = document.createElement("td");
 
 				celda.setAttribute("id", "celd"+celda_id)
+				celda.setAttribute("class","celda_style_td");
 
 				
 				if(i==0){
@@ -324,8 +325,10 @@ function create_table_rp(){
 
 				tex_mask.setAttribute("readonly", "");
 				tex_mask.setAttribute("class", "input_style_edicion_td");
+				tex_mask.setAttribute("placeholder", "Ingrese Valor");
 
 				input.setAttribute("id", "inputrp"+celda_id);
+				input.setAttribute("placeholder", "Ingrese Valor");
 
 				//Cuadros de solo textos
 				if (i==0 || i ==1){
