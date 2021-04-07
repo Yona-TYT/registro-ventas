@@ -50,6 +50,18 @@ function clonar_filtros(id) {
 }
 
 function visible_element(opt) {
+
+	for(var j = 1; j<6;j++){
+		var bot_temp = document.getElementById("butopt"+j);
+		bot_temp.setAttribute("class","mask_style");
+		
+	}
+
+	var bott = document.getElementById("butopt"+opt);
+	if(bott)
+		bott.setAttribute("class","butt_selec_style");
+
+
 	var table_regvent = document.getElementById("seccion1");
 	var table_regpro = document.getElementById("seccion2");
 	var historial = document.getElementById("seccion3");
