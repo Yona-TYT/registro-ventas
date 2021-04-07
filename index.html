@@ -1,0 +1,404 @@
+<!DOCTYPE html>
+<html lang="es">
+	<head>
+		<meta charset="UTF-8">
+		<title>Proyecto TYT</title>
+
+		<link rel="icon" href="resources/img/icono.png" type="image/png"sizes="50x50">
+		<! Aquí definimos los Scrit js para esta página -->
+		<script src="resources/js/crear-tables.js"></script>
+		<script src="resources/js/save_date.js"></script>
+		<script src="resources/js/main.js"></script>
+		<script src="resources/js/basic_calc.js"></script>
+		<script src="resources/js/export-cvs.js"></script>
+		<script src="resources/js/menus.js"></script>
+
+		<script src="resources/js/registro-ventas.js"></script>
+		<script src="resources/js/registro-productos.js"></script>
+		<script src="resources/js/lista-productos.js"></script>
+		<script src="resources/js/historial.js"></script>
+
+		<script type="text/javascript" src="https://unpkg.com/xlsx@0.14.1/dist/xlsx.full.min.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.1.0/papaparse.min.js"></script>
+
+
+
+		<! Fin del js -->
+		<! Aquí definimos los estilo CSS para esta página -->
+		<link rel="stylesheet" href="resources/css/main.css"></link>
+		<link rel="stylesheet" href="resources/css/basic-class.css"></link>
+
+		<link rel="stylesheet" href="resources/css/auto-pantalla.css"></link>
+
+
+		<! Fin del CSS -->
+	</head>
+	<body onLoad="init();" >
+		<section class="label_style">
+
+			<h1 class="mask_style">Experimento de Lista de negocios en HTML</h1>
+
+			<div class="cajas_style">
+				<button class="mask_style" type="button" id="butopt1" onclick="visible_element(1);">
+				Registro de Ventas
+			</div>
+			<div class="cajas_style">
+				<button class="mask_style" type="button" id="butopt2" onclick="visible_element(2);">
+				Registro de Productos
+			</div>
+			<div class="cajas_style">
+				<button class="mask_style" type="button" id="butopt4" onclick="visible_element(3);">
+				Historial de Ventas
+			</div>
+			<div class="cajas_style" >
+				<button class="mask_style" type="button" id="butopt4" onclick="visible_element(4);">
+				Lista de Productos
+			</div>
+			<div class="cajas_style">
+				<button class="mask_style" type="button" id="butopt5" onclick="visible_element(5);">
+				Importar Lista
+			</div>
+		</section>
+
+		<! ---------------- Seccion1 Registro de ventas ------------------>
+
+		<section class="label_style" id="seccion1">
+			<div class="cajas_style">Seleccione las lista: 
+				<select class="mask_style" id="selcregvent" onchange = "select_base_list('selcregvent');"></select>
+			</div>
+			<div class="cajas_style">Buscara productos: 
+				<input class="mask_style" type="search" id="buscar_rv" placeholder="Ingrese Nombre de Producto" list="listproducts">
+			</div>
+			<div class="cajas_style">Precio Dolar: 
+				<input class="mask_style" type="text" id="dolar_rv" readonly>
+			</div>
+			<table class="table_style" id="tablerv">
+				<tbody>
+					<tr class="button_style_x" id="frvila10">
+						<td class="celda_style_name" id="rvceldacol00" >
+							<input class="input_style_td" type="text" value="Nombre Producto" readonly>
+						</td>
+						<td class="celda_style_name" id="rvceldacol01">
+							<input class="input_style_td" type="text" value="Cantidad Disponible" readonly>
+						</td>
+						<td class="celda_style_name" id="rvceldacol02">
+							<input class="input_style_td" type="text" value="Precio Dolar" readonly>
+						</td>
+						<td class="celda_style_name" id="rvceldacol03">
+							<input class="input_style_td" type="text" value="Precio BsF" readonly>
+						</td>
+						<td class="celda_style_name" id="rvceldacol04">
+							<input class="input_style_td" type="text" value="Cant. Venta" readonly>
+						</td>
+						<td class="celda_style_name" id="rvceldacol05">
+							<input class="input_style_td" type="text" value="Accion" readonly>
+						</td>
+
+					</tr>
+					<tr class="fila_style" id="frvila11">
+						<td class="celda_style" id="rvcelda0100">
+							<input class="input_style_td" type="text" id="rvinput0100" value="" disabled>
+						</td>
+						<td class="celda_style" id="rvcelda0101">
+							<input class="input_style_td" type="text" id="rvinput0101" value="" disabled>
+						</td>
+						<td class="celda_style" id="rvcelda0102">
+							<input class="input_style_td" type="text" id="rvinput0102" value="" disabled>
+						</td>
+						<td class="celda_style" id="rvcelda0103">
+							<input class="input_style_td" type="text" id="rvinput0103" value="" disabled>
+						</td>
+						<td class="celda_style" id="rvcelda0104">
+							<input class="input_style_visible" type="number" min="1" id="rvinput0104" value="1" >
+						</td>
+						<td class="button_style_r" id="rvcelda0105">
+							<button class="mask_style" type="button" id="buttrv05" onclick="button_reg_venta(0);">Registrar</button>
+						</td>
+					</tr>
+					<tr class="fila_style" id="frvila12">
+						<td class="celda_style" id="rvcelda0110">
+							<input class="input_style_td" type="text" id="rvinput0110" value="" disabled>
+						</td>
+						<td class="celda_style" id="rvcelda0111">
+							<input class="input_style_td" type="text" id="rvinput0111" value="" disabled>
+						</td>
+						<td class="celda_style" id="rvcelda0112">
+							<input class="input_style_td" type="text" id="rvinput0112" value="" disabled>
+						</td>
+						<td class="celda_style" id="rvcelda0113">
+							<input class="input_style_td" type="text" id="rvinput0113" value="" disabled>
+						</td>
+						<td class="celda_style" id="rvcelda0114">
+							<input class="input_style_visible" type="number" min="1" id="rvinput0114" value="1">
+						</td>
+						<td class="button_style_r" id="rvcelda0115">
+							<button class="mask_style" type="button" id="buttrv15" onclick="button_reg_venta(1);">Registrar</button>
+						</td>
+					</tr>
+					<tr class="fila_style" id="frvila13">
+						<td class="celda_style" id="rvcelda0120">
+							<input class="input_style_td" type="text" id="rvinput0120" value="" disabled>
+						</td>
+						<td class="celda_style" id="rvcelda0121">
+							<input class="input_style_td" type="text" id="rvinput0121" value="" disabled>
+						</td>
+						<td class="celda_style" id="rvcelda0122">
+							<input class="input_style_td" type="text" id="rvinput0122" value="" disabled>
+						</td>
+						<td class="celda_style" id="rvcelda0123">
+							<input class="input_style_td" type="text" id="rvinput0123" value="" disabled>
+						</td>
+						<td class="celda_style" id="rvcelda0124">
+							<input class="input_style_visible" type="number" min="1" id="rvinput0124" value="1">
+						</td>
+						<td class="button_style_r" id="rvcelda0125">
+							<button class="mask_style" type="button" id="buttrv25" onclick="button_reg_venta(2);">Registrar</button>
+						</td>
+					</tr>
+					<tr class="fila_style" id="frvila14">
+						<td class="celda_style" id="rvcelda0130">
+							<input class="input_style_td" type="text" id="rvinput0130" value="" disabled>
+						</td>
+						<td class="celda_style" id="rvcelda0131">
+							<input class="input_style_td" type="text" id="rvinput0131" value="" disabled>
+						</td>
+						<td class="celda_style" id="rvcelda0132">
+							<input class="input_style_td" type="text" id="rvinput0132" value="" disabled>
+						</td>
+						<td class="celda_style" id="rvcelda0133">
+							<input class="input_style_td" type="text" id="rvinput0133" value="" disabled>
+						</td>
+						<td class="celda_style" id="rvcelda0134">
+							<input class="input_style_visible" type="number" min="1" id="rvinput0134" value="1">
+						</td>
+						<td class="button_style_r" id="rvcelda0135">
+							<button class="mask_style" type="button" id="buttrv35" onclick="button_reg_venta(3);">Registrar</button>
+						</td>
+					</tr>
+					<tr class="fila_style" id="frvila15">
+						<td class="celda_style" id="rvcelda0140">
+							<input class="input_style_td" type="text" id="rvinput0140" value="" disabled>
+						</td>
+						<td class="celda_style" id="rvcelda0141">
+							<input class="input_style_td" type="text" id="rvinput0141" value="" disabled>
+						</td>
+						<td class="celda_style" id="rvcelda0142">
+							<input class="input_style_td" type="text" id="rvinput0142" value="" disabled>
+						</td>
+						<td class="celda_style" id="rvcelda0143">
+							<input class="input_style_td" type="text" id="rvinput0143" value="" disabled>
+						</td>
+						<td class="celda_style" id="rvcelda0144">
+							<input class="input_style_visible" type="number" min="1" id="rvinput0144" value="1">
+						</td>
+						<td class="button_style_r" id="rvcelda0145">
+							<button class="mask_style" type="button" id="buttrv45" onclick="button_reg_venta(4);">Registrar</button>
+						</td>
+					</tr>
+				</tbody>
+			</table>
+			<div class="cajas_style">Total en Dolar: <input class="mask_style" type="text" id="rv_totaldol" value="0,00 $" readonly></div>
+			<div class="cajas_style">Total en Bsf: <input class="mask_style" type="text" id="rv_totalbsf" value="0,00 BsF" readonly></div>
+			<div class="cajas_style">Nombre Cliente: <input class="mask_style" type="text" id="rv_clnombre" placeholder="Ingrese Nombre de Cliente" list="list_datacl"></div>
+			<div class="cajas_style">Pendiente:  <input class="" input type="checkbox" id="pend_mark"></div>
+			<div class="cajas_style"><button class="mask_style" type="button" id="buttrvtotal" onclick="guardar_venta();">Registrar Venta</button></div>
+
+
+			<section class="label_style" id="registroactual"></section>
+		</section>
+		<! ------- Seccion2 Registro de Productos ------------- >
+		<section class="label_style" id="seccion2">
+			<div class="cajas_style">Seleccione las lista: 
+				<select class="mask_style" id="selcregprod" onchange = "select_base_list('selcregprod');"></select>
+			</div>
+			<section class="label_style" id="sect_rp"></section>
+		</section>
+
+		<! ------- Seccion3 Historial de ventas ------------- >
+		<section class="label_style" id="seccion3">
+			<div class="cajas_style">Seleccione Fecha: 
+				<select class="mask_style" id="selchisfec"></select>
+			</div>
+			<section class="label_style" id="historialventa"></section>
+			<datalist id="list_datacl"></datalist>
+		</section>
+
+		<! ------- Seccion4 Lista general de productos ------------- >
+
+		<section class="label_style" id="seccion4">
+
+			<div class="cajas_style">Modo edicion: <input class="mask_style" input type="checkbox" id="edit_mode"></div>
+			<div class="cajas_style">
+				<label for="selectlistaname">Seleccione las lista: </label>
+				<select class="mask_style" id="selectlistaname" onchange = "select_base_list('selectlistaname');" >
+					<option id="opt0" value="0">Lista 1</option>
+					<option id="opt1" value="1">Lista 2</option>
+					<option id="opt2" value="2">Lista 3</option>
+					<option id="opt3" value="3">Lista 4</option>
+					<option id="opt4" value="4">Lista 5</option>
+					<option id="opt4" value="5">Lista 6</option>
+
+				</select>
+				<input class="element_style_hidden" type="text" id="inputlistaname" onClick="chlistnameinput_a();" onBlur="chlistnameinput_b();">
+			</div>
+			<div class="cajas_style">Buscara productos: <input class="mask_style" type="search" id="buscar" placeholder="Buscar Productos" list="listproducts"></div>
+			<datalist id="listproducts"></datalist>
+			<section id="tablproductos"></section>
+			<section class="label_style" id="listageneral"></section>
+
+		</section>
+
+
+		<! ---------------- Seccion5 Inportar los datos   ------------------>
+
+		<section class="label_style" id="seccion5">
+			<div class="cajas_style">
+				<label class="input_style_name" for="archivos">Seleccione archivo: </label>
+				<input  type="file" name="archivos" id="archivos" accept=".xlsx , .csv, .xlsm, .xls">
+			</div>
+
+			<section>
+			<div class="cajas_style">
+				<label for="startfila">Iniciar lectura desde: </label>
+				<select class="mask_style" id="startfila">
+					<option value="0">Fila 1</option>
+					<option value="1">Fila 2</option>
+					<option value="2">Fila 3</option>
+					<option value="3">Fila 4</option>
+					<option value="4">Fila 5</option>
+					<option value="5">Fila 6</option>
+					<option value="6">Fila 7</option>
+					<option value="7">Fila 8</option>
+					<option value="8">Fila 9</option>
+					<option value="9">Fila 10</option>
+					<option value="10">Fila 11</option>
+					<option value="11">Fila 12</option>
+					<option value="12">Fila 13</option>
+					<option value="13">Fila 14</option>
+					<option value="14">Fila 15</option>
+					<option value="15">Fila 16</option>
+					<option value="16">Fila 17</option>
+					<option value="17">Fila 18</option>
+					<option value="18">Fila 19</option>
+					<option value="19">Fila 20</option>
+				</select>
+			</div>
+			<div class="cajas_style">
+				<label for="listcolum">Seleccione el orden de las columnas: </label>
+				<select class="mask_style" name="listcolum" id="listcolum">
+					<option value="default">Orden automatico</option>
+					<option value="0">Nombre Producto</option>
+					<option value="1">Cantidad Dispon.</option>
+					<option value="2">Precio Entrada</option>
+				</select>
+			</div>
+				<div class="cajas_style"><button class="mask_style" type="button" id="butreset" onclick="reset_preview();">Reiniciar</div>
+				<div class="cajas_style"><button class="mask_style" type="button" id="butsendcol" onclick="button_selelc_fila()">Enviar Colum</div>
+				<div class="cajas_style">Vista previa del documento importado:</div>
+			</section>
+
+			<table class="table_style" id="tableprev0">
+				<tbody>
+					<tr class="button_style_x" id="fila010">
+						<td class="celda_style_name"></td>
+						<td class="celda_style_name" id="exceldacol00" >
+							<input class="input_style_td" type="text" value="A" readonly>
+							<input type="checkbox" id="check00" value="0">
+						</td>
+						<td class="celda_style_name" id="exceldacol01">
+							<input class="input_style_td" type="text" value="B" readonly>
+							<input type="checkbox" id="check01" value="1">							
+						</td>
+						<td class="celda_style_name" id="exceldacol02">
+							<input class="input_style_td" type="text" value="C" readonly>
+							<input class="input_style_td" type="checkbox" id="check02" value="2">							
+
+						</td>
+						<td class="celda_style_name" id="exceldacol03">
+							<input class="input_style_td" type="text" value="D" readonly>
+							<input class="input_style_td" type="checkbox" id="check03" value="3">							
+						</td>
+						<td class="celda_style_name" id="exceldacol04">
+							<input class="input_style_td" type="text" value="E" readonly>
+							<input class="input_style_td" type="checkbox" id="check04" value="4">							
+						</td>
+						<td class="celda_style_name" id="exceldacol05">
+							<input class="input_style_td" type="text" value="F" readonly>
+							<input class="input_style_td" type="checkbox" id="check05" value="5">							
+						</td>
+						<td class="celda_style_name" id="exceldacol06">
+							<input class="input_style_td" type="text" value="G" readonly>
+							<input class="input_style_td" type="checkbox" id="check06" value="6">							
+						</td>
+					</tr><tr class="fila_style" id="fila011">
+						<td class="celda_style_name" id="exceldafil0">
+							<section>[F1]: 
+								<input type="radio" class="input_style" id="radio0" name="fila" onfocus="cursor_en_fila_ex(1);" onBlur="cursor_no_fila_ex(1);">
+							</section>
+						</td>
+						<td class="celda_style" id="celda0100"></td>
+						<td class="celda_style" id="celda0101"></td>
+						<td class="celda_style" id="celda0102"></td>
+						<td class="celda_style" id="celda0103"></td>
+						<td class="celda_style" id="celda0104"></td>
+						<td class="celda_style" id="celda0105"></td>
+						<td class="celda_style" id="celda0106"></td>
+					</tr><tr class="fila_style" id="fila012">
+						<td class="celda_style_name" id="exceldafil1">
+							<section>[F2]: 
+								<input type="radio" class="input_style" id="radio1"  name="fila" onfocus="cursor_en_fila_ex(2);" onBlur="cursor_no_fila_ex(2);">
+							</section>
+						</td>
+						<td class="celda_style" id="celda0110"></td>
+						<td class="celda_style" id="celda0111"></td>
+						<td class="celda_style" id="celda0112"></td>
+						<td class="celda_style" id="celda0113"></td>
+						<td class="celda_style" id="celda0114"></td>
+						<td class="celda_style" id="celda0115"></td>
+						<td class="celda_style" id="celda0116"></td>
+					</tr><tr class="fila_style" id="fila013">
+						<td class="celda_style_name" id="exceldafil2">
+							<section>[F3]: 
+								<input type="radio" class="input_style" id="radio2"  name="fila" onfocus="cursor_en_fila_ex(3);" onBlur="cursor_no_fila_ex(3);">
+							</section>
+						</td>
+						<td class="celda_style" id="celda0120"></td>
+						<td class="celda_style" id="celda0121"></td>
+						<td class="celda_style" id="celda0122"></td>
+						<td class="celda_style" id="celda0123"></td>
+						<td class="celda_style" id="celda0124"></td>
+						<td class="celda_style" id="celda0125"></td>
+						<td class="celda_style" id="celda0126"></td>
+					</tr><tr class="fila_style" id="fila014">
+						<td class="celda_style_name" id="exceldafil3">
+							<section>[F4]: 
+								<input type="radio" class="input_style" id="radio3"  name="fila" onfocus="cursor_en_fila_ex(4);" onBlur="cursor_no_fila_ex(4);">
+							</section>
+						</td>
+						<td class="celda_style" id="celda0130"></td>
+						<td class="celda_style" id="celda0131"></td>
+						<td class="celda_style" id="celda0132"></td>
+						<td class="celda_style" id="celda0133"></td>
+						<td class="celda_style" id="celda0134"></td>
+						<td class="celda_style" id="celda0135"></td>
+						<td class="celda_style" id="celda0136"></td>
+					</tr>
+				</tbody>
+			</table>
+
+			<section class="label_style" id="templatetable">
+
+
+			<section>
+				<div class="cajas_style">
+					<label for="listbasedato">Seleccione la lista para guardar: </label>
+					<select class="mask_style" name="listbasedato" id="listbasedato" onchange = "select_base_list('listbasedato');"></select>
+				</div>
+				<div class="cajas_style"><button class="mask_style" type="button" id="butsavelist" onclick="recovery_data();">Guardar lista</div>
+				<div class="cajas_style">Vista previa del orden de los datos en la lista:</div>
+			</section>
+			</section>
+		</section>
+
+	</body>
+</html>

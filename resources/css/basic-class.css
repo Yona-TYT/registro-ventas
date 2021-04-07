@@ -1,0 +1,424 @@
+.table_style{
+	width: 100%;
+	height: auto;
+}
+
+.colum_selec_style {
+
+	color: #fffffe;
+	text-align: center;
+	font-weight: bold;
+	font-size:120%;
+
+	width: auto;
+	height: auto;
+
+	border-style: solid;
+	border-color: #0000ff;
+	border-width: 2px;
+
+	background-color: rgba(20, 24, 80, 0.5);
+	overflow: hidden;
+
+}
+.colum_click_style {
+
+	color: #fffffe;
+	text-align: center;
+	font-weight: bold;
+	font-size:120%;
+
+	width: auto;
+	height: auto;
+
+	border-style: solid;
+	border-color: #0000ff;
+	border-width: 2px;
+
+	background-color: rgba(67, 195, 48, 0.4);
+	overflow: hidden;
+
+}
+
+.celda_style {
+
+	color: #fffffe;
+	text-align: center;
+	font-weight: bold;
+	font-size:120%;
+
+	width: 1%;
+	height: 10%;
+
+	border-style: solid;
+	border-color: #0000ff;
+	border-width: 2px;
+
+
+	overflow: hidden;
+
+}
+
+.celda_style_x {
+
+	color: #001326;
+	text-align: center;
+	font-weight: bold;
+	font-size:100%;
+
+	width: 0.5%;
+	height: 0.5%;
+
+	border-style: solid;
+	border-color: #0000ff;
+	border-width: 2px;
+
+	background-color: #6e3068;
+
+	overflow: hidden;
+
+}
+
+
+.celda_style_td {
+
+	color: #001326;
+	text-align: center;
+	font-weight: bold;
+	font-size:110%;
+
+	width: 10%;
+	height: 10%;
+
+	border-style: solid;
+	border-color: #0000ff;
+	border-width: 2px;
+
+
+	overflow: hidden;
+
+}
+
+.celda_style_name {
+	color: #fffffe;
+	text-align: center;
+	font-weight: bold;
+	font-size:110%;
+
+	width: 10%;
+	height: 10%;
+
+	border-style: solid;
+	border-color: #fffffe;
+	border-width: 2px;
+
+	background-color: #6e3068;
+	overflow: hidden;
+
+}
+
+.button_style_x {
+	color: #fffffe;
+	text-align: center;
+	font-weight: bold;
+	font-size:100%;
+
+	width: 100%;
+	height: auto;
+
+	border-style: solid;
+	border-color: #fffffe;
+	border-width: 2px;
+
+	background-color: #ce181e;
+
+	overflow: hidden;
+}
+
+.input_style {
+
+	text-align: center;
+	font-weight: bold;
+	font-size:100%;
+
+	color: #ffffff;
+	width: 5%;
+	height: 10%;
+
+	background: rgba(55, 64, 145, 0.4);
+	overflow: hidden;
+
+}
+
+.input_style_name {
+
+	text-align: center;
+	font-weight: bold;
+	font-size:110%;
+
+	border-style: solid;
+	border-color: #ffffff;
+	border-width: 1px;
+
+	color: #ffffff;
+	width: 10%;
+	height: 10%;
+
+	background: rgba(55, 64, 145, 0);
+	overflow: hidden;
+
+}
+.input_style_td {
+
+	text-align: center;
+	font-weight: bold;
+	font-size:100%;
+
+	color: #ffffff;
+	width: 100%;
+	height: auto;
+
+	background: rgba(55, 64, 145, 0.4);
+}
+
+.input_text_style {
+	text-align: center;
+	font-weight: bold;
+	font-size:100%;
+
+	color: #ffffff;
+	width: 100%;
+	height: auto;
+
+	background: rgba(55, 64, 145, 0.4);
+	overflow: scroll;
+}
+
+.input_style_hidden {
+	display: none;
+
+}
+
+.input_style_visible{
+
+	text-align: center;
+	font-weight: bold;
+	font-size:100%;
+
+	color: #fffffe;
+	width: 100%;
+	height: auto;
+
+	border-style: dotted;
+	border-color: #fffffe;
+	border-width: 2px;
+
+	background: #2a7991;
+	overflow: hidden;
+
+}
+
+.input_style_edicion{
+	text-align: center;
+	font-weight: bold;
+	font-size: 100%;
+
+	color: #0000ff;
+	width: 100%;
+	height: auto;
+
+	border-style: solid;
+	border-color: #000000;
+	border-width: 2px;
+
+	background: rgba(225, 225, 225, 0.9);
+	overflow: hidden;
+
+}
+.input_style_edicion_td{
+	text-align: center;
+	font-weight: bold;
+	font-size: 100%;
+
+	color: #0000ff;
+	width: 100%;
+	height: auto;
+
+	border-style: solid;
+	border-color: #000000;
+	border-width: 2px;
+
+	background: rgba(225, 225, 225, 0.9);
+	overflow: hidden;
+
+}
+
+.input_style_selec {
+
+	text-align: center;
+	font-weight: bold;
+	font-size:100%;
+
+	color: #ffffff;
+	width: 100%;
+	height: auto;
+
+	background-color: rgba(206, 24, 30, 0.5);
+	overflow: hidden;
+
+}
+
+.mask_style {
+	text-align: center;
+	font-weight: bold;
+	font-size:100%;
+
+	color: #ffffff;
+	width: 100%;
+	height: auto;
+
+	background: rgba(55, 64, 145, 0.4);
+	overflow: hidden;
+}
+.div_list_style {
+	text-align: left;
+	font-weight: bold;
+	font-size:100%;
+
+	color: #ffffff;
+	width: 100%;
+	height: auto;
+
+	border-width: 1px;
+	border-style: solid;
+	border-color: #fafafa;
+
+	background: rgba(55, 64, 145, 0.4);
+	overflow: hidden;
+}
+.desc_style {
+
+	color: #fffffe;
+	font-weight: bold;
+	font-size:120%;
+
+	width: 10%;
+	height: auto;
+
+	border-width: 2px;
+	border-style: dotted;
+	border-color: #fafafa;
+
+	background-color: #6e3068;
+	overflow: hidden;
+
+}
+
+.colum_name_style {
+
+	color: #fffffe;
+	text-align: center;
+	font-weight: bold;
+	font-size:100%;
+
+	width: 100%;
+	height: 10%%;
+
+	border-style: dotted;
+	border-color: #fafafa;
+
+	background-color: #6e3068;
+	overflow: hidden;
+}
+
+.fila_selec_style {
+	background-color: rgba(206, 24, 30, 0.5);
+}
+
+.fila_style_hidden {
+	display: none;
+}
+
+
+tr, .fila_style:nth-child(odd) {
+	background: #aadcf7;
+	color: orange;
+}
+tr, .fila_style:nth-child(even) {
+	background: #47bafc;
+	color: orange;
+}
+
+tr, .fila_style:hover {
+	background-color: rgba(206, 24, 30, 0.5);
+}
+
+.div_list_style:hover {
+	background-color: rgba(206, 24, 30, 0.5);
+}
+
+.label_style {
+	color: #fffffe;
+	text-align: left;
+	font-weight: bold;
+	font-size:110%;
+
+	width: 99%;
+	height: auto;
+
+	border-width: 2px;
+	border-style: solid;
+	border-color: #fafafa;
+
+	margin-left: 0.2%;
+	background-color: #219f90;
+}
+
+.button_style_r {
+	color: #fffffe;
+	text-align: left;
+	font-weight: bold;
+	font-size:110%;
+
+	width: 5%;
+	height: auto;
+
+	border-width: 2px;
+	border-style: solid;
+	border-color: #fafafa;
+
+	margin-left: 0.2%;
+	background-color: #219f90;
+}
+
+
+.cajas_style {
+
+	display: inline-block;
+	margin: 1%;
+}
+
+.restaurar {
+	clear: both;
+}
+.element_style_hidden {
+	display: none;
+
+}
+.mask_style:hover {
+	background-color: rgba(206, 24, 30, 0.5);
+}
+.input_style_edicion_td:hover {
+	background-color: #47bafc;
+	color: #ffffff;
+}
+
+input[type='file'] {
+
+	text-align: left;
+	font-weight: bold;
+	font-size:90%;
+
+}
+
+
