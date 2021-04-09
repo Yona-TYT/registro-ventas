@@ -90,7 +90,7 @@ function add_text_fila(index,opt){
 		return "<div class='div_list_style' id='divlp"+index+"'><button type='button' onclick='button_selec_product("+index+");'>Seleccionar</button> "+values_tx+"</div>";
 	}
 	if(opt==2){
-		return "<option value='"+r_nombre+"'>";
+		return "<option id='optlist"+index+"' value='"+r_nombre+"'>";
 	}
 }
 
@@ -218,6 +218,10 @@ function get_celda_value_test(){
 		var sect_div = document.getElementById("divlp"+gl_current_selec);
 		var values_tx = nombre.value+" Cantidad ("+cantidad.value+") Margen c/u ("+margen_mask.value+") Entrada c/u ("+precio_mask.value+")";
 		sect_div.innerHTML = "<button type='button' onclick='button_selec_product("+gl_current_selec+");'>Seleccionar</button> "+values_tx;
+
+		var opt_list = document.getElementById("optlist"+gl_current_selec);
+		opt_list.value = nombre.value;
+
 	}
 	enviar_index();
 }
