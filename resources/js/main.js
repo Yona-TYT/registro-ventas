@@ -187,6 +187,7 @@ function cursor_no_button(id)
 
 function init(){
 
+	gl_list[gl_selc] = new result_list_a();
 
 	//test arrays bidimencionales
 	/*	
@@ -230,6 +231,22 @@ function init(){
  	visible_element(1);
 
 	example_preview();
+
+
+
+
+	//Comprueba y activa/desactiva el modo editor
+	check_edit_mode();
+
+	//Crea la tabla de lista productos
+	create_table();
+
+	//Crea la tabla de Registro de productos
+	create_table_rp();
+
+	//crea la lista de productos
+	crear_lista_productos();
+
 
 	var boton = document.getElementById("load_start");
 	//boton.addEventListener("click", agregarobjeto);

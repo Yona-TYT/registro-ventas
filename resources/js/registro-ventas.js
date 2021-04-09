@@ -5,10 +5,14 @@ function buscar_lista_rv(id)
 	reset_inputs_rv();
 	var result = false;
 	var count = 0;
-	for (var j = 0; gl_list[gl_selc].nombre[j]; j++) {
-		if(count>4) break;
-		var nombre = gl_list[gl_selc].nombre[j].toLowerCase();
+	//console.log("Finished: ");
+	for (var j = 0; j<gl_list[gl_selc].listatamaño; j++) {
 
+		if(count>4) break;
+		var nombre = gl_list[gl_selc].nombre[j]
+		
+		if (nombre!=null) nombre = nombre.toLowerCase();
+		else continue;
 		result = nombre.includes(text.toLowerCase());
 
 		if(result){
