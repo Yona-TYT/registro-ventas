@@ -167,8 +167,6 @@ function mostrar_lista_rv() {
 	gl_lista_ventas.totaldol[gl_lista_ventas.index] = t_dol;
 	gl_lista_ventas.totalbsf[gl_lista_ventas.index] = t_bsf;
 
-
-
 	gl_lista_ventas.pdtindex[gl_lista_ventas.index] = nw_index;
 	gl_lista_ventas.pdtclave[gl_lista_ventas.index] = nw_clave;
 	gl_lista_ventas.pdtcantidad[gl_lista_ventas.index] = nw_cantidad;
@@ -280,6 +278,8 @@ function guardar_venta() {
 		cl_nombre.value = "";
 		secc_reg.innerHTML = "";
 		agregarventas(gl_lista_ventas);
+
+		preloder_filtro_fec();
 		selec_fechas("selchisfec");
 	}
 	else {
