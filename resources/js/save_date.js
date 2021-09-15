@@ -29,7 +29,7 @@ function comenzar(evento) {
 
 	bd = evento.target.result;
 	mostrar_nombres(clavename);
-	mostrar_ventas(claveventa);
+
 
 
 	//Test lista de productos
@@ -93,8 +93,9 @@ function agregarventas(ventas) {
 	var transaccion = bd.transaction(["ventas_saves"], "readwrite");
 	var almacen = transaccion.objectStore("ventas_saves");
 
+	var id = gl_listname.save_id;
 	var solicitud = almacen.put({
-							id: claveventa, rventas: ventas
+							id: id, rventas: ventas
 				});
 
 }
@@ -135,6 +136,7 @@ function agregarobjeto(result, clave, opt) {
 }
 function mostrar_lista(clave) {
 
+console.log("tes clave"+clave  )
 	var transaccion = bd.transaction(["nombre_lista"]);
 	var almacen = transaccion.objectStore("nombre_lista");
 	var solicitud = almacen.get(clave);
@@ -187,13 +189,14 @@ function obtener_nombres(evento) {
 
 	if(resultado){
 		gl_listname = resultado.nombrelista;
+		mostrar_ventas(gl_listname.save_id);
 	}
 	preloder_selec_list("selectlistaname");
 	
 }
 //----------------------------------------------------------------------
 
-//Se obtine la lista de ventas -----------------------------------------
+//Manejo de datos desde la venta y al inicio -----------------------------------------
 function mostrar_ventas(clave) {
 	//cajadatos.innerHTML = "";
 	var transaccion = bd.transaction(["ventas_saves"]);
@@ -205,47 +208,113 @@ function mostrar_ventas(clave) {
 
 function obtener_ventas(evento) {
 	var resultado = evento.target.result;
+
+	var hoy = new Date();
+	var curr_fecha = hoy.getDate()+ "-" + ( hoy.getMonth() + 1 ) + "-" + hoy.getFullYear();
+	var index = gl_listname.index;
+	var fecha = gl_listname.fecha;
+	var curr_id = gl_listname.save_id;
+
 	if(resultado){
-		gl_lista_ventas = resultado.rventas;
 
-		crear_lista_cl();
-
-		var hoy = new Date();
-		var index = gl_lista_ventas.index;
-		var indexfec = gl_lista_ventas.indexfec;
-		var fecha = hoy.getDate()+ "-" + ( hoy.getMonth() + 1 ) + "-" + hoy.getFullYear();
-		var fechalist = gl_lista_ventas.fechalist[indexfec];
-
-		if(fechalist != fecha) {
-
-			if(!fechalist) {
-
-				gl_lista_ventas.indexstart[indexfec] = index;
-				gl_lista_ventas.fechalist[indexfec] = fecha;
+		var id = resultado.id;
+		if(id == curr_id){
+			if(!fecha){
+				gl_listname.fecha = curr_fecha;
+				gl_listname.fechalist[gl_listname.index] = curr_fecha;
+				//gl_trasn_save = new trasn_save();
+				//console.log(+puntero.value.id+"  noo" );
 			}
+			else if(curr_fecha != fecha){
+				gl_listname.index = 0;
+				gl_listname.save_id++;
+				gl_listname.fecha = curr_fecha;
+				gl_listname.fechalist[gl_listname.save_id] = curr_fecha;
+				//add_temp(gl_trasn_datos);
 
-			else{
-				indexfec++
-				gl_lista_ventas.indexstart[indexfec] = index;
-				gl_lista_ventas.indexfec = indexfec;
-				gl_lista_ventas.fechalist[indexfec] = fecha;
+
 			}
+		}	
+		//console.log(" ---" +resultado.rtdatos.id+"");
+		if(curr_fecha == fecha){
+			gl_lista_ventas = resultado.rventas;
+			gl_hist_save = resultado.rventas;
 		}
-		preloder_filtro_fec();
-		selec_fechas("selchisfec");
+
+		//console.log(""+gl_trasn_datos.save_id+" index");
 	}
+	crear_lista_cl();
+	preloder_filtro_fec();
+	selec_fechas("selchisfec", false);
+	var nr = gl_hist_save.index;
+	for (var j = nr-1;  j >= 0; j--) {
+		crear_historial(j);
+	}
+
 }
 //----------------------------------------------------------------------
 
-function all_ventas() {
+function removerobjeto(clave) {
+
+	var transaccion = bd.transaction(["ventas_saves"], "readwrite");
+	var almacen = transaccion.objectStore("ventas_saves");
+	var solicitud = almacen.delete(clave);
+
+}
+
+function remove_datos(clave) {
+
+	var transaccion = bd.transaction(["nombre_saves"], "readwrite");
+	var almacen = transaccion.objectStore("nombre_saves");
+	var solicitud = almacen.delete(clave);
+
+}
+
+
+//Manejo de datos desde el selector de fechas -----------------------------------------
+function mostrar_selec(clave) {
+	var transaccion = bd.transaction(["ventas_saves"]);
+	var almacen = transaccion.objectStore("ventas_saves");
+	var solicitud = almacen.get(clave);
+	solicitud.addEventListener("success", obtener_selec);
+	
+}
+function obtener_selec(evento) {
+	var resultado = evento.target.result;
+	gl_hist_save = new all_ventas();
+	if(resultado){
+		//var id = resultado.id;
+		gl_hist_save = resultado.rventas;
+		var nr = gl_hist_save.index;
+		for (var j = nr-1;  j >= 0; j--) {
+			crear_historial(j);
+		}		
+	}
+}
+//---------------------------------------------------------------------------------------
+
+
+function history_save() {
 	this.indexnomb = 0;
 	this.nombrecl = new Array();
 
 	this.indexfec = 0;
-	this.fechalist = new Array();
 
-	this.indexstart = new Array();
-	this.indexend = new Array();
+	this.pdtindex = new Array();
+	this.pdtclave = new Array();
+	this.pdtcantidad = new Array();
+	this.pdtdesc = new Array();
+
+	//Control de trasn_save()
+	this.index = 0;					//Index actual (Va incrementando por operacion, regresa a 0 por dia)
+	this.fecha = null;				//Fecha actual
+	this.save_id = 0;				//ID actual (Va incrementando por dia)
+	this.fechalist = new Array(); 	//Lista de fechas por dia
+}
+
+function all_ventas() {
+	this.indexfec = 0;
+	this.fechalist = new Array();
 
 	this.index = 0;
 	this.cliente = new Array();
@@ -265,9 +334,19 @@ function all_ventas() {
 function allnames_list() {
 	this.list_id = [0, 1, 2, 3, 4, 5];
 	this.list_nam = ["Liata Numero 1", "Liata Numero 2", "Liata Numero 3", "Liata Numero 4", "Liata Numero 5", "Liata Numero 6"];
-	this.clave = 0001;
+	this.clave = 0;
 	this.genmargen = 0;
 	this.genprecio = 0;
+
+	//Lista de clientes en datalist
+	this.indexnomb = 0;
+	this.nombrecl = new Array();
+
+	//Control de history_save()
+	this.index = 0;					//Index actual (Va incrementando por operacion, regresa a 0 por dia)
+	this.fecha = null;				//Fecha actual
+	this.save_id = 0;				//ID actual (Va incrementando por dia)
+	this.fechalist = new Array(); 	//Lista de fechas por dia
 }
 
 function result_list_a() {

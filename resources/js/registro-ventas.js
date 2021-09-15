@@ -242,45 +242,54 @@ function guardar_venta() {
 
 		var secc_reg = document.getElementById("registroactual");
 
-		var index = gl_lista_ventas.index;
+		var index = gl_listname.index;
 		var indexfec = gl_lista_ventas.indexfec;
 		var fechalist = gl_lista_ventas.fechalist[indexfec];
 		
 		var prdol = gl_lista_ventas.totaldol[index];
 		var prbsf = gl_lista_ventas.totalbsf[index];
 
+
+
+		var hoy = new Date();
 		var hora =  hoy.getHours() + ":" + hoy.getMinutes() + ":" + hoy.getSeconds();
-		var fecha = hoy.getDate()+ "-" + ( hoy.getMonth() + 1 ) + "-" + hoy.getFullYear();
+		var curr_fecha = hoy.getDate()+ "-" + ( hoy.getMonth() + 1 ) + "-" + hoy.getFullYear();
 
-		gl_lista_ventas.hora[index] = hora;
-		gl_lista_ventas.fecha[index] = fecha;
+		var fecha = gl_listname.fecha;
 
-		if(fechalist != fecha) {
-			if(!fechalist) {
-				gl_lista_ventas.indexstart[indexfec] = index;
-				gl_lista_ventas.fechalist[indexfec] = fecha;
+		if(fecha != curr_fecha) {
+			if(!fecha) {
+				gl_listname.fecha = curr_fecha;
+				gl_listname.fechalist[gl_listname.index] = curr_fecha;
 			}
-
-			else{
-				indexfec++
-				gl_lista_ventas.indexstart[indexfec] = index;
-				gl_lista_ventas.indexfec = indexfec;
-				gl_lista_ventas.fechalist[indexfec] = fecha;
+			else {
+				gl_listname.index = 0;
+				gl_listname.save_id++;
+				gl_listname.fecha = curr_fecha;
+				gl_listname.fechalist[gl_listname.index] = curr_fecha;
 			}
 		}
-		descontar_pdt(index);
-		gl_lista_ventas.indexend[indexfec] = index;
 
-		gl_lista_ventas.index++;
+		gl_lista_ventas.hora[index] = hora;
+		gl_lista_ventas.fecha[index] = curr_fecha;
+
+
+		descontar_pdt(index);
+
+
+		//Cambia a la siguiente venta
+		gl_listname.index++;
+		gl_lista_ventas.index = gl_listname.index;
+		//----------------------------------------
 
 		document.getElementById("rv_totaldol").value = 0;
 		document.getElementById("rv_totalbsf").value = 0;
 		cl_nombre.value = "";
 		secc_reg.innerHTML = "";
-		agregarventas(gl_lista_ventas);
 
-		preloder_filtro_fec();
-		selec_fechas("selchisfec");
+		agregarnombres(gl_listname);
+		agregarventas(gl_lista_ventas);
+		mostrar_ventas(gl_listname.save_id);
 	}
 	else {
 		alert("La lista esta vacia!.");
@@ -309,12 +318,12 @@ function descontar_pdt(lindex) {
 }
 
 function cliente_check(text) {
-	var nomb_test = gl_lista_ventas.nombrecl[0];
+	var nomb_test = gl_listname.nombrecl[0];
 	if (!nomb_test){
-		 gl_lista_ventas.nombrecl[0] = "N/A";
+		 gl_listname.nombrecl[0] = "N/A";
 	}
 
-	var nomb_list = gl_lista_ventas.nombrecl;
+	var nomb_list = gl_listname.nombrecl;
 
 	var result = false;
 	for (var j = 0; j < nomb_list.length ; j++) {
@@ -327,8 +336,8 @@ function cliente_check(text) {
 
 	if(!result){
 
-		gl_lista_ventas.indexnomb++;
-		gl_lista_ventas.nombrecl[gl_lista_ventas.indexnomb] = text;
+		gl_listname.indexnomb++;
+		gl_listname.nombrecl[gl_listname.indexnomb] = text;
 
 		var data_lista = document.getElementById("list_datacl");
 

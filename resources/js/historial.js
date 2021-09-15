@@ -1,43 +1,44 @@
+gl_curr_optsel = 0;
+gl_hist_save = new all_ventas();
+
+
 function preloder_filtro_fec() {
 	var selec = document.getElementById("selchisfec");
-	var indexfec = gl_lista_ventas.indexfec;
+
+	var index = gl_listname.save_id;
 	var selc_tx = "";
-	for (var j = indexfec;  j >= 0; j--) {
-		var fechalist = gl_lista_ventas.fechalist[j];
-		selc_tx += "<option id='fech"+j+"' value='"+j+"'>"+fechalist+"</option>";
+	for (var j = index; j >= 0; j--) {
+		var name = gl_listname.fechalist[j]
+		if(name){
+			selc_tx += "<option id='fech"+j+"' value='"+j+"'>"+name+"</option>";
+		}
 	}
 	selec.innerHTML = selc_tx;
 	selec.setAttribute("onchange","selec_fechas('selchisfec');");
-	//selec.setAttribute("onclick","selec_fechas('selchisfec');");
+
 }
 
-function selec_fechas(id) {
+function selec_fechas(id,mostrar = true) {
 	var secc_his = document.getElementById("historialventa");
 	secc_his.innerHTML ="";
 	var selec = document.getElementById(id);
 	var current_opt = selec.options[selec.selectedIndex];
-	//console.log(current_opt.value);
-	//var count = gl_lista_ventas.countfec[current_opt.value];
-	if(current_opt){
-		var start = gl_lista_ventas.indexstart[current_opt.value];
-		var end = gl_lista_ventas.indexend[current_opt.value];
-
-		for (var j = start; start != null && j < (end+1); j++) {
-			//var index = gl_lista_ventas.savindex[j];
-			crear_historial(j);
-		}
-	}
+	if(current_opt && mostrar){
+		
+		gl_curr_optsel = parseInt(current_opt.value);
+		mostrar_selec(gl_curr_optsel);
+	}	
 }
 
 function crear_historial(index) {
-	var detalles = gl_lista_ventas.detalles[index];
-	var prdol = gl_lista_ventas.totaldol[index];
-	var prbsf = gl_lista_ventas.totalbsf[index];
-	var hora = gl_lista_ventas.hora[index];
-	var fecha = gl_lista_ventas.fecha[index];
-	var estado = gl_lista_ventas.estado[index];
+	var detalles = gl_hist_save.detalles[index];
+	var prdol = gl_hist_save.totaldol[index];
+	var prbsf = gl_hist_save.totalbsf[index];
+	var hora = gl_hist_save.hora[index];
+	var fecha = gl_hist_save.fecha[index];
+	var estado = gl_hist_save.estado[index];
 
-	var cl = gl_lista_ventas.cliente[index];
+	var cl = gl_hist_save.cliente[index];
 
 	var est_txa = "<strong id='txesta"+index+"'> Estado: "+estado+"</strong>";
 	var est_txb = "<strong id='txestb"+index+"'> Estado: "+estado+"</strong>";
@@ -66,7 +67,7 @@ function crear_lista_cl() {
 	data_lista.innerHTML = "";
 	var lista_tx = "";
 	var data_tx = "";
-	for (var j = 0; j < gl_lista_ventas.nombrecl.length; j++) {
+	for (var j = 0; j < gl_listname.nombrecl.length; j++) {
 		//lista_tx += add_text_cl(j,1);
 		data_tx += add_text_cl(j,2);
 	}
@@ -76,7 +77,7 @@ function crear_lista_cl() {
 }
 
 function add_text_cl(index,opt){
-	var nombre = gl_lista_ventas.nombrecl[index]?gl_lista_ventas.nombrecl[index]:"";
+	var nombre = gl_listname.nombrecl[index]?gl_listname.nombrecl[index]:"";
 
 	if(opt==1){
 		return "<div> </div>";
@@ -101,10 +102,10 @@ function button_reint_hist(index) {
 		var bott = document.getElementById("bott_reint"+index);
 		bott.setAttribute("class", "element_style_hidden");
 
-		var listindex = gl_lista_ventas.pdtindex[index];
-		var listclave = gl_lista_ventas.pdtclave[index];
-		var listcantidad = gl_lista_ventas.pdtcantidad[index];
-		var listdesc = gl_lista_ventas.pdtdesc[index];
+		var listindex = gl_hist_save.pdtindex[index];
+		var listclave = gl_hist_save.pdtclave[index];
+		var listcantidad = gl_hist_save.pdtcantidad[index];
+		var listdesc = gl_hist_save.pdtdesc[index];
 		for (var j = 0; j < listindex.length ; j++) {
 			var nr_a = parseFloat(listdesc[j]);
 
@@ -157,5 +158,48 @@ function button_pend_hist(index) {
 	bott.setAttribute("onclick", "button_reint_hist("+index+");");
 	bott.innerHTML = "Reintegrar";
 }
+
+function eliminar_todo(opt){
+	var butt = document.getElementById("buthist");
+	var label = document.getElementById("histlabel");
+	var check = document.getElementById("histcheck");
+	if(opt==0){
+		label.setAttribute("class", "cajas_style");
+		check.checked = false;
+		butt.setAttribute("onclick", "eliminar_todo(1)");
+		alert("Estas a punto de borrar todo, marque la casilla para confirmar y vuelva a pulsar.");
+	}
+	if(opt==1){
+		label.setAttribute("class", "input_style_hidden");
+		butt.setAttribute("onclick", "eliminar_todo(0)");
+		if(check.checked){
+			check.checked = false;
+			clear_history();
+			alert("Se ha borrado Todo el Historial.");
+		}
+	}
+}
+function clear_history(){
+
+	for (var j = 0; j <= gl_listname.save_id; j++) {
+		removerobjeto(j);
+	}
+
+	//Restaura los valores de control de historial
+	gl_listname.index = 0;					//Index actual (Va incrementando por operacion, regresa a 0 por dia)
+	gl_listname.fecha = null;				//Fecha actual
+	gl_listname.save_id = 0;				//ID actual (Va incrementando por dia)
+	gl_listname.fechalist = new Array(); 	//Lista de fechas por dia
+	agregarnombres(gl_listname);
+
+	gl_hist_save = new all_ventas();
+
+	gl_lista_rv = new all_ventas();
+
+	preloder_filtro_fec();
+	selec_fechas("selchisfec");
+
+}
+
 
 
