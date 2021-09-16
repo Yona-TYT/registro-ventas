@@ -1,6 +1,39 @@
+:root {
+	--siz-text: 100%;
+	--all-height: 100%;
+	--mask-height: 5%;
+	--caja-disp: inline-block;
+	--all-bord: 1px;
+	--alig-text: center;
+	--cel-siz: auto;
+}
+
+.cajas_style {
+
+	display:var(--caja-disp);
+	margin:2px;
+}
+
 .table_style{
 	width: 100%;
-	height: auto;
+	height:var(--all-height);
+}
+
+.menu_style {
+	color: #fffffe;
+	text-align: left;
+	font-weight: bold;
+	font-size:var(--siz-text);
+
+	width: 99%;
+	height:var(--all-height);
+
+	border-width: var(--all-bord);
+	border-style: solid;
+	border-color: #fafafa;
+
+	margin: 10% auto;
+	background-color: rgba(33, 159, 144, 0.7);
 }
 
 .colum_selec_style {
@@ -8,14 +41,14 @@
 	color: #fffffe;
 	text-align: center;
 	font-weight: bold;
-	font-size:120%;
+	font-size:var(--siz-text);
 
 	width: auto;
-	height: auto;
+	height:var(--all-height);
 
 	border-style: solid;
 	border-color: #0000ff;
-	border-width: 2px;
+	border-width: var(--all-bord);
 
 	background-color: rgba(20, 24, 80, 0.5);
 	overflow: hidden;
@@ -26,14 +59,14 @@
 	color: #fffffe;
 	text-align: center;
 	font-weight: bold;
-	font-size:120%;
+	font-size:var(--siz-text);
 
 	width: auto;
-	height: auto;
+	height:var(--all-height);
 
 	border-style: solid;
 	border-color: #0000ff;
-	border-width: 2px;
+	border-width: var(--all-bord);
 
 	background-color: rgba(67, 195, 48, 0.4);
 	overflow: hidden;
@@ -45,14 +78,14 @@
 	color: #fffffe;
 	text-align: center;
 	font-weight: bold;
-	font-size:120%;
+	font-size:var(--siz-text);
 
 	width: 1%;
 	height: 10%;
 
 	border-style: solid;
 	border-color: #0000ff;
-	border-width: 2px;
+	border-width: var(--all-bord);
 
 
 	overflow: hidden;
@@ -64,14 +97,14 @@
 	color: #001326;
 	text-align: center;
 	font-weight: bold;
-	font-size:100%;
+	font-size:var(--siz-text);
 
 	width: 0.5%;
 	height: 0.5%;
 
 	border-style: solid;
 	border-color: #0000ff;
-	border-width: 2px;
+	border-width: var(--all-bord);
 
 	background-color: #6e3068;
 
@@ -85,14 +118,14 @@
 	color: #001326;
 	text-align: center;
 	font-weight: bold;
-	font-size:110%;
+	font-size:var(--siz-text);
 
 	width: 10%;
 	height: 10%;
 
 	border-style: solid;
 	border-color: #0000ff;
-	border-width: 2px;
+	border-width: var(--all-bord);
 
 
 	overflow: hidden;
@@ -103,14 +136,14 @@
 	color: #fffffe;
 	text-align: center;
 	font-weight: bold;
-	font-size:110%;
+	font-size:var(--siz-text);
 
 	width: 10%;
 	height: 10%;
 
 	border-style: solid;
 	border-color: #fffffe;
-	border-width: 2px;
+	border-width: var(--all-bord);
 
 	background-color: #6e3068;
 	overflow: hidden;
@@ -121,14 +154,14 @@
 	color: #fffffe;
 	text-align: center;
 	font-weight: bold;
-	font-size:100%;
+	font-size:var(--siz-text);
 
 	width: 100%;
-	height: auto;
+	height:var(--all-height);
 
 	border-style: solid;
 	border-color: #fffffe;
-	border-width: 2px;
+	border-width: var(--all-bord);
 
 	background-color: #ce181e;
 
@@ -139,7 +172,7 @@
 
 	text-align: center;
 	font-weight: bold;
-	font-size:100%;
+	font-size:var(--siz-text);
 
 	color: #ffffff;
 	width: 5%;
@@ -154,11 +187,11 @@
 
 	text-align: center;
 	font-weight: bold;
-	font-size:110%;
+	font-size:var(--siz-text);
 
 	border-style: solid;
 	border-color: #ffffff;
-	border-width: 1px;
+	border-width: var(--all-bord);
 
 	color: #ffffff;
 	width: 10%;
@@ -172,11 +205,11 @@
 
 	text-align: center;
 	font-weight: bold;
-	font-size:100%;
+	font-size:var(--siz-text);
 
 	color: #ffffff;
 	width: 100%;
-	height: auto;
+	height:var(--all-height);
 
 	background: rgba(55, 64, 145, 0.4);
 }
@@ -184,11 +217,11 @@
 .input_text_style {
 	text-align: center;
 	font-weight: bold;
-	font-size:100%;
+	font-size:var(--siz-text);
 
 	color: #ffffff;
 	width: 100%;
-	height: auto;
+	height:var(--all-height);
 
 	background: rgba(55, 64, 145, 0.4);
 	overflow: scroll;
@@ -203,15 +236,15 @@
 
 	text-align: center;
 	font-weight: bold;
-	font-size:100%;
+	font-size:var(--siz-text);
 
 	color: #fffffe;
 	width: 100%;
-	height: auto;
+	height:var(--all-height);
 
 	border-style: dotted;
 	border-color: #fffffe;
-	border-width: 2px;
+	border-width: var(--all-bord);
 
 	background: #2a7991;
 	overflow: hidden;
@@ -225,11 +258,11 @@
 
 	color: #0000ff;
 	width: 100%;
-	height: auto;
+	height:var(--all-height);
 
 	border-style: solid;
 	border-color: #000000;
-	border-width: 2px;
+	border-width: var(--all-bord);
 
 	background: rgba(225, 225, 225, 0.9);
 	overflow: hidden;
@@ -242,7 +275,7 @@
 
 	color: #ffffff;
 	width: 100%;
-	height: auto;
+	height:var(--all-height);
 
 	background: rgba(128, 148, 158, 0.8);
 	overflow: hidden;
@@ -253,11 +286,11 @@
 
 	text-align: center;
 	font-weight: bold;
-	font-size:100%;
+	font-size:var(--siz-text);
 
 	color: #ffffff;
 	width: 100%;
-	height: auto;
+	height:var(--all-height);
 
 	background-color: rgba(206, 24, 30, 0.5);
 	overflow: hidden;
@@ -267,11 +300,11 @@
 .mask_style {
 	text-align: center;
 	font-weight: bold;
-	font-size:100%;
+	font-size:var(--siz-text);
 
 	color: #ffffff;
 	width: 100%;
-	height: auto;
+	height:var(--all-height);
 
 	background: rgba(55, 64, 145, 0.4);
 	overflow: hidden;
@@ -279,11 +312,11 @@
 .butt_selec_style {
 	text-align: center;
 	font-weight: bold;
-	font-size:100%;
+	font-size:var(--siz-text);
 
 	color: #ffffff;
 	width: 100%;
-	height: auto;
+	height:var(--all-height);
 
 	background-color: rgba(206, 24, 30, 0.5);
 	overflow: hidden;
@@ -291,13 +324,13 @@
 .div_list_style {
 	text-align: left;
 	font-weight: bold;
-	font-size:100%;
+	font-size:var(--siz-text);
 
 	color: #ffffff;
 	width: 100%;
-	height: auto;
+	height:var(--all-height);
 
-	border-width: 1px;
+	border-width: var(--all-bord);
 	border-style: solid;
 	border-color: #fafafa;
 
@@ -308,12 +341,12 @@
 
 	color: #fffffe;
 	font-weight: bold;
-	font-size:120%;
+	font-size:var(--siz-text);
 
 	width: 10%;
-	height: auto;
+	height:var(--all-height);
 
-	border-width: 2px;
+	border-width: var(--all-bord);
 	border-style: dotted;
 	border-color: #fafafa;
 
@@ -327,7 +360,7 @@
 	color: #fffffe;
 	text-align: center;
 	font-weight: bold;
-	font-size:100%;
+	font-size:var(--siz-text);
 
 	width: 100%;
 	height: 10%%;
@@ -369,41 +402,34 @@ tr, .fila_style:hover {
 	color: #fffffe;
 	text-align: left;
 	font-weight: bold;
-	font-size:110%;
+	font-size:var(--siz-text);
 
 	width: 99%;
-	height: auto;
+	height:var(--all-height);
 
-	border-width: 2px;
+	border-width: var(--all-bord);
 	border-style: solid;
 	border-color: #fafafa;
 
 	margin-left: 0.2%;
-	background-color: #219f90;
+	background-color: rgba(33, 159, 144, 0.3);
 }
 
 .button_style_r {
 	color: #fffffe;
 	text-align: left;
 	font-weight: bold;
-	font-size:110%;
+	font-size:var(--siz-text);
 
 	width: 5%;
-	height: auto;
+	height:var(--all-height);
 
-	border-width: 2px;
+	border-width: var(--all-bord);
 	border-style: solid;
 	border-color: #fafafa;
 
 	margin-left: 0.2%;
 	background-color: #219f90;
-}
-
-
-.cajas_style {
-
-	display: inline-block;
-	margin: 1%;
 }
 
 .restaurar {
@@ -433,7 +459,7 @@ input[type='file'] {
 
 	text-align: left;
 	font-weight: bold;
-	font-size:90%;
+	font-size:var(--siz-text);
 
 }
 

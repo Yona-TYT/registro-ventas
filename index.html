@@ -34,7 +34,7 @@
 		<! Fin del CSS -->
 	</head>
 	<body onLoad="init();" >
-		<section class="label_style">
+		<section class="menu_style">
 
 			<h1 class="input_style_td">Lista de negocios</h1>
 
@@ -61,7 +61,7 @@
 				<button class="mask_style" type="button" id="butopt5" onclick="visible_element(5);">
 				Importar Lista
 			</div>
-		</section>
+
 
 		<! ---------------- Seccion1 Registro de ventas ------------------>
 
@@ -273,18 +273,18 @@
 			</table>
 
 			<section class="label_style" id="templatetable">
-
-
-			<section>
-				<div class="cajas_style">
-					<label for="listbasedato">Seleccione la lista para guardar: </label>
-					<select class="mask_style" name="listbasedato" id="listbasedato" onchange = "select_base_list('listbasedato');"></select>
-				</div>
-				<div class="cajas_style"><button class="mask_style" type="button" id="butsavelist" onclick="recovery_data();">Guardar lista</div>
-				<div class="cajas_style">Vista previa del orden de los datos en la lista:</div>
-			</section>
+				<section>
+					<div class="cajas_style">
+						<label for="listbasedato">Seleccione la lista para guardar: </label>
+						<select class="mask_style" name="listbasedato" id="listbasedato" onchange = "select_base_list('listbasedato');"></select>
+					</div>
+					<div class="cajas_style"><button class="mask_style" type="button" id="butsavelist" onclick="recovery_data();">Guardar lista</div>
+					<div class="cajas_style">Vista previa del orden de los datos en la lista:</div>
+				</section>
 			</section>
 		</section>
 
+
+		</section>
 	</body>
 </html>
