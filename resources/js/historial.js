@@ -15,7 +15,8 @@ function preloder_filtro_fec() {
 	}
 	selec.innerHTML = selc_tx;
 	selec.setAttribute("onchange","selec_fechas('selchisfec');");
-
+	var current_opt = selec.options[selec.selectedIndex];
+	gl_curr_optsel = parseInt(current_opt.value);
 }
 
 function selec_fechas(id,mostrar = true) {
@@ -97,7 +98,7 @@ function button_detalles(index) {
 
 function button_reint_hist(index) {
 	var etd = "Reintegrada";
-	if(gl_lista_ventas.estado[index]=="Aprobada"){
+	if(gl_hist_save.estado[index]=="Aprobada"){
 		//console.log(index);
 		var bott = document.getElementById("bott_reint"+index);
 		bott.setAttribute("class", "element_style_hidden");
@@ -117,7 +118,7 @@ function button_reint_hist(index) {
 			agregarobjeto(gl_list[clave], clave, 1);					//1 es para lectura y escritra
 		}
 
-		gl_lista_ventas.estado[index] = etd;
+		gl_hist_save.estado[index] = etd;
 
 		//console.log("index"+" "+index);
 		var txesta = document.getElementById("txesta"+index);
@@ -127,7 +128,7 @@ function button_reint_hist(index) {
 		txesta.innerHTML = " Estado: "+etd;
 		txestb.innerHTML = " Estado: "+etd;
 
-		agregarventas(gl_lista_ventas);
+		agregarventas(gl_hist_save, gl_curr_optsel);
 		
 
 		start_one = true;
@@ -138,7 +139,7 @@ function button_reint_hist(index) {
 function button_pend_hist(index) {
 	var etd = "Aprobada";
 
-	gl_lista_ventas.estado[index] = etd;
+	gl_hist_save.estado[index] = etd;
 
 	var txesta = document.getElementById("txesta"+index);
 	var txestb = document.getElementById("txestb"+index);
@@ -147,7 +148,7 @@ function button_pend_hist(index) {
 	txesta.innerHTML = " Estado: "+etd;
 	txestb.innerHTML = " Estado: "+etd;
 
-	agregarventas(gl_lista_ventas);
+	agregarventas(gl_hist_save, gl_curr_optsel);
 	
 	start_one = true;
 	mostrar_lista(gl_selc);

@@ -91,12 +91,13 @@ function enviar_index() {
 	return null;
 }
 
-function agregarventas(ventas) {
+function agregarventas(ventas, id = gl_listname.save_id) {
 
 	var transaccion = bd.transaction(["ventas_saves"], "readwrite");
 	var almacen = transaccion.objectStore("ventas_saves");
 
-	var id = gl_listname.save_id;
+	//var id = gl_listname.save_id;
+	console.log("Vac: "+id )
 	var solicitud = almacen.put({
 							id: id, rventas: ventas
 				});
@@ -294,6 +295,8 @@ function mostrar_selec(clave) {
 function obtener_selec(evento) {
 	var resultado = evento.target.result;
 	gl_hist_save = new all_ventas();
+
+
 	if(resultado){
 		//var id = resultado.id;
 		gl_hist_save = resultado.rventas;
@@ -302,6 +305,7 @@ function obtener_selec(evento) {
 			crear_historial(j);
 		}		
 	}
+		//console.log(""+resultado.id+" fech index");
 }
 //---------------------------------------------------------------------------------------
 
@@ -364,38 +368,6 @@ function allnames_list() {
 function result_list_a() {
 	this.listatamaño = 0;
 	this.clave = 0001;
-	this.nombre = new Array();
-	this.cantidad = new Array();
-	this.margen = new Array();
-	this.precio = new Array();
-}
-function result_list_b() {
-	this.listatamaño = 10;
-	this.clave = 0002;
-	this.nombre = new Array();
-	this.cantidad = new Array();
-	this.margen = new Array();
-	this.precio = new Array();
-}
-function result_list_c() {
-	this.listatamaño = 10;
-	this.clave = 0003;
-	this.nombre = new Array();
-	this.cantidad = new Array();
-	this.margen = new Array();
-	this.precio = new Array();
-}
-function result_list_d() {
-	this.listatamaño = 0;
-	this.clave = 0004;
-	this.nombre = new Array();
-	this.cantidad = new Array();
-	this.margen = new Array();
-	this.precio = new Array();
-}
-function result_list_e() {
-	this.listatamaño = 10;
-	this.clave = 0005;
 	this.nombre = new Array();
 	this.cantidad = new Array();
 	this.margen = new Array();
