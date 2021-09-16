@@ -112,9 +112,9 @@ function button_reint_hist(index) {
 			var lindex = listindex[j];
 			var clave = listclave[j];
 			var nr_cant = parseFloat(gl_list[clave].cantidad[lindex]);
-			console.log("lindex"+nr_cant+ " "+nr_a);
+			//console.log("lindex"+nr_cant+ " "+nr_a);
 			gl_list[clave].cantidad[lindex] = nr_cant + nr_a;
-			agregarobjeto(gl_list[clave], clave, 1);//1 es para lectura y escritra
+			agregarobjeto(gl_list[clave], clave, 1);					//1 es para lectura y escritra
 		}
 
 		gl_lista_ventas.estado[index] = etd;
@@ -133,7 +133,7 @@ function button_reint_hist(index) {
 		start_one = true;
 		mostrar_lista(gl_selc);
 	}
-	else{console.log("Test error calc");};
+	//else{console.log("Test error calc");};
 }
 function button_pend_hist(index) {
 	var etd = "Aprobada";

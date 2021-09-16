@@ -218,6 +218,8 @@ function init(){
 
 	//get_celda_value(table_fila,table_col);
 
+	create_table_rv();
+
 	//Para cambiar entre listas
 	select_list_x();
 

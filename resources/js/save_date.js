@@ -37,8 +37,11 @@ function comenzar(evento) {
 	gl_list[gl_selc] = new result_list_a();
 	start_one = true;
 	mostrar_lista(gl_selc);
+
 	var list_id = gl_listname.list_id;
-	for (var j = 0; j < list_id.length && j != gl_selc; j++) {
+	for (var j = 0; j < list_id.length ; j++) {
+		if (j == gl_selc) continue;
+		//console.log("contar "+j);
 		gl_list[j] = new result_list_a();
 		mostrar_lista(j);
 	}
@@ -136,24 +139,27 @@ function agregarobjeto(result, clave, opt) {
 }
 function mostrar_lista(clave) {
 
-console.log("tes clave"+clave  )
+
 	var transaccion = bd.transaction(["nombre_lista"]);
 	var almacen = transaccion.objectStore("nombre_lista");
 	var solicitud = almacen.get(clave);
 	solicitud.addEventListener("success", function(evento) {
-		var resultado = evento.target.result;
+	var resultado = evento.target.result;
 
-		if(resultado){
-
+	if(resultado){
+		//console.log("tes tamaño: "+resultado.datos.listatamaño  )
 		//console.log("tes clave"+clave + " "+resultado.datos.listatamaño + "" +start_one)
-				resultado.datos.listatamaño != null? gl_list[parseInt(clave)] = resultado.datos : gl_list[parseInt(clave)] = new result_list_a();
-				//console.log("test "+gl_list[clave].nombre[0]);
-				if (start_one){
+		resultado.datos.listatamaño != null? gl_list[parseInt(clave)] = resultado.datos : gl_list[parseInt(clave)] = new result_list_a();
+		//console.log("test "+gl_list[clave].nombre[0]);
+		if (start_one){
 
-					load_save_data();
-				}
-
+			load_save_data();
 		}
+	}
+	else{
+		//console.log("Vaciooooo: " )
+		gl_list[parseInt(clave)] = new result_list_a();
+	}
 	});
 	//solicitud.addEventListener("success", obtener_lista);
 	
@@ -166,8 +172,6 @@ function obtener_lista(evento) {
 		//Solo una vez por inicio o en un cambio de lista
 		if (start_one){
 			//contador = setInterval(cambio_valor, 1000);
-				
-			
 			//gl_list[gl_selc] = resultado.datos;
 			//load_save_data();
 		}
@@ -270,6 +274,14 @@ function remove_datos(clave) {
 
 }
 
+function remove_lista(clave) {
+
+	var transaccion = bd.transaction(["nombre_lista"], "readwrite");
+	var almacen = transaccion.objectStore("nombre_lista");
+	var solicitud = almacen.delete(clave);
+
+}
+
 
 //Manejo de datos desde el selector de fechas -----------------------------------------
 function mostrar_selec(clave) {
@@ -350,7 +362,7 @@ function allnames_list() {
 }
 
 function result_list_a() {
-	this.listatamaño = 10;
+	this.listatamaño = 0;
 	this.clave = 0001;
 	this.nombre = new Array();
 	this.cantidad = new Array();
@@ -374,7 +386,7 @@ function result_list_c() {
 	this.precio = new Array();
 }
 function result_list_d() {
-	this.listatamaño = 10;
+	this.listatamaño = 0;
 	this.clave = 0004;
 	this.nombre = new Array();
 	this.cantidad = new Array();

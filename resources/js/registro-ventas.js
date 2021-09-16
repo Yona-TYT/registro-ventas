@@ -4,7 +4,7 @@ function buscar_lista_rv(id)
 	var text = document.getElementById(id).value;
 	reset_inputs_rv();
 	var result = false;
-	var count = 0;
+	var count = 1;
 	//console.log("Finished: ");
 	for (var j = 0; j<gl_list[gl_selc].listatamaño; j++) {
 
@@ -25,11 +25,11 @@ function buscar_lista_rv(id)
 			var calc_precio = calc_dolarporunidad(genmargen, margen, precio);
 			var calc_precbs = calc_bolivarprecio(genprecbs, calc_precio);
 
-			var input_nomb = document.getElementById("rvinput01"+count+""+0);
-			var input_cant = document.getElementById("rvinput01"+count+""+1);
-			var input_pdol = document.getElementById("rvinput01"+count+""+2);
-			var input_pbsf = document.getElementById("rvinput01"+count+""+3);
-			var input_tvent = document.getElementById("rvinput01"+count+""+4);
+			var input_nomb = document.getElementById("rvinput"+count+""+0);
+			var input_cant = document.getElementById("rvinput"+count+""+1);
+			var input_pdol = document.getElementById("rvinput"+count+""+2);
+			var input_pbsf = document.getElementById("rvinput"+count+""+3);
+			var input_tvent = document.getElementById("rvinput"+count+""+4);
 
 			input_nomb.value = nombre;
 			input_cant.value = cantidad;
@@ -192,12 +192,13 @@ function button_borr_venta(index){
 }
 function reset_inputs_rv() {
 	gl_lista_rv = new lista_actual_rv();
-	for (var i = 0; i < 5; i++) {
-		var input_nomb = document.getElementById("rvinput01"+i+""+0);
-		var input_cant = document.getElementById("rvinput01"+i+""+1);
-		var input_pdol = document.getElementById("rvinput01"+i+""+2);
-		var input_pdbs = document.getElementById("rvinput01"+i+""+3);
-		var input_tvent = document.getElementById("rvinput01"+i+""+4);
+	for (var i = 1; i < 5; i++) {
+
+		var input_nomb = document.getElementById("rvinput"+i+""+0);
+		var input_cant = document.getElementById("rvinput"+i+""+1);
+		var input_pdol = document.getElementById("rvinput"+i+""+2);
+		var input_pdbs = document.getElementById("rvinput"+i+""+3);
+		var input_tvent = document.getElementById("rvinput"+i+""+4);
 
 
 		input_nomb.value = "";

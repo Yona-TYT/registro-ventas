@@ -36,7 +36,7 @@
 	<body onLoad="init();" >
 		<section class="label_style">
 
-			<h1 class="mask_style">Experimento de Lista de negocios en HTML</h1>
+			<h1 class="input_style_td">Lista de negocios</h1>
 
 			<div class="">
 			<img class="logo_style" src="resources/img/logo.png"> </div>
@@ -73,135 +73,11 @@
 				<input class="mask_style" type="search" id="buscar_rv" placeholder="Ingrese Nombre de Producto" list="listproducts" onfocus="el_selec('buscar_rv');">
 			</div>
 			<div class="cajas_style">Precio Dolar: 
-				<input class="mask_style" type="text" id="dolar_rv" readonly>
+				<input class="input_style_td" type="text" id="dolar_rv" readonly>
 			</div>
-			<table class="table_style" id="tablerv">
-				<tbody>
-					<tr class="button_style_x" id="frvila10">
-						<td class="celda_style_name" id="rvceldacol00" >
-							<input class="input_style_td" type="text" value="Nombre Producto" readonly>
-						</td>
-						<td class="celda_style_name" id="rvceldacol01">
-							<input class="input_style_td" type="text" value="Cantidad Disponible" readonly>
-						</td>
-						<td class="celda_style_name" id="rvceldacol02">
-							<input class="input_style_td" type="text" value="Precio Dolar" readonly>
-						</td>
-						<td class="celda_style_name" id="rvceldacol03">
-							<input class="input_style_td" type="text" value="Precio BsF" readonly>
-						</td>
-						<td class="celda_style_name" id="rvceldacol04">
-							<input class="input_style_td" type="text" value="Cant. Venta" readonly>
-						</td>
-						<td class="celda_style_name" id="rvceldacol05">
-							<input class="input_style_td" type="text" value="Accion" readonly>
-						</td>
-
-					</tr>
-					<tr class="fila_style" id="frvila11">
-						<td class="celda_style" id="rvcelda0100">
-							<input class="input_style_td" type="text" id="rvinput0100" value="" disabled>
-						</td>
-						<td class="celda_style" id="rvcelda0101">
-							<input class="input_style_td" type="text" id="rvinput0101" value="" disabled>
-						</td>
-						<td class="celda_style" id="rvcelda0102">
-							<input class="input_style_td" type="text" id="rvinput0102" value="" disabled>
-						</td>
-						<td class="celda_style" id="rvcelda0103">
-							<input class="input_style_td" type="text" id="rvinput0103" value="" disabled>
-						</td>
-						<td class="celda_style" id="rvcelda0104">
-							<input class="input_style_visible" type="number" min="1" id="rvinput0104" value="1"  onfocus="el_selec('rvinput0104');" >
-						</td>
-						<td class="button_style_r" id="rvcelda0105">
-							<button class="mask_style" type="button" id="buttrv05" onclick="button_reg_venta(0);">Registrar</button>
-						</td>
-					</tr>
-					<tr class="fila_style" id="frvila12">
-						<td class="celda_style" id="rvcelda0110">
-							<input class="input_style_td" type="text" id="rvinput0110" value="" disabled>
-						</td>
-						<td class="celda_style" id="rvcelda0111">
-							<input class="input_style_td" type="text" id="rvinput0111" value="" disabled>
-						</td>
-						<td class="celda_style" id="rvcelda0112">
-							<input class="input_style_td" type="text" id="rvinput0112" value="" disabled>
-						</td>
-						<td class="celda_style" id="rvcelda0113">
-							<input class="input_style_td" type="text" id="rvinput0113" value="" disabled>
-						</td>
-						<td class="celda_style" id="rvcelda0114">
-							<input class="input_style_visible" type="number" min="1" id="rvinput0114" value="1" onfocus="el_selec('rvinput0114');" >
-						</td>
-						<td class="button_style_r" id="rvcelda0115">
-							<button class="mask_style" type="button" id="buttrv15" onclick="button_reg_venta(1);">Registrar</button>
-						</td>
-					</tr>
-					<tr class="fila_style" id="frvila13">
-						<td class="celda_style" id="rvcelda0120">
-							<input class="input_style_td" type="text" id="rvinput0120" value="" disabled>
-						</td>
-						<td class="celda_style" id="rvcelda0121">
-							<input class="input_style_td" type="text" id="rvinput0121" value="" disabled>
-						</td>
-						<td class="celda_style" id="rvcelda0122">
-							<input class="input_style_td" type="text" id="rvinput0122" value="" disabled>
-						</td>
-						<td class="celda_style" id="rvcelda0123">
-							<input class="input_style_td" type="text" id="rvinput0123" value="" disabled>
-						</td>
-						<td class="celda_style" id="rvcelda0124">
-							<input class="input_style_visible" type="number" min="1" id="rvinput0124" value="1" onfocus="el_selec('rvinput0124');" >
-						</td>
-						<td class="button_style_r" id="rvcelda0125">
-							<button class="mask_style" type="button" id="buttrv25" onclick="button_reg_venta(2);">Registrar</button>
-						</td>
-					</tr>
-					<tr class="fila_style" id="frvila14">
-						<td class="celda_style" id="rvcelda0130">
-							<input class="input_style_td" type="text" id="rvinput0130" value="" disabled>
-						</td>
-						<td class="celda_style" id="rvcelda0131">
-							<input class="input_style_td" type="text" id="rvinput0131" value="" disabled>
-						</td>
-						<td class="celda_style" id="rvcelda0132">
-							<input class="input_style_td" type="text" id="rvinput0132" value="" disabled>
-						</td>
-						<td class="celda_style" id="rvcelda0133">
-							<input class="input_style_td" type="text" id="rvinput0133" value="" disabled>
-						</td>
-						<td class="celda_style" id="rvcelda0134">
-							<input class="input_style_visible" type="number" min="1" id="rvinput0134" value="1" onfocus="el_selec('rvinput0134');" >
-						</td>
-						<td class="button_style_r" id="rvcelda0135">
-							<button class="mask_style" type="button" id="buttrv35" onclick="button_reg_venta(3);">Registrar</button>
-						</td>
-					</tr>
-					<tr class="fila_style" id="frvila15">
-						<td class="celda_style" id="rvcelda0140">
-							<input class="input_style_td" type="text" id="rvinput0140" value="" disabled>
-						</td>
-						<td class="celda_style" id="rvcelda0141">
-							<input class="input_style_td" type="text" id="rvinput0141" value="" disabled>
-						</td>
-						<td class="celda_style" id="rvcelda0142">
-							<input class="input_style_td" type="text" id="rvinput0142" value="" disabled>
-						</td>
-						<td class="celda_style" id="rvcelda0143">
-							<input class="input_style_td" type="text" id="rvinput0143" value="" disabled>
-						</td>
-						<td class="celda_style" id="rvcelda0144">
-							<input class="input_style_visible" type="number" min="1" id="rvinput0144" value="1" onfocus="el_selec('rvinput0144');" >
-						</td>
-						<td class="button_style_r" id="rvcelda0145">
-							<button class="mask_style" type="button" id="buttrv45" onclick="button_reg_venta(4);">Registrar</button>
-						</td>
-					</tr>
-				</tbody>
-			</table>
-			<div class="cajas_style">Total en Dolar: <input class="mask_style" type="text" id="rv_totaldol" value="0,00 $" readonly></div>
-			<div class="cajas_style">Total en Bsf: <input class="mask_style" type="text" id="rv_totalbsf" value="0,00 BsF" readonly></div>
+			<section class="label_style" id="sect_rv"></section>
+			<div class="cajas_style">Total en Dolar: <input class="input_style_td" type="text" id="rv_totaldol" value="0,00 $" readonly></div>
+			<div class="cajas_style">Total en Bsf: <input class="input_style_td" type="text" id="rv_totalbsf" value="0,00 BsF" readonly></div>
 			<div class="cajas_style">Nombre Cliente: <input class="mask_style" type="text" id="rv_clnombre" placeholder="Ingrese Nombre de Cliente" list="list_datacl"></div>
 			<div class="cajas_style">Pendiente:  <input class="" input type="checkbox" id="pend_mark"></div>
 			<div class="cajas_style"><button class="mask_style" type="button" id="buttrvtotal" onclick="guardar_venta();">Registrar Venta</button></div>
