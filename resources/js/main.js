@@ -216,7 +216,7 @@ function init(){
 	//add_message(save_expdate[2][0]+"--"+save_expdate[2][1]);
 
 
-	//get_celda_value(table_fila,table_col);
+	check_windows_siz();
 
 	create_table_rv();
 

@@ -13,6 +13,7 @@
 		<script src="resources/js/basic_calc.js"></script>
 		<script src="resources/js/export-cvs.js"></script>
 		<script src="resources/js/menus.js"></script>
+		<script src="resources/js/auto-pantalla.js"></script>
 
 		<script src="resources/js/registro-ventas.js"></script>
 		<script src="resources/js/registro-productos.js"></script>
@@ -39,31 +40,44 @@
 
 			<h1 class="input_style_td">Lista de negocios</h1>
 
-			<div class="">
-			<img class="logo_style" src="resources/img/logo.png"> </div>
-
-			<div class="cajas_style">
-				<button class="mask_style" type="button" id="butopt1" onclick="visible_element(1);">
-				Registro de Ventas
-			</div>
-			<div class="cajas_style">
-				<button class="mask_style" type="button" id="butopt2" onclick="visible_element(2);">
-				Registro de Productos
-			</div>
-			<div class="cajas_style">
-				<button class="mask_style" type="button" id="butopt3" onclick="visible_element(3);">
-				Historial de Ventas
-			</div>
-			<div class="cajas_style" >
-				<button class="mask_style" type="button" id="butopt4" onclick="visible_element(4);">
-				Lista de Productos
-			</div>
-			<div class="cajas_style">
-				<button class="mask_style" type="button" id="butopt5" onclick="visible_element(5);">
-				Importar Lista
+			<div class="" id="allmenu">
+				<div class="cajas_style">
+					<button class="mask_style" type="button" id="butmenu" onclick="mostrar_lista_menu();"> Menu </button>
+				</div>
+				<div class="menu_title_style" id="div_title">
+					Registro de Venta
+				</div>
+				<div class="input_style_hidden" id="menulist">
+					<button class='menu_list_style' type="button" id="menuopt1" onclick="visible_element(1);">Registro de Ventas</button>
+					<button class='menu_list_style' type="button" id="menuopt2" onclick="visible_element(2);">Registro de Productos</button>
+					<button class='menu_list_style' type="button" id="menuopt3" onclick="visible_element(3);">Historial de Ventas</button>
+					<button class='menu_list_style' type="button" id="menuopt4" onclick="visible_element(4);">Lista de Productos</button>
+					<button class='menu_list_style' type="button" id="menuopt5" onclick="visible_element(5);">Importar Lista</button>
+				</div>
 			</div>
 
-
+			<div class="input_style_hidden" id="allbutons">
+				<div class="cajas_style">
+					<button class="mask_style" type="button" id="butopt1" onclick="visible_element(1);">
+					Registro de Ventas
+				</div>
+				<div class="cajas_style">
+					<button class="mask_style" type="button" id="butopt2" onclick="visible_element(2);">
+					Registro de Productos
+				</div>
+				<div class="cajas_style">
+					<button class="mask_style" type="button" id="butopt3" onclick="visible_element(3);">
+					Historial de Ventas
+				</div>
+				<div class="cajas_style" >
+					<button class="mask_style" type="button" id="butopt4" onclick="visible_element(4);">
+					Lista de Productos
+				</div>
+				<div class="cajas_style">
+					<button class="mask_style" type="button" id="butopt5" onclick="visible_element(5);">
+					Importar Lista
+				</div>
+			</div>
 		<! ---------------- Seccion1 Registro de ventas ------------------>
 
 		<section class="label_style" id="seccion1">

@@ -337,6 +337,39 @@
 	background: rgba(55, 64, 145, 0.4);
 	overflow: hidden;
 }
+.menu_list_style {
+	display: block;
+
+	text-align: left;
+	font-weight: bold;
+	font-size:var(--siz-text);
+
+	color: #ffffff;
+	width: 20%;
+	height:var(--all-height);
+
+	border-width: var(--all-bord);
+	border-style: solid;
+	border-color: #fafafa;
+
+	background: rgba(55, 64, 145, 0.4);
+	overflow: hidden;
+}
+.menu_title_style {
+	display: var(--caja-disp);
+
+	text-align: left;
+	font-weight: bold;
+	font-size:var(--siz-text);
+
+	color: #ffffff;
+	width: 20%;
+	height:var(--all-height);
+
+	background: rgba(55, 64, 145, 0.4);
+
+	margin:2px;
+}
 .desc_style {
 
 	color: #fffffe;
@@ -395,6 +428,10 @@ tr, .fila_style:hover {
 }
 
 .div_list_style:hover {
+	background-color: rgba(206, 24, 30, 0.5);
+}
+
+.menu_list_style:hover {
 	background-color: rgba(206, 24, 30, 0.5);
 }
 
