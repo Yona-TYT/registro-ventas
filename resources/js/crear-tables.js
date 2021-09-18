@@ -331,16 +331,24 @@ function create_table_rp(){
 				input.setAttribute("id", "inputrp"+celda_id);
 				input.setAttribute("placeholder", "Ingrese Valor");
 
-				//Cuadros de solo textos
-				if (i==0 || i ==1){
+				//Cuadro De nombres
+				if (i==0){
 					input.setAttribute("class","input_style_td");
-					//input.setAttribute("onclick","get_celda_value_test();");
-					//input.setAttribute("onkeyup","get_celda_value_test();");
-					//input.setAttribute("onwheel","get_celda_value_test();");
-					//input.setAttribute("onchange","enviar_index();");
-
 					input.setAttribute("class","input_style_edicion_td");
 					input.setAttribute("type", "text");
+					celda.appendChild(input);
+					input.setAttribute("onFocus", "ocultar_input();");
+				}
+				//Cuadro cantidad
+				if (i==1){
+					input.setAttribute("class","input_style_td");
+					input.setAttribute("class","input_style_edicion_td");
+					input.setAttribute("type", "number");
+
+					input.setAttribute("step", "1");
+					input.setAttribute("min", "1");
+					input.setAttribute("lang", "en");
+
 					celda.appendChild(input);
 					input.setAttribute("onFocus", "ocultar_input();");
 				}

@@ -262,8 +262,8 @@ function init(){
 	var input_buscar_rv = document.getElementById("buscar_rv");
 	input_buscar_rv.addEventListener("input", function(){buscar_lista_rv("buscar_rv");});
 }
-//window.addEventListener("load", click_test);
-//window.addEventListener("keypress", is_enter_press);
+
+window.addEventListener("resize", check_windows_siz);
 
 window.addEventListener("keypress", function() {
 

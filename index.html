@@ -7,13 +7,14 @@
 
 		<link rel="icon" href="resources/img/icono.png" type="image/png"sizes="50x50">
 		<! Aquí definimos los Scrit js para esta página -->
+		<script src="resources/js/auto-pantalla.js"></script>
 		<script src="resources/js/crear-tables.js"></script>
 		<script src="resources/js/save_date.js"></script>
 		<script src="resources/js/main.js"></script>
 		<script src="resources/js/basic_calc.js"></script>
 		<script src="resources/js/export-cvs.js"></script>
 		<script src="resources/js/menus.js"></script>
-		<script src="resources/js/auto-pantalla.js"></script>
+
 
 		<script src="resources/js/registro-ventas.js"></script>
 		<script src="resources/js/registro-productos.js"></script>
@@ -40,7 +41,7 @@
 
 			<h1 class="input_style_td">Lista de negocios</h1>
 
-			<div class="" id="allmenu">
+			<div class="input_style_hidden" id="allmenu">
 				<div class="cajas_style">
 					<button class="mask_style" type="button" id="butmenu" onclick="mostrar_lista_menu();"> Menu </button>
 				</div>
@@ -84,17 +85,17 @@
 			<div class="cajas_style">Seleccione las lista: 
 				<select class="mask_style" id="selcregvent" onchange = "select_base_list('selcregvent');"></select>
 			</div>
-			<div class="cajas_style">Buscara productos: 
-				<input class="mask_style" type="search" id="buscar_rv" placeholder="Ingrese Nombre de Producto" list="listproducts" onfocus="el_selec('buscar_rv');">
-			</div>
 			<div class="cajas_style">Precio Dolar: 
 				<input class="input_style_td" type="text" id="dolar_rv" readonly>
+			</div>
+			<div class="cajas_style">Buscara productos: 
+				<input class="mask_style" type="search" id="buscar_rv" placeholder="Ingrese Nombre de Producto" list="listproducts" onfocus="el_selec('buscar_rv');">
 			</div>
 			<section class="label_style" id="sect_rv"></section>
 			<div class="cajas_style">Total en Dolar: <input class="input_style_td" type="text" id="rv_totaldol" value="0,00 $" readonly></div>
 			<div class="cajas_style">Total en Bsf: <input class="input_style_td" type="text" id="rv_totalbsf" value="0,00 BsF" readonly></div>
 			<div class="cajas_style">Nombre Cliente: <input class="mask_style" type="text" id="rv_clnombre" placeholder="Ingrese Nombre de Cliente" list="list_datacl"></div>
-			<div class="cajas_style">Pendiente:  <input class="" input type="checkbox" id="pend_mark"></div>
+			<div class="cajas_style">Pendiente:  <input class="" type="checkbox" id="pend_mark"></div>
 			<div class="cajas_style"><button class="mask_style" type="button" id="buttrvtotal" onclick="guardar_venta();">Registrar Venta</button></div>
 
 
@@ -128,7 +129,7 @@
 
 		<section class="label_style" id="seccion4">
 
-			<div class="cajas_style">Modo edicion: <input class="mask_style" input type="checkbox" id="edit_mode"></div>
+			<div class="cajas_style">Modo edicion: <input class="" type="checkbox" id="edit_mode"></div>
 			<div class="cajas_style">
 				<label for="selectlistaname">Seleccione las lista: </label>
 				<select class="mask_style" id="selectlistaname" onchange = "select_base_list('selectlistaname');" >
@@ -203,33 +204,46 @@
 					<tr class="button_style_x" id="fila010">
 						<td class="celda_style_name"></td>
 						<td class="celda_style_name" id="exceldacol00" >
-							<input class="input_style_td" type="text" value="A" readonly>
-							<input type="checkbox" id="check00" value="0">
+							<div class="">
+								<input class="input_style_td" type="text" value="A" readonly>
+								<input class="" type="checkbox" id="check00" value="0">	
+							</div>			
 						</td>
 						<td class="celda_style_name" id="exceldacol01">
-							<input class="input_style_td" type="text" value="B" readonly>
-							<input type="checkbox" id="check01" value="1">							
+							<div class="">
+								<input class="input_style_td" type="text" value="B" readonly>
+								<input class="" type="checkbox" id="check01" value="1">	
+							</div>						
 						</td>
 						<td class="celda_style_name" id="exceldacol02">
-							<input class="input_style_td" type="text" value="C" readonly>
-							<input class="input_style_td" type="checkbox" id="check02" value="2">							
-
+							<div class="">
+								<input class="input_style_td" type="text" value="C" readonly>
+								<input class="" type="checkbox" id="check02" value="2">	
+							</div>				
 						</td>
 						<td class="celda_style_name" id="exceldacol03">
-							<input class="input_style_td" type="text" value="D" readonly>
-							<input class="input_style_td" type="checkbox" id="check03" value="3">							
+							<div class="">
+								<input class="input_style_td" type="text" value="D" readonly>
+								<input class="" type="checkbox" id="check03" value="3">	
+							</div>				
 						</td>
 						<td class="celda_style_name" id="exceldacol04">
-							<input class="input_style_td" type="text" value="E" readonly>
-							<input class="input_style_td" type="checkbox" id="check04" value="4">							
+							<div class="">
+								<input class="input_style_td" type="text" value="E" readonly>
+								<input class="" type="checkbox" id="check04" value="4">	
+							</div>				
 						</td>
 						<td class="celda_style_name" id="exceldacol05">
-							<input class="input_style_td" type="text" value="F" readonly>
-							<input class="input_style_td" type="checkbox" id="check05" value="5">							
+							<div class="">
+								<input class="input_style_td" type="text" value="F" readonly>
+								<input class="" type="checkbox" id="check05" value="5">	
+							</div>						
 						</td>
 						<td class="celda_style_name" id="exceldacol06">
-							<input class="input_style_td" type="text" value="G" readonly>
-							<input class="input_style_td" type="checkbox" id="check06" value="6">							
+							<div class="">
+								<input class="input_style_td" type="text" value="G" readonly>
+								<input class="" type="checkbox" id="check06" value="6">	
+							</div>		
 						</td>
 					</tr><tr class="fila_style" id="fila011">
 						<td class="celda_style_name" id="exceldafil0">
