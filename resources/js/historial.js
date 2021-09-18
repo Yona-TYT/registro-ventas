@@ -16,7 +16,7 @@ function preloder_filtro_fec() {
 	selec.innerHTML = selc_tx;
 	selec.setAttribute("onchange","selec_fechas('selchisfec');");
 	var current_opt = selec.options[selec.selectedIndex];
-	gl_curr_optsel = parseInt(current_opt.value);
+	gl_curr_optsel = current_opt?parseInt(current_opt.value):0;
 }
 
 function selec_fechas(id,mostrar = true) {
