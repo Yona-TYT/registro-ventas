@@ -10,7 +10,8 @@ function create_table(){
 
 	//----------------------------------------------------------------
 	//Nombre de las celdas value--------------------------------------
-	var name_cel = ["Borrar","Nombre Producto", "Cantidad Dispon.", "Precio Dolar", "Precio Bsf", "Ganancia C/U", "Precio Entrada"];
+	var name_cel = ["Nombre Producto / Cantidad", "Ganancia / Precio Entrada", "Precio Dolar / Precio Bsf", "Borrar"];
+	var siz_colm = name_cel.length;
 	//----------------------------------------------------------------
 
 	var sect_table = document.getElementById("tablproductos");
@@ -26,7 +27,7 @@ function create_table(){
 	var tblBody = document.createElement("tbody");
 
 	// Creamos las celdas
-	for (var j = 0; j < 4; j++) {
+	for (var j = 0; j < siz_colm; j++) {
 		// Creamos las hileras de la tabla
 		var fila = document.createElement("tr");
 
@@ -38,76 +39,11 @@ function create_table(){
 
 		var multiplo = (j*table_col);
 		save_id_filas[j] = j+multiplo;
-		for (var i = 0; i < table_col; i++) {
+		for (var i = 0; i < 3; i++) {
 
-			var celda_id = j+""+i;
-			if(j==0){
-				var celda = document.createElement("td");
-
-		//console.log(prdol+"  "+ total);
-
-				celda.setAttribute("id", "celd"+celda_id)
-				celda.setAttribute("class","celda_style_td");
-
-				// Creamos 2 elementos de entrada
-				var input = document.createElement("input");
-				input.setAttribute("type", "number");
-				var tex_mask = document.createElement("input");
-				input.setAttribute(edit_mode?"readwrite":"readonly", "");
-
-				tex_mask.setAttribute("readonly", "");
-				tex_mask.setAttribute("class", edit_mode?"input_style_edicion_td":"mask_style");
-
-				//Cuadros de MArgen  ganancia y Precio del dolar----------------------------------------------
-				var textoCelda = document.createTextNode(name_desc_cel[i]);
-				input.setAttribute("class","input_style_hidden");
-				input.setAttribute("onkeyup","update_celdas_generales();");
-				input.setAttribute("onclick","update_celdas_generales();");
-				input.setAttribute("onchange","update_celdas_generales();");
-				//input.setAttribute("onchange","enviar_index();");
-
-				celda.setAttribute("colspan","3");
-				if(i==0){
-					input.remove();
-					celda.setAttribute("class",edit_mode?"celda_style_x":"input_style_hidden");
-					var celda_desc = document.createElement("th");
-					celda_desc.setAttribute("class",edit_mode?"celda_style_x":"input_style_hidden");
-					celda_desc.appendChild(textoCelda);
-					fila.appendChild(celda_desc);
-				}
-				//input.setAttribute("onclick","cambio_valor();");
-				if(i == 2 || i == 4){
-					input.setAttribute("step", "10");
-					input.setAttribute("min", "0.00");
-					input.setAttribute("lang", "en");
-
-					//gloval_test = document.getElementById("input"+celda_id);
-					input.setAttribute("id", "input"+celda_id);
-					//para la mask del cuadro
-					var text_mask_id = celda_id;
-					tex_mask.setAttribute("id", "text_mask"+text_mask_id);
-
-					var celda_desc = document.createElement("th");
-					celda_desc.setAttribute("class","desc_style");
-
-					celda_desc.appendChild(textoCelda);
-					fila.appendChild(celda_desc);
-					celda.appendChild(tex_mask);
-					celda.appendChild(input);
-					fila.appendChild(celda);
-
-					var total_id_a = j;
-					var total_id_b = multiplo;
-					//input.setAttribute("onChange", "enviar_index("+total_id_a+","+total_id_b+");" );
-					tex_mask.setAttribute("onClick", edit_mode?"mostrar_input();":"");
-					tex_mask.setAttribute("onSelect", edit_mode?"mostrar_input();":"");
-					input.setAttribute("onFocus", edit_mode?"ocultar_input();":"");
-
-				}
-				tblBody.appendChild(fila);
-			}
+			var celda_id = i+""+j;
 			//Cuadros de nombres de columnas
-			else if(j==1){
+			if(i==0){
 				var celda = document.createElement("td");
 
 				celda.setAttribute("id", "celd"+celda_id)
@@ -123,12 +59,9 @@ function create_table(){
 				tex_mask.setAttribute("readonly", "");
 				tex_mask.setAttribute("class", edit_mode?"input_style_edicion_td":"mask_style");
 				if(i==0){
-					celda.setAttribute("class",  edit_mode?"celda_style_x":"input_style_hidden");
-					
-				}
-				else{
+
 					input.setAttribute("type", "text");
-					input.setAttribute("value", name_cel[i]);
+					input.setAttribute("value", name_cel[j]);
 					input.setAttribute("readonly", "");
 					input.setAttribute("class","colum_name_style");
 					//celda.appendChild(input);
@@ -139,7 +72,7 @@ function create_table(){
 			}
 			//--------------------------------------------------------------------------------------------------
 
-			else if(j==2){
+			else {
 				//lista_tx += add_text_fila(j);
 
 				var celda = document.createElement("td");
@@ -147,31 +80,19 @@ function create_table(){
 				celda.setAttribute("id", "celd"+celda_id)
 				celda.setAttribute("class","celda_style_td");
 
-				
-				if(i==0){
-					celda.setAttribute("class",  edit_mode?"celda_style_x":"input_style_hidden");
-					var button = document.createElement("button");
-					button.setAttribute("class","button_style_x");
-					button.setAttribute("type", "button");
-					button.innerHTML= "[X]";
-					button.setAttribute("onclick","remove_product();");
-					button.setAttribute("id", "button"+j);
-					celda.appendChild(button);
-				}
-
 				// Creamos 2 elementos de entrada
 				var input = document.createElement("input");
 				input.setAttribute("type", "number");
-				var tex_mask = document.createElement("input");
 				input.setAttribute(edit_mode?"readwrite":"readonly", "");
 
+				var tex_mask = document.createElement("input");
 				tex_mask.setAttribute("readonly", "");
-				tex_mask.setAttribute("class", edit_mode?"input_style_edicion_td":"mask_style");
+				tex_mask.setAttribute("class", edit_mode?"input_style_edicion_td":"input_text_style");
 
 				input.setAttribute("id", "input"+celda_id);
 
 				//Cuadros de solo textos
-				if (i==1 || i ==2){
+				if (j==0 ){
 					input.setAttribute("class","input_style_td");
 					input.setAttribute("onclick","get_celda_value_test();");
 					input.setAttribute("onkeyup","get_celda_value_test();");
@@ -183,15 +104,9 @@ function create_table(){
 					celda.appendChild(input);
 					input.setAttribute("onFocus", "ocultar_input();");
 				}
-				//Cuadros de texto no editables
-				if (i==3 || i ==4){
-					input.setAttribute("class","input_style_td");
-					input.setAttribute("type", "text");
-					input.setAttribute("disabled", "");	
-					celda.appendChild(input);			
-				}
+
 				//Cuadros de entrada numerica
-				if(i==5 || i==6){
+				if(j==1){
 					input.setAttribute("class","input_style_td");
 					input.setAttribute("onclick","get_celda_value_test();");
 					input.setAttribute("onkeyup","get_celda_value_test();");
@@ -216,6 +131,24 @@ function create_table(){
 					tex_mask.setAttribute("onSelect", edit_mode?"mostrar_input();":"");
 					input.setAttribute("onFocus", edit_mode?"ocultar_input();":"");
 
+				}
+				//Cuadros de texto no editables
+				if (j==2){
+					input.setAttribute("class","input_style_td");
+					input.setAttribute("type", "text");
+					input.setAttribute("disabled", "");	
+					celda.appendChild(input);			
+				}
+				//Borrar
+				if(j==6){
+					celda.setAttribute("class",  edit_mode?"celda_style_x":"input_style_hidden");
+					var button = document.createElement("button");
+					button.setAttribute("class","button_style_x");
+					button.setAttribute("type", "button");
+					button.innerHTML= "[X]";
+					button.setAttribute("onclick","remove_product();");
+					button.setAttribute("id", "button"+j);
+					celda.appendChild(button);
 				}
 				fila.appendChild(celda);
 			}
@@ -344,11 +277,6 @@ function create_table_rp(){
 					input.setAttribute("class","input_style_td");
 					input.setAttribute("class","input_style_edicion_td");
 					input.setAttribute("type", "number");
-
-					input.setAttribute("step", "1");
-					input.setAttribute("min", "1");
-					input.setAttribute("lang", "en");
-
 					celda.appendChild(input);
 					input.setAttribute("onFocus", "ocultar_input();");
 				}

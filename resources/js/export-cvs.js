@@ -137,7 +137,9 @@ function recovery_data() {
 	var opt = 1;
 	start_one = true;
 	agregarobjeto(gl_result_temp, parseInt(clave), opt);
+ 	reset_preview();
 	gl_result_temp = new result_list_a();
+	alert("Lista Guardada Correctamente.");
 }
 
 function tableformato(results) {
@@ -293,7 +295,7 @@ function focus_celda_ex(id){
 	var input = document.getElementById(id);
 	input.checked = true;
 	input.focus();
-console.log("focus");
+	//console.log("focus");
 }
 
 var in_use = [false, false, false, false, false, false, false, false];

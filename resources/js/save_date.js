@@ -65,10 +65,10 @@ function crearbd(evento) {
 function enviar_index() {
 	//var result = new result_list();
 
-	var nombre_id = 2+""+1;
-	var cantidad_id = 2+""+2;
-	var margen_id = 2+""+5;
-	var precio_id = 2+""+6;
+	var nombre_id = 1+""+0;
+	var cantidad_id = 2+""+0;
+	var margen_id = 1+""+1;
+	var precio_id = 2+""+1;
 
 	var gen_precio_id = 0+""+2;
 	var gen_margen_id = 0+""+4;

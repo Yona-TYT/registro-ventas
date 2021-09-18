@@ -76,8 +76,7 @@ function crear_lista_productos() {
 }
 
 function add_text_fila(index,opt){
-
-		//console.log("tes selc"+gl_selc)
+	//console.log("tes selc"+gl_selc)
 	var r_nombre = gl_list[gl_selc].nombre[index]?gl_list[gl_selc].nombre[index]:"";
 	var r_cantidad = gl_list[gl_selc].cantidad[index]?gl_list[gl_selc].cantidad[index]:0;
 	var r_margen = gl_list[gl_selc].margen[index]?gl_list[gl_selc].margen[index]:0;
@@ -102,15 +101,15 @@ function button_selec_product(index){
 	var r_margen = gl_list[gl_selc].margen[index]?gl_list[gl_selc].margen[index]:0;
 	var r_precio = gl_list[gl_selc].precio[index]?gl_list[gl_selc].precio[index]:0;
 
-	var nombre = document.getElementById("input21");
-	var cantidad = document.getElementById("input22");
-	var pdol = document.getElementById("input23");
-	var pbsf = document.getElementById("input24");
-	var margen = document.getElementById("input25");
-	var precio = document.getElementById("input26");
+	var nombre = document.getElementById("input10");
+	var cantidad = document.getElementById("input20");
+	var margen = document.getElementById("input11");
+	var precio = document.getElementById("input21");
+	var pdol = document.getElementById("input12");
+	var pbsf = document.getElementById("input22");
 
-	var margen_mask = document.getElementById("text_mask25");
-	var precio_mask = document.getElementById("text_mask26");
+	var margen_mask = document.getElementById("text_mask11");
+	var precio_mask = document.getElementById("text_mask21");
 
 	nombre.value = r_nombre.toLowerCase();
 	cantidad.value = r_cantidad;
@@ -189,18 +188,18 @@ function ocultar_input()
 function get_celda_value_test(){
 
 	if(gl_current_selec != null){
-		var nombre = document.getElementById("input21");
-		var cantidad = document.getElementById("input22");
-		var pdol = document.getElementById("input23");
-		var pbsf = document.getElementById("input24");
-		var margen = document.getElementById("input25");
-		var precio = document.getElementById("input26");
+		var nombre = document.getElementById("input10");
+		var cantidad = document.getElementById("input20");
+		var margen = document.getElementById("input11");
+		var precio = document.getElementById("input21");
+		var pdol = document.getElementById("input12");
+		var pbsf = document.getElementById("input22");
+
+		var margen_mask = document.getElementById("text_mask11");
+		var precio_mask = document.getElementById("text_mask21");
 
 		var unimargen = margen.value;
 		var celd_precio = precio.value;
-
-		var margen_mask = document.getElementById("text_mask25");
-		var precio_mask = document.getElementById("text_mask26");
 
 		margen_mask.value = get_mask_simple(unimargen,"%");
 		precio_mask.value = get_mask(celd_precio,"$");

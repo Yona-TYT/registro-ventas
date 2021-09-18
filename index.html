@@ -145,6 +145,17 @@
 			</div>
 			<div class="cajas_style">Buscara productos: <input class="mask_style" type="search" id="buscar" placeholder="Buscar Productos" list="listproducts" onfocus="el_selec('buscar');"></div>
 			<datalist id="listproducts"></datalist>
+
+			<div class="cajas_style">
+				<input readonly="" class="input_style_edicion_td" id="text_mask02" onclick="mostrar_input();" onselect="mostrar_input();">
+				<input type="number" readwrite="" class="input_style_hidden" onkeyup="update_celdas_generales();" onclick="update_celdas_generales();" onchange="update_celdas_generales();" step="10" min="1" id="input02" onfocus="ocultar_input();" lang="en">
+			</div>
+
+			<div class="cajas_style">
+				<input readonly="" class="input_style_edicion_td" id="text_mask04" onclick="mostrar_input();" onselect="mostrar_input();">
+				<input type="number" readwrite="" class="input_style_hidden" onkeyup="update_celdas_generales();" onclick="update_celdas_generales();" onchange="update_celdas_generales();" step="10" min="1" id="input04" onfocus="ocultar_input();" lang="en">
+			</div>
+
 			<section id="tablproductos"></section>
 			<section class="label_style" id="listageneral"></section>
 
@@ -155,8 +166,8 @@
 
 		<section class="label_style" id="seccion5">
 			<div class="cajas_style">
-				<label class="input_style_name" for="archivos">Seleccione archivo: </label>
-				<input  type="file" name="archivos" id="archivos" accept=".xlsx , .csv, .xlsm, .xls">
+				<label class="" for="archivos">Seleccione archivo: </label>
+				<input class="custom-file-input" type="file" name="archivos" id="archivos" accept=".xlsx , .csv, .xlsm, .xls">
 			</div>
 
 			<section>
@@ -196,9 +207,8 @@
 			</div>
 				<div class="cajas_style"><button class="mask_style" type="button" id="butreset" onclick="reset_preview();">Reiniciar</div>
 				<div class="cajas_style"><button class="mask_style" type="button" id="butsendcol" onclick="button_selelc_fila()">Enviar Colum</div>
-				<div class="cajas_style">Vista previa del documento importado:</div>
 			</section>
-
+			<div class="cajas_style">Vista previa del documento importado:</div>
 			<table class="table_style" id="tableprev0">
 				<tbody>
 					<tr class="button_style_x" id="fila010">

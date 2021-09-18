@@ -499,10 +499,11 @@ input::placeholder{
 
 input[type='file'] {
 
+	overflow: hidden;
 	text-align: left;
 	font-weight: bold;
 	font-size:var(--siz-text);
-
+	width: 100%;
 }
 
 
