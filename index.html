@@ -145,18 +145,21 @@
 			</div>
 			<div class="cajas_style">Buscara productos: <input class="mask_style" type="search" id="buscar" placeholder="Buscar Productos" list="listproducts" onfocus="el_selec('buscar');"></div>
 			<datalist id="listproducts"></datalist>
+			<section class="cajas_style">
+				<div class="cajas_style">
+					Dolar:
+					<input readonly="" class="input_style_edicion_td" id="text_mask02" onclick="mostrar_input();" onselect="mostrar_input();">
+					<input type="number" readwrite="" class="input_style_hidden" onkeyup="update_celdas_generales();" onclick="update_celdas_generales();" onchange="update_celdas_generales();" step="10" min="1" id="input02" onfocus="ocultar_input();" lang="en">
+				</div>
 
-			<div class="cajas_style">
-				<input readonly="" class="input_style_edicion_td" id="text_mask02" onclick="mostrar_input();" onselect="mostrar_input();">
-				<input type="number" readwrite="" class="input_style_hidden" onkeyup="update_celdas_generales();" onclick="update_celdas_generales();" onchange="update_celdas_generales();" step="10" min="1" id="input02" onfocus="ocultar_input();" lang="en">
-			</div>
+				<div class="cajas_style">
+					Margen:
+					<input readonly="" class="input_style_edicion_td" id="text_mask04" onclick="mostrar_input();" onselect="mostrar_input();">
+					<input type="number" readwrite="" class="input_style_hidden" onkeyup="update_celdas_generales();" onclick="update_celdas_generales();" onchange="update_celdas_generales();" step="10" min="1" id="input04" onfocus="ocultar_input();" lang="en">
+				</div>
+			</section>
 
-			<div class="cajas_style">
-				<input readonly="" class="input_style_edicion_td" id="text_mask04" onclick="mostrar_input();" onselect="mostrar_input();">
-				<input type="number" readwrite="" class="input_style_hidden" onkeyup="update_celdas_generales();" onclick="update_celdas_generales();" onchange="update_celdas_generales();" step="10" min="1" id="input04" onfocus="ocultar_input();" lang="en">
-			</div>
-
-			<section id="tablproductos"></section>
+			<section class="cajas_style" id="tablproductos"></section>
 			<section class="label_style" id="listageneral"></section>
 
 		</section>
@@ -169,8 +172,6 @@
 				<label class="" for="archivos">Seleccione archivo: </label>
 				<input class="custom-file-input" type="file" name="archivos" id="archivos" accept=".xlsx , .csv, .xlsm, .xls">
 			</div>
-
-			<section>
 			<div class="cajas_style">
 				<label for="startfila">Iniciar lectura desde: </label>
 				<select class="mask_style" id="startfila">

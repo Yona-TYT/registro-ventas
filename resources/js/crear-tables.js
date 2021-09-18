@@ -47,7 +47,8 @@ function create_table(){
 				var celda = document.createElement("td");
 
 				celda.setAttribute("id", "celd"+celda_id)
-				celda.setAttribute("class","celda_style_td");
+				celda.setAttribute("class","celda_style_name");
+
 
 				// Creamos 2 elementos de entrada
 				var input = document.createElement("input");
@@ -78,7 +79,7 @@ function create_table(){
 				var celda = document.createElement("td");
 
 				celda.setAttribute("id", "celd"+celda_id)
-				celda.setAttribute("class","celda_style_td");
+				celda.setAttribute("class","celda_style_table");
 
 				// Creamos 2 elementos de entrada
 				var input = document.createElement("input");
@@ -107,7 +108,6 @@ function create_table(){
 
 				//Cuadros de entrada numerica
 				if(j==1){
-					input.setAttribute("class","input_style_td");
 					input.setAttribute("onclick","get_celda_value_test();");
 					input.setAttribute("onkeyup","get_celda_value_test();");
 					input.setAttribute("onchange","get_celda_value_test();");
@@ -161,9 +161,6 @@ function create_table(){
 
 	// appends <table> into <body>
 	//body.appendChild(tabla);
-
-	// modifica el atributo "border" de la tabla y lo fija a "2";
-	tabla.setAttribute("border", 2);
 
 	sect_table.appendChild(tabla);  ///innerHTML = tabla.innerHTML;
 
@@ -247,7 +244,6 @@ function create_table_rp(){
 				//lista_tx += add_text_fila(j);
 
 				var celda = document.createElement("td");
-
 				celda.setAttribute("id", "celdrp"+celda_id)
 
 				
@@ -325,9 +321,6 @@ function create_table_rp(){
 
 	// posicionamos el <tbody> debajo del elemento <table>
 	tabla.appendChild(tblBody);
-
-	// modifica el atributo "border" de la tabla y lo fija a "2";
-	tabla.setAttribute("border", 2);
 
 	sect_table.appendChild(tabla);  ///innerHTML = tabla.innerHTML;
 
@@ -465,9 +458,6 @@ function create_table_rv(){
 
 	// posicionamos el <tbody> debajo del elemento <table>
 	tabla.appendChild(tblBody);
-
-	// modifica el atributo "border" de la tabla y lo fija a "2";
-	tabla.setAttribute("border", 2);
 
 	sect_table.appendChild(tabla);  ///innerHTML = tabla.innerHTML;
 
