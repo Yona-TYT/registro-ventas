@@ -40,7 +40,7 @@ function buscar_lista_rv(id)
 			if(nombre.length>20)
 				input_nomb.style.fontSize = "80%";
 
-			if(input_pbsf.value.length>20)
+			if(input_pbsf.value.length>25)
 				input_pbsf.style.fontSize = "80%";
 			//----------------------------------------------------------------
 

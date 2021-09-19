@@ -138,6 +138,10 @@ function buscar_lista(text) {
 		}
 		//gloval_test += "result:"+result+ " ";
 	}
+	
+	//Desenfoca el input para ocultar el teclado
+	document.activeElement.blur();
+	
 }
 
 function mostrar_input() {
