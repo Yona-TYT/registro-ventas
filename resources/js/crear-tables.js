@@ -47,7 +47,7 @@ function create_table(){
 				var celda = document.createElement("td");
 
 				celda.setAttribute("id", "celd"+celda_id)
-				celda.setAttribute("class","celda_style_name");
+				celda.setAttribute("class","celda_style");
 
 
 				// Creamos 2 elementos de entrada
@@ -332,7 +332,7 @@ function create_table_rv(){
 	//----------------------------------------------------------------
 	//Nombre de las celdas value--------------------------------------
 	var name_cel = ["Nombre Producto", "Cantidad Dispon.", "Precio Dolar", "Precio BsF", "Cant. Venta", "Accion"];
-	var col_siz = name_cel.length;
+	var name_siz = name_cel.length;
 	//----------------------------------------------------------------
 
 	var sect_table = document.getElementById("sect_rv");
@@ -346,7 +346,9 @@ function create_table_rv(){
 	var tblBody = document.createElement("tbody");
 
 	// Creamos las celdas
-	for (var j = 0; j < 5; j++) {
+	var siz_col = gl_mobil? 2:name_siz;
+	var siz_fil = gl_mobil? name_siz:5;
+	for (var j = 0; j < siz_fil; j++) {
 		// Creamos las hileras de la tabla
 		var fila = document.createElement("tr");
 
@@ -354,16 +356,18 @@ function create_table_rv(){
 
 		var multiplo = (j*table_col);
 		save_id_filas[j] = j+multiplo;
-		for (var i = 0; i < col_siz; i++) {
+		for (var i = 0; i < siz_col; i++) {
 
-			var celda_id = j+""+i;
+			var siz_f = gl_mobil?i:j;
+			var siz_c = gl_mobil?j:i;
+			var celda_id = siz_f+""+siz_c;
 			
 			//Cuadros de nombres de columnas
-			if(j==0){
+			if(siz_f==0){
 				var celda = document.createElement("td");
 
 				celda.setAttribute("id", "celdrv"+celda_id)
-				celda.setAttribute("class","celda_style_td");
+				celda.setAttribute("class","celda_style");
 
 				// Creamos 2 elementos de entrada
 				var input = document.createElement("input");
@@ -376,7 +380,7 @@ function create_table_rv(){
 				tex_mask.setAttribute("class", "input_style_edicion_td");
 
 				input.setAttribute("type", "text");
-				input.setAttribute("value", name_cel[i]);
+				input.setAttribute("value", name_cel[siz_c]);
 				input.setAttribute("readonly", "");
 				input.setAttribute("class","colum_name_style");
 				//celda.appendChild(input);
@@ -386,16 +390,10 @@ function create_table_rv(){
 
 			}
 			//--------------------------------------------------------------------------------------------------
-
-			else if(j>0){
-				//lista_tx += add_text_fila(j);
-
+			else if(siz_f>0){
+				//lista_tx += add_text_fila(siz_f);
 				var celda = document.createElement("td");
-
 				celda.setAttribute("id", "celdrv"+celda_id)
-
-				
-
 				// Creamos 2 elementos de entrada
 				var input = document.createElement("input");
 				input.setAttribute("type", "number");
@@ -404,7 +402,7 @@ function create_table_rv(){
 
 
 				//Cuadros de solo textos
-				if (i==4){
+				if (siz_c==4){
 					input.setAttribute("class","input_style_td");
 					//input.setAttribute("onclick","get_celda_value_test();");
 					//input.setAttribute("onkeyup","get_celda_value_test();");
@@ -420,7 +418,7 @@ function create_table_rv(){
 					input.setAttribute("onFocus", "ocultar_input();");
 				}
 				//Cuadros de entrada numerica
-				else if (i != 5){
+				else if (siz_c != 5){
 					input.setAttribute("class","input_style_td");
 					input.setAttribute("onclick","get_celda_value_rp();");
 					input.setAttribute("onkeyup","get_celda_value_rp();");
@@ -433,21 +431,22 @@ function create_table_rv(){
 
 					celda.appendChild(input);
 
-					var total_id_a = j;
+					var total_id_a = siz_f;
 					var total_id_b = multiplo;
 					//input.setAttribute("onkeyup", "enviar_index("+total_id_a+","+total_id_b+");" );
 
 					input.setAttribute("onFocus", "ocultar_input();");
 
 				}
-				if(i==5){
+	console.log(siz_c);
+				if(siz_c==5){
 					celda.setAttribute("class", "button_style_r");
 					var button = document.createElement("button");
 					button.setAttribute("class", "mask_style");
 					button.setAttribute("type", "button");
 					button.innerHTML= "Registrar";
-					button.setAttribute("onclick","button_reg_venta("+j+");");
-					button.setAttribute("id", "buttrv"+j+"5");
+					button.setAttribute("onclick","button_reg_venta("+siz_f+");");
+					button.setAttribute("id", "buttrv"+siz_f+"5");
 					celda.appendChild(button);
 				}
 				fila.appendChild(celda);

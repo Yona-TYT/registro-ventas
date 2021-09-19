@@ -25,16 +25,24 @@ function buscar_lista_rv(id)
 			var calc_precio = calc_dolarporunidad(genmargen, margen, precio);
 			var calc_precbs = calc_bolivarprecio(genprecbs, calc_precio);
 
-			var input_nomb = document.getElementById("rvinput"+count+""+0);
-			var input_cant = document.getElementById("rvinput"+count+""+1);
-			var input_pdol = document.getElementById("rvinput"+count+""+2);
-			var input_pbsf = document.getElementById("rvinput"+count+""+3);
-			var input_tvent = document.getElementById("rvinput"+count+""+4);
+			var input_nomb = document.getElementById("rvinput"+(gl_mobil?1:count)+""+0);
+			var input_cant = document.getElementById("rvinput"+(gl_mobil?1:count)+""+1);
+			var input_pdol = document.getElementById("rvinput"+(gl_mobil?1:count)+""+2);
+			var input_pbsf = document.getElementById("rvinput"+(gl_mobil?1:count)+""+3);
+			var input_tvent = document.getElementById("rvinput"+(gl_mobil?1:count)+""+4);
 
 			input_nomb.value = nombre;
 			input_cant.value = cantidad;
 			input_pdol.value = get_mask(calc_precio,"$");
 			input_pbsf.value = get_mask(calc_precbs,"BsF");
+
+			//Test cambia tamaño de la fuente para ajustar a l espacio pequeño
+			if(nombre.length>20)
+				input_nomb.style.fontSize = "80%";
+
+			if(input_pbsf.value.length>20)
+				input_pbsf.style.fontSize = "80%";
+			//----------------------------------------------------------------
 
 			gl_lista_rv.clave[count] = gl_selc;
 			gl_lista_rv.index[count] = j;
@@ -192,22 +200,43 @@ function button_borr_venta(index){
 }
 function reset_inputs_rv() {
 	gl_lista_rv = new lista_actual_rv();
-	for (var i = 1; i < 5; i++) {
+	if(gl_mobil){
+		var siz_fil = 5;
+		for (var i = 1; i < siz_fil; i++) {
+			var input_nomb = document.getElementById("rvinput"+1+""+i);
+			var input_cant = document.getElementById("rvinput"+1+""+i);
+			var input_pdol = document.getElementById("rvinput"+1+""+i);
+			var input_pdbs = document.getElementById("rvinput"+1+""+i);
+			var input_tvent = document.getElementById("rvinput"+1+""+i);
 
-		var input_nomb = document.getElementById("rvinput"+i+""+0);
-		var input_cant = document.getElementById("rvinput"+i+""+1);
-		var input_pdol = document.getElementById("rvinput"+i+""+2);
-		var input_pdbs = document.getElementById("rvinput"+i+""+3);
-		var input_tvent = document.getElementById("rvinput"+i+""+4);
+
+			input_nomb.value = "";
+			input_cant.value = "";
+			input_pdol.value = "";
+			input_pdbs.value = "";
+			input_tvent.value = "1";
+
+			//gloval_test += "result:"+result+ " ";
+		}
+	}
+	else {
+		var siz_fil = 5;
+		for (var i = 1; i < siz_fil; i++) {
+			var input_nomb = document.getElementById("rvinput"+i+""+0);
+			var input_cant = document.getElementById("rvinput"+i+""+1);
+			var input_pdol = document.getElementById("rvinput"+i+""+2);
+			var input_pdbs = document.getElementById("rvinput"+i+""+3);
+			var input_tvent = document.getElementById("rvinput"+i+""+4);
 
 
-		input_nomb.value = "";
-		input_cant.value = "";
-		input_pdol.value = "";
-		input_pdbs.value = "";
-		input_tvent.value = "1";
+			input_nomb.value = "";
+			input_cant.value = "";
+			input_pdol.value = "";
+			input_pdbs.value = "";
+			input_tvent.value = "1";
 
-		//gloval_test += "result:"+result+ " ";
+			//gloval_test += "result:"+result+ " ";
+		}
 	}
 }
 var gl_lista_ventas = new all_ventas();

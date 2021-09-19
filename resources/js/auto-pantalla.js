@@ -19,17 +19,19 @@ function check_windows_siz() {
 		if(!gl_mobil) {
 			//console.log(+ancho+"  " +font_siz);
 			objref.style.setProperty("--alig-text", 'left');
-			objref.style.setProperty("--cel-siz", '35%');
+			objref.style.setProperty("--cel-siz", '5%');
 			gl_mobil = true;
+			create_table_rv();
 		}
 	}
 	else if(ancho >= 1024) {
 		//console.log(+ancho+"  " +font_siz);
 		objref.style.setProperty("--alig-text", 'center');
-		objref.style.setProperty("--cel-siz", 'auto');
+		objref.style.setProperty("--cel-siz", '10%');
 		gl_mobil = false;
 
 		menu_butt.setAttribute("class","");
 		menu_list.setAttribute("class","element_style_hidden");
+		create_table_rv();
 	}
 }

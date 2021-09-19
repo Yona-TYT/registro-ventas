@@ -168,48 +168,50 @@
 		<! ---------------- Seccion5 Inportar los datos   ------------------>
 
 		<section class="label_style" id="seccion5">
-			<div class="cajas_style">
-				<label class="" for="archivos">Seleccione archivo: </label>
-				<input class="custom-file-input" type="file" name="archivos" id="archivos" accept=".xlsx , .csv, .xlsm, .xls">
-			</div>
-
-			<div class="cajas_style">
-				<label for="startfila">Iniciar lectura desde: </label>
-				<select class="mask_style" id="startfila">
-					<option value="0">Fila 1</option>
-					<option value="1">Fila 2</option>
-					<option value="2">Fila 3</option>
-					<option value="3">Fila 4</option>
-					<option value="4">Fila 5</option>
-					<option value="5">Fila 6</option>
-					<option value="6">Fila 7</option>
-					<option value="7">Fila 8</option>
-					<option value="8">Fila 9</option>
-					<option value="9">Fila 10</option>
-					<option value="10">Fila 11</option>
-					<option value="11">Fila 12</option>
-					<option value="12">Fila 13</option>
-					<option value="13">Fila 14</option>
-					<option value="14">Fila 15</option>
-					<option value="15">Fila 16</option>
-					<option value="16">Fila 17</option>
-					<option value="17">Fila 18</option>
-					<option value="18">Fila 19</option>
-					<option value="19">Fila 20</option>
-				</select>
-			</div>
-			<div class="cajas_style">
-				<label for="listcolum">Seleccione el orden de las columnas: </label>
-				<select class="mask_style" name="listcolum" id="listcolum">
-					<option value="default">Orden automatico</option>
-					<option value="0">Nombre Producto</option>
-					<option value="1">Cantidad Dispon.</option>
-					<option value="2">Precio Entrada</option>
-				</select>
-			</div>
-			<div class="cajas_style"><button class="mask_style" type="button" id="butreset" onclick="reset_preview();">Reiniciar</div>
-			<div class="cajas_style"><button class="mask_style" type="button" id="butsendcol" onclick="button_selelc_fila()">Enviar Colum</div>
-
+			<section class="cajas_style">
+				<div class="cajas_style">
+					<label for="startfila">Iniciar lectura desde: </label>
+					<select class="mask_style" id="startfila">
+						<option value="0">Fila 1</option>
+						<option value="1">Fila 2</option>
+						<option value="2">Fila 3</option>
+						<option value="3">Fila 4</option>
+						<option value="4">Fila 5</option>
+						<option value="5">Fila 6</option>
+						<option value="6">Fila 7</option>
+						<option value="7">Fila 8</option>
+						<option value="8">Fila 9</option>
+						<option value="9">Fila 10</option>
+						<option value="10">Fila 11</option>
+						<option value="11">Fila 12</option>
+						<option value="12">Fila 13</option>
+						<option value="13">Fila 14</option>
+						<option value="14">Fila 15</option>
+						<option value="15">Fila 16</option>
+						<option value="16">Fila 17</option>
+						<option value="17">Fila 18</option>
+						<option value="18">Fila 19</option>
+						<option value="19">Fila 20</option>
+					</select>
+				</div>
+				<div class="cajas_style">
+					<label class="" for="archivos">Seleccione archivo: </label>
+					<input class="custom-file-input" type="file" name="archivos" id="archivos" accept=".xlsx , .csv, .xlsm, .xls">
+				</div>
+			</section>
+			<section class="label_style">
+				<div class="cajas_style">
+					<label for="listcolum">Seleccione el orden de las columnas: </label>
+					<select class="mask_style" name="listcolum" id="listcolum">
+						<option value="default">Orden automatico</option>
+						<option value="0">Nombre Producto</option>
+						<option value="1">Cantidad Dispon.</option>
+						<option value="2">Precio Entrada</option>
+					</select>
+				</div>
+				<div class="cajas_style"><button class="mask_style" type="button" id="butreset" onclick="reset_preview();">Reiniciar</div>
+				<div class="cajas_style"><button class="mask_style" type="button" id="butsendcol" onclick="button_selelc_fila()">Enviar Colum</div>
+			</section>
 			<div class="cajas_style">Vista previa del documento importado:</div>
 			<table class="table_style" id="tableprev0">
 				<tbody>

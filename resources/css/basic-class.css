@@ -5,7 +5,8 @@
 	--caja-disp: inline-block;
 	--all-bord: 1px;
 	--alig-text: center;
-	--cel-siz: auto;
+	--cel-siz: 100%;
+	--cel-siz-name: 100%;
 }
 
 .cajas_style {
@@ -80,8 +81,8 @@
 	font-weight: bold;
 	font-size:var(--siz-text);
 
-	width: 1%;
-	height: 10%;
+	width: var(--cel-siz);
+	height: auto;
 
 	border-style: solid;
 	border-color: #0000ff;
@@ -118,7 +119,7 @@
 	color: #001326;
 	text-align: center;
 	font-weight: bold;
-	font-size:var(--siz-text);
+	font-size: var(--siz-text);
 
 	width: 10%;
 	height: 10%;
@@ -153,12 +154,12 @@
 
 .celda_style_name {
 	color: #fffffe;
-	text-align: center;
+	text-align: var(--siz-text);
 	font-weight: bold;
 	font-size:var(--siz-text);
 
 	width: 10%;
-	height: auto;
+	height: 10%;
 
 	border-style: solid;
 	border-color: #fffffe;
@@ -228,7 +229,7 @@
 
 	color: #ffffff;
 	width: 100%;
-	height:var(--all-height);
+	height: 20px;
 
 	background: rgba(55, 64, 145, 0.4);
 }
@@ -411,13 +412,11 @@
 .colum_name_style {
 
 	color: #fffffe;
-	text-align: center;
+	text-align: var(--alig-text);
 	font-weight: bold;
-	font-size:var(--siz-text);
+	font-size: var(--siz-text);
 
-	width: 100%;
-	height: 10%%;
-
+	width: var(--cel-siz-name);
 	border-style: dotted;
 	border-color: #fafafa;
 
