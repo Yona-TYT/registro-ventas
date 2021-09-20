@@ -1,14 +1,16 @@
 gl_curr_optsel = 0;
 gl_hist_save = new all_ventas();
 
+gl_hist_date = new history_data();
+
 
 function preloder_filtro_fec() {
 	var selec = document.getElementById("selchisfec");
 
-	var index = gl_listname.save_id;
+	var index = gl_hist_date.save_id;
 	var selc_tx = "";
 	for (var j = index; j >= 0; j--) {
-		var name = gl_listname.fechalist[j]
+		var name = gl_hist_date.fechalist[j]
 		if(name){
 			selc_tx += "<option id='fech"+j+"' value='"+j+"'>"+name+"</option>";
 		}
@@ -25,10 +27,10 @@ function selec_fechas(id,mostrar = true) {
 	var selec = document.getElementById(id);
 	var current_opt = selec.options[selec.selectedIndex];
 	if(current_opt && mostrar){
-		
 		gl_curr_optsel = parseInt(current_opt.value);
 		mostrar_selec(gl_curr_optsel);
-	}	
+	}
+
 }
 
 function crear_historial(index) {
@@ -182,16 +184,14 @@ function eliminar_todo(opt){
 }
 function clear_history(){
 
-	for (var j = 0; j <= gl_listname.save_id; j++) {
-		removerobjeto(j);
+	for (var j = 0; j <= gl_hist_date.save_id; j++) {
+		remover_ventas(j);
 	}
 
 	//Restaura los valores de control de historial
-	gl_listname.index = 0;					//Index actual (Va incrementando por operacion, regresa a 0 por dia)
-	gl_listname.fecha = null;				//Fecha actual
-	gl_listname.save_id = 0;				//ID actual (Va incrementando por dia)
-	gl_listname.fechalist = new Array(); 	//Lista de fechas por dia
-	agregarnombres(gl_listname);
+	gl_hist_date = new history_data();
+	remove_his_data(gl_hist_date.clave);
+	
 
 	gl_hist_save = new all_ventas();
 

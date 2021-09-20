@@ -140,15 +140,28 @@ function create_table(){
 					celda.appendChild(input);			
 				}
 				//Borrar
-				if(j==6){
-					celda.setAttribute("class",  edit_mode?"celda_style_x":"input_style_hidden");
-					var button = document.createElement("button");
-					button.setAttribute("class","button_style_x");
-					button.setAttribute("type", "button");
-					button.innerHTML= "[X]";
-					button.setAttribute("onclick","remove_product();");
-					button.setAttribute("id", "button"+j);
-					celda.appendChild(button);
+				if(j==3 ){
+					if(i==1) {
+						celda.setAttribute("class",  edit_mode?"celda_style_x":"input_style_hidden");
+						var div = document.createElement("div");
+						div.setAttribute("class","input_style_edicion_td");
+						div.setAttribute("id", "listp_div");
+						div.innerHTML= "Confirmar:";
+						input.setAttribute("type","checkbox");
+						input.setAttribute("id", "listp_check");
+						div.appendChild(input);
+						celda.appendChild(div);
+					}
+					if(i==2) {
+						celda.setAttribute("class",  edit_mode?"celda_style_x":"input_style_hidden");
+						var button = document.createElement("button");
+						button.setAttribute("class","mask_style");
+						button.setAttribute("type", "button");
+						button.innerHTML= "Borrar Producto";
+						button.setAttribute("onclick","remove_product();");
+						button.setAttribute("id", "button"+j);
+						celda.appendChild(button);
+					}
 				}
 				fila.appendChild(celda);
 			}
@@ -185,7 +198,7 @@ function create_table_rp(){
 	//----------------------------------------------------------------
 	//Nombre de las celdas value--------------------------------------
 	var name_cel = ["Nombre Producto", "Cantidad Dispon.", "Ganancia C/U", "Precio Entrada", "Accion"];
-	var col_siz = name_cel.length;
+	var name_siz = name_cel.length;
 	//----------------------------------------------------------------
 
 	var sect_table = document.getElementById("sect_rp");
@@ -199,7 +212,9 @@ function create_table_rp(){
 	var tblBody = document.createElement("tbody");
 
 	// Creamos las celdas
-	for (var j = 0; j < 2; j++) {
+	var siz_col = gl_mobil? 2:name_siz;
+	var siz_fil = gl_mobil? name_siz:2;
+	for (var j = 0; j < siz_fil; j++) {
 		// Creamos las hileras de la tabla
 		var fila = document.createElement("tr");
 
@@ -207,16 +222,18 @@ function create_table_rp(){
 
 		var multiplo = (j*table_col);
 		save_id_filas[j] = j+multiplo;
-		for (var i = 0; i < col_siz; i++) {
+		for (var i = 0; i < siz_col; i++) {
 
-			var celda_id = j+""+i;
+			var siz_f = gl_mobil?i:j;
+			var siz_c = gl_mobil?j:i;
+			var celda_id = siz_f+""+siz_c;
 			
 			//Cuadros de nombres de columnas
-			if(j==0){
+			if(siz_f==0){
 				var celda = document.createElement("td");
 
 				celda.setAttribute("id", "celdrp"+celda_id)
-				celda.setAttribute("class","celda_style_td");
+				celda.setAttribute("class","celda_style");
 
 				// Creamos 2 elementos de entrada
 				var input = document.createElement("input");
@@ -229,7 +246,7 @@ function create_table_rp(){
 				tex_mask.setAttribute("class", "input_style_edicion_td");
 
 				input.setAttribute("type", "text");
-				input.setAttribute("value", name_cel[i]);
+				input.setAttribute("value", name_cel[siz_c]);
 				input.setAttribute("readonly", "");
 				input.setAttribute("class","colum_name_style");
 				//celda.appendChild(input);
@@ -240,7 +257,7 @@ function create_table_rp(){
 			}
 			//--------------------------------------------------------------------------------------------------
 
-			else if(j==1){
+			else if(siz_f==1){
 				//lista_tx += add_text_fila(j);
 
 				var celda = document.createElement("td");
@@ -261,7 +278,7 @@ function create_table_rp(){
 				input.setAttribute("placeholder", "Ingrese Valor");
 
 				//Cuadro De nombres
-				if (i==0){
+				if (siz_c==0){
 					input.setAttribute("class","input_style_td");
 					input.setAttribute("class","input_style_edicion_td");
 					input.setAttribute("type", "text");
@@ -269,7 +286,7 @@ function create_table_rp(){
 					input.setAttribute("onFocus", "ocultar_input();");
 				}
 				//Cuadro cantidad
-				if (i==1){
+				if (siz_c==1){
 					input.setAttribute("class","input_style_td");
 					input.setAttribute("class","input_style_edicion_td");
 					input.setAttribute("type", "number");
@@ -277,7 +294,7 @@ function create_table_rp(){
 					input.setAttribute("onFocus", "ocultar_input();");
 				}
 				//Cuadros de entrada numerica
-				if(i==2 || i==3){
+				if(siz_c==2 || siz_c==3){
 					input.setAttribute("class","input_style_td");
 					input.setAttribute("onclick","get_celda_value_rp();");
 					input.setAttribute("onkeyup","get_celda_value_rp();");
@@ -303,7 +320,7 @@ function create_table_rp(){
 					input.setAttribute("onFocus", "ocultar_input();");
 
 				}
-				if(i==4){
+				if(siz_c==4){
 					celda.setAttribute("class", "button_style_r");
 					var button = document.createElement("button");
 					button.setAttribute("class", "mask_style");
@@ -438,7 +455,6 @@ function create_table_rv(){
 					input.setAttribute("onFocus", "ocultar_input();");
 
 				}
-	console.log(siz_c);
 				if(siz_c==5){
 					celda.setAttribute("class", "button_style_r");
 					var button = document.createElement("button");

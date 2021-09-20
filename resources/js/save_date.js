@@ -5,7 +5,7 @@ var claveventa = 001;
 function set_basededatos(name)
 {
 	cajadatos = document.getElementById("cajadatos");
-	var solicitud = indexedDB.open(name, 5);
+	var solicitud = indexedDB.open(name, 1);
 	solicitud.addEventListener("error", mostrarerror);
 	solicitud.addEventListener("success", comenzar);
 	solicitud.addEventListener("upgradeneeded", crearbd);
@@ -29,6 +29,9 @@ function comenzar(evento) {
 
 	bd = evento.target.result;
 	mostrar_nombres(clavename);
+
+	//Datos para controlar historial
+	mostrar_hist_date(gl_hist_date.clave);
 
 
 
@@ -60,6 +63,9 @@ function crearbd(evento) {
 	var almacen_ventas = basededatos.createObjectStore("ventas_saves", {keyPath:"id", autoIncrement: true});
 	almacen_ventas.createIndex("buscarnombre", "nombre", {unique: true});
 
+	var almacen_history = basededatos.createObjectStore("history_data", {keyPath:"id", autoIncrement: true});
+	almacen_history.createIndex("buscarnombre", "nombre", {unique: true});
+
 }
 
 function enviar_index() {
@@ -84,63 +90,56 @@ function enviar_index() {
 		gl_list[gl_selc].precio[gl_current_selec] = document.getElementById("input"+precio_id).value;
 	}
 	//add_message(document.getElementById("inputest").value);
-
-
 	agregarobjeto(gl_list[gl_selc], gl_selc, 1);//1 es para lectura y escritra
 	agregarnombres(gl_listname);
 	return null;
 }
 
-function agregarventas(ventas, id = gl_listname.save_id) {
-
+//Guarda los datos de la venta
+function agregarventas(ventas, id = gl_hist_date.save_id) {
 	var transaccion = bd.transaction(["ventas_saves"], "readwrite");
 	var almacen = transaccion.objectStore("ventas_saves");
 
-	//var id = gl_listname.save_id;
+	//var id = gl_hist_date.save_id;
 	console.log("Vac: "+id )
-	var solicitud = almacen.put({
-							id: id, rventas: ventas
-				});
+	var solicitud = almacen.put({id: id, rventas: ventas});
 
 }
 
+//Guarda los datos de las listas como nombres y datalistas
 function agregarnombres(names) {
-
 	var transaccion = bd.transaction(["nombre_saves"], "readwrite");
 	var almacen = transaccion.objectStore("nombre_saves");
 
-	var solicitud = almacen.put({
-							id: names.clave, nombrelista: names
-				});
-
+	var solicitud = almacen.put({id: names.clave, nombrelista: names});
 }
 
+//Guarda los datos para controlar el historial
+function agregar_his_data(data) {
+	var transaccion = bd.transaction(["history_data"], "readwrite");
+	var almacen = transaccion.objectStore("history_data");
+
+	var solicitud = almacen.put({id: data.clave, data_his: data});
+}
+
+//Guarda los productos en las listas
 function agregarobjeto(result, clave, opt) {
 	var transaccion = bd.transaction(["nombre_lista"], "readwrite");
 	var almacen = transaccion.objectStore("nombre_lista");
 	//transaccion.addEventListener("complete", mostrar_lista);
-	transaccion.addEventListener("complete", function() {
-		mostrar_lista(clave);
-	});
-	transaccion.addEventListener("error", function() {
-		mostrar_lista(clave);
-	});
+	transaccion.addEventListener("complete", function() {mostrar_lista(clave);});
+	transaccion.addEventListener("error", function() {mostrar_lista(clave)});
 	//transaccion.addEventListener("error", mostrar_lista);
-
 	if (opt == 0){
-		var solicitud = almacen.add({
-									id: clave, datos: result
-						});
+		var solicitud = almacen.add({id: clave, datos: result});
 	}
 	if (opt == 1){
-		var solicitud = almacen.put({
-									id: clave, datos: result
-						});
+		var solicitud = almacen.put({id: clave, datos: result});
 	}
 }
+
+// Manejos de las listas de productos------------------------------------------------------------------
 function mostrar_lista(clave) {
-
-
 	var transaccion = bd.transaction(["nombre_lista"]);
 	var almacen = transaccion.objectStore("nombre_lista");
 	var solicitud = almacen.get(clave);
@@ -153,7 +152,6 @@ function mostrar_lista(clave) {
 		resultado.datos.listatamaño != null? gl_list[parseInt(clave)] = resultado.datos : gl_list[parseInt(clave)] = new result_list_a();
 		//console.log("test "+gl_list[clave].nombre[0]);
 		if (start_one){
-
 			load_save_data();
 		}
 	}
@@ -162,8 +160,6 @@ function mostrar_lista(clave) {
 		gl_list[parseInt(clave)] = new result_list_a();
 	}
 	});
-	//solicitud.addEventListener("success", obtener_lista);
-	
 }
 
 function obtener_lista(evento) {
@@ -179,6 +175,8 @@ function obtener_lista(evento) {
 	}
 }
 
+//-----------------------------------------------------------------------------------------------------------------------------------------------
+
 //Se obtienen los nombres lista y valores generales ------------------------------
 function mostrar_nombres(clave) {
 	//cajadatos.innerHTML = "";
@@ -191,13 +189,9 @@ function mostrar_nombres(clave) {
 
 function obtener_nombres(evento) {
 	var resultado = evento.target.result;
-
 	if(resultado){
 		gl_listname = resultado.nombrelista;
-		mostrar_ventas(gl_listname.save_id);
 	}
-	preloder_selec_list("selectlistaname");
-	
 }
 //----------------------------------------------------------------------
 
@@ -216,27 +210,25 @@ function obtener_ventas(evento) {
 
 	var hoy = new Date();
 	var curr_fecha = hoy.getDate()+ "-" + ( hoy.getMonth() + 1 ) + "-" + hoy.getFullYear();
-	var index = gl_listname.index;
-	var fecha = gl_listname.fecha;
-	var curr_id = gl_listname.save_id;
+	var index = gl_hist_date.index;
+	var fecha = gl_hist_date.fecha;
+	var curr_id = gl_hist_date.save_id;
 
 	if(resultado){
 
 		var id = resultado.id;
 		if(id == curr_id){
 			if(!fecha){
-				gl_listname.fecha = curr_fecha;
-				gl_listname.fechalist[gl_listname.index] = curr_fecha;
+				gl_hist_date.fecha = curr_fecha;
+				gl_hist_date.fechalist[gl_hist_date.index] = curr_fecha;
 				//gl_trasn_save = new trasn_save();
 				//console.log(+puntero.value.id+"  noo" );
 			}
 			else if(curr_fecha != fecha){
-				gl_listname.index = 0;
-				gl_listname.save_id++;
-				gl_listname.fecha = curr_fecha;
-				gl_listname.fechalist[gl_listname.save_id] = curr_fecha;
-				//add_temp(gl_trasn_datos);
-
+				gl_hist_date.index = 0;
+				gl_hist_date.save_id++;
+				gl_hist_date.fecha = curr_fecha;
+				gl_hist_date.fechalist[gl_hist_date.save_id] = curr_fecha;
 
 			}
 		}	
@@ -259,7 +251,7 @@ function obtener_ventas(evento) {
 }
 //----------------------------------------------------------------------
 
-function removerobjeto(clave) {
+function remover_ventas(clave) {
 
 	var transaccion = bd.transaction(["ventas_saves"], "readwrite");
 	var almacen = transaccion.objectStore("ventas_saves");
@@ -275,10 +267,10 @@ function remove_datos(clave) {
 
 }
 
-function remove_lista(clave) {
+function remove_his_data(clave) {
 
-	var transaccion = bd.transaction(["nombre_lista"], "readwrite");
-	var almacen = transaccion.objectStore("nombre_lista");
+	var transaccion = bd.transaction(["history_data"], "readwrite");
+	var almacen = transaccion.objectStore("history_data");
 	var solicitud = almacen.delete(clave);
 
 }
@@ -296,7 +288,7 @@ function obtener_selec(evento) {
 	var resultado = evento.target.result;
 	gl_hist_save = new all_ventas();
 
-
+	console.log(gl_hist_date.save_id);	
 	if(resultado){
 		//var id = resultado.id;
 		gl_hist_save = resultado.rventas;
@@ -308,6 +300,27 @@ function obtener_selec(evento) {
 		//console.log(""+resultado.id+" fech index");
 }
 //---------------------------------------------------------------------------------------
+
+
+//Manejo de datos para el control del historial ------------------------------
+function mostrar_hist_date(clave) {
+	var transaccion = bd.transaction(["history_data"]);
+	var almacen = transaccion.objectStore("history_data");
+	var solicitud = almacen.get(clave);
+	solicitud.addEventListener("success", obtener_hist_date);
+	
+}
+
+function obtener_hist_date(evento) {
+	var resultado = evento.target.result;
+
+	if(resultado){
+		gl_hist_date = resultado.data_his;
+		mostrar_ventas(gl_hist_date.save_id);
+	}
+	preloder_selec_list("selectlistaname");
+}
+//----------------------------------------------------------------------
 
 
 function history_save() {
@@ -363,6 +376,15 @@ function allnames_list() {
 	this.fecha = null;				//Fecha actual
 	this.save_id = 0;				//ID actual (Va incrementando por dia)
 	this.fechalist = new Array(); 	//Lista de fechas por dia
+}
+
+function history_data() {
+	this.clave = 0;
+	//Control de history_save()
+	this.index = 0;					//Index actual (Va incrementando por operacion, regresa a 0 por dia)
+	this.fecha = null;				//Fecha actual
+	this.save_id = 0;				//ID actual (Va incrementando por dia)
+	this.fechalist = new Array(); 	//Lista de fechas por di
 }
 
 function result_list_a() {

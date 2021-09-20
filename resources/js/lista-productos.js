@@ -138,10 +138,6 @@ function buscar_lista(text) {
 		}
 		//gloval_test += "result:"+result+ " ";
 	}
-	
-	//Desenfoca el input para ocultar el teclado
-	document.activeElement.blur();
-	
 }
 
 function mostrar_input() {
@@ -251,7 +247,9 @@ function update_celdas_generales(){
 
 function remove_product(){
 	if(gl_current_selec != null){
-		if(current_key == "x" || current_key =="X" ){
+		
+		var check = document.getElementById("listp_check");
+		if(check.checked){
 			gl_list[gl_selc].nombre.splice(gl_current_selec, 1);
 			gl_list[gl_selc].cantidad.splice(gl_current_selec, 1);
 			gl_list[gl_selc].margen.splice(gl_current_selec, 1);
@@ -267,6 +265,6 @@ function remove_product(){
 			var input_buscar = document.getElementById("buscar");
 			buscar_lista(input_buscar.value);
 		}
-		else add_message("Haga click mientras mantiene precionada la tecla [ X ] !.");
+		else return alert("Primero Marque la casilla para confirmar!.");
 	}
 }

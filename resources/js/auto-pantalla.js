@@ -22,16 +22,20 @@ function check_windows_siz() {
 			objref.style.setProperty("--cel-siz", '5%');
 			gl_mobil = true;
 			create_table_rv();
+			create_table_rp();
 		}
 	}
 	else if(ancho >= 1024) {
 		//console.log(+ancho+"  " +font_siz);
-		objref.style.setProperty("--alig-text", 'center');
-		objref.style.setProperty("--cel-siz", '10%');
-		gl_mobil = false;
 
 		menu_butt.setAttribute("class","");
 		menu_list.setAttribute("class","element_style_hidden");
-		create_table_rv();
+		objref.style.setProperty("--alig-text", 'center');
+		objref.style.setProperty("--cel-siz", '10%');
+		if(gl_mobil) {
+			gl_mobil = false;
+			create_table_rv();
+			create_table_rp();
+		}
 	}
 }

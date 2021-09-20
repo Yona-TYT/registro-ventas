@@ -161,7 +161,7 @@ function buscar_reg_lista(text)
 
 function select_list_x(){
 
-	set_basededatos("basededat");
+	set_basededatos("registroventas");
 
 	var select = document.getElementById("selectlistaname");
 	//select.setAttribute("onchange","test_select_base('selectlistaname');");

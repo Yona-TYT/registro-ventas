@@ -161,7 +161,7 @@ function mostrar_lista_rv() {
 
 		//console.log(prdol+"  "+ total);
 		var butt = "<button type='button' onclick='button_borr_venta("+i+");'>Quitar</button>";
-		var detalles = "["+total+"] "+nombre+" c/u:( "+get_mask(prdol,"$")+" / "+get_mask(prbsf,"Bsf )")+" Total:( "+get_mask(calc_precio,"$")+" / "+get_mask(calc_precbs,"Bsf )")+" Lista:("+sel_nombre+")";
+		var detalles = "["+total+"] "+nombre+" c/u: "+get_mask(prdol,"$")+" / "+get_mask(prbsf,"Bsf ")+" <div>Total: "+get_mask(calc_precio,"$")+" / "+get_mask(calc_precbs,"Bsf </div>");
 		venta_tx= "<div class='div_list_style' id='divrv"+i+"'>" + butt + detalles + "</div>";
 
 		secc_reg.innerHTML += venta_tx;
@@ -272,7 +272,7 @@ function guardar_venta() {
 
 		var secc_reg = document.getElementById("registroactual");
 
-		var index = gl_listname.index;
+		var index = gl_hist_date.index;
 		var indexfec = gl_lista_ventas.indexfec;
 		var fechalist = gl_lista_ventas.fechalist[indexfec];
 		
@@ -285,18 +285,18 @@ function guardar_venta() {
 		var hora =  hoy.getHours() + ":" + hoy.getMinutes() + ":" + hoy.getSeconds();
 		var curr_fecha = hoy.getDate()+ "-" + ( hoy.getMonth() + 1 ) + "-" + hoy.getFullYear();
 
-		var fecha = gl_listname.fecha;
+		var fecha = gl_hist_date.fecha;
 
 		if(fecha != curr_fecha) {
 			if(!fecha) {
-				gl_listname.fecha = curr_fecha;
-				gl_listname.fechalist[gl_listname.index] = curr_fecha;
+				gl_hist_date.fecha = curr_fecha;
+				gl_hist_date.fechalist[gl_hist_date.index] = curr_fecha;
 			}
 			else {
-				gl_listname.index = 0;
-				gl_listname.save_id++;
-				gl_listname.fecha = curr_fecha;
-				gl_listname.fechalist[gl_listname.index] = curr_fecha;
+				gl_hist_date.index = 0;
+				gl_hist_date.save_id++;
+				gl_hist_date.fecha = curr_fecha;
+				gl_hist_date.fechalist[gl_hist_date.save_id] = curr_fecha;
 			}
 		}
 
@@ -308,8 +308,8 @@ function guardar_venta() {
 
 
 		//Cambia a la siguiente venta
-		gl_listname.index++;
-		gl_lista_ventas.index = gl_listname.index;
+		gl_hist_date.index++;
+		gl_lista_ventas.index = gl_hist_date.index;
 		//----------------------------------------
 
 		document.getElementById("rv_totaldol").value = 0;
@@ -317,9 +317,10 @@ function guardar_venta() {
 		cl_nombre.value = "";
 		secc_reg.innerHTML = "";
 
-		agregarnombres(gl_listname);
-		agregarventas(gl_lista_ventas);
-		mostrar_ventas(gl_listname.save_id);
+		agregarnombres(gl_listname);			//Datos de lista de clientes
+		agregar_his_data(gl_hist_date);			//Datos control de historial
+		agregarventas(gl_lista_ventas);			//Datos De la venta
+		mostrar_ventas(gl_hist_date.save_id);	//Muestra la venta en el historial
 	}
 	else {
 		alert("La lista esta vacia!.");
