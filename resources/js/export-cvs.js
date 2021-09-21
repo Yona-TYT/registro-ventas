@@ -93,8 +93,6 @@ function save_exp_date(results) {
 			if(cells[j].includes("ã"))
 				cells[j] = cells[j].replaceAll("ã", "ñ");
 
-
-
 			save_expdate[i][j] = cells[j];
 			
         }
@@ -134,12 +132,29 @@ function recovery_data() {
 			gl_result_temp.margen[i] = 0;		
         }
     }
+	remove_empy_name();			//Quita filas con nombres vacios
 	var opt = 1;
 	start_one = true;
 	agregarobjeto(gl_result_temp, parseInt(clave), opt);
  	reset_preview();
 	gl_result_temp = new result_list_a();
 	alert("Lista Guardada Correctamente.");
+}
+
+function remove_empy_name(){
+	var siz = gl_result_temp.listatamaño;
+    for (var j = 0;j<siz ; j++) {
+		if(!gl_result_temp.nombre[j] ){
+			gl_result_temp.listatamaño--;
+		}
+		else if(gl_result_temp.nombre[j].length==0){
+			gl_result_temp.nombre.splice(j, 1);
+			gl_result_temp.cantidad.splice(j, 1);
+			gl_result_temp.margen.splice(j, 1);
+			gl_result_temp.precio.splice(j, 1);
+			gl_result_temp.listatamaño--;
+		}
+	}
 }
 
 function tableformato(results) {

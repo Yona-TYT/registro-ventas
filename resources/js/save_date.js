@@ -371,11 +371,6 @@ function allnames_list() {
 	this.indexnomb = 0;
 	this.nombrecl = new Array();
 
-	//Control de history_save()
-	this.index = 0;					//Index actual (Va incrementando por operacion, regresa a 0 por dia)
-	this.fecha = null;				//Fecha actual
-	this.save_id = 0;				//ID actual (Va incrementando por dia)
-	this.fechalist = new Array(); 	//Lista de fechas por dia
 }
 
 function history_data() {

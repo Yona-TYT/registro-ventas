@@ -418,15 +418,14 @@ function create_table_rv(){
 				input.setAttribute("id", "rvinput"+celda_id);
 
 
-				//Cuadros de solo textos
+				//Cuadros de cantidad
 				if (siz_c==4){
-					input.setAttribute("class","input_style_td");
 					//input.setAttribute("onclick","get_celda_value_test();");
 					//input.setAttribute("onkeyup","get_celda_value_test();");
 					//input.setAttribute("onwheel","get_celda_value_test();");
 					//input.setAttribute("onchange","enviar_index();");
 
-					input.setAttribute("class","mask_style");
+					input.setAttribute("class","input_style_visible");
 					input.setAttribute("type", "number");
 					input.setAttribute("step", "1");
 					input.setAttribute("min", "1");

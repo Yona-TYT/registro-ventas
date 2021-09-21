@@ -84,13 +84,7 @@
 	width: var(--cel-siz);
 	height: auto;
 
-	border-style: solid;
-	border-color: #0000ff;
-	border-width: var(--all-bord);
-
-
 	overflow: hidden;
-
 }
 
 .celda_style_x {
@@ -262,7 +256,7 @@
 	width: 100%;
 
 
-	border-style: dotted;
+	border-style: solid;
 	border-color: #fffffe;
 	border-width: var(--all-bord);
 
@@ -357,6 +351,19 @@
 	background: rgba(55, 64, 145, 0.4);
 	overflow: hidden;
 }
+
+.div_his_list_style {
+	text-align: left;
+	font-weight: bold;
+	font-size:var(--siz-text);
+
+	color: #ffffff;
+	width: 100%;
+	height:var(--all-height);
+
+	background: rgba(55, 64, 145, 0.4);
+	overflow: hidden;
+}
 .menu_list_style {
 	display: block;
 
@@ -417,8 +424,7 @@
 	font-size: var(--siz-text);
 
 	width: var(--cel-siz-name);
-	border-style: dotted;
-	border-color: #fafafa;
+
 
 	background-color: #6e3068;
 	overflow: hidden;
@@ -442,8 +448,18 @@ tr, .fila_style:nth-child(even) {
 	color: orange;
 }
 
+
+
 tr, .fila_style:hover {
 	background-color: rgba(206, 24, 30, 0.5);
+}
+
+.div_his_list_style:hover {
+	border-width: var(--all-bord);
+	border-style: solid;
+	border-color: #fafafa;
+
+	background: rgba(70, 30, 130, 0.6);
 }
 
 .div_list_style:hover {
@@ -516,6 +532,15 @@ input::placeholder{
 }
 
 input[type='file'] {
+
+	overflow: hidden;
+	text-align: left;
+	font-weight: bold;
+	font-size:var(--siz-text);
+	width: 100%;
+}
+
+input[type='checkbox'] {
 
 	overflow: hidden;
 	text-align: left;

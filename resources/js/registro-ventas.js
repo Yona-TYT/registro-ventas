@@ -138,7 +138,7 @@ function mostrar_lista_rv() {
 
 	secc_reg.innerHTML = "";
 	var venta_tx = "";
-	var hist_tx = "<ul>";
+	var hist_tx = "";
 	var t_dol = 0;
 	var t_bsf = 0;
 
@@ -165,13 +165,13 @@ function mostrar_lista_rv() {
 		venta_tx= "<div class='div_list_style' id='divrv"+i+"'>" + butt + detalles + "</div>";
 
 		secc_reg.innerHTML += venta_tx;
-		hist_tx += "<li>"+detalles+"</li>";
+		hist_tx += "<div class='div_his_list_style'>"+detalles+"</div>";
 	}
 
 	total_dol.value = get_mask(t_dol,"$");
 	total_bsf.value = get_mask(t_bsf,"Bsf");
 
-	gl_lista_ventas.detalles[gl_lista_ventas.index] = hist_tx+"</ul>";
+	gl_lista_ventas.detalles[gl_lista_ventas.index] = hist_tx;
 	gl_lista_ventas.totaldol[gl_lista_ventas.index] = t_dol;
 	gl_lista_ventas.totalbsf[gl_lista_ventas.index] = t_bsf;
 
@@ -201,23 +201,18 @@ function button_borr_venta(index){
 function reset_inputs_rv() {
 	gl_lista_rv = new lista_actual_rv();
 	if(gl_mobil){
-		var siz_fil = 5;
-		for (var i = 1; i < siz_fil; i++) {
-			var input_nomb = document.getElementById("rvinput"+1+""+i);
-			var input_cant = document.getElementById("rvinput"+1+""+i);
-			var input_pdol = document.getElementById("rvinput"+1+""+i);
-			var input_pdbs = document.getElementById("rvinput"+1+""+i);
-			var input_tvent = document.getElementById("rvinput"+1+""+i);
+		var input_nomb = document.getElementById("rvinput"+1+""+0);
+		var input_cant = document.getElementById("rvinput"+1+""+1);
+		var input_pdol = document.getElementById("rvinput"+1+""+2);
+		var input_pdbs = document.getElementById("rvinput"+1+""+3);
+		var input_tvent = document.getElementById("rvinput"+1+""+4);
 
 
-			input_nomb.value = "";
-			input_cant.value = "";
-			input_pdol.value = "";
-			input_pdbs.value = "";
-			input_tvent.value = "1";
-
-			//gloval_test += "result:"+result+ " ";
-		}
+		input_nomb.value = "";
+		input_cant.value = "";
+		input_pdol.value = "";
+		input_pdbs.value = "";
+		input_tvent.value = "1";
 	}
 	else {
 		var siz_fil = 5;
