@@ -28,7 +28,7 @@ function activadesactiva_editmode(){
 		}
 		else{
 			input_name.setAttribute("class","element_style_hidden");
-			select_name.setAttribute("class","input_style_td");
+			select_name.setAttribute("class","mask_style");
 		}
 
 		create_table(table_fila,table_col);

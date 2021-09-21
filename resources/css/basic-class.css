@@ -540,13 +540,5 @@ input[type='file'] {
 	width: 100%;
 }
 
-input[type='checkbox'] {
-
-	overflow: hidden;
-	text-align: left;
-	font-weight: bold;
-	font-size:var(--siz-text);
-	width: 100%;
-}
 
 
