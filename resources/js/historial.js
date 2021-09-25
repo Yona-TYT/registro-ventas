@@ -47,7 +47,7 @@ function crear_historial(index) {
 	var est_txb = "<strong id='txestb"+index+"'> Estado: "+estado+"</strong>";
 
 	var secc_his = document.getElementById("historialventa");
-	var titulo = "["+cl+", "+est_txa+ "], compra de: ("+get_mask(prdol,"$")+" / "+get_mask(prbsf,"Bsf")+") Fecha:("+fecha+") Hora:("+hora+") ";
+	var titulo = "["+cl+", "+est_txa+ "], "+fecha+" "+hora+" <strong class='total_style'>Total: "+get_mask(prdol,"$")+" / "+get_mask(prbsf,"Bsf </strong>");
 
 	var buttm = "<button type='button' onclick='button_detalles("+index+");'>Detalles</button>";
 

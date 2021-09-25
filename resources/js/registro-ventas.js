@@ -161,7 +161,7 @@ function mostrar_lista_rv() {
 
 		//console.log(prdol+"  "+ total);
 		var butt = "<button type='button' onclick='button_borr_venta("+i+");'>Quitar</button>";
-		var detalles = "["+total+"] "+nombre+" c/u: "+get_mask(prdol,"$")+" / "+get_mask(prbsf,"Bsf ")+" <div>Total: "+get_mask(calc_precio,"$")+" / "+get_mask(calc_precbs,"Bsf </div>");
+		var detalles = "["+total+"] "+nombre+" c/u: "+get_mask(prdol,"$")+" / "+get_mask(prbsf,"Bsf ")+" <div class='total_style'>Total: "+get_mask(calc_precio,"$")+" / "+get_mask(calc_precbs,"Bsf &nbsp;</div>");
 		venta_tx= "<div class='div_list_style' id='divrv"+i+"'>" + butt + detalles + "</div>";
 
 		secc_reg.innerHTML += venta_tx;

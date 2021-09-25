@@ -66,27 +66,6 @@ function load_save_data(){
 	var rv_dolar = document.getElementById("dolar_rv");
 	rv_dolar.value = get_mask(r_precio,"BsF");
 
-	if(gl_current_selec != null){	
-		var r_nombre = gl_list[gl_selc].nombre[gl_current_selec]?gl_list[gl_selc].nombre[gl_current_selec]:"";
-		var r_cantidad = gl_list[gl_selc].cantidad[gl_current_selec]?gl_list[gl_selc].cantidad[gl_current_selec]:"";
-		var r_margen = gl_list[gl_selc].margen[gl_current_selec]?gl_list[gl_selc].margen[gl_current_selec]:0;
-		var r_precio = gl_list[gl_selc].precio[gl_current_selec]?gl_list[gl_selc].precio[gl_current_selec]:0;
-
-		var nombre = document.getElementById("input21");
-		var cantidad = document.getElementById("input22");
-		var margen = document.getElementById("input25");
-		var precio = document.getElementById("input26");
-		var margen_mask = document.getElementById("text_mask25");
-		var precio_mask = document.getElementById("text_mask26");
-		
-		nombre.value = r_nombre.toLowerCase();
-		cantidad.value = r_cantidad;
-		margen.value = r_margen;
-		margen_mask.value = get_mask_simple(r_margen,"%");
-		precio.value = r_precio;
-		precio_mask.value = get_mask(r_precio,"$");
-	}
-
 	if(is_start){
 		menu_main();
 		is_start=false;

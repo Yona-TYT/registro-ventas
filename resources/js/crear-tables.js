@@ -197,7 +197,7 @@ function create_table_rp(){
 
 	//----------------------------------------------------------------
 	//Nombre de las celdas value--------------------------------------
-	var name_cel = ["Nombre Producto", "Cantidad Dispon.", "Ganancia C/U", "Precio Entrada", "Accion"];
+	var name_cel = ["Nombre", "Cantidad", "Ganancia C/U", "Precio", "Accion"];
 	var name_siz = name_cel.length;
 	//----------------------------------------------------------------
 
@@ -348,7 +348,7 @@ function create_table_rv(){
 
 	//----------------------------------------------------------------
 	//Nombre de las celdas value--------------------------------------
-	var name_cel = ["Nombre Producto", "Cantidad Dispon.", "Precio Dolar", "Precio BsF", "Cant. Venta", "Accion"];
+	var name_cel = ["Producto", "Cant. Dispon.", "En Dolar", "En Bs", "Cant. Venta", "Accion"];
 	var name_siz = name_cel.length;
 	//----------------------------------------------------------------
 

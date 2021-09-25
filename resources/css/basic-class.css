@@ -398,23 +398,7 @@
 
 	margin:2px;
 }
-.desc_style {
 
-	color: #fffffe;
-	font-weight: bold;
-	font-size:var(--siz-text);
-
-	width: 10%;
-	height:var(--all-height);
-
-	border-width: var(--all-bord);
-	border-style: dotted;
-	border-color: #fafafa;
-
-	background-color: #6e3068;
-	overflow: hidden;
-
-}
 
 .colum_name_style {
 
@@ -430,6 +414,21 @@
 	overflow: hidden;
 }
 
+.total_style {
+
+	color: #ffffff;
+	text-shadow: 2px 2px 2px #000000;
+	text-align: right;
+	font-weight: bold;
+	font-size:var(--siz-text);
+
+	width: 100%;
+	height:var(--all-height);
+
+	overflow: hidden;
+
+}
+
 .fila_selec_style {
 	background-color: rgba(206, 24, 30, 0.5);
 }
@@ -441,14 +440,12 @@
 
 tr, .fila_style:nth-child(odd) {
 	background: #aadcf7;
-	color: orange;
+	color: #ffffff;
 }
 tr, .fila_style:nth-child(even) {
 	background: #47bafc;
-	color: orange;
+	color: #ffffff;
 }
-
-
 
 tr, .fila_style:hover {
 	background-color: rgba(206, 24, 30, 0.5);
