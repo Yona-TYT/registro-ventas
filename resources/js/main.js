@@ -302,12 +302,19 @@ function soloNumeros(e){
 	var input = document.activeElement;
 	var num = input.value;
     var key = window.event ? e.which : e.keyCode;
-	//add_message(key);
 	if(key == 46){
-	//add_message(num.includes("."));
-	 	if (!num.includes(".")){
-			//input_test.value = remplace_test(num);
-			//input.value = parseFloat(input.value).toFixed(2);
+		if (num == "")
+			return e.preventDefault();
+
+	 	else if(!num.includes(".")){
+			return null;
+		}	
+	}
+	else if(key == 45){
+		if (num == "")
+			return e.preventDefault();
+
+	 	else if(!num.includes("-")){
 			return null;
 		}
 	}
