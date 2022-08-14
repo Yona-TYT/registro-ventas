@@ -62,6 +62,20 @@ function get_fila_nr(num, tabble_siz, i){
 		return resusl;
 }
 
+function get_dignr(num){
+	return Math.log(num) * Math.LOG10E + 1 | 0;  // for positive integers
+}
+
+function get_time_zero(num){
+	if (get_dignr(num) == 1)
+		return "0"+num;
+
+	if (get_dignr(num) == 0)
+		return "00";
+
+	return num;
+}
+
 function Queue() {
 
     this.dataStore = Array.prototype.slice.call(arguments, 0);

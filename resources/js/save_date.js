@@ -214,7 +214,55 @@ function obtener_ventas(evento) {
 	var fecha = gl_hist_date.fecha;
 	var curr_id = gl_hist_date.save_id;
 
+	var curr_h = hoy.getHours() +""+get_time_zero(hoy.getMinutes()) +""+ get_time_zero(hoy.getSeconds());
+	var curr_d = hoy.getDate();
+	var curr_m = hoy.getMonth();
+	var curr_y = hoy.getFullYear();
+	var hour = gl_hist_date.hour;
+	var day = gl_hist_date.day;
+	var month = gl_hist_date.month;
+	var year = gl_hist_date.year;
+	curr_h = parseInt(curr_h);
 	if(resultado){
+		if(hour){
+
+			
+			if(year > curr_y) { 
+				alert("Error: La fecha y Hora del sistema son invalidas! ");
+				return null;
+			}
+			else if(year == curr_y) {
+
+
+				if(month > curr_m) { 
+					alert("Error: La fecha y Hora del sistema son invalidas! ");
+					return null;
+				}
+
+				else if(month == curr_m) {
+
+
+					if(day > curr_d) { 
+						alert("Error: La fecha y Hora del sistema son invalidas! ");
+						return null;
+					}
+
+					else if(day == curr_d) {
+
+					console.log(" Validar fecha---"+ curr_h +" -- "+ +get_dignr(parseInt(curr_h))+"  --  "+hour +" - "+ curr_h);
+						if (hour > curr_h) { 
+							alert("Error: La fecha y Hora del sistema son invalidas! ");
+							return null;
+						}				
+					}
+				}
+			}
+		}
+
+		gl_hist_date.hour = curr_h;
+		gl_hist_date.day = curr_d;
+		gl_hist_date.month = curr_m;
+		gl_hist_date.year = curr_y;
 
 		var id = resultado.id;
 		if(id == curr_id){
@@ -339,6 +387,15 @@ function history_save() {
 	this.fecha = null;				//Fecha actual
 	this.save_id = 0;				//ID actual (Va incrementando por dia)
 	this.fechalist = new Array(); 	//Lista de fechas por dia
+
+	//Validadores de Fechas
+	this.hour = null;
+	this.day = null;
+	this.month = null;
+	this.year = null;
+	
+
+
 }
 
 function all_ventas() {
