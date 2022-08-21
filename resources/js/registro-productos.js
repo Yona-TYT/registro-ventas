@@ -4,17 +4,19 @@ function guardar_rp(){
 	var margen = document.getElementById("inputrp12");
 	var precio = document.getElementById("inputrp13");
 
-	console.log(gl_list[gl_selc].nombre[table_fila]);
+	//console.log(gl_products.list_prd.nombre[table_fila]);
 	if(nombre.value != "" && precio.value != ""){
-		gl_list[gl_selc].nombre[table_fila] = nombre.value;
-		gl_list[gl_selc].cantidad[table_fila] = cantidad.value;
-		gl_list[gl_selc].margen[table_fila] = margen.value;
-		gl_list[gl_selc].precio[table_fila] = precio.value;
+		gl_products.list_prd.nombre.push(nombre.value);
+		gl_products.list_prd.cantidad.push(cantidad.value);
+		gl_products.list_prd.margen.push(margen.value);
+		gl_products.list_prd.precio.push(precio.value);
 
-		gl_list[gl_selc].listatamaño++;
-		table_fila = gl_list[gl_selc].listatamaño;
-		start_one = true;
-		agregarobjeto(gl_list[gl_selc], gl_selc, 1);//1 es para lectura y escritra
+		gl_products.list_prd.listatamaño++;
+		table_fila = gl_products.list_prd.listatamaño;
+
+		gl_products.clave = gl_currt_list_selec;
+		crear_datalist(gl_products.list_prd.nombre, "listproducts");
+		agregar_producto(gl_products);		//Guarda los valores de productos
 
 		nombre.value = "";
 		cantidad.value = "";
@@ -32,5 +34,5 @@ function get_celda_value_rp(){
 	var precio_mask = document.getElementById("text_maskrp13");
 
 	margen_mask.value = get_mask_simple(margen.value,"%");
-	precio_mask.value = get_mask(precio.value,"$");
+	precio_mask.value = get_mask(precio.value,gl_mon_b);
 }

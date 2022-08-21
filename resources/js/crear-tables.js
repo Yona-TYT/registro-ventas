@@ -98,7 +98,7 @@ function create_table(){
 					input.setAttribute("onclick","get_celda_value_test();");
 					input.setAttribute("onkeyup","get_celda_value_test();");
 					//input.setAttribute("onwheel","get_celda_value_test();");
-					input.setAttribute("onchange","enviar_index();");
+					//input.setAttribute("onchange","enviar_index();");
 
 					input.setAttribute("class",edit_mode?"input_style_edicion_td":"input_text_style");
 					input.setAttribute("type", "text");
@@ -177,8 +177,8 @@ function create_table(){
 
 	sect_table.appendChild(tabla);  ///innerHTML = tabla.innerHTML;
 
-	var r_margen = gl_listname.genmargen;
-	var r_precio = gl_listname.genprecio;
+	var r_margen = gl_products.genmargen;
+	var r_precio = gl_products.genprecio;
 
 	var precio = document.getElementById("input02");
 	var margen = document.getElementById("input04");
@@ -188,7 +188,7 @@ function create_table(){
 	margen.value = r_margen;
 	margen_mask.value = get_mask_simple(r_margen,"%");
 	precio.value = r_precio;
-	precio_mask.value = get_mask(r_precio,"BsF");
+	precio_mask.value = get_mask(r_precio,gl_mon_a);
 
 	return null;
 }
@@ -436,9 +436,6 @@ function create_table_rv(){
 				//Cuadros de entrada numerica
 				else if (siz_c != 5){
 					input.setAttribute("class","input_style_td");
-					input.setAttribute("onclick","get_celda_value_rp();");
-					input.setAttribute("onkeyup","get_celda_value_rp();");
-					input.setAttribute("onchange","get_celda_value_rp();");
 					//input.setAttribute("onchange","enviar_index();");
 
 					input.setAttribute("class","input_style_td");

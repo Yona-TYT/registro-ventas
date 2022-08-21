@@ -1,7 +1,6 @@
 
 function menu_main(){
 
-
 	var select = document.getElementById("selectlistaname");
 	var opt = select.options[select.selectedIndex];
 	var input2 = document.getElementById("inputlistaname");
@@ -14,7 +13,6 @@ function menu_main(){
 		select.setAttribute("class","element_style_hidden");
 	}
 
-
 	reset_inputs_rv();
 
 	document.getElementById("rv_totaldol").value = 0.00+" $";
@@ -22,7 +20,6 @@ function menu_main(){
 
 	var select1 = document.getElementById("selcregvent");
 	//select1.setAttribute("onchange","test_select_base('selcregvent');");
-
 }
 
 function clonar_filtros(id) {
@@ -139,36 +136,6 @@ function visible_element(opt) {
 	}
 }
 
-/*
-function buscar_reg_lista(text)
-{
-	var result = true;
-	for (var j = 2; j < table_fila; j++) {
-		//Obtine todas las columnas de nombres
-		var input = document.getElementById("input"+(1+save_id_filas[j])).value;
-		var fila = document.getElementById("fila"+j);
-		result = input.includes(text.toLowerCase());
-		if(!result){
-			fila.setAttribute("class","fila_style_hidden");
-		}
-		else{
-			fila.setAttribute("class","fila_style");
-		}
-		//gloval_test += "result:"+result+ " ";
-	}
-
-}*/
-
-function select_list_x(){
-
-	set_basededatos("registroventas");
-
-	var select = document.getElementById("selectlistaname");
-	//select.setAttribute("onchange","test_select_base('selectlistaname');");
-
-	var input = document.getElementById("inputlistaname");
-	
-}
 var gl_select = null;
 function select_base_list(id){
 
@@ -181,7 +148,7 @@ function select_base_list(id){
 	}
 
 	gl_selc = parseInt(opt.value);
-	preloder_selec_list("selectlistaname");
+	//preloder_selec_list("selectlistaname");
 
 	var sect_lista = document.getElementById("listageneral");
 	var data_lista = document.getElementById("listproducts");
@@ -194,64 +161,14 @@ function select_base_list(id){
 	mostrar_lista(parseInt(opt.value));
 } 
 
-function chlistnameinput_a(){
-	var select = document.getElementById("selectlistaname");
-	var input = document.getElementById("inputlistaname");
-	
-	var opt = select.options[select.selectedIndex];
-	input.value = opt.innerHTML;	
-	//console.log([select.selectedIndex]);
-	//clonar_filtros("selectlistaname")
-}
-function chlistnameinput_b(){
-	var select = document.getElementById("selectlistaname");
-	var input = document.getElementById("inputlistaname");
-	
-	var opt = select.options[select.selectedIndex];
-	opt.innerHTML = input.value;
-	var index = parseInt(opt.value);
-	gl_listname.list_nam[index] = input.value;
-	agregarnombres(gl_listname);
-
-
-	var sel_a = document.getElementById("selcregvent");
-	var sel_b = document.getElementById("selcregprod");
-	var sel_c = document.getElementById("listbasedato");
-	sel_a.innerHTML = select.innerHTML;
-	sel_b.innerHTML = select.innerHTML;
-	sel_c.innerHTML = select.innerHTML;
-	//console.log([select.selectedIndex]);
-	//preloder_selec_list("selectlistaname");
-	//clonar_filtros("selectlistaname")
-}
-
-function preloder_selec_list(id) {
-
-	var selec = document.getElementById(id);
-	var sel_a = document.getElementById("selcregvent");
-	var sel_b = document.getElementById("selcregprod");
-	var sel_c = document.getElementById("listbasedato");
-	var list_id = gl_listname.list_id;
-	var list_nam = gl_listname.list_nam;
-	var selc_tx = "";
-	for (var j = 0;  j < list_id.length; j++) {
-		var fechalist = gl_lista_ventas.fechalist[j];
-		selc_tx += "<option id='selelist"+j+"' value='"+list_id[j]+"'>"+list_nam[j]+"</option>";
+function crear_datalist(list,id) {
+	var data_lista = document.getElementById(id);
+	data_lista.innerHTML = "";
+	//console.log("Finished:"+gl_general.cl_save_id)
+	for (var j = 0; j <list.length; j++) {
+		//console.log("Nr: "+j+" Name: "+gl_general.cuentlist[j]+" Estd: "+list[j] );
+		data_lista.innerHTML += "<option value='"+list[j]+"'>";
 	}
-
-	selec.innerHTML = selc_tx;
-	sel_a.innerHTML = selc_tx;
-	sel_b.innerHTML = selc_tx;
-	sel_c.innerHTML = selc_tx;
-
-	selec.options[gl_selc].selected=true;
-	sel_a.options[gl_selc].selected=true;
-	sel_b.options[gl_selc].selected=true;
-	sel_c.options[gl_selc].selected=true;
-
-	//selec.setAttribute("onchange","select_base_list('"+id+"');");
-
-	//selec.setAttribute("onclick","selec_fechas('selchisfec');");
 }
 
 function el_selec(id){

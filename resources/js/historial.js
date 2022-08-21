@@ -1,5 +1,5 @@
 gl_curr_optsel = 0;
-gl_hist_save = new all_ventas();
+gl_hist_save = new reg_ventas();
 
 gl_hist_date = new history_data();
 
@@ -47,7 +47,7 @@ function crear_historial(index) {
 	var est_txb = "<strong id='txestb"+index+"'> Estado: "+estado+"</strong>";
 
 	var secc_his = document.getElementById("historialventa");
-	var titulo = "["+cl+", "+est_txa+ "], "+fecha+" "+hora+" <strong class='total_style'>Total: "+get_mask(prdol,"$")+" / "+get_mask(prbsf,"Bsf </strong>");
+	var titulo = "["+cl+", "+est_txa+ "], "+fecha+" "+hora+" <strong class='total_style'>Total: "+get_mask(prdol,gl_mon_b)+" / "+get_mask(prbsf,gl_mon_a+" </strong>");
 
 	var buttm = "<button type='button' onclick='button_detalles("+index+");'>Detalles</button>";
 
@@ -134,7 +134,7 @@ function button_reint_hist(index) {
 		
 
 		start_one = true;
-		mostrar_lista(gl_selc);
+		mostrar_lista(gl_currt_list_selec);
 	}
 	//else{console.log("Test error calc");};
 }
@@ -153,7 +153,7 @@ function button_pend_hist(index) {
 	agregarventas(gl_hist_save, gl_curr_optsel);
 	
 	start_one = true;
-	mostrar_lista(gl_selc);
+	mostrar_lista(gl_currt_list_selec);
 
 	//Cambia el boton
 	var bott = document.getElementById("bott_pend"+index);
@@ -193,9 +193,9 @@ function clear_history(){
 	remove_his_data(gl_hist_date.clave);
 	
 
-	gl_hist_save = new all_ventas();
+	gl_hist_save = new reg_ventas();
 
-	gl_lista_rv = new all_ventas();
+	gl_lista_rv = new reg_ventas();
 
 	preloder_filtro_fec();
 	selec_fechas("selchisfec");

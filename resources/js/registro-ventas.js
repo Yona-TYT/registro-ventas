@@ -1,4 +1,21 @@
 var gl_lista_rv = new lista_actual_rv();
+
+function ventas_main(){
+
+	//crea la lista de productos
+	crear_lista_productos();
+
+	buscar_lista_rv("buscar_rv");
+
+	//Buscador para la lista de productos
+	var input_buscar = document.getElementById("buscar");
+	input_buscar.addEventListener("input", function(){buscar_lista(input_buscar.value);});
+
+	//Buscador para el registro de ventas
+	var input_buscar_rv = document.getElementById("buscar_rv");
+	input_buscar_rv.addEventListener("input", function(){buscar_lista_rv("buscar_rv");});
+}
+
 function buscar_lista_rv(id)
 {
 	var text = document.getElementById(id).value;
@@ -6,21 +23,20 @@ function buscar_lista_rv(id)
 	var result = false;
 	var count = 1;
 	//console.log("Finished: ");
-	for (var j = 0; j<gl_list[gl_selc].listatamaño; j++) {
-
+	var max = gl_products.list_prd.nombre.length;
+	//console.log("Finished: "+max);
+	for (var j = 0; j<max; j++) {
 		if(count>4) break;
-		var nombre = gl_list[gl_selc].nombre[j]
-		
+		var nombre = gl_products.list_prd.nombre[j];
 		if (nombre!=null) nombre = nombre.toLowerCase();
 		else continue;
 		result = nombre.includes(text.toLowerCase());
-
 		if(result){
-			var cantidad = parseInt(gl_list[gl_selc].cantidad[j])?gl_list[gl_selc].cantidad[j]:0;
-			var margen = gl_list[gl_selc].margen[j];
-			var precio = gl_list[gl_selc].precio[j];
-			var genmargen = gl_listname.genmargen;
-			var genprecbs = gl_listname.genprecio;
+			var cantidad = parseInt(gl_products.list_prd.cantidad[j])?gl_products.list_prd.cantidad[j]:0;
+			var margen = gl_products.list_prd.margen[j];
+			var precio = gl_products.list_prd.precio[j];
+			var genmargen = gl_general.gen_margen;
+			var genprecbs = gl_general.gen_bs;
 
 			var calc_precio = calc_dolarporunidad(genmargen, margen, precio);
 			var calc_precbs = calc_bolivarprecio(genprecbs, calc_precio);
@@ -33,8 +49,8 @@ function buscar_lista_rv(id)
 
 			input_nomb.value = nombre;
 			input_cant.value = cantidad;
-			input_pdol.value = get_mask(calc_precio,"$");
-			input_pbsf.value = get_mask(calc_precbs,"BsF");
+			input_pdol.value = get_mask(calc_precio,gl_mon_b);
+			input_pbsf.value = get_mask(calc_precbs,gl_mon_a);
 
 			//Test cambia tamaño de la fuente para ajustar a l espacio pequeño
 			if(nombre.length>20)
@@ -44,7 +60,7 @@ function buscar_lista_rv(id)
 				input_pbsf.style.fontSize = "80%";
 			//----------------------------------------------------------------
 
-			gl_lista_rv.clave[count] = gl_selc;
+			gl_lista_rv.clave[count] = gl_currt_list_selec;
 			gl_lista_rv.index[count] = j;
 			gl_lista_rv.nombre[count] = nombre;
 			gl_lista_rv.cantidad[count] = cantidad;
@@ -71,7 +87,7 @@ function button_reg_venta(nr) {
 		var sel_nombre = select.options[select.selectedIndex].innerHTML;
 
 		var clave = gl_lista_rv.clave[nr];
-//	console.log("Finished:"+clave +"  "+gl_list[gl_selc].clave);
+//	console.log("Finished:"+clave +"  "+gl_products.list_prd.clave);
 
 		var index = gl_lista_rv.index[nr];
 		var nombre = gl_lista_rv.nombre[nr];
@@ -79,10 +95,10 @@ function button_reg_venta(nr) {
 		var precio = gl_lista_rv.precio[nr];
 		var margen = gl_lista_rv.margen[nr];
 		var total = gl_lista_rv.totalvent[nr];
-		var genmargen = gl_listname.genmargen;
-		var genprecbs = gl_listname.genprecio;
+		var genmargen = gl_general.gen_margen;
+		var genprecbs = gl_general.gen_bs;
 
-		if(clave == gl_selc){
+		if(clave == gl_currt_list_selec){
 			//Para guardar datos de producto
 			nw_index[gl_venta_rv.count] = index;
 			nw_clave[gl_venta_rv.count] = clave;
@@ -118,7 +134,7 @@ function comparar_rv(index) {
 	var nr = gl_venta_rv.count;
 	for (var i = 0; i <nr; i++) {
 		var clave = gl_venta_rv.clave[i];
-		if(clave==gl_selc){
+		if(clave==gl_currt_list_selec){
 			var new_index = gl_venta_rv.index[i];
 			if(new_index == index){
 				return false;
@@ -161,15 +177,15 @@ function mostrar_lista_rv() {
 
 		//console.log(prdol+"  "+ total);
 		var butt = "<button type='button' onclick='button_borr_venta("+i+");'>Quitar</button>";
-		var detalles = "["+total+"] "+nombre+" c/u: "+get_mask(prdol,"$")+" / "+get_mask(prbsf,"Bsf ")+" <div class='total_style'>Total: "+get_mask(calc_precio,"$")+" / "+get_mask(calc_precbs,"Bsf &nbsp;</div>");
+		var detalles = "["+total+"] "+nombre+" c/u: "+get_mask(prdol,gl_mon_b)+" / "+get_mask(prbsf,gl_mon_a)+" <div class='total_style'>Total: "+get_mask(calc_precio,gl_mon_b)+" / "+get_mask(calc_precbs,gl_mon_a+" &nbsp;</div>");
 		venta_tx= "<div class='div_list_style' id='divrv"+i+"'>" + butt + detalles + "</div>";
 
 		secc_reg.innerHTML += venta_tx;
 		hist_tx += "<div class='div_his_list_style'>"+detalles+"</div>";
 	}
 
-	total_dol.value = get_mask(t_dol,"$");
-	total_bsf.value = get_mask(t_bsf,"Bsf");
+	total_dol.value = get_mask(t_dol,gl_mon_b);
+	total_bsf.value = get_mask(t_bsf,gl_mon_a);
 
 	gl_lista_ventas.detalles[gl_lista_ventas.index] = hist_tx;
 	gl_lista_ventas.totaldol[gl_lista_ventas.index] = t_dol;
@@ -184,7 +200,7 @@ function mostrar_lista_rv() {
 function button_borr_venta(index){
 	
 	var clave = gl_venta_rv.clave[index];
-	//if(clave==gl_list[gl_selc].clave){
+	//if(clave==gl_list[gl_currt_list_selec].clave){
 		document.getElementById("divrv"+index).remove();
 		gl_venta_rv.listnomb.splice(index, 1);
 		gl_venta_rv.clave.splice(index, 1);
@@ -234,7 +250,7 @@ function reset_inputs_rv() {
 		}
 	}
 }
-var gl_lista_ventas = new all_ventas();
+var gl_lista_ventas = new reg_ventas();
 
 function guardar_venta() {
 
@@ -312,7 +328,7 @@ function guardar_venta() {
 		cl_nombre.value = "";
 		secc_reg.innerHTML = "";
 
-		agregarnombres(gl_listname);			//Datos de lista de clientes
+		agregar_gene_datos(gl_general);				//Aqui se guarda la lista de clientes
 		agregar_his_data(gl_hist_date);			//Datos control de historial
 		agregarventas(gl_lista_ventas);			//Datos De la venta
 		mostrar_ventas(gl_hist_date.save_id);	//Muestra la venta en el historial
@@ -322,6 +338,7 @@ function guardar_venta() {
 	}
 }
 
+var cop_list = new Array();
 function descontar_pdt(lindex) {
 	var listindex = gl_lista_ventas.pdtindex[lindex];
 	var listclave = gl_lista_ventas.pdtclave[lindex];
@@ -331,25 +348,36 @@ function descontar_pdt(lindex) {
 
 		var nr_a = listcantidad[j];
 		var nr_b = listdesc[j];
-		var nw_cant = nr_a - nr_b;
+		var num = nr_a - nr_b;
+
+		console.log("Finished::" +nr_a +" - "+nr_b)
 
 		var index = listindex[j];
 		var clave = listclave[j];
 
-		gl_list[clave].cantidad[index] = nw_cant;
-		agregarobjeto(gl_list[clave], clave, 1);//1 es para lectura y escritra
+		if (!cop_list[clave])
+			cop_list[clave] = new cop_products();
+
+		cop_list[clave].clave = clave;
+		cop_list[clave].index.push(index);
+		cop_list[clave].num.push(num);
+
+
+
 	}
-	start_one = true;
-	mostrar_lista(gl_selc);
+	var cl_max = 6;
+	mostrar_prod_opt(cl_max) //Clave para ubicar la lista, index para encontrar el producto,  num la cantidad rewsultante 
+	//start_one = true;
+	//mostrar_lista(gl_currt_list_selec);
 }
 
 function cliente_check(text) {
-	var nomb_test = gl_listname.nombrecl[0];
+	var nomb_test = gl_general.nomblist[0];
 	if (!nomb_test){
-		 gl_listname.nombrecl[0] = "N/A";
+		 gl_general.nomblist[0] = "N/A";
 	}
 
-	var nomb_list = gl_listname.nombrecl;
+	var nomb_list = gl_general.nomblist;
 
 	var result = false;
 	for (var j = 0; j < nomb_list.length ; j++) {
@@ -362,8 +390,8 @@ function cliente_check(text) {
 
 	if(!result){
 
-		gl_listname.indexnomb++;
-		gl_listname.nombrecl[gl_listname.indexnomb] = text;
+		gl_general.indexnomb++;
+		gl_general.nomblist[gl_general.indexnomb] = text;
 
 		var data_lista = document.getElementById("list_datacl");
 

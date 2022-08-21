@@ -101,9 +101,9 @@ function save_exp_date(results) {
     }
 }
 
-var gl_result_temp = new result_list_a();
+var gl_result_temp = new prod_detalles();
 function recovery_data() {
-	gl_result_temp = new result_list_a();
+	gl_result_temp = new prod_detalles();
 
 
 	var select = document.getElementById("listbasedato");
@@ -135,7 +135,7 @@ function recovery_data() {
 	remove_empy_name();			//Quita filas con nombres vacios
 	var opt = 1;
 	start_one = true;
-	agregarobjeto(gl_result_temp, parseInt(clave), opt);
+	agregar_producto(gl_result_temp, parseInt(clave), opt);
  	reset_preview();
 	gl_result_temp = new result_list_a();
 	alert("Lista Guardada Correctamente.");

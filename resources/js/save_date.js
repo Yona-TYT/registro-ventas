@@ -1,11 +1,9 @@
 
-var cajadatos, bd;
-var claveventa = 001;
+var bd;	//Para la base de datos
 
 function set_basededatos(name)
 {
-	cajadatos = document.getElementById("cajadatos");
-	var solicitud = indexedDB.open(name, 1);
+	var solicitud = indexedDB.open(name, 6);
 	solicitud.addEventListener("error", mostrarerror);
 	solicitud.addEventListener("success", comenzar);
 	solicitud.addEventListener("upgradeneeded", crearbd);
@@ -15,84 +13,43 @@ function mostrarerror(evento) {
 	alert("Error: tyt tyt " + evento.code + " " + evento.message);
 }
 function comenzar(evento) {
-	var select = document.getElementById("selectlistaname");
-	var current_select = select.options[select.selectedIndex].value;
-
-	var names = new allnames_list();
-	var list_a = new result_list_a();
-
-
-	var clave = current_select;
-
-
-	var clavename = names.clave;
 
 	bd = evento.target.result;
-	mostrar_nombres(clavename);
-
-	//Datos para controlar historial
-	mostrar_hist_date(gl_hist_date.clave);
-
-
-
-	//Test lista de productos
-	gl_selc = parseInt(current_select);
-	gl_list[gl_selc] = new result_list_a();
-	start_one = true;
-	mostrar_lista(gl_selc);
-
-	var list_id = gl_listname.list_id;
-	for (var j = 0; j < list_id.length ; j++) {
-		if (j == gl_selc) continue;
-		//console.log("contar "+j);
-		gl_list[j] = new result_list_a();
-		mostrar_lista(j);
-	}
-	//----------------------------------------------
-	//menu_main();
+	var clave = 0;					//Siempre sera 0
+	mostrar_general(clave);			//Se cargan los datos generales guardados
 }
 
+//Se crean todos los almacenes
 function crearbd(evento) {
 	var basededatos = evento.target.result;
-	var almacen_productos = basededatos.createObjectStore("nombre_lista", {keyPath:"id", autoIncrement: true});
-	almacen_productos.createIndex("buscarnombre", "nombre", {unique: true});
 
-	var almacen_nombreslista = basededatos.createObjectStore("nombre_saves", {keyPath:"id", autoIncrement: true});
-	almacen_nombreslista.createIndex("buscarnombre", "nombre", {unique: true});
+	//Guarda los datos generales
+	var alma_general = basededatos.createObjectStore("general_datos", {keyPath:"id", autoIncrement: true});
+	alma_general.createIndex("buscarnombre", "nombre", {unique: true});
 
-	var almacen_ventas = basededatos.createObjectStore("ventas_saves", {keyPath:"id", autoIncrement: true});
-	almacen_ventas.createIndex("buscarnombre", "nombre", {unique: true});
+	//Guarda lista de Productos
+	var alma_productos = basededatos.createObjectStore("productos_lista", {keyPath:"id", autoIncrement: true});
+	alma_productos.createIndex("buscarnombre", "nombre", {unique: true});
 
-	var almacen_history = basededatos.createObjectStore("history_data", {keyPath:"id", autoIncrement: true});
-	almacen_history.createIndex("buscarnombre", "nombre", {unique: true});
+	//Guarda lista de Clientes
+	//var alma_nombreslista = basededatos.createObjectStore("nombre_saves", {keyPath:"id", autoIncrement: true});
+	//alma_nombreslista.createIndex("buscarnombre", "nombre", {unique: true});
+
+	//Guarda los registros de ventas
+	var alma_ventas = basededatos.createObjectStore("ventas_saves", {keyPath:"id", autoIncrement: true});
+	alma_ventas.createIndex("buscarnombre", "nombre", {unique: true});
+
+	//Guarda el Historial
+	var alma_history = basededatos.createObjectStore("history_data", {keyPath:"id", autoIncrement: true});
+	alma_history.createIndex("buscarnombre", "nombre", {unique: true});
 
 }
 
-function enviar_index() {
-	//var result = new result_list();
-
-	var nombre_id = 1+""+0;
-	var cantidad_id = 2+""+0;
-	var margen_id = 1+""+1;
-	var precio_id = 2+""+1;
-
-	var gen_precio_id = 0+""+2;
-	var gen_margen_id = 0+""+4;
-
-	//Entradas numericas de precio bs y ganancia general
-	gl_listname.genprecio = document.getElementById("input02").value;
-	gl_listname.genmargen = document.getElementById("input04").value;
-	
-	if(gl_current_selec != null){
-		gl_list[gl_selc].nombre[gl_current_selec] = document.getElementById("input"+nombre_id).value;
-		gl_list[gl_selc].cantidad[gl_current_selec] = document.getElementById("input"+cantidad_id).value;
-		gl_list[gl_selc].margen[gl_current_selec] = document.getElementById("input"+margen_id).value;
-		gl_list[gl_selc].precio[gl_current_selec] = document.getElementById("input"+precio_id).value;
-	}
-	//add_message(document.getElementById("inputest").value);
-	agregarobjeto(gl_list[gl_selc], gl_selc, 1);//1 es para lectura y escritra
-	agregarnombres(gl_listname);
-	return null;
+//Guarda los datos generales
+function agregar_gene_datos(datos) {
+	var transaccion = bd.transaction(["general_datos"], "readwrite");
+	var almacen = transaccion.objectStore("general_datos");
+	var solicitud = almacen.put({id: datos.clave, datos_gene: datos});
 }
 
 //Guarda los datos de la venta
@@ -106,14 +63,6 @@ function agregarventas(ventas, id = gl_hist_date.save_id) {
 
 }
 
-//Guarda los datos de las listas como nombres y datalistas
-function agregarnombres(names) {
-	var transaccion = bd.transaction(["nombre_saves"], "readwrite");
-	var almacen = transaccion.objectStore("nombre_saves");
-
-	var solicitud = almacen.put({id: names.clave, nombrelista: names});
-}
-
 //Guarda los datos para controlar el historial
 function agregar_his_data(data) {
 	var transaccion = bd.transaction(["history_data"], "readwrite");
@@ -123,81 +72,123 @@ function agregar_his_data(data) {
 }
 
 //Guarda los productos en las listas
-function agregarobjeto(result, clave, opt) {
-	var transaccion = bd.transaction(["nombre_lista"], "readwrite");
-	var almacen = transaccion.objectStore("nombre_lista");
-	//transaccion.addEventListener("complete", mostrar_lista);
-	transaccion.addEventListener("complete", function() {mostrar_lista(clave);});
-	transaccion.addEventListener("error", function() {mostrar_lista(clave)});
-	//transaccion.addEventListener("error", mostrar_lista);
-	if (opt == 0){
-		var solicitud = almacen.add({id: clave, datos: result});
-	}
-	if (opt == 1){
-		var solicitud = almacen.put({id: clave, datos: result});
-	}
+function agregar_producto(data) {
+	var transaccion = bd.transaction(["productos_lista"], "readwrite");
+	var almacen = transaccion.objectStore("productos_lista");
+	var solicitud = almacen.put({id: data.clave, products: data});
 }
 
-// Manejos de las listas de productos------------------------------------------------------------------
-function mostrar_lista(clave) {
-	var transaccion = bd.transaction(["nombre_lista"]);
-	var almacen = transaccion.objectStore("nombre_lista");
+//----------------------------------------------------------------------------------------------------------------------------------------
+
+//Manejo de datos generales -----------------------------------------
+function mostrar_general(clave) {
+	var transaccion = bd.transaction(["general_datos"]);
+	var almacen = transaccion.objectStore("general_datos");
 	var solicitud = almacen.get(clave);
-	solicitud.addEventListener("success", function(evento) {
-	var resultado = evento.target.result;
-
-	if(resultado){
-		//console.log("tes tamaño: "+resultado.datos.listatamaño  )
-		//console.log("tes clave"+clave + " "+resultado.datos.listatamaño + "" +start_one)
-		resultado.datos.listatamaño != null? gl_list[parseInt(clave)] = resultado.datos : gl_list[parseInt(clave)] = new result_list_a();
-		//console.log("test "+gl_list[clave].nombre[0]);
-		if (start_one){
-			load_save_data();
-		}
-	}
-	else{
-		//console.log("Vaciooooo: " )
-		gl_list[parseInt(clave)] = new result_list_a();
-	}
-	});
-}
-
-function obtener_lista(evento) {
-	var resultado = evento.target.result;
-	var text = "";
-	if(resultado){
-		//Solo una vez por inicio o en un cambio de lista
-		if (start_one){
-			//contador = setInterval(cambio_valor, 1000);
-			//gl_list[gl_selc] = resultado.datos;
-			//load_save_data();
-		}
-	}
-}
-
-//-----------------------------------------------------------------------------------------------------------------------------------------------
-
-//Se obtienen los nombres lista y valores generales ------------------------------
-function mostrar_nombres(clave) {
-	//cajadatos.innerHTML = "";
-	var transaccion = bd.transaction(["nombre_saves"]);
-	var almacen = transaccion.objectStore("nombre_saves");
-	var solicitud = almacen.get(clave);
-	solicitud.addEventListener("success", obtener_nombres);
+	solicitud.addEventListener("success", obtener_general);
 	
 }
 
-function obtener_nombres(evento) {
+function obtener_general(evento) {
+	var resultado = evento.target.result;
+
+	if(resultado){
+		gl_general = resultado.datos_gene;
+		var hoy = new Date();
+		var curr_fecha = hoy.getDate()+ "-" + ( hoy.getMonth() + 1 ) + "-" + hoy.getFullYear();
+
+		var index = gl_general.index;
+		var fecha = gl_general.fecha;
+
+		if(!fecha){
+			gl_general.fecha = curr_fecha;
+			gl_general.fechalist[gl_general.index] = "Vacio";
+		}
+		else if(curr_fecha != fecha){
+			gl_general.fecha = curr_fecha;
+		}
+
+		gl_currt_list_selec = gl_general.sel_list;
+		mostrar_producto(gl_currt_list_selec);
+		mostrar_ventas(0);
+
+		crear_datalist(gl_general.nomblist, "list_datacl");
+
+		load_general_data();	//Se cargan precios del dolar y margen de ganancia
+
+	}
+	else {
+		preloder_filtro_lista();
+	}
+
+//----------------------------------------------------------------------
+
+// Manejos de las listas de productos------------------------------------------------------------------
+function mostrar_producto(clave) {
+	var transaccion = bd.transaction(["productos_lista"]);
+	var almacen = transaccion.objectStore("productos_lista");
+	var solicitud = almacen.get(clave);
+	solicitud.addEventListener("success", obtener_producto);
+
+}
+
+function obtener_producto(evento) {
 	var resultado = evento.target.result;
 	if(resultado){
-		gl_listname = resultado.nombrelista;
+		gl_products = resultado.products;
+		crear_datalist(gl_products.list_prd.nombre, "listproducts");
+		//console.log(""+gl_products.nombre[0]+" ??  " );
+	}
+	else {
+		gl_products = new reg_products();
+		crear_datalist(gl_products.list_prd.nombre, "listproducts");
+	}
+	preloder_filtro_lista();
+	ventas_main();
+
+}
+
+//Funcion experimental para descontar productos
+function mostrar_prod_opt(max) {
+	//console.log(" max:: "+max)
+	var transaccion = bd.transaction(["productos_lista"]);
+	var almacen = transaccion.objectStore("productos_lista");
+	for(var j = max; j>=0; ){
+		if(!cop_list[j]){
+			j--;
+			continue;
+		}
+		//console.log(""+cop_list[j].start+" :: "+j+" :: "+cop_list[j].index[0] +" :: "+cop_list[j].num[0])
+		var solicitud = almacen.get(j);
+		solicitud.addEventListener("success", function(){obtener_prod_opt(event, j);});
+		break;
 	}
 }
-//----------------------------------------------------------------------
+
+function obtener_prod_opt(evento, max) {
+	var resultado = evento.target.result;
+	if(resultado){
+		var produc = resultado.products;
+		var list = cop_list[produc.clave];
+		for(var j=0; j<list.index.length;j++) {
+			//console.log(""+list.index[j]+" :: "+list.num[j])
+			produc.list_prd.cantidad[list.index[j]] = list.num[j];
+		}
+		agregar_producto(produc);
+
+		max--;
+		mostrar_prod_opt(max);
+
+		//console.log("-- "+max)
+		if(max<0){
+			cop_list = new Array();	//Se restaura la copia temporal de descuento producto
+			mostrar_producto(gl_currt_list_selec);
+		}
+	}
+}
 
 //Manejo de datos desde la venta y al inicio -----------------------------------------
 function mostrar_ventas(clave) {
-	//cajadatos.innerHTML = "";
 	var transaccion = bd.transaction(["ventas_saves"]);
 	var almacen = transaccion.objectStore("ventas_saves");
 	var solicitud = almacen.get(clave);
@@ -249,7 +240,7 @@ function obtener_ventas(evento) {
 
 					else if(day == curr_d) {
 
-					console.log(" Validar fecha---"+ curr_h +" -- "+ +get_dignr(parseInt(curr_h))+"  --  "+hour +" - "+ curr_h);
+					//console.log(" Validar fecha---"+ curr_h +" -- "+ +get_dignr(parseInt(curr_h))+"  --  "+hour +" - "+ curr_h);
 						if (hour > curr_h) { 
 							alert("Error: La fecha y Hora del sistema son invalidas! ");
 							return null;
@@ -288,7 +279,7 @@ function obtener_ventas(evento) {
 
 		//console.log(""+gl_trasn_datos.save_id+" index");
 	}
-	crear_lista_cl();
+	//crear_lista_cl();
 	preloder_filtro_fec();
 	selec_fechas("selchisfec", false);
 	var nr = gl_hist_save.index;
@@ -323,7 +314,6 @@ function remove_his_data(clave) {
 
 }
 
-
 //Manejo de datos desde el selector de fechas -----------------------------------------
 function mostrar_selec(clave) {
 	var transaccion = bd.transaction(["ventas_saves"]);
@@ -334,7 +324,7 @@ function mostrar_selec(clave) {
 }
 function obtener_selec(evento) {
 	var resultado = evento.target.result;
-	gl_hist_save = new all_ventas();
+	gl_hist_save = new reg_ventas();
 
 	console.log(gl_hist_date.save_id);	
 	if(resultado){
@@ -370,6 +360,34 @@ function obtener_hist_date(evento) {
 }
 //----------------------------------------------------------------------
 
+//Datos generales
+function general_datos() {
+	this.clave = 0;						//Clave para guardar/cargar el registro
+	this.cu_save_id = 0;				//Clave clave mayor para el registro cuentas
+	this.cl_save_id = 0;				//Clave clave mayor para el registro clientes
+	this.demo = null;
+
+	//Guarda valor de input bolivares y margen
+	this.gen_bs = 0;
+	this.gen_margen = 0;
+
+
+	//Guarda el estado de selector
+	this.sel_list = 0;
+	this.sel_hist = 0;
+
+	//Se registran las fechas
+	this.index = 0;						//Index actual (Va incrementando por operacion, regresa a 0 por dia)
+	this.fecha = null;					//Fecha actual
+	this.fechalist = new Array(); 		//Lista de fechas por id
+
+	//Se registran los nombres de lista de productos
+	this.list_nam = ["Liata Numero 1", "Liata Numero 2", "Liata Numero 3", "Liata Numero 4", "Liata Numero 5", "Liata Numero 6"];
+
+	//Lista de clientes en datalist
+	this.indexnomb = 0;
+	this.nomblist = new Array();
+}
 
 function history_save() {
 	this.indexnomb = 0;
@@ -393,12 +411,10 @@ function history_save() {
 	this.day = null;
 	this.month = null;
 	this.year = null;
-	
-
-
 }
 
-function all_ventas() {
+//Detalles de las ventas
+function reg_ventas() {
 	this.indexfec = 0;
 	this.fechalist = new Array();
 
@@ -417,18 +433,23 @@ function all_ventas() {
 	this.pdtdesc = new Array();
 }
 
-function allnames_list() {
+//Lista de productos
+function reg_products() {
 	this.list_id = [0, 1, 2, 3, 4, 5];
-	this.list_nam = ["Liata Numero 1", "Liata Numero 2", "Liata Numero 3", "Liata Numero 4", "Liata Numero 5", "Liata Numero 6"];
+	this.list_prd = new prod_detalles();
 	this.clave = 0;
-	this.genmargen = 0;
-	this.genprecio = 0;
-
-	//Lista de clientes en datalist
-	this.indexnomb = 0;
-	this.nombrecl = new Array();
-
 }
+// Copia de Lista de productos
+function cop_products() {
+	this.start = false;
+
+	this.index = new Array();
+	this.num = new Array();
+
+	this.list_prd = new prod_detalles();
+	this.clave = 0;
+}
+
 
 function history_data() {
 	this.clave = 0;
@@ -439,9 +460,8 @@ function history_data() {
 	this.fechalist = new Array(); 	//Lista de fechas por di
 }
 
-function result_list_a() {
+function prod_detalles() {
 	this.listatamaño = 0;
-	this.clave = 0001;
 	this.nombre = new Array();
 	this.cantidad = new Array();
 	this.margen = new Array();

@@ -37,6 +37,7 @@
 		<! Fin del CSS -->
 	</head>
 	<body onLoad="init();" >
+		<button class="" type="button" id="but_test" onclick="click_test();">Test</button>
 		<section class="menu_style">
 
 			<h1 class="input_style_td">Lista de negocios</h1>
@@ -83,7 +84,7 @@
 
 		<section class="label_style" id="seccion1">
 			<div class="cajas_style">Seleccione las lista: 
-				<select class="mask_style" id="selcregvent" onchange = "select_base_list('selcregvent');"></select>
+				<select class="mask_style" id="selcregvent" ></select>
 			</div>
 			<div class="cajas_style">Precio Dolar: 
 				<input class="input_style_td" type="text" id="dolar_rv" readonly>
@@ -95,6 +96,8 @@
 			<div class="cajas_style">Total en Dolar: <input class="input_style_td" type="text" id="rv_totaldol" value="0,00 $" readonly></div>
 			<div class="cajas_style">Total en Bsf: <input class="input_style_td" type="text" id="rv_totalbsf" value="0,00 BsF" readonly></div>
 			<div class="cajas_style">Nombre Cliente: <input class="mask_style" type="text" id="rv_clnombre" placeholder="Ingrese Nombre de Cliente" list="list_datacl"></div>
+			<datalist id="list_datacl"></datalist>
+
 			<div class="cajas_style">Pendiente:  <input class="" type="checkbox" id="pend_mark"></div>
 			<div class="cajas_style"><button class="mask_style" type="button" id="buttrvtotal" onclick="guardar_venta();">Registrar Venta</button></div>
 
@@ -104,7 +107,7 @@
 		<! ------- Seccion2 Registro de Productos ------------- >
 		<section class="label_style" id="seccion2">
 			<div class="cajas_style">Seleccione las lista: 
-				<select class="mask_style" id="selcregprod" onchange = "select_base_list('selcregprod');"></select>
+				<select class="mask_style" id="selcregprod" ></select>
 			</div>
 			<section class="label_style" id="sect_rp"></section>
 		</section>
@@ -115,7 +118,6 @@
 				<select class="mask_style" id="selchisfec"></select>
 			</div>
 			<section class="label_style" id="historialventa"></section>
-			<datalist id="list_datacl"></datalist>
 			<div class="cajas_style">
 				<button class="mask_style" type="button" id="buthist" onclick="eliminar_todo(0);">
 				Borrar Historial
@@ -132,16 +134,8 @@
 			<div class="cajas_style">Modo edicion: <input class="" type="checkbox" id="edit_mode"></div>
 			<div class="cajas_style">
 				<label for="selectlistaname">Seleccione las lista: </label>
-				<select class="mask_style" id="selectlistaname" onchange = "select_base_list('selectlistaname');" >
-					<option id="opt0" value="0">Lista 1</option>
-					<option id="opt1" value="1">Lista 2</option>
-					<option id="opt2" value="2">Lista 3</option>
-					<option id="opt3" value="3">Lista 4</option>
-					<option id="opt4" value="4">Lista 5</option>
-					<option id="opt4" value="5">Lista 6</option>
-
-				</select>
-				<input class="element_style_hidden" type="text" id="inputlistaname" onClick="chlistnameinput_a();" onBlur="chlistnameinput_b();" onfocus="el_selec('inputlistaname');">
+				<select class="mask_style" id="selectlistaname" ></select>
+				<input class="element_style_hidden" type="text" id="inputlistaname" oninput="input_to_selec();" onBlur="input_to_selec();" onfocus="el_selec('inputlistaname');">
 			</div>
 			<div class="cajas_style">Buscara productos: <input class="mask_style" type="search" id="buscar" placeholder="Buscar Productos" list="listproducts" onfocus="el_selec('buscar');"></div>
 			<datalist id="listproducts"></datalist>
@@ -319,7 +313,7 @@
 				<section>
 					<div class="cajas_style">
 						<label for="listbasedato">Seleccione la lista para guardar: </label>
-						<select class="mask_style" name="listbasedato" id="listbasedato" onchange = "select_base_list('listbasedato');"></select>
+						<select class="mask_style" name="listbasedato" id="listbasedato" ></select>
 					</div>
 					<div class="cajas_style"><button class="mask_style" type="button" id="butsavelist" onclick="recovery_data();">Guardar lista</div>
 					<div class="cajas_style">Vista previa del orden de los datos en la lista:</div>
