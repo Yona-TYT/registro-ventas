@@ -120,6 +120,7 @@ function obtener_general(evento) {
 	else {
 		preloder_filtro_lista();
 	}
+}
 
 //----------------------------------------------------------------------
 
@@ -467,4 +468,3 @@ function prod_detalles() {
 	this.margen = new Array();
 	this.precio = new Array();
 }
-
