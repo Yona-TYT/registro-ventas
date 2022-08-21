@@ -184,8 +184,8 @@ function mostrar_lista_rv() {
 		hist_tx += "<div class='div_his_list_style'>"+detalles+"</div>";
 	}
 
-	total_dol.value = get_mask(t_dol,gl_mon_b);
-	total_bsf.value = get_mask(t_bsf,gl_mon_a);
+	total_dol.value = get_mask(t_dol, gl_mon_b);
+	total_bsf.value = get_mask(t_bsf, gl_mon_a);
 
 	gl_lista_ventas.detalles[gl_lista_ventas.index] = hist_tx;
 	gl_lista_ventas.totaldol[gl_lista_ventas.index] = t_dol;
@@ -323,8 +323,8 @@ function guardar_venta() {
 		gl_lista_ventas.index = gl_hist_date.index;
 		//----------------------------------------
 
-		document.getElementById("rv_totaldol").value = 0;
-		document.getElementById("rv_totalbsf").value = 0;
+		document.getElementById("rv_totaldol").value = get_mask(0 , gl_mon_b);
+		document.getElementById("rv_totalbsf").value = get_mask(0 , gl_mon_a);
 		cl_nombre.value = "";
 		secc_reg.innerHTML = "";
 

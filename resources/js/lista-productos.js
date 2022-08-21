@@ -242,10 +242,12 @@ function ocultar_input()
 function load_general_data() {
 
 	//Precio de dolar en Bs
+	var input_bs = document.getElementById("dolar_rv");
 	var celd_bolivares = document.getElementById("input02");
 	var celd_bolivares_mask = document.getElementById("text_mask02");
 	celd_bolivares.value = gl_general.gen_bs;
 	celd_bolivares_mask.value = get_mask(gl_general.gen_bs,gl_mon_a);
+	input_bs.value = get_mask(gl_general.gen_bs,gl_mon_a);
 
 
 	//Margen de ganancias

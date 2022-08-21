@@ -10,7 +10,7 @@ function create_table(){
 
 	//----------------------------------------------------------------
 	//Nombre de las celdas value--------------------------------------
-	var name_cel = ["Nombre Producto / Cantidad", "Ganancia / Precio Entrada", "Precio Dolar / Precio Bsf", "Borrar"];
+	var name_cel = ["Nombre Producto | Cantidad", "Ganancia | Precio Entrada", "Precio "+gl_mon_b+" | Precio "+gl_mon_a, "Borrar"];
 	var siz_colm = name_cel.length;
 	//----------------------------------------------------------------
 
