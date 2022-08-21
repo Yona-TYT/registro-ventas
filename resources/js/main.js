@@ -115,7 +115,7 @@ function init(){
 	create_table_rv();
 
 	//Iniciaaliza la base de datos
-	set_basededatos("registroventas6");
+	set_basededatos("registro");
 
 	//Leer documentos tipo hojas de datos
 	importar_datos();

@@ -4,6 +4,9 @@ function guardar_rp(){
 	var margen = document.getElementById("inputrp12");
 	var precio = document.getElementById("inputrp13");
 
+	var margen_mask = document.getElementById("text_maskrp12");
+	var precio_mask = document.getElementById("text_maskrp13");
+
 	//console.log(gl_products.list_prd.nombre[table_fila]);
 	if(nombre.value != "" && precio.value != ""){
 		gl_products.list_prd.nombre.push(nombre.value);
@@ -22,6 +25,9 @@ function guardar_rp(){
 		cantidad.value = "";
 		margen.value = "";
 		precio.value = "";
+
+		margen_mask.value = get_mask_simple(0, "%");
+		precio_mask.value = get_mask(0, gl_mon_b);
 	}
 	else alert("Nombre y Precio no deben estar vacios.");
 }

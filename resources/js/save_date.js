@@ -3,7 +3,7 @@ var bd;	//Para la base de datos
 
 function set_basededatos(name)
 {
-	var solicitud = indexedDB.open(name, 6);
+	var solicitud = indexedDB.open(name, 1);
 	solicitud.addEventListener("error", mostrarerror);
 	solicitud.addEventListener("success", comenzar);
 	solicitud.addEventListener("upgradeneeded", crearbd);
@@ -119,6 +119,7 @@ function obtener_general(evento) {
 	}
 	else {
 		preloder_filtro_lista();
+		mostrar_producto(gl_currt_list_selec);
 	}
 }
 
