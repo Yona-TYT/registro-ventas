@@ -3,7 +3,7 @@ var bd;	//Para la base de datos
 
 function set_basededatos(name)
 {
-	var solicitud = indexedDB.open(name, 1);
+	var solicitud = indexedDB.open(name, 3);
 	solicitud.addEventListener("error", mostrarerror);
 	solicitud.addEventListener("success", comenzar);
 	solicitud.addEventListener("upgradeneeded", crearbd);
@@ -53,14 +53,10 @@ function agregar_gene_datos(datos) {
 }
 
 //Guarda los datos de la venta
-function agregarventas(ventas, id = gl_hist_date.save_id) {
+function agregar_ventas(data) {
 	var transaccion = bd.transaction(["ventas_saves"], "readwrite");
 	var almacen = transaccion.objectStore("ventas_saves");
-
-	//var id = gl_hist_date.save_id;
-	console.log("Vac: "+id )
-	var solicitud = almacen.put({id: id, rventas: ventas});
-
+	var solicitud = almacen.put({id: data.clave, rventas: data});
 }
 
 //Guarda los datos para controlar el historial
@@ -94,23 +90,14 @@ function obtener_general(evento) {
 
 	if(resultado){
 		gl_general = resultado.datos_gene;
+
 		var hoy = new Date();
 		var curr_fecha = hoy.getDate()+ "-" + ( hoy.getMonth() + 1 ) + "-" + hoy.getFullYear();
-
-		var index = gl_general.index;
-		var fecha = gl_general.fecha;
-
-		if(!fecha){
-			gl_general.fecha = curr_fecha;
-			gl_general.fechalist[gl_general.index] = "Vacio";
-		}
-		else if(curr_fecha != fecha){
-			gl_general.fecha = curr_fecha;
-		}
+		check_current_fech(curr_fecha); // Compara las fechas y determina si es un dia nuevo
 
 		gl_currt_list_selec = gl_general.sel_list;
 		mostrar_producto(gl_currt_list_selec);
-		mostrar_ventas(0);
+		mostrar_ventas(gl_general.clv_max);
 
 		crear_datalist(gl_general.nomblist, "list_datacl");
 
@@ -123,9 +110,9 @@ function obtener_general(evento) {
 	}
 }
 
-//----------------------------------------------------------------------
+//-----------------------------------------------------------------------------------------------------------
 
-// Manejos de las listas de productos------------------------------------------------------------------
+// Manejos de las listas de productos------------------------------------------------------------------------
 function mostrar_producto(clave) {
 	var transaccion = bd.transaction(["productos_lista"]);
 	var almacen = transaccion.objectStore("productos_lista");
@@ -150,7 +137,7 @@ function obtener_producto(evento) {
 
 }
 
-//Funcion experimental para descontar productos
+//Funcion experimental para descontar/reintegrar productos -----------------------------------------------------------------
 function mostrar_prod_opt(max) {
 	//console.log(" max:: "+max)
 	var transaccion = bd.transaction(["productos_lista"]);
@@ -173,14 +160,15 @@ function obtener_prod_opt(evento, max) {
 		var produc = resultado.products;
 		var list = cop_list[produc.clave];
 		for(var j=0; j<list.index.length;j++) {
-			//console.log(""+list.index[j]+" :: "+list.num[j])
-			produc.list_prd.cantidad[list.index[j]] = list.num[j];
+			var can = parseFloat(produc.list_prd.cantidad[list.index[j]]);
+			var num = parseFloat(list.num[j]);
+			produc.list_prd.cantidad[list.index[j]] = (can + num);
+
+			console.log(""+list.index[j]+" :: "+list.num[j] +" :: "+can)
 		}
 		agregar_producto(produc);
-
 		max--;
 		mostrar_prod_opt(max);
-
 		//console.log("-- "+max)
 		if(max<0){
 			cop_list = new Array();	//Se restaura la copia temporal de descuento producto
@@ -188,8 +176,9 @@ function obtener_prod_opt(evento, max) {
 		}
 	}
 }
+//------------------------------------------------------------------------------------------------
 
-//Manejo de datos desde la venta y al inicio -----------------------------------------
+//Manejo de datos desde la venta y al inicio -----------------------------------------------------
 function mostrar_ventas(clave) {
 	var transaccion = bd.transaction(["ventas_saves"]);
 	var almacen = transaccion.objectStore("ventas_saves");
@@ -200,88 +189,14 @@ function mostrar_ventas(clave) {
 
 function obtener_ventas(evento) {
 	var resultado = evento.target.result;
-
-	var hoy = new Date();
-	var curr_fecha = hoy.getDate()+ "-" + ( hoy.getMonth() + 1 ) + "-" + hoy.getFullYear();
 	var index = gl_hist_date.index;
 	var fecha = gl_hist_date.fecha;
 	var curr_id = gl_hist_date.save_id;
 
-	var curr_h = hoy.getHours() +""+get_time_zero(hoy.getMinutes()) +""+ get_time_zero(hoy.getSeconds());
-	var curr_d = hoy.getDate();
-	var curr_m = hoy.getMonth();
-	var curr_y = hoy.getFullYear();
-	var hour = gl_hist_date.hour;
-	var day = gl_hist_date.day;
-	var month = gl_hist_date.month;
-	var year = gl_hist_date.year;
-	curr_h = parseInt(curr_h);
 	if(resultado){
-		if(hour){
-
-			
-			if(year > curr_y) { 
-				alert("Error: La fecha y Hora del sistema son invalidas! ");
-				return null;
-			}
-			else if(year == curr_y) {
-
-
-				if(month > curr_m) { 
-					alert("Error: La fecha y Hora del sistema son invalidas! ");
-					return null;
-				}
-
-				else if(month == curr_m) {
-
-
-					if(day > curr_d) { 
-						alert("Error: La fecha y Hora del sistema son invalidas! ");
-						return null;
-					}
-
-					else if(day == curr_d) {
-
-					//console.log(" Validar fecha---"+ curr_h +" -- "+ +get_dignr(parseInt(curr_h))+"  --  "+hour +" - "+ curr_h);
-						if (hour > curr_h) { 
-							alert("Error: La fecha y Hora del sistema son invalidas! ");
-							return null;
-						}				
-					}
-				}
-			}
-		}
-
-		gl_hist_date.hour = curr_h;
-		gl_hist_date.day = curr_d;
-		gl_hist_date.month = curr_m;
-		gl_hist_date.year = curr_y;
-
-		var id = resultado.id;
-		if(id == curr_id){
-			if(!fecha){
-				gl_hist_date.fecha = curr_fecha;
-				gl_hist_date.fechalist[gl_hist_date.index] = curr_fecha;
-				//gl_trasn_save = new trasn_save();
-				//console.log(+puntero.value.id+"  noo" );
-			}
-			else if(curr_fecha != fecha){
-				gl_hist_date.index = 0;
-				gl_hist_date.save_id++;
-				gl_hist_date.fecha = curr_fecha;
-				gl_hist_date.fechalist[gl_hist_date.save_id] = curr_fecha;
-
-			}
-		}	
-		//console.log(" ---" +resultado.rtdatos.id+"");
-		if(curr_fecha == fecha){
-			gl_lista_ventas = resultado.rventas;
-			gl_hist_save = resultado.rventas;
-		}
-
-		//console.log(""+gl_trasn_datos.save_id+" index");
+		gl_lista_ventas = resultado.rventas;
+		gl_hist_save = resultado.rventas;
 	}
-	//crear_lista_cl();
 	preloder_filtro_fec();
 	selec_fechas("selchisfec", false);
 	var nr = gl_hist_save.index;
@@ -292,43 +207,19 @@ function obtener_ventas(evento) {
 }
 //----------------------------------------------------------------------
 
-function remover_ventas(clave) {
-
-	var transaccion = bd.transaction(["ventas_saves"], "readwrite");
-	var almacen = transaccion.objectStore("ventas_saves");
-	var solicitud = almacen.delete(clave);
-
-}
-
-function remove_datos(clave) {
-
-	var transaccion = bd.transaction(["nombre_saves"], "readwrite");
-	var almacen = transaccion.objectStore("nombre_saves");
-	var solicitud = almacen.delete(clave);
-
-}
-
-function remove_his_data(clave) {
-
-	var transaccion = bd.transaction(["history_data"], "readwrite");
-	var almacen = transaccion.objectStore("history_data");
-	var solicitud = almacen.delete(clave);
-
-}
-
 //Manejo de datos desde el selector de fechas -----------------------------------------
-function mostrar_selec(clave) {
+function mostrar_selec_hist(clave) {
 	var transaccion = bd.transaction(["ventas_saves"]);
 	var almacen = transaccion.objectStore("ventas_saves");
 	var solicitud = almacen.get(clave);
-	solicitud.addEventListener("success", obtener_selec);
-	
+	solicitud.addEventListener("success", obtener_selec_hist);	
 }
-function obtener_selec(evento) {
+
+function obtener_selec_hist(evento) {
 	var resultado = evento.target.result;
 	gl_hist_save = new reg_ventas();
 
-	console.log(gl_hist_date.save_id);	
+	//console.log(gl_hist_date.save_id);	
 	if(resultado){
 		//var id = resultado.id;
 		gl_hist_save = resultado.rventas;
@@ -337,10 +228,28 @@ function obtener_selec(evento) {
 			crear_historial(j);
 		}		
 	}
-		//console.log(""+resultado.id+" fech index");
+}
+//===========================================================================================
+
+//Eliminar objetos de la base de datos ------------------------------------------------------
+function remover_ventas(clave) {
+	var transaccion = bd.transaction(["ventas_saves"], "readwrite");
+	var almacen = transaccion.objectStore("ventas_saves");
+	var solicitud = almacen.delete(clave);
+}
+
+function remove_datos(clave) {
+	var transaccion = bd.transaction(["nombre_saves"], "readwrite");
+	var almacen = transaccion.objectStore("nombre_saves");
+	var solicitud = almacen.delete(clave);
+}
+
+function remove_his_data(clave) {
+	var transaccion = bd.transaction(["history_data"], "readwrite");
+	var almacen = transaccion.objectStore("history_data");
+	var solicitud = almacen.delete(clave);
 }
 //---------------------------------------------------------------------------------------
-
 
 //Manejo de datos para el control del historial ------------------------------
 function mostrar_hist_date(clave) {
@@ -348,7 +257,6 @@ function mostrar_hist_date(clave) {
 	var almacen = transaccion.objectStore("history_data");
 	var solicitud = almacen.get(clave);
 	solicitud.addEventListener("success", obtener_hist_date);
-	
 }
 
 function obtener_hist_date(evento) {
@@ -361,7 +269,6 @@ function obtener_hist_date(evento) {
 	preloder_selec_list("selectlistaname");
 }
 //----------------------------------------------------------------------
-
 //Datos generales
 function general_datos() {
 	this.clave = 0;						//Clave para guardar/cargar el registro
@@ -373,15 +280,20 @@ function general_datos() {
 	this.gen_bs = 0;
 	this.gen_margen = 0;
 
-
 	//Guarda el estado de selector
 	this.sel_list = 0;
 	this.sel_hist = 0;
 
-	//Se registran las fechas
-	this.index = 0;						//Index actual (Va incrementando por operacion, regresa a 0 por dia)
+	//Controles de fechas por dia
+	this.clv_max = 0;					//Clave actual, va icrementando por dias
 	this.fecha = null;					//Fecha actual
-	this.fechalist = new Array(); 		//Lista de fechas por id
+	this.fechalist = new Array(); 		//Lista de fechas, cada dia agg una nueva fecha
+
+	//Validadores de Fechas
+	this.hour = null;
+	this.day = null;
+	this.month = null;
+	this.year = null;
 
 	//Se registran los nombres de lista de productos
 	this.list_nam = ["Liata Numero 1", "Liata Numero 2", "Liata Numero 3", "Liata Numero 4", "Liata Numero 5", "Liata Numero 6"];
@@ -417,6 +329,7 @@ function history_save() {
 
 //Detalles de las ventas
 function reg_ventas() {
+	this.clave = 0;
 	this.indexfec = 0;
 	this.fechalist = new Array();
 
@@ -451,7 +364,6 @@ function cop_products() {
 	this.list_prd = new prod_detalles();
 	this.clave = 0;
 }
-
 
 function history_data() {
 	this.clave = 0;

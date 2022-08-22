@@ -75,7 +75,7 @@ function click_test(){
 
 	//get_celda_value(table_fila,table_col);
 //var gl_products.list_prda_ventas = new reg_ventas();
-	//	agregarventas(gl_products.list_prda_ventas);
+	//	agregar_ventas(gl_products.list_prda_ventas);
 
 }
 
@@ -115,7 +115,7 @@ function init(){
 	create_table_rv();
 
 	//Iniciaaliza la base de datos
-	set_basededatos("registro");
+	set_basededatos("registro3");
 
 	//Leer documentos tipo hojas de datos
 	importar_datos();

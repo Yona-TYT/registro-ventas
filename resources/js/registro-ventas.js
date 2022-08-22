@@ -187,6 +187,7 @@ function mostrar_lista_rv() {
 	total_dol.value = get_mask(t_dol, gl_mon_b);
 	total_bsf.value = get_mask(t_bsf, gl_mon_a);
 
+	//Se Preparan los detalles de la venta para ser guardados
 	gl_lista_ventas.detalles[gl_lista_ventas.index] = hist_tx;
 	gl_lista_ventas.totaldol[gl_lista_ventas.index] = t_dol;
 	gl_lista_ventas.totalbsf[gl_lista_ventas.index] = t_bsf;
@@ -272,7 +273,6 @@ function guardar_venta() {
 		var tx_cl = (cl_nombre.value == ""?"N/A": cl_nombre.value);
 		cliente_check(tx_cl.toLowerCase());
 
-		var hoy = new Date();
 
 		//Restaura los datos de venta y arreglos
 		gl_venta_rv = new  venta_actual();
@@ -283,44 +283,24 @@ function guardar_venta() {
 
 		var secc_reg = document.getElementById("registroactual");
 
-		var index = gl_hist_date.index;
-		var indexfec = gl_lista_ventas.indexfec;
-		var fechalist = gl_lista_ventas.fechalist[indexfec];
-		
-		var prdol = gl_lista_ventas.totaldol[index];
-		var prbsf = gl_lista_ventas.totalbsf[index];
+		var index = gl_lista_ventas.index;
 
-
+	//	var indexfec = gl_lista_ventas.indexfec;
+		//var fechalist = gl_lista_ventas.fechalist[indexfec];
 
 		var hoy = new Date();
 		var hora =  hoy.getHours() + ":" + hoy.getMinutes() + ":" + hoy.getSeconds();
 		var curr_fecha = hoy.getDate()+ "-" + ( hoy.getMonth() + 1 ) + "-" + hoy.getFullYear();
+		check_current_fech(curr_fecha); // Compara las fechas y determina si es un dia nuevo
 
-		var fecha = gl_hist_date.fecha;
-
-		if(fecha != curr_fecha) {
-			if(!fecha) {
-				gl_hist_date.fecha = curr_fecha;
-				gl_hist_date.fechalist[gl_hist_date.index] = curr_fecha;
-			}
-			else {
-				gl_hist_date.index = 0;
-				gl_hist_date.save_id++;
-				gl_hist_date.fecha = curr_fecha;
-				gl_hist_date.fechalist[gl_hist_date.save_id] = curr_fecha;
-			}
-		}
-
-		gl_lista_ventas.hora[index] = hora;
-		gl_lista_ventas.fecha[index] = curr_fecha;
-
+		gl_lista_ventas.hora.push(hora);
+		gl_lista_ventas.fecha.push(curr_fecha);
 
 		descontar_pdt(index);
 
-
 		//Cambia a la siguiente venta
 		gl_hist_date.index++;
-		gl_lista_ventas.index = gl_hist_date.index;
+		gl_lista_ventas.index++; //= gl_hist_date.index;
 		//----------------------------------------
 
 		document.getElementById("rv_totaldol").value = get_mask(0 , gl_mon_b);
@@ -330,8 +310,12 @@ function guardar_venta() {
 
 		agregar_gene_datos(gl_general);				//Aqui se guarda la lista de clientes
 		agregar_his_data(gl_hist_date);			//Datos control de historial
-		agregarventas(gl_lista_ventas);			//Datos De la venta
-		mostrar_ventas(gl_hist_date.save_id);	//Muestra la venta en el historial
+
+		//Datos De la venta -----------------------------------------------------
+		gl_lista_ventas.clave = gl_general.clv_max;		//Valor de la clave se incrementa por dia
+		agregar_ventas(gl_lista_ventas);				//Guarda los datos de la venta
+		mostrar_ventas(gl_general.clv_max);			//Muestra la venta en el historial
+		//------------------------------------------------------------------------
 	}
 	else {
 		alert("La lista esta vacia!.");
@@ -345,13 +329,10 @@ function descontar_pdt(lindex) {
 	var listcantidad = gl_lista_ventas.pdtcantidad[lindex];
 	var listdesc = gl_lista_ventas.pdtdesc[lindex];
 	for (var j = 0; j < listindex.length ; j++) {
-
 		var nr_a = listcantidad[j];
 		var nr_b = listdesc[j];
-		var num = nr_a - nr_b;
-
-		console.log("Finished::" +nr_a +" - "+nr_b)
-
+		var num = (nr_b)*(-1);
+		//console.log("Finished::" +num )
 		var index = listindex[j];
 		var clave = listclave[j];
 
@@ -361,9 +342,6 @@ function descontar_pdt(lindex) {
 		cop_list[clave].clave = clave;
 		cop_list[clave].index.push(index);
 		cop_list[clave].num.push(num);
-
-
-
 	}
 	var cl_max = 6;
 	mostrar_prod_opt(cl_max) //Clave para ubicar la lista, index para encontrar el producto,  num la cantidad rewsultante 

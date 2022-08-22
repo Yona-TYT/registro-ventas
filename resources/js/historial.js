@@ -7,10 +7,10 @@ gl_hist_date = new history_data();
 function preloder_filtro_fec() {
 	var selec = document.getElementById("selchisfec");
 
-	var index = gl_hist_date.save_id;
+	var index = gl_general.clv_max;
 	var selc_tx = "";
 	for (var j = index; j >= 0; j--) {
-		var name = gl_hist_date.fechalist[j]
+		var name = gl_general.fechalist[j]
 		if(name){
 			selc_tx += "<option id='fech"+j+"' value='"+j+"'>"+name+"</option>";
 		}
@@ -28,7 +28,7 @@ function selec_fechas(id,mostrar = true) {
 	var current_opt = selec.options[selec.selectedIndex];
 	if(current_opt && mostrar){
 		gl_curr_optsel = parseInt(current_opt.value);
-		mostrar_selec(gl_curr_optsel);
+		mostrar_selec_hist(gl_curr_optsel);
 	}
 
 }
@@ -110,33 +110,39 @@ function button_reint_hist(index) {
 		var listcantidad = gl_hist_save.pdtcantidad[index];
 		var listdesc = gl_hist_save.pdtdesc[index];
 		for (var j = 0; j < listindex.length ; j++) {
-			var nr_a = parseFloat(listdesc[j]);
 
-			var lindex = listindex[j];
-			var clave = listclave[j];
-			var nr_cant = parseFloat(gl_list[clave].cantidad[lindex]);
-			//console.log("lindex"+nr_cant+ " "+nr_a);
-			gl_list[clave].cantidad[lindex] = nr_cant + nr_a;
-			agregarobjeto(gl_list[clave], clave, 1);					//1 es para lectura y escritra
+			var lindex = parseInt(listindex[j]);
+			var clave = parseInt(listclave[j]);
+
+			var num = listdesc[j];
+			  
+			console.log("Finished::" +num +" :: "+lindex )
+
+			if (!cop_list[clave])
+				cop_list[clave] = new cop_products();
+
+			cop_list[clave].clave = clave;
+			cop_list[clave].index.push(lindex);
+			cop_list[clave].num.push(num);
 		}
 
-		gl_hist_save.estado[index] = etd;
+		var cl_max = 6;
+		mostrar_prod_opt(cl_max) //Clave para ubicar la lista, index para encontrar el producto,  num la cantidad rewsultante 
 
 		//console.log("index"+" "+index);
 		var txesta = document.getElementById("txesta"+index);
 		var txestb = document.getElementById("txestb"+index);
 
-
 		txesta.innerHTML = " Estado: "+etd;
 		txestb.innerHTML = " Estado: "+etd;
 
-		agregarventas(gl_hist_save, gl_curr_optsel);
-		
+		//Datos De la venta -----------------------------------------------------
+		gl_hist_save.estado[index] = etd;
+		gl_hist_save.clave = gl_curr_optsel;		//Valor de la clave segun el selector de fechas
+		agregar_ventas(gl_hist_save);				//Envia los datos para ser guardados
+		//mostrar_lista(gl_currt_list_selec);
 
-		start_one = true;
-		mostrar_lista(gl_currt_list_selec);
 	}
-	//else{console.log("Test error calc");};
 }
 function button_pend_hist(index) {
 	var etd = "Aprobada";
@@ -150,10 +156,10 @@ function button_pend_hist(index) {
 	txesta.innerHTML = " Estado: "+etd;
 	txestb.innerHTML = " Estado: "+etd;
 
-	agregarventas(gl_hist_save, gl_curr_optsel);
+	agregar_ventas(gl_hist_save, gl_curr_optsel);
 	
 	start_one = true;
-	mostrar_lista(gl_currt_list_selec);
+	//mostrar_lista(gl_currt_list_selec);
 
 	//Cambia el boton
 	var bott = document.getElementById("bott_pend"+index);

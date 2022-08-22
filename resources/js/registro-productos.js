@@ -21,6 +21,9 @@ function guardar_rp(){
 		crear_datalist(gl_products.list_prd.nombre, "listproducts");
 		agregar_producto(gl_products);		//Guarda los valores de productos
 
+		//crea la lista de productos
+		crear_lista_productos();
+
 		nombre.value = "";
 		cantidad.value = "";
 		margen.value = "";

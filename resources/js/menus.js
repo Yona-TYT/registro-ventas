@@ -1,12 +1,8 @@
 
 function menu_main(){
-
 	var select = document.getElementById("selectlistaname");
 	var opt = select.options[select.selectedIndex];
 	var input2 = document.getElementById("inputlistaname");
-	//input2.value = opt.innerHTML;
-
-	//clonar_filtros("selectlistaname");
 
 	if(edit_mode){
 		input2.setAttribute("class","mask_style");
@@ -14,36 +10,10 @@ function menu_main(){
 	}
 
 	reset_inputs_rv();
-
 	document.getElementById("rv_totaldol").value = 0.00+" $";
 	document.getElementById("rv_totalbsf").value = 0.00+" BsF";
 
 	var select1 = document.getElementById("selcregvent");
-	//select1.setAttribute("onchange","test_select_base('selcregvent');");
-}
-
-function clonar_filtros(id) {
-	var select = document.getElementById(id);
-	var obj_inn = select.innerHTML;
-	var current_opt = select.options[select.selectedIndex];
-
-
-	var selec1 = document.getElementById("listbasedato");
-	var selec2 = document.getElementById("selcregvent");
-	var selec3 = document.getElementById("selectlistaname");
-
-	selec1.innerHTML = obj_inn;
-
-	selec1.options[select.selectedIndex].selected=true;
-
-	if(id != "selectlistaname"){
-		selec3.innerHTML = obj_inn;
-		selec3.options[select.selectedIndex].selected=true;
-	}
-	if(id != "selcregvent"){
-		selec2.innerHTML = obj_inn;
-		selec2.options[select.selectedIndex].selected=true;
-	}
 }
 
 function mostrar_lista_menu(){
