@@ -243,7 +243,7 @@ function eliminar_todo(opt){
 }
 function clear_history(){
 
-	for (var j = 0; j <= gl_hist_date.save_id; j++) {
+	for (var j = 0; j <= gl_general.clv_max; j++) {
 		remover_ventas(j);
 	}
 
@@ -252,8 +252,13 @@ function clear_history(){
 	remove_his_data(gl_hist_date.clave);
 	
 	gl_hist_save = new reg_ventas();
-
 	gl_lista_rv = new reg_ventas();
+
+	gl_general.fechalist = new Array();
+	gl_general.fecha = null;
+	gl_general.clv_max = 0;
+
+	agregar_gene_datos(gl_general);	
 
 	preloder_filtro_fec();
 	selec_fechas("selchisfec");
