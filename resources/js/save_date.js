@@ -163,8 +163,7 @@ function obtener_prod_opt(evento, max) {
 			var can = parseFloat(produc.list_prd.cantidad[list.index[j]]);
 			var num = parseFloat(list.num[j]);
 			produc.list_prd.cantidad[list.index[j]] = (can + num);
-
-			console.log(""+list.index[j]+" :: "+list.num[j] +" :: "+can)
+			//console.log(""+list.index[j]+" :: "+list.num[j] +" :: "+can)
 		}
 		agregar_producto(produc);
 		max--;

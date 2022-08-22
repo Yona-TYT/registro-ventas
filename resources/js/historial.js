@@ -58,6 +58,9 @@ function crear_historial(index) {
 	else if(estado=="Pendiente")
 		buttq = "<button id='bott_pend"+index+"' type='button' onclick='button_pend_hist("+index+");'>Confirmar</button>";
 
+	else if(estado=="Reintegrada")
+		buttq = "<button id='bott_desh"+index+"' type='button' onclick='button_desh_hist("+index+");'>Deshacer</button>";
+
 	var inside = "<div class='element_style_hidden' id='divhis"+index+"'>"+ detalles + buttq + est_txb +"</div>";
 
 
@@ -98,6 +101,29 @@ function button_detalles(index) {
 		secc_div.setAttribute("class", "element_style_hidden");
 }
 
+function button_pend_hist(index) {
+	var etd = "Aprobada";
+
+	var txesta = document.getElementById("txesta"+index);
+	var txestb = document.getElementById("txestb"+index);
+
+	txesta.innerHTML = " Estado: "+etd;
+	txestb.innerHTML = " Estado: "+etd;
+
+	//Datos De la venta -----------------------------------------------------
+	gl_hist_save.estado[index] = etd;			//Cambia el estado de la venta seleccionada
+	gl_hist_save.clave = gl_curr_optsel;		//Valor de la clave segun el selector de fechas
+	agregar_ventas(gl_hist_save);				//Envia los datos para ser guardados
+	//mostrar_lista(gl_currt_list_selec);
+
+	//Cambia el boton
+	var bott = document.getElementById("bott_pend"+index);
+	bott.setAttribute("id", "bott_reint"+index);
+	bott.setAttribute("onclick", "button_reint_hist("+index+");");
+	bott.setAttribute("class", "");
+	bott.innerHTML = "Reintegrar";
+}
+
 function button_reint_hist(index) {
 	var etd = "Reintegrada";
 	if(gl_hist_save.estado[index]=="Aprobada"){
@@ -110,14 +136,10 @@ function button_reint_hist(index) {
 		var listcantidad = gl_hist_save.pdtcantidad[index];
 		var listdesc = gl_hist_save.pdtdesc[index];
 		for (var j = 0; j < listindex.length ; j++) {
-
 			var lindex = parseInt(listindex[j]);
 			var clave = parseInt(listclave[j]);
-
 			var num = listdesc[j];
-			  
-			console.log("Finished::" +num +" :: "+lindex )
-
+			//console.log("Finished::" +num +" :: "+lindex )
 			if (!cop_list[clave])
 				cop_list[clave] = new cop_products();
 
@@ -125,7 +147,6 @@ function button_reint_hist(index) {
 			cop_list[clave].index.push(lindex);
 			cop_list[clave].num.push(num);
 		}
-
 		var cl_max = 6;
 		mostrar_prod_opt(cl_max) //Clave para ubicar la lista, index para encontrar el producto,  num la cantidad rewsultante 
 
@@ -136,36 +157,68 @@ function button_reint_hist(index) {
 		txesta.innerHTML = " Estado: "+etd;
 		txestb.innerHTML = " Estado: "+etd;
 
+		//Cambia el boton a modo deshacer
+		var bott = document.getElementById("bott_reint"+index);
+		bott.setAttribute("id", "bott_desh"+index);
+		bott.setAttribute("onclick", "button_desh_hist("+index+");");
+		bott.setAttribute("class", "");
+		bott.innerHTML = "Deshacer";
+
 		//Datos De la venta -----------------------------------------------------
-		gl_hist_save.estado[index] = etd;
+		gl_hist_save.estado[index] = etd;			//Cambia el estado de la venta seleccionada
 		gl_hist_save.clave = gl_curr_optsel;		//Valor de la clave segun el selector de fechas
 		agregar_ventas(gl_hist_save);				//Envia los datos para ser guardados
 		//mostrar_lista(gl_currt_list_selec);
-
 	}
 }
-function button_pend_hist(index) {
+
+function button_desh_hist(index) {
 	var etd = "Aprobada";
+	if(gl_hist_save.estado[index]=="Reintegrada"){
+		//console.log(index);
+		var bott = document.getElementById("bott_desh"+index);
+		bott.setAttribute("class", "element_style_hidden");
 
-	gl_hist_save.estado[index] = etd;
+		var listindex = gl_hist_save.pdtindex[index];
+		var listclave = gl_hist_save.pdtclave[index];
+		var listcantidad = gl_hist_save.pdtcantidad[index];
+		var listdesc = gl_hist_save.pdtdesc[index];
+		for (var j = 0; j < listindex.length ; j++) {
+			var lindex = parseInt(listindex[j]);
+			var clave = parseInt(listclave[j]);
+			var num = (listdesc[j])*(-1);
+			  
+			//console.log("Finished::" +num +" :: "+lindex )
+			if (!cop_list[clave])
+				cop_list[clave] = new cop_products();
 
-	var txesta = document.getElementById("txesta"+index);
-	var txestb = document.getElementById("txestb"+index);
+			cop_list[clave].clave = clave;
+			cop_list[clave].index.push(lindex);
+			cop_list[clave].num.push(num);
+		}
+		var cl_max = 6;
+		mostrar_prod_opt(cl_max) //Clave para ubicar la lista, index para encontrar el producto,  num la cantidad rewsultante 
 
+		//console.log("index"+" "+index);
+		var txesta = document.getElementById("txesta"+index);
+		var txestb = document.getElementById("txestb"+index);
 
-	txesta.innerHTML = " Estado: "+etd;
-	txestb.innerHTML = " Estado: "+etd;
+		txesta.innerHTML = " Estado: "+etd;
+		txestb.innerHTML = " Estado: "+etd;
 
-	agregar_ventas(gl_hist_save, gl_curr_optsel);
-	
-	start_one = true;
-	//mostrar_lista(gl_currt_list_selec);
+		//Cambia el boton a modo reintegrar
+		var bott = document.getElementById("bott_desh"+index);
+		bott.setAttribute("id", "bott_reint"+index);
+		bott.setAttribute("onclick", "button_reint_hist("+index+");");
+		bott.setAttribute("class", "");
+		bott.innerHTML = "Reintegrar";
 
-	//Cambia el boton
-	var bott = document.getElementById("bott_pend"+index);
-	bott.setAttribute("id", "bott_reint"+index);
-	bott.setAttribute("onclick", "button_reint_hist("+index+");");
-	bott.innerHTML = "Reintegrar";
+		//Datos De la venta -----------------------------------------------------
+		gl_hist_save.estado[index] = etd;			//Cambia el estado de la venta seleccionada
+		gl_hist_save.clave = gl_curr_optsel;		//Valor de la clave segun el selector de fechas
+		agregar_ventas(gl_hist_save);				//Envia los datos para ser guardados
+		//mostrar_lista(gl_currt_list_selec);
+	}
 }
 
 function eliminar_todo(opt){
@@ -198,14 +251,12 @@ function clear_history(){
 	gl_hist_date = new history_data();
 	remove_his_data(gl_hist_date.clave);
 	
-
 	gl_hist_save = new reg_ventas();
 
 	gl_lista_rv = new reg_ventas();
 
 	preloder_filtro_fec();
 	selec_fechas("selchisfec");
-
 }
 
 
