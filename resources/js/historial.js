@@ -1,8 +1,12 @@
 gl_curr_optsel = 0;
+gl_curr_etd_sel = "Todas";
+
 gl_hist_save = new reg_ventas();
 
-gl_hist_date = new history_data();
-
+function historial_main() {
+	preloder_filtro_etd();
+	preloder_filtro_fec();
+}
 
 function preloder_filtro_fec() {
 	var selec = document.getElementById("selchisfec");
@@ -21,50 +25,67 @@ function preloder_filtro_fec() {
 	gl_curr_optsel = current_opt?parseInt(current_opt.value):0;
 }
 
+function preloder_filtro_etd() {
+	var selec = document.getElementById("selcthisetd");
+	var list = ["Todas", "Pendiente", "Aprobada", "Reintegrada"];
+	var index = gl_general.clv_max;
+	var selc_tx = "";
+	for (var j = 0; j < list.length; j++) {
+		var name = list[j]
+		selc_tx += "<option id='fechetd"+j+"' value='"+name+"'>"+name+"</option>";	
+	}
+	selec.innerHTML = selc_tx;
+	selec.setAttribute("onchange","selec_estado('selcthisetd');");
+}
+
 function selec_fechas(id,mostrar = true) {
-	var secc_his = document.getElementById("historialventa");
-	secc_his.innerHTML ="";
 	var selec = document.getElementById(id);
 	var current_opt = selec.options[selec.selectedIndex];
 	if(current_opt && mostrar){
 		gl_curr_optsel = parseInt(current_opt.value);
 		mostrar_selec_hist(gl_curr_optsel);
 	}
+}
 
+function selec_estado(id) {
+	var selec = document.getElementById(id);
+	var current_opt = selec.options[selec.selectedIndex];
+	gl_curr_etd_sel = current_opt.value;
+
+		console.log(gl_curr_etd_sel);
+	crea_hist_list();
 }
 
 function crear_historial(index) {
-	var detalles = gl_hist_save.detalles[index];
-	var prdol = gl_hist_save.totaldol[index];
-	var prbsf = gl_hist_save.totalbsf[index];
-	var hora = gl_hist_save.hora[index];
-	var fecha = gl_hist_save.fecha[index];
 	var estado = gl_hist_save.estado[index];
+	if( (gl_curr_etd_sel == "Todas") || (gl_curr_etd_sel == estado) ){
+		var detalles = gl_hist_save.detalles[index];
+		var prdol = gl_hist_save.totaldol[index];
+		var prbsf = gl_hist_save.totalbsf[index];
+		var hora = gl_hist_save.hora[index];
+		var fecha = gl_hist_save.fecha[index];
+		var cl = gl_hist_save.cliente[index];
 
-	var cl = gl_hist_save.cliente[index];
+		var est_txa = "<strong id='txesta"+index+"'> Estado: "+estado+"</strong>";
+		var est_txb = "<strong id='txestb"+index+"'> Estado: "+estado+"</strong>";
 
-	var est_txa = "<strong id='txesta"+index+"'> Estado: "+estado+"</strong>";
-	var est_txb = "<strong id='txestb"+index+"'> Estado: "+estado+"</strong>";
+		var secc_his = document.getElementById("historialventa");
+		var titulo = "["+cl+", "+est_txa+ "], "+fecha+" "+hora+" <strong class='total_style'>Total: "+get_mask(prdol,gl_mon_b)+" / "+get_mask(prbsf,gl_mon_a+" </strong>");
 
-	var secc_his = document.getElementById("historialventa");
-	var titulo = "["+cl+", "+est_txa+ "], "+fecha+" "+hora+" <strong class='total_style'>Total: "+get_mask(prdol,gl_mon_b)+" / "+get_mask(prbsf,gl_mon_a+" </strong>");
+		var buttm = "<button type='button' onclick='button_detalles("+index+");'>Detalles</button>";
 
-	var buttm = "<button type='button' onclick='button_detalles("+index+");'>Detalles</button>";
+		var buttq = "";
+		if(estado=="Aprobada")
+			buttq = "<button id='bott_reint"+index+"' type='button' onclick='button_reint_hist("+index+");'>Reintegrar</button>";
+		else if(estado=="Pendiente")
+			buttq = "<button id='bott_pend"+index+"' type='button' onclick='button_pend_hist("+index+");'>Confirmar</button>";
+		else if(estado=="Reintegrada")
+			buttq = "<button id='bott_desh"+index+"' type='button' onclick='button_desh_hist("+index+");'>Deshacer</button>";
 
+		var inside = "<div class='element_style_hidden' id='divhis"+index+"'>"+ detalles + buttq + est_txb +"</div>";
 
-	var buttq = "";
-	if(estado=="Aprobada")
-		buttq = "<button id='bott_reint"+index+"' type='button' onclick='button_reint_hist("+index+");'>Reintegrar</button>";
-	else if(estado=="Pendiente")
-		buttq = "<button id='bott_pend"+index+"' type='button' onclick='button_pend_hist("+index+");'>Confirmar</button>";
-
-	else if(estado=="Reintegrada")
-		buttq = "<button id='bott_desh"+index+"' type='button' onclick='button_desh_hist("+index+");'>Deshacer</button>";
-
-	var inside = "<div class='element_style_hidden' id='divhis"+index+"'>"+ detalles + buttq + est_txb +"</div>";
-
-
-	secc_his.innerHTML +=  "<div class='div_list_style'>" + buttm  + titulo + inside + "</div>";
+		secc_his.innerHTML +=  "<div class='div_list_style'>" + buttm  + titulo + inside + "</div>";
+	}
 }
 function crear_lista_cl() {
 	//var sect_lista = document.getElementById("list_cl");
@@ -247,17 +268,13 @@ function clear_history(){
 		remover_ventas(j);
 	}
 
-	//Restaura los valores de control de historial
-	gl_hist_date = new history_data();
-	remove_his_data(gl_hist_date.clave);
-	
 	gl_hist_save = new reg_ventas();
 	gl_lista_rv = new reg_ventas();
 
+	//Restaura los valores de control del historial
 	gl_general.fechalist = new Array();
 	gl_general.fecha = null;
 	gl_general.clv_max = 0;
-
 	agregar_gene_datos(gl_general);	
 
 	preloder_filtro_fec();

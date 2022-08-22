@@ -188,21 +188,14 @@ function mostrar_ventas(clave) {
 
 function obtener_ventas(evento) {
 	var resultado = evento.target.result;
-	var index = gl_hist_date.index;
-	var fecha = gl_hist_date.fecha;
-	var curr_id = gl_hist_date.save_id;
-
 	if(resultado){
 		gl_lista_ventas = resultado.rventas;
 		gl_hist_save = resultado.rventas;
 	}
-	preloder_filtro_fec();
-	selec_fechas("selchisfec", false);
-	var nr = gl_hist_save.index;
-	for (var j = nr-1;  j >= 0; j--) {
-		crear_historial(j);
-	}
 
+	historial_main(); //Inicializa los selectores y demas funciones del historial
+	selec_fechas("selchisfec", false);
+	crea_hist_list();
 }
 //----------------------------------------------------------------------
 
@@ -218,7 +211,6 @@ function obtener_selec_hist(evento) {
 	var resultado = evento.target.result;
 	gl_hist_save = new reg_ventas();
 
-	//console.log(gl_hist_date.save_id);	
 	if(resultado){
 		//var id = resultado.id;
 		gl_hist_save = resultado.rventas;
@@ -250,29 +242,10 @@ function remove_his_data(clave) {
 }
 //---------------------------------------------------------------------------------------
 
-//Manejo de datos para el control del historial ------------------------------
-function mostrar_hist_date(clave) {
-	var transaccion = bd.transaction(["history_data"]);
-	var almacen = transaccion.objectStore("history_data");
-	var solicitud = almacen.get(clave);
-	solicitud.addEventListener("success", obtener_hist_date);
-}
-
-function obtener_hist_date(evento) {
-	var resultado = evento.target.result;
-
-	if(resultado){
-		gl_hist_date = resultado.data_his;
-		mostrar_ventas(gl_hist_date.save_id);
-	}
-	preloder_selec_list("selectlistaname");
-}
 //----------------------------------------------------------------------
 //Datos generales
 function general_datos() {
 	this.clave = 0;						//Clave para guardar/cargar el registro
-	this.cu_save_id = 0;				//Clave clave mayor para el registro cuentas
-	this.cl_save_id = 0;				//Clave clave mayor para el registro clientes
 	this.demo = null;
 
 	//Guarda valor de input bolivares y margen
@@ -353,6 +326,7 @@ function reg_products() {
 	this.list_prd = new prod_detalles();
 	this.clave = 0;
 }
+
 // Copia de Lista de productos
 function cop_products() {
 	this.start = false;
@@ -362,15 +336,6 @@ function cop_products() {
 
 	this.list_prd = new prod_detalles();
 	this.clave = 0;
-}
-
-function history_data() {
-	this.clave = 0;
-	//Control de history_save()
-	this.index = 0;					//Index actual (Va incrementando por operacion, regresa a 0 por dia)
-	this.fecha = null;				//Fecha actual
-	this.save_id = 0;				//ID actual (Va incrementando por dia)
-	this.fechalist = new Array(); 	//Lista de fechas por di
 }
 
 function prod_detalles() {

@@ -300,7 +300,7 @@ function guardar_venta() {
 
 		//Cambia a la siguiente venta
 		gl_hist_date.index++;
-		gl_lista_ventas.index++; //= gl_hist_date.index;
+		gl_lista_ventas.index++;
 		//----------------------------------------
 
 		document.getElementById("rv_totaldol").value = get_mask(0 , gl_mon_b);
@@ -309,7 +309,6 @@ function guardar_venta() {
 		secc_reg.innerHTML = "";
 
 		agregar_gene_datos(gl_general);				//Aqui se guarda la lista de clientes
-		agregar_his_data(gl_hist_date);			//Datos control de historial
 
 		//Datos De la venta -----------------------------------------------------
 		gl_lista_ventas.clave = gl_general.clv_max;		//Valor de la clave se incrementa por dia

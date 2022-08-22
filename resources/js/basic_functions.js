@@ -1,3 +1,12 @@
+//Genera la lista ventas en el histoprial
+function crea_hist_list(){
+	var secc_his = document.getElementById("historialventa");
+	secc_his.innerHTML ="";
+	var nr = gl_hist_save.index;
+	for (var j = nr-1;  j >= 0; j--) {
+		crear_historial(j);
+	}
+}
 
 //Compara las fechas para incrementar el index y crear lista de fechas para el selector
 function check_current_fech(curr_fecha) {
