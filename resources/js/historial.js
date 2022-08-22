@@ -4,6 +4,10 @@ gl_curr_etd_sel = "Todas";
 gl_hist_save = new reg_ventas();
 
 function historial_main() {
+
+	var butt = document.getElementById("buthistsave");
+	butt.setAttribute("onclick",'mostrar_exp_ventas(\''+gl_general.clv_max+'\');');
+
 	preloder_filtro_etd();
 	preloder_filtro_fec();
 }

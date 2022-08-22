@@ -102,7 +102,6 @@ function obtener_general(evento) {
 		crear_datalist(gl_general.nomblist, "list_datacl");
 
 		load_general_data();	//Se cargan precios del dolar y margen de ganancia
-
 	}
 	else {
 		preloder_filtro_lista();
@@ -188,6 +187,7 @@ function mostrar_ventas(clave) {
 
 function obtener_ventas(evento) {
 	var resultado = evento.target.result;
+	//console.log("-- "+resultado.rventas.clave)
 	if(resultado){
 		gl_lista_ventas = resultado.rventas;
 		gl_hist_save = resultado.rventas;
@@ -197,6 +197,52 @@ function obtener_ventas(evento) {
 	selec_fechas("selchisfec", false);
 	crea_hist_list();
 }
+
+//Funcion obtener los datos de las ventas a exportar/guardar ------------------------------------------------------------
+var gl_ventas_save = new reg_ventas();
+function mostrar_exp_ventas(max) {
+	//console.log(" max:: "+max)
+	max = parseInt(max);
+	var transaccion = bd.transaction(["ventas_saves"]);
+	var almacen = transaccion.objectStore("ventas_saves");
+	for(var j = max; j>=0; ){	
+		var solicitud = almacen.get(j);
+		solicitud.addEventListener("success", function(){obtener_exp_ventas(event, j);});
+		break;
+	}
+}
+
+function obtener_exp_ventas(evento, max) {
+	var resultado = evento.target.result;
+	console.log("-- "+resultado.rventas.clave)
+	if(resultado){
+		var ventas =  resultado.rventas;
+		var siz = ventas.pdtindex.length;
+		for(var j=0; j<siz ;j++) {
+			gl_ventas_save.cliente.push(ventas.cliente[j]);
+			gl_ventas_save.detalles.push(ventas.detalles[j]);
+			gl_ventas_save.totaldol.push(ventas.totaldol[j]);
+			gl_ventas_save.totalbsf.push(ventas.totalbsf[j]);
+			gl_ventas_save.fecha.push(ventas.fecha[j]);
+			gl_ventas_save.hora.push(ventas.hora[j]);
+			gl_ventas_save.estado.push(ventas.estado[j]);
+			gl_ventas_save.pdtindex.push(ventas.pdtindex[j]);
+			gl_ventas_save.pdtclave.push(ventas.pdtclave[j]);
+			gl_ventas_save.pdtcantidad.push(ventas.pdtcantidad[j]);
+			gl_ventas_save.pdtdesc.push(ventas.pdtdesc[j]);
+		}
+
+		max--;
+		mostrar_prod_opt(max);
+
+		if(max<0){
+			cuent_datos_csv();
+			gl_ventas_save = new reg_ventas();
+		}
+	}
+}
+//------------------------------------------------------------------------------------------------
+
 //----------------------------------------------------------------------
 
 //Manejo de datos desde el selector de fechas -----------------------------------------
@@ -273,30 +319,6 @@ function general_datos() {
 	//Lista de clientes en datalist
 	this.indexnomb = 0;
 	this.nomblist = new Array();
-}
-
-function history_save() {
-	this.indexnomb = 0;
-	this.nombrecl = new Array();
-
-	this.indexfec = 0;
-
-	this.pdtindex = new Array();
-	this.pdtclave = new Array();
-	this.pdtcantidad = new Array();
-	this.pdtdesc = new Array();
-
-	//Control de trasn_save()
-	this.index = 0;					//Index actual (Va incrementando por operacion, regresa a 0 por dia)
-	this.fecha = null;				//Fecha actual
-	this.save_id = 0;				//ID actual (Va incrementando por dia)
-	this.fechalist = new Array(); 	//Lista de fechas por dia
-
-	//Validadores de Fechas
-	this.hour = null;
-	this.day = null;
-	this.month = null;
-	this.year = null;
 }
 
 //Detalles de las ventas
