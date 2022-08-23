@@ -99,7 +99,7 @@ function add_text_fila(index,opt){
 
 	var values_tx = r_nombre+" Cantidad ("+r_cantidad+") Margen c/u ("+get_mask_simple(r_margen,"%")+") Entrada c/u ("+get_mask(r_precio,gl_mon_b)+")";
 	if(opt==1){
-		return "<div class='div_list_style' id='divlp"+index+"'><button type='button' onclick='button_selec_product("+index+");'>Seleccionar</button> "+values_tx+"</div>";
+		return "<div class='div_list_style' id='divlp"+index+"'><button type='button' class='butt_style' onclick='button_selec_product("+index+");'>Seleccionar</button> "+values_tx+"</div>";
 	}
 	if(opt==2){
 		return "<option id='optlist"+index+"' value='"+r_nombre+"'>";
@@ -272,7 +272,7 @@ function get_celda_value_test(){
 
 		var sect_div = document.getElementById("divlp"+gl_current_selec);
 		var values_tx = nombre.value+" Cantidad ("+cantidad.value+") Margen c/u ("+margen_mask.value+") Entrada c/u ("+precio_mask.value+")";
-		sect_div.innerHTML = "<button type='button' onclick='button_selec_product("+gl_current_selec+");'>Seleccionar</button> "+values_tx;
+		sect_div.innerHTML = "<button type='button' class='butt_style' onclick='button_selec_product("+gl_current_selec+");'>Seleccionar</button> "+values_tx;
 
 		gl_products.list_prd.nombre[gl_current_selec] = nombre.value;
 		gl_products.list_prd.cantidad[gl_current_selec] = cantidad.value;

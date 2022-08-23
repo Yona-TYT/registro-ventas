@@ -64,7 +64,8 @@ function create_table(){
 					input.setAttribute("type", "text");
 					input.setAttribute("value", name_cel[j]);
 					input.setAttribute("readonly", "");
-					input.setAttribute("class","colum_name_style");
+					gl_mobil? input.setAttribute("class","input_style_hidden") : input.setAttribute("class","colum_name_style");
+					gl_mobil? celda.setAttribute("class","input_style_hidden") : celda.setAttribute("class","celda_style");
 					//celda.appendChild(input);
 					celda.innerHTML= input.outerHTML;
 				}
@@ -94,6 +95,9 @@ function create_table(){
 
 				//Cuadros de solo textos
 				if (j==0 ){
+					//Muestra un mensaje de validacion
+					comprobar_mensaje(input, i, j);
+
 					input.setAttribute("class","input_style_td");
 					input.setAttribute("onclick","get_celda_value_test();");
 					input.setAttribute("onkeyup","get_celda_value_test();");
@@ -108,6 +112,9 @@ function create_table(){
 
 				//Cuadros de entrada numerica
 				if(j==1){
+					//Muestra un mensaje de validacion
+					comprobar_mensaje(input, i, j);
+
 					input.setAttribute("onclick","get_celda_value_test();");
 					input.setAttribute("onkeyup","get_celda_value_test();");
 					input.setAttribute("onchange","get_celda_value_test();");

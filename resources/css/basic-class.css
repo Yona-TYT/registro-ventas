@@ -1,5 +1,6 @@
 :root {
-	--siz-text: 100%;
+	--siz-text: 95%;
+	--siz-text-small: 87%;
 	--all-height: 100%;
 	--mask-height: 5%;
 	--caja-disp: inline-block;
@@ -352,7 +353,7 @@
 .div_list_style {
 	text-align: left;
 	font-weight: bold;
-	font-size:var(--siz-text);
+	font-size:var(--siz-text-small);
 
 	color: #ffffff;
 	width: 100%;
@@ -578,7 +579,6 @@ input[type='file'] {
 	font-size:var(--siz-text);
 	width: 100%;
 }
-
 button {
 	border-radius: 5px;
 

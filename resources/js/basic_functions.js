@@ -44,15 +44,27 @@ function selec_list(id,mostrar = true) {
 
 //------------------------------------------------------------------------------------------------------------------------------------
 
-// Gestionan el precio del dolar en bs --------------------------------------------------------------------------------------------
-var gl_prec_edit = false;
-function gen_bs_start_edit(){
-	var input = document.getElementById("input_dolar");
-	if (gl_prec_edit || confirm("Presione [ACEPTAR] para editar el precio.")) {
-		gl_prec_edit = true;
-		input.removeAttribute("readonly");
+function comprobar_mensaje(elm, i, j) {
+	elm.setAttribute("required","");
+	var text = "no";
+	if(j == 0){
+		if(i == 1)
+			text = "Ingrese Nombre del Producto";
+		else if(i == 2)
+			text = "Ingrese Cantidad Disponible";
 	}
+	if(j == 1) {
+		if(i == 1)
+			text = "Ingrese Valor de Ganancia (%)";
+
+		else if(i == 2)
+			text = "Ingrese Precio de Entrada en $";
+	}
+
+  	if(elm)
+		elm.setCustomValidity(text);
 }
+
 //-------------------------------------------------------------------------------------------------------------------------------------
 
 //Genera la lista ventas en el histoprial
