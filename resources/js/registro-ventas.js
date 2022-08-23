@@ -176,7 +176,7 @@ function mostrar_lista_rv() {
 		t_bsf += calc_precbs;
 
 		//console.log(prdol+"  "+ total);
-		var butt = "<button type='button' onclick='button_borr_venta("+i+");'>Quitar</button>";
+		var butt = "<button type='button' class='butt_style' onclick='button_borr_venta("+i+");'>Quitar</button>";
 		var detalles = "["+total+"] "+nombre+" c/u: "+get_mask(prdol,gl_mon_b)+" / "+get_mask(prbsf,gl_mon_a)+" <div class='total_style'>Total: "+get_mask(calc_precio,gl_mon_b)+" / "+get_mask(calc_precbs,gl_mon_a+" &nbsp;</div>");
 		venta_tx= "<div class='div_list_style' id='divrv"+i+"'>" + butt + detalles + "</div>";
 

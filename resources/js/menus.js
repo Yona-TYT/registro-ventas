@@ -36,7 +36,7 @@ function visible_element(opt) {
 
 	for(var j = 1; j<6;j++){
 		var bot_temp = document.getElementById("butopt"+j);
-		bot_temp.setAttribute("class","mask_style");
+		bot_temp.setAttribute("class","butt_menu_style");
 		
 	}
 

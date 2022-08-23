@@ -76,15 +76,15 @@ function crear_historial(index) {
 		var secc_his = document.getElementById("historialventa");
 		var titulo = "["+cl+", "+est_txa+ "], "+fecha+" "+hora+" <strong class='total_style'>Total: "+get_mask(prdol,gl_mon_b)+" / "+get_mask(prbsf,gl_mon_a+" </strong>");
 
-		var buttm = "<button type='button' onclick='button_detalles("+index+");'>Detalles</button>";
+		var buttm = "<button type='button' class='butt_style' onclick='button_detalles("+index+");'>Detalles</button>";
 
 		var buttq = "";
 		if(estado=="Aprobada")
-			buttq = "<button id='bott_reint"+index+"' type='button' onclick='button_reint_hist("+index+");'>Reintegrar</button>";
+			buttq = "<button id='bott_reint"+index+"' class='butt_style' type='button' onclick='button_reint_hist("+index+");'>Reintegrar</button>";
 		else if(estado=="Pendiente")
-			buttq = "<button id='bott_pend"+index+"' type='button' onclick='button_pend_hist("+index+");'>Confirmar</button>";
+			buttq = "<button id='bott_pend"+index+"' class='butt_style' type='button' onclick='button_pend_hist("+index+");'>Confirmar</button>";
 		else if(estado=="Reintegrada")
-			buttq = "<button id='bott_desh"+index+"' type='button' onclick='button_desh_hist("+index+");'>Deshacer</button>";
+			buttq = "<button id='bott_desh"+index+"' class='butt_style' type='button' onclick='button_desh_hist("+index+");'>Deshacer</button>";
 
 		var inside = "<div class='element_style_hidden' id='divhis"+index+"'>"+ detalles + buttq + est_txb +"</div>";
 
@@ -145,7 +145,7 @@ function button_pend_hist(index) {
 	var bott = document.getElementById("bott_pend"+index);
 	bott.setAttribute("id", "bott_reint"+index);
 	bott.setAttribute("onclick", "button_reint_hist("+index+");");
-	bott.setAttribute("class", "");
+	bott.setAttribute("class", "butt_style");
 	bott.innerHTML = "Reintegrar";
 }
 
@@ -186,7 +186,7 @@ function button_reint_hist(index) {
 		var bott = document.getElementById("bott_reint"+index);
 		bott.setAttribute("id", "bott_desh"+index);
 		bott.setAttribute("onclick", "button_desh_hist("+index+");");
-		bott.setAttribute("class", "");
+		bott.setAttribute("class", "butt_style");
 		bott.innerHTML = "Deshacer";
 
 		//Datos De la venta -----------------------------------------------------
@@ -235,7 +235,7 @@ function button_desh_hist(index) {
 		var bott = document.getElementById("bott_desh"+index);
 		bott.setAttribute("id", "bott_reint"+index);
 		bott.setAttribute("onclick", "button_reint_hist("+index+");");
-		bott.setAttribute("class", "");
+		bott.setAttribute("class", "butt_style");
 		bott.innerHTML = "Reintegrar";
 
 		//Datos De la venta -----------------------------------------------------
