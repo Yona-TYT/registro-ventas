@@ -201,7 +201,7 @@ function obtener_ventas(evento) {
 //Funcion obtener los datos de las ventas a exportar/guardar ------------------------------------------------------------
 var gl_ventas_save = new reg_ventas();
 function mostrar_exp_ventas(max) {
-	//console.log(" max:: "+max)
+	console.log(" max:: "+max)
 	max = parseInt(max);
 	var transaccion = bd.transaction(["ventas_saves"]);
 	var almacen = transaccion.objectStore("ventas_saves");
@@ -214,26 +214,29 @@ function mostrar_exp_ventas(max) {
 
 function obtener_exp_ventas(evento, max) {
 	var resultado = evento.target.result;
-	console.log("-- "+resultado.rventas.clave)
+	console.log("-- Clv: "+resultado.rventas.clave)
 	if(resultado){
 		var ventas =  resultado.rventas;
 		var siz = ventas.pdtindex.length;
+		console.log("-- Siz: "+siz)
 		for(var j=0; j<siz ;j++) {
 			gl_ventas_save.cliente.push(ventas.cliente[j]);
-			gl_ventas_save.detalles.push(ventas.detalles[j]);
-			gl_ventas_save.totaldol.push(ventas.totaldol[j]);
-			gl_ventas_save.totalbsf.push(ventas.totalbsf[j]);
+			gl_ventas_save.totaldol.push("Total: "+get_mask(ventas.totaldol[j], gl_mon_b));
+			gl_ventas_save.totalbsf.push("Total: "+get_mask(ventas.totalbsf[j], gl_mon_a));
 			gl_ventas_save.fecha.push(ventas.fecha[j]);
 			gl_ventas_save.hora.push(ventas.hora[j]);
 			gl_ventas_save.estado.push(ventas.estado[j]);
+			gl_ventas_save.detalles.push(ventas.detalles[j]);
+
+			//Informacion adicional no relevante para el usuario
 			gl_ventas_save.pdtindex.push(ventas.pdtindex[j]);
 			gl_ventas_save.pdtclave.push(ventas.pdtclave[j]);
 			gl_ventas_save.pdtcantidad.push(ventas.pdtcantidad[j]);
 			gl_ventas_save.pdtdesc.push(ventas.pdtdesc[j]);
 		}
-
 		max--;
-		mostrar_prod_opt(max);
+		console.log("-- Max: "+max)
+		mostrar_exp_ventas(max);
 
 		if(max<0){
 			cuent_datos_csv();
@@ -260,10 +263,7 @@ function obtener_selec_hist(evento) {
 	if(resultado){
 		//var id = resultado.id;
 		gl_hist_save = resultado.rventas;
-		var nr = gl_hist_save.index;
-		for (var j = nr-1;  j >= 0; j--) {
-			crear_historial(j);
-		}		
+		crea_hist_list();	
 	}
 }
 //===========================================================================================

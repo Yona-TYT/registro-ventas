@@ -299,7 +299,6 @@ function guardar_venta() {
 		descontar_pdt(index);
 
 		//Cambia a la siguiente venta
-		gl_hist_date.index++;
 		gl_lista_ventas.index++;
 		//----------------------------------------
 

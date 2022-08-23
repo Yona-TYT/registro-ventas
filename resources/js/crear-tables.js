@@ -180,15 +180,11 @@ function create_table(){
 	var r_margen = gl_products.genmargen;
 	var r_precio = gl_products.genprecio;
 
-	var precio = document.getElementById("input02");
 	var margen = document.getElementById("input04");
-	var precio_mask = document.getElementById("text_mask02");
 	var margen_mask = document.getElementById("text_mask04");
 
 	margen.value = r_margen;
 	margen_mask.value = get_mask_simple(r_margen,"%");
-	precio.value = r_precio;
-	precio_mask.value = get_mask(r_precio,gl_mon_a);
 
 	return null;
 }

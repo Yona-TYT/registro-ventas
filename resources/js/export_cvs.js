@@ -7,15 +7,13 @@ function cuent_datos_csv() {
 	//comprobamos compatibilidad
 	if(window.Blob && (window.URL || window.webkitURL)){
 		var contenido = "";
-		contenido += ventas.join(";") + "\n";			//Se agregan datos de ventas
+		contenido += ventas.join(";") ;			//Se agregan datos de ventas
 		start_save(ventas);
 	}
 	else {
 		alert("Su navegador no permite esta acción");
 	}
 }
-
-
 function start_save(ventas) {
 	//console.log(hash);
 	var contenido = "",
@@ -25,8 +23,18 @@ function start_save(ventas) {
 		save,
 		clicEvent;
 	//creamos contenido del archivo
-	contenido += ventas.join(";") + "\n";			//Se agregan datos de ventas
+	contenido += ventas.join(";") ;			//Se agregan datos de ventas
 
+	const regex_a = /(\r\n|\r|\n)\;/ig;		//Exp Regula, indica un salto de linea seguido de ;
+	contenido = contenido.replaceAll(regex_a, '\n');
+
+	const regex_b = /<[^>]*>/ig;		//Exp Regula, Elimina las etiquetas html
+	contenido = contenido.replaceAll(regex_b, '');
+
+	contenido = contenido.replaceAll('&nbsp', '');
+
+	console.log(""+contenido);
+	//return null;
 	//creamos el blob
 	blob =  new Blob(["\ufeff", contenido], {type: 'text/csv'});
 	//creamos el reader
@@ -61,20 +69,38 @@ function start_save(ventas) {
 
 function crear_array_ventas() {
 	var result = new Array();
+	result.push("Nombre Cliente");
+	result.push("Total Venta ("+gl_mon_a+")");
+	result.push("Total Venta ("+gl_mon_b+")");
+	result.push("Fecha");
+	result.push("Hora");
+	result.push("Estado");
+	result.push("\n");
+	var count = 0;
 	for (var j = 0 ; j < gl_ventas_save.pdtindex.length ; j++) {
-		result.push(gl_ventas_save.cliente[j]);
-		result.push(gl_ventas_save.detalles[j]);
-		result.push(gl_ventas_save.totaldol[j]);
-		result.push(gl_ventas_save.totalbsf[j]);
-		result.push(""+gl_ventas_save.fecha[j]+"");
-		result.push(""+gl_ventas_save.hora[j]+"");
+		result.push(verificar_text(gl_ventas_save.cliente[j]));
+		result.push(verificar_text(gl_ventas_save.totaldol[j]));
+		result.push(verificar_text(gl_ventas_save.totalbsf[j]));
+		result.push(gl_ventas_save.fecha[j]);
+		result.push(gl_ventas_save.hora[j]);
 		result.push(gl_ventas_save.estado[j]);
+		result.push(verificar_text(gl_ventas_save.detalles[j]));
+
+		//Informacion adicional no relevante para el usuario
+		/*
 		result.push(gl_ventas_save.pdtindex[j]);
 		result.push(gl_ventas_save.pdtclave[j]);
 		result.push(gl_ventas_save.pdtcantidad[j]);
-		result.push(gl_ventas_save.pdtdesc[j]);
+		result.push(""+gl_ventas_save.pdtdesc[j]);
+		*/
+		result.push("\n");
 	}
 	return result;
+}
+function verificar_text(text) {
+	text = text.replaceAll(',', '');
+	text = text.replaceAll(';', '');
+	return text;
 }
 
 

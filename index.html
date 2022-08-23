@@ -82,15 +82,21 @@
 					Importar Lista
 				</div>
 			</div>
-		<! ---------------- Seccion1 Registro de ventas ------------------>
 
-		<section class="label_style" id="seccion1">
+		<! ---------------- Seccion Siempre Visible ------------------>
+		<section class="label_style" id="seccion_fija">
 			<div class="cajas_style">Seleccione las lista: 
 				<select class="mask_style" id="selcregvent" ></select>
 			</div>
 			<div class="cajas_style">Precio Dolar: 
-				<input class="input_style_td" type="text" id="dolar_rv" readonly>
+				<input readonly="" class="input_style_td" id="text_mask_dolar" onclick="mostrar_input();" onselect="mostrar_input();">
+				<input type="number" class="input_style_hidden" id="input_dolar" onkeyup="update_celdas_generales();" onchange="update_celdas_generales();" step="10" min="1" onfocus="ocultar_input();" lang="en" >
 			</div>
+		</section>
+
+		<! ---------------- Seccion1 Registro de ventas ------------------>
+
+		<section class="label_style" id="seccion1">
 			<div class="cajas_style">Buscara productos: 
 				<input class="mask_style" type="search" id="buscar_rv" placeholder="Ingrese Nombre de Producto" list="listproducts" onfocus="el_selec('buscar_rv');">
 			</div>
@@ -108,9 +114,6 @@
 		</section>
 		<! ------- Seccion2 Registro de Productos ------------- >
 		<section class="label_style" id="seccion2">
-			<div class="cajas_style">Seleccione las lista: 
-				<select class="mask_style" id="selcregprod" ></select>
-			</div>
 			<section class="label_style" id="sect_rp"></section>
 		</section>
 
@@ -142,19 +145,12 @@
 
 			<div class="cajas_style">Modo edicion: <input class="" type="checkbox" id="edit_mode"></div>
 			<div class="cajas_style">
-				<label for="selectlistaname">Seleccione las lista: </label>
-				<select class="mask_style" id="selectlistaname" ></select>
-				<input class="element_style_hidden" type="text" id="inputlistaname" oninput="input_to_selec();" onBlur="input_to_selec();" onfocus="el_selec('inputlistaname');">
+				<label for="selectlistaname">Nombre de Lista: </label>
+				<input class="mask_style" type="text" id="inputlistaname" oninput="input_to_selec();" onBlur="input_to_selec();" onfocus="el_selec('inputlistaname');">
 			</div>
 			<div class="cajas_style">Buscara productos: <input class="mask_style" type="search" id="buscar" placeholder="Buscar Productos" list="listproducts" onfocus="el_selec('buscar');"></div>
 			<datalist id="listproducts"></datalist>
 			<section class="cajas_style">
-				<div class="cajas_style">
-					Dolar:
-					<input readonly="" class="input_style_edicion_td" id="text_mask02" onclick="mostrar_input();" onselect="mostrar_input();">
-					<input type="number" readwrite="" class="input_style_hidden" onkeyup="update_celdas_generales();" onclick="update_celdas_generales();" onchange="update_celdas_generales();" step="10" min="1" id="input02" onfocus="ocultar_input();" lang="en">
-				</div>
-
 				<div class="cajas_style">
 					Margen:
 					<input readonly="" class="input_style_edicion_td" id="text_mask04" onclick="mostrar_input();" onselect="mostrar_input();">

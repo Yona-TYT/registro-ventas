@@ -1,3 +1,60 @@
+
+
+// Gestionan los selectores de listas --------------------------------------------------------------------------------------------
+var gl_current_selec = null;
+var gl_currt_list_selec = 0;
+
+function preloder_filtro_lista() {
+	var id_list = ["selcregvent", "listbasedato"];
+
+	//console.log("tes selc: "+gl_currt_list_selec)
+	for (var j = 0; j < id_list.length; j++) {
+		var index = gl_general.list_nam.length;
+		var selc_tx = "";
+		for (var i = 0; i < index; i++) {
+			var name = gl_general.list_nam[i]
+			if(name){
+				selc_tx += "<option id='nameproduct"+i+"' value='"+i+"'>"+name+"</option>";
+			}
+		}
+
+		var selec = document.getElementById(id_list[j]);
+		selec.innerHTML = selc_tx;
+		selec.options[gl_currt_list_selec].selected=true;
+		selec.setAttribute("onchange",'selec_list(\''+id_list[j]+'\');');
+	}
+}
+
+function selec_list(id,mostrar = true) {
+	//console.log("tes selc: "+id)
+	var input_name = document.getElementById("inputlistaname");
+	var selec = document.getElementById(id);
+	var current_opt = selec.options[selec.selectedIndex];
+	//console.log("tes selc: "+current_opt)
+	if(current_opt && mostrar){
+		gl_currt_list_selec = parseInt(current_opt.value);
+		input_name.value = gl_general.list_nam[gl_currt_list_selec];
+		//Guarda los datos generales
+		gl_general.sel_list = gl_currt_list_selec;
+		agregar_gene_datos(gl_general);
+
+		mostrar_producto(gl_currt_list_selec);	//Muestra la lista de productos seleccionada	
+	}
+}
+
+//------------------------------------------------------------------------------------------------------------------------------------
+
+// Gestionan el precio del dolar en bs --------------------------------------------------------------------------------------------
+var gl_prec_edit = false;
+function gen_bs_start_edit(){
+	var input = document.getElementById("input_dolar");
+	if (gl_prec_edit || confirm("Presione [ACEPTAR] para editar el precio.")) {
+		gl_prec_edit = true;
+		input.removeAttribute("readonly");
+	}
+}
+//-------------------------------------------------------------------------------------------------------------------------------------
+
 //Genera la lista ventas en el histoprial
 function crea_hist_list(){
 	var secc_his = document.getElementById("historialventa");

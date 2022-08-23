@@ -1,42 +1,3 @@
-var gl_current_selec = null;
-var gl_currt_list_selec = 0;
-
-function preloder_filtro_lista() {
-	var id_list = ["selcregvent", "selcregprod", "selectlistaname"];
-
-	//console.log("tes selc: "+gl_currt_list_selec)
-	for (var j = 0; j < id_list.length; j++) {
-		var index = gl_general.list_nam.length;
-		var selc_tx = "";
-		for (var i = 0; i < index; i++) {
-			var name = gl_general.list_nam[i]
-			if(name){
-				selc_tx += "<option id='nameproduct"+i+"' value='"+i+"'>"+name+"</option>";
-			}
-		}
-
-		var selec = document.getElementById(id_list[j]);
-		selec.innerHTML = selc_tx;
-		selec.options[gl_currt_list_selec].selected=true;
-		selec.setAttribute("onchange",'selec_list(\''+id_list[j]+'\');');
-	}
-}
-
-function selec_list(id,mostrar = true) {
-	//console.log("tes selc: "+id)
-	var selec = document.getElementById(id);
-	var current_opt = selec.options[selec.selectedIndex];
-	//console.log("tes selc: "+current_opt)
-	if(current_opt && mostrar){
-		gl_currt_list_selec = parseInt(current_opt.value);
-
-		//Guarda los datos generales
-		gl_general.sel_list = gl_currt_list_selec;
-		agregar_gene_datos(gl_general);
-
-		mostrar_producto(gl_currt_list_selec);	//Muestra la lista de productos seleccionada	
-	}
-}
 
 //Actualiza el nombre de lista con el valor del input
 function input_to_selec() {
@@ -74,11 +35,12 @@ function activadesactiva_editmode(){
 	if(edit_mode){
 		selec_to_input();
 		input_name.setAttribute("class","mask_style");
-		select_name.setAttribute("class","element_style_hidden");
+		input_name.removeAttribute("readonly");
+		//select_name.setAttribute("class","element_style_hidden");
 	}
 	else{
-		input_name.setAttribute("class","element_style_hidden");
-		select_name.setAttribute("class","mask_style");
+		input_name.setAttribute("readonly", "");
+		input_name.setAttribute("class","element_style_disable");
 	}
 
 	create_table(table_fila,table_col);
@@ -242,12 +204,11 @@ function ocultar_input()
 function load_general_data() {
 
 	//Precio de dolar en Bs
-	var input_bs = document.getElementById("dolar_rv");
-	var celd_bolivares = document.getElementById("input02");
-	var celd_bolivares_mask = document.getElementById("text_mask02");
+	var celd_bolivares = document.getElementById("input_dolar");
+	var celd_bolivares_mask = document.getElementById("text_mask_dolar");
 	celd_bolivares.value = gl_general.gen_bs;
 	celd_bolivares_mask.value = get_mask(gl_general.gen_bs,gl_mon_a);
-	input_bs.value = get_mask(gl_general.gen_bs,gl_mon_a);
+
 
 
 	//Margen de ganancias
@@ -260,14 +221,10 @@ function load_general_data() {
 function update_celdas_generales(){
 
 	//Precio de dolar en Bs
-	var celd_bolivares = document.getElementById("input02");
-	var celd_bolivares_mask = document.getElementById("text_mask02");
+	var celd_bolivares = document.getElementById("input_dolar");
+	var celd_bolivares_mask = document.getElementById("text_mask_dolar");
 	var gen_bsf = celd_bolivares.value;
 	celd_bolivares_mask.value = get_mask(gen_bsf,gl_mon_a);
-
-	//Calcula el valor del dolar
-	var rv_dolar = document.getElementById("dolar_rv");
-	rv_dolar.value = get_mask(gen_bsf,gl_mon_a);
 
 	//Margen de ganancias
 	var celd_margen = document.getElementById("input04");
@@ -281,6 +238,7 @@ function update_celdas_generales(){
 	agregar_gene_datos(gl_general);		
 
 	get_celda_value_test();
+	buscar_lista_rv("buscar_rv");
 }
 
 function get_celda_value_test(){
