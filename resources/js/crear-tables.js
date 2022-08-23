@@ -95,9 +95,6 @@ function create_table(){
 
 				//Cuadros de solo textos
 				if (j==0 ){
-					//Muestra un mensaje de validacion
-					comprobar_mensaje(input, i, j);
-
 					input.setAttribute("class","input_style_td");
 					input.setAttribute("onclick","get_celda_value_test();");
 					input.setAttribute("onkeyup","get_celda_value_test();");
@@ -112,9 +109,6 @@ function create_table(){
 
 				//Cuadros de entrada numerica
 				if(j==1){
-					//Muestra un mensaje de validacion
-					comprobar_mensaje(input, i, j);
-
 					input.setAttribute("onclick","get_celda_value_test();");
 					input.setAttribute("onkeyup","get_celda_value_test();");
 					input.setAttribute("onchange","get_celda_value_test();");

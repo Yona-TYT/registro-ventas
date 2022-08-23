@@ -28,12 +28,7 @@ function start_save(ventas) {
 	const regex_a = /(\r\n|\r|\n)\;/ig;		//Exp Regula, indica un salto de linea seguido de ;
 	contenido = contenido.replaceAll(regex_a, '\n');
 
-	const regex_b = /<[^>]*>/ig;		//Exp Regula, Elimina las etiquetas html
-	contenido = contenido.replaceAll(regex_b, '');
-
-	contenido = contenido.replaceAll('&nbsp', '');
-
-	console.log(""+contenido);
+	//console.log(""+contenido);
 	//return null;
 	//creamos el blob
 	blob =  new Blob(["\ufeff", contenido], {type: 'text/csv'});
@@ -84,7 +79,7 @@ function crear_array_ventas() {
 		result.push(gl_ventas_save.fecha[j]);
 		result.push(gl_ventas_save.hora[j]);
 		result.push(gl_ventas_save.estado[j]);
-		result.push(verificar_text(gl_ventas_save.detalles[j]));
+		result.push(verificar_text_detall(gl_ventas_save.detalles[j]));
 
 		//Informacion adicional no relevante para el usuario
 		/*
@@ -94,6 +89,7 @@ function crear_array_ventas() {
 		result.push(""+gl_ventas_save.pdtdesc[j]);
 		*/
 		result.push("\n");
+
 	}
 	return result;
 }
@@ -103,5 +99,15 @@ function verificar_text(text) {
 	return text;
 }
 
+function verificar_text_detall(text) {
+	text = text.replaceAll(',', '');
+	text = text.replaceAll(';', '');
+
+	const regex_b = /<[^>]*>/ig;		//Exp Regula, Elimina las etiquetas html
+	text = text.replaceAll(regex_b, '');
+
+	text = text.replaceAll('&nbsp', ';');
+	return text;
+}
 
 
