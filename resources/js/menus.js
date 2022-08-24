@@ -106,31 +106,6 @@ function visible_element(opt) {
 	}
 }
 
-var gl_select = null;
-function select_base_list(id){
-
-	var selec = document.getElementById(id);
-	var opt = selec.options[selec.selectedIndex];
-
-	if(id == "selectlistaname"){
-		var input = document.getElementById("inputlistaname");
-		input.value = opt.innerHTML;
-	}
-
-	gl_selc = parseInt(opt.value);
-	//preloder_selec_list("selectlistaname");
-
-	var sect_lista = document.getElementById("listageneral");
-	var data_lista = document.getElementById("listproducts");
-	sect_lista.innerHTML = "";
-	data_lista.innerHTML = "";
-
-	reset_inputs_rv();
-
-	start_one = true;
-	mostrar_lista(parseInt(opt.value));
-} 
-
 function crear_datalist(list,id) {
 	var data_lista = document.getElementById(id);
 	data_lista.innerHTML = "";
@@ -141,8 +116,68 @@ function crear_datalist(list,id) {
 	}
 }
 
+function mostrar_input() {
+	var mask = document.activeElement;
+	mask.setAttribute("placeholder", "");
+	var id_name = mask.id;
+	var id_input = id_name.replace("text_mask", "input"); //remplaza  palabaras en cadenas de texto
+
+	var input = document.getElementById(id_input);
+	//var fila = document.getElementById("fila"+id_a);
+	//var celda = document.getElementById("celd"+id_b);
+	//var input = document.getElementById("input"+id_c);
+	//var mask = document.getElementById("text_mask"+id_d);
+
+	if(input && id_name.includes("text_mask")){
+		input.setAttribute("class","input_style_visible");
+		mask.setAttribute("disabled", "");
+		input.focus();
+		if(current_element == input)
+			current_element = null;
+
+		else
+			current_element = input;
+	}
+	return null
+}
+
+function ocultar_input(otros = false)
+{
+	var current_input = document.activeElement;
+	var current_id_name = current_input.id;
+	var input_old = current_element;
+
+	var result = true;
+	if(!otros){				//Otros inputs distintos a los de ingresar valores numericos
+		try {
+			el_selec(current_id_name);
+		}
+		catch (err) {
+			result = false;
+		}
+	}
+	
+	if(input_old && result){
+		var id_name_old = input_old.id;
+		var id_mask_old = id_name_old.replace("input", "text_mask"); //remplaza  palabaras en cadenas de texto
+		var mask_old = document.getElementById(id_mask_old);
+		if(mask_old && id_name_old.includes("input")){
+			input_old.setAttribute("class","input_style_hidden");
+			mask_old.setAttribute("placeholder", "Ingrese Valor");
+			mask_old.disabled=false;
+			if(id_name_old != current_id_name)
+				current_element = null;
+		}
+	}
+}
+
 function el_selec(id){
 	var elm = document.getElementById(id);
 	elm.select();
+}
+function el_unselec(){
+	var elm = document.activeElement;
+	var sel = elm.blur();
+
 }
 

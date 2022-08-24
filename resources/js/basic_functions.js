@@ -31,6 +31,8 @@ function selec_list(id,mostrar = true) {
 	var selec = document.getElementById(id);
 	var current_opt = selec.options[selec.selectedIndex];
 	//console.log("tes selc: "+current_opt)
+
+	console.log("Finished: "+current_opt.value);
 	if(current_opt && mostrar){
 		gl_currt_list_selec = parseInt(current_opt.value);
 		input_name.value = gl_general.list_nam[gl_currt_list_selec];
