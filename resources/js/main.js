@@ -128,11 +128,6 @@ function init(){
 
 	example_preview();
 
-	//Comprueba y activa/desactiva el modo editor
-	check_edit_mode();
-	activadesactiva_editmode();
-	//-------------------------------------------
-
 	//Crea la tabla de lista productos
 	create_table();
 

@@ -95,7 +95,11 @@ function obtener_general(evento) {
 		var curr_fecha = hoy.getDate()+ "-" + ( hoy.getMonth() + 1 ) + "-" + hoy.getFullYear();
 		check_current_fech(curr_fecha); // Compara las fechas y determina si es un dia nuevo
 
-		gl_currt_list_selec = 0 //gl_general.sel_list;
+		gl_currt_list_selec = gl_general.sel_list;
+
+		lista_produc_main();
+
+		//console.log("Start selec: "+gl_currt_list_selec);
 
 		mostrar_producto(gl_currt_list_selec);
 		mostrar_ventas(gl_general.clv_max);

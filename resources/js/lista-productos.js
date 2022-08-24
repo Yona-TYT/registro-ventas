@@ -1,4 +1,15 @@
 
+function lista_produc_main() {
+
+	//Comprueba y activa/desactiva el modo editor
+	check_edit_mode();
+	activadesactiva_editmode();
+	//-------------------------------------------
+
+	selec_to_input();
+
+}
+
 //Actualiza el nombre de lista con el valor del input
 function input_to_selec() {
 	var input = document.getElementById("inputlistaname");
@@ -9,6 +20,7 @@ function input_to_selec() {
 
 //Actualiza el input de lista con el nombre de lista
 function selec_to_input() {
+	//console.log("Finished name: "+ gl_general.list_nam[gl_currt_list_selec]);
 	var input = document.getElementById("inputlistaname");
 	input.value = gl_general.list_nam[gl_currt_list_selec];
 }
@@ -33,7 +45,7 @@ function activadesactiva_editmode(){
 	var select_name = document.getElementById("selectlistaname");
 	var input_name = document.getElementById("inputlistaname");
 	if(edit_mode){
-		selec_to_input();
+
 		input_name.setAttribute("class","mask_style");
 		input_name.removeAttribute("readonly");
 		//select_name.setAttribute("class","element_style_hidden");

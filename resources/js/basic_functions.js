@@ -16,6 +16,8 @@ function preloder_filtro_lista() {
 			if(name){
 				selc_tx += "<option id='nameproduct"+i+"' value='"+i+"'>"+name+"</option>";
 			}
+			else	
+				selc_tx += "<option id='nameproduct"+i+"' value='"+i+"'>Vacio</option>";
 		}
 
 		var selec = document.getElementById(id_list[j]);
@@ -27,15 +29,13 @@ function preloder_filtro_lista() {
 
 function selec_list(id,mostrar = true) {
 	//console.log("tes selc: "+id)
-	var input_name = document.getElementById("inputlistaname");
 	var selec = document.getElementById(id);
 	var current_opt = selec.options[selec.selectedIndex];
 	//console.log("tes selc: "+current_opt)
 
-	console.log("Finished: "+current_opt.value);
 	if(current_opt && mostrar){
 		gl_currt_list_selec = parseInt(current_opt.value);
-		input_name.value = gl_general.list_nam[gl_currt_list_selec];
+		selec_to_input();		//Input del lista productos obtiene el nombre de la lista
 		//Guarda los datos generales
 		gl_general.sel_list = gl_currt_list_selec;
 		agregar_gene_datos(gl_general);
