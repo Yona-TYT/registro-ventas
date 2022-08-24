@@ -155,13 +155,17 @@
 			</div>
 			<div class="cajas_style">Buscara productos: <input class="mask_style" type="search" id="buscar" placeholder="Buscar Productos" list="listproducts" onfocus="el_selec('buscar');"></div>
 			<datalist id="listproducts"></datalist>
-			<section class="cajas_style">
+
 				<div class="cajas_style">
 					Margen:
 					<input readonly="" class="input_style_edicion_td" id="text_mask04" onclick="mostrar_input();" onselect="mostrar_input();">
 					<input type="number" readwrite="" class="input_style_hidden" onkeyup="update_celdas_generales();" onclick="update_celdas_generales();" onchange="update_celdas_generales();" step="10" min="1" id="input04" onfocus="ocultar_input();" lang="en">
 				</div>
-			</section>
+				<div class="cajas_style">
+					<button class="mask_style" type="button" id="butlistsave">
+					Guardar Lista
+				</div>
+
 
 			<section class="cajas_style" id="tablproductos"></section>
 			<section class="label_style" id="listageneral"></section>

@@ -1,6 +1,6 @@
 
 
-function cuent_datos_csv() {
+function hist_datos_to_csv() {
 
 	var ventas = crear_array_ventas();
 
@@ -8,22 +8,39 @@ function cuent_datos_csv() {
 	if(window.Blob && (window.URL || window.webkitURL)){
 		var contenido = "";
 		contenido += ventas.join(";") ;			//Se agregan datos de ventas
-		start_save(ventas);
+
+		//Se envian los datops para ser guardados
+		file_name = "Historial";
+		start_save(ventas, file_name);
 	}
 	else {
 		alert("Su navegador no permite esta acción");
 	}
 }
-function start_save(ventas) {
+
+function produ_datos_to_csv() {
+
+	var produ = crear_array_produ();
+
+	//comprobamos compatibilidad
+	if(window.Blob && (window.URL || window.webkitURL)){
+		var contenido = "";
+		contenido += produ.join(";") ;			//Se agregan datos de ventas
+		
+		//Se envian los datops para ser guardados
+		file_name = "Lista_Guardada";
+		start_save(produ, file_name);
+	}
+	else {
+		alert("Su navegador no permite esta acción");
+	}
+}
+
+function start_save(text, name) {
 	//console.log(hash);
-	var contenido = "",
-		d = new Date(),
-		blob,
-		reader,
-		save,
-		clicEvent;
+	var contenido = "", d = new Date(), blob, reader, save, clicEvent, tx_name = name;
 	//creamos contenido del archivo
-	contenido += ventas.join(";") ;			//Se agregan datos de ventas
+	contenido += text.join(";") ;			//Se agregan datos de ventas
 
 	const regex_a = /(\r\n|\r|\n)\;/ig;		//Exp Regula, indica un salto de linea seguido de ;
 	contenido = contenido.replaceAll(regex_a, '\n');
@@ -34,13 +51,16 @@ function start_save(ventas) {
 	blob =  new Blob(["\ufeff", contenido], {type: 'text/csv'});
 	//creamos el reader
 	var reader = new FileReader();
-	reader.onload = function (event) {
+
+
+	reader.onload = function (event, name) {
+			console.log(""+tx_name);
 		//escuchamos su evento load y creamos un enlace en dom
 		save = document.createElement('a');
 		save.href = event.target.result;
 		save.target = '_blank';
 		//aquí le damos nombre al archivo
-		save.download = "historial" + "_"+ d.getDate() + "_" + (d.getMonth()+1) + "_" + d.getFullYear() + "_" + d.getHours() + d.getMinutes() + d.getSeconds()+".csv";
+		save.download = tx_name + "_"+ d.getDate() + "_" + (d.getMonth()+1) + "_" + d.getFullYear() + "_" + d.getHours() + d.getMinutes() + d.getSeconds()+".csv";
 		try {
 			//creamos un evento click
 			clicEvent = new MouseEvent('click', {
@@ -71,7 +91,6 @@ function crear_array_ventas() {
 	result.push("Hora");
 	result.push("Estado");
 	result.push("\n");
-	var count = 0;
 	for (var j = 0 ; j < gl_ventas_save.pdtindex.length ; j++) {
 		result.push(verificar_text(gl_ventas_save.cliente[j]));
 		result.push(verificar_text(gl_ventas_save.totaldol[j]));
@@ -93,6 +112,30 @@ function crear_array_ventas() {
 	}
 	return result;
 }
+
+function crear_array_produ() {
+	var result = new Array();
+	result.push("Nombre");
+	result.push("Cantidad");
+	result.push("Ganancia (%)");
+	result.push("Precio de entrada ("+gl_mon_b+")");
+	result.push("\n");
+	for (var j = 0 ; j < gl_products.list_prd.nombre.length ; j++) {
+		var nombre = gl_products.list_prd.nombre[j]?gl_products.list_prd.nombre[j]:"";
+		var cant = gl_products.list_prd.cantidad[j]?gl_products.list_prd.cantidad[j]:0;
+		var marg = gl_products.list_prd.margen[j]?gl_products.list_prd.margen[j]:0;
+		var prec = gl_products.list_prd.precio[j]?gl_products.list_prd.precio[j]:0;
+
+		result.push(verificar_text(nombre));
+		result.push(verificar_text(cant));
+		result.push(verificar_text(marg));
+		result.push(verificar_text(prec));
+		result.push("\n");
+
+	}
+	return result;
+}
+
 function verificar_text(text) {
 	text = text.replaceAll(',', '');
 	text = text.replaceAll(';', '');

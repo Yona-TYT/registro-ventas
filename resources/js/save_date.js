@@ -244,7 +244,7 @@ function obtener_exp_ventas(evento, max) {
 		mostrar_exp_ventas(max);
 
 		if(max<0){
-			cuent_datos_csv();
+			hist_datos_to_csv();
 			gl_ventas_save = new reg_ventas();
 		}
 	}

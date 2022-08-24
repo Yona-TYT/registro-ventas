@@ -8,6 +8,9 @@ function lista_produc_main() {
 
 	selec_to_input();
 
+	var butt = document.getElementById("butlistsave");
+	butt.setAttribute("onclick",'produ_datos_to_csv();');
+
 }
 
 //Actualiza el nombre de lista con el valor del input
