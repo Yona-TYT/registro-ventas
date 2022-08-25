@@ -89,26 +89,26 @@ function create_table_lp(){
 				tex_mask.setAttribute("class", "input_style_edicion_td");
 				tex_mask.setAttribute("placeholder", "Ingrese Valor");
 				input.setAttribute("id", "inputlp"+celda_id);
-				input.setAttribute("placeholder", "Ingrese Valor");
+				siz_c!=4?input.setAttribute("placeholder", "Ingrese Valor"):"";
 
 				//Cuadro De nombres
 				if (siz_c==0){
 					input.setAttribute("class","input_style_td");
 					input.setAttribute("class","input_style_edicion_td");
 					input.setAttribute("type", "text");
-					celda.appendChild(input);
 					input.setAttribute("onFocus", "ocultar_input();");
+					celda.appendChild(input);
 				}
 				//Cuadro cantidad
-				if (siz_c==1){
+				else if (siz_c==1){
 					input.setAttribute("class","input_style_td");
 					input.setAttribute("class","input_style_edicion_td");
 					input.setAttribute("type", "number");
-					celda.appendChild(input);
 					input.setAttribute("onFocus", "ocultar_input();");
+					celda.appendChild(input);
 				}
 				//Cuadros de entrada numerica
-				if(siz_c==2 || siz_c==3){
+				else if(siz_c==2 || siz_c==3){
 					input.setAttribute("class","input_style_td");
 					input.setAttribute("onclick","update_product_cu();");
 					input.setAttribute("onkeyup","update_product_cu();");
@@ -120,33 +120,30 @@ function create_table_lp(){
 
 					//para la mask del cuadro
 					tex_mask.setAttribute("id", "text_masklp"+celda_id);
-					celda.appendChild(tex_mask);
-					celda.appendChild(input);
-
-					var total_id_a = j;
-					var total_id_b = multiplo;
 					tex_mask.setAttribute("onClick", "mostrar_input();");
 					tex_mask.setAttribute("onSelect", "mostrar_input();");
 					input.setAttribute("onFocus", "ocultar_input();");
-
+					celda.appendChild(tex_mask);
+					celda.appendChild(input);
 				}
 				//Cuadros de solo lectura
-				if (siz_c == 4){
-					input.setAttribute("class","input_style_td");
-					input.setAttribute("class","input_style_td");
-					input.setAttribute("type", "text");
-					input.setAttribute("readonly", "");
-					celda.appendChild(input);
-					input.setAttribute("onFocus", "ocultar_input();");
+				else if (siz_c == 4){
+					console.log("siz: "+input);
+					//input.setAttribute("class","input_style_td");
+					//input.setAttribute("type", "text");
+					//input.setAttribute("readonly", "");
+					//input.setAttribute("onFocus", "ocultar_input();");
+					//celda.appendChild(input);
+					celda.innerHTML = "<input type='text' id='inputlp14' class='input_style_td' onfocus='ocultar_input();' readonly='';>"
 				}
-				if(siz_c==5){
+				else if(siz_c==5){
 					celda.setAttribute("class", "celda_style_x");
 					var button = document.createElement("button");
 					button.setAttribute("class","mask_style");
 					button.setAttribute("type", "button");
 					button.innerHTML= "Borrar Producto";
 					button.setAttribute("onclick","remove_product();");
-					button.setAttribute("id", "buttlp"+j);
+					button.setAttribute("id", "buttlp"+celda_id);
 					celda.appendChild(button);
 				}
 				if(gl_mobil) celda.style.width = "60%";

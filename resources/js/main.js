@@ -107,7 +107,14 @@ function init(){
 
 	check_windows_siz();
 
+	//Crea la tabla para registro ventas
 	create_table_rv();
+
+	//Crea la tabla de lista productos
+	create_table_lp();
+
+	//Crea la tabla de Registro de productos
+	create_table_rp();
 
 	//Iniciaaliza la base de datos
 	set_basededatos("registro3");
@@ -123,11 +130,7 @@ function init(){
 
 	example_preview();
 
-	//Crea la tabla de lista productos
-	create_table_lp();
 
-	//Crea la tabla de Registro de productos
-	create_table_rp();
 
 	var boton = document.getElementById("load_start");
 	//boton.addEventListener("click", agregar_producto);

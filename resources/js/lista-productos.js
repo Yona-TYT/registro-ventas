@@ -42,8 +42,8 @@ function check_edit_mode(){
 function activadesactiva_editmode(){
 	console.log("tes selc: aquiiii ")
 	var input_edit = document.getElementById("edit_mode");
-	var id_list = ["inputlistaname", "inputlp10", "inputlp11", "text_masklp12", "text_masklp13"];
-	var butt = document.getElementById("buttlp1");
+	var id_list = ["inputlistaname", "inputlp10", "inputlp11", "text_masklp12", "text_masklp13", "inputlp14"];
+	var butt = document.getElementById("buttlp15");
 	edit_mode = input_edit.checked;
 
 	//table.remove();
@@ -51,7 +51,7 @@ function activadesactiva_editmode(){
 	if(edit_mode){
 		butt.removeAttribute("disabled");
 		butt.setAttribute("class", "mask_style");
-
+		
 		for (var j = 0; j < id_list.length; j++) {
 			var input = document.getElementById(id_list[j]);
 			input.setAttribute("class","mask_style");
