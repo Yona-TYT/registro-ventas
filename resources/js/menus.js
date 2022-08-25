@@ -45,64 +45,56 @@ function visible_element(opt) {
 		bott.setAttribute("class","butt_selec_style");
 
 
-	var table_regvent = document.getElementById("seccion1");
-	var table_regpro = document.getElementById("seccion2");
-	var historial = document.getElementById("seccion3");
-	var table_list = document.getElementById("tablproductos");
-	var table_panel = document.getElementById("seccion4");
-	var table = document.getElementById("tableprev0");
-	var import_data = document.getElementById("seccion5");
+	var sec_regvent = document.getElementById("seccion1");
+	var sec_regpro = document.getElementById("seccion2");
+	var sec_hist = document.getElementById("seccion3");
+	var sec_listprod = document.getElementById("seccion4");
+	var sec_impdata = document.getElementById("seccion5");
 
 
 	//Registro de Ventas
 	if(opt==1) {
-		table_list.setAttribute("class","element_style_hidden");
-		table_panel.setAttribute("class","element_style_hidden");
-		import_data.setAttribute("class","element_style_hidden");
-		historial.setAttribute("class","element_style_hidden");
-		table_regpro.setAttribute("class","element_style_hidden");
-		table_regvent.setAttribute("class","label_style");
-
+		sec_listprod.setAttribute("class","element_style_hidden");
+		sec_impdata.setAttribute("class","element_style_hidden");
+		sec_hist.setAttribute("class","element_style_hidden");
+		sec_regpro.setAttribute("class","element_style_hidden");
+		sec_regvent.setAttribute("class","label_style");
 	}
+
 	//Registro de Productos
 	if(opt==2) {
-		table_list.setAttribute("class","element_style_hidden");
-		table_panel.setAttribute("class","element_style_hidden");
-		import_data.setAttribute("class","element_style_hidden");
-		table_regvent.setAttribute("class","element_style_hidden");
-		historial.setAttribute("class","element_style_hidden");
-		table_regpro.setAttribute("class","label_style");
+		sec_listprod.setAttribute("class","element_style_hidden");
+		sec_impdata.setAttribute("class","element_style_hidden");
+		sec_regvent.setAttribute("class","element_style_hidden");
+		sec_hist.setAttribute("class","element_style_hidden");
+		sec_regpro.setAttribute("class","label_style");
 	}
+
 	//Historial de Ventas
 	if(opt==3) {
-		table_list.setAttribute("class","element_style_hidden");
-		table_panel.setAttribute("class","element_style_hidden");
-		import_data.setAttribute("class","element_style_hidden");
-		table_regvent.setAttribute("class","element_style_hidden");
-		table_regpro.setAttribute("class","element_style_hidden");
-		historial.setAttribute("class","label_style");
-
+		sec_listprod.setAttribute("class","element_style_hidden");
+		sec_impdata.setAttribute("class","element_style_hidden");
+		sec_regvent.setAttribute("class","element_style_hidden");
+		sec_regpro.setAttribute("class","element_style_hidden");
+		sec_hist.setAttribute("class","label_style");
 	}
+
 	//Lista general de productos
 	if(opt==4) {
-		table_list.setAttribute("class","fila_style");
-		table_panel.setAttribute("class","label_style");
-		import_data.setAttribute("class","element_style_hidden");
-		table.setAttribute("class","element_style_hidden");
-		table_regvent.setAttribute("class","element_style_hidden");
-		historial.setAttribute("class","element_style_hidden");
-		table_regpro.setAttribute("class","element_style_hidden");
+		sec_listprod.setAttribute("class","label_style");
+		sec_impdata.setAttribute("class","element_style_hidden");
+		sec_regvent.setAttribute("class","element_style_hidden");
+		sec_hist.setAttribute("class","element_style_hidden");
+		sec_regpro.setAttribute("class","element_style_hidden");
 
 	}
 	//Importar datos
 	if(opt==5) {
-		table_list.setAttribute("class","element_style_hidden");
-		table_panel.setAttribute("class","element_style_hidden");
-		table_regvent.setAttribute("class","element_style_hidden");
-		historial.setAttribute("class","element_style_hidden");
-		table_regpro.setAttribute("class","element_style_hidden");
-		import_data.setAttribute("class","label_style");
-		table.setAttribute("class","label_style");
+		sec_listprod.setAttribute("class","element_style_hidden");
+		sec_regvent.setAttribute("class","element_style_hidden");
+		sec_hist.setAttribute("class","element_style_hidden");
+		sec_regpro.setAttribute("class","element_style_hidden");
+		sec_impdata.setAttribute("class","label_style");
 	}
 }
 

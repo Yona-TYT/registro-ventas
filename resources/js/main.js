@@ -124,7 +124,7 @@ function init(){
 	example_preview();
 
 	//Crea la tabla de lista productos
-	create_table();
+	create_table_lp();
 
 	//Crea la tabla de Registro de productos
 	create_table_rp();

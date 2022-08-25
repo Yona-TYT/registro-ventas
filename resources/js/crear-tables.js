@@ -96,9 +96,9 @@ function create_table(){
 				//Cuadros de solo textos
 				if (j==0 ){
 					input.setAttribute("class","input_style_td");
-					input.setAttribute("onclick","get_celda_value_test();");
-					input.setAttribute("onkeyup","get_celda_value_test();");
-					//input.setAttribute("onwheel","get_celda_value_test();");
+					input.setAttribute("onclick","update_product_cu();");
+					input.setAttribute("onkeyup","update_product_cu();");
+					//input.setAttribute("onwheel","update_product_cu();");
 					//input.setAttribute("onchange","enviar_index();");
 
 					input.setAttribute("class",edit_mode?"input_style_edicion_td":"input_text_style");
@@ -109,9 +109,9 @@ function create_table(){
 
 				//Cuadros de entrada numerica
 				if(j==1){
-					input.setAttribute("onclick","get_celda_value_test();");
-					input.setAttribute("onkeyup","get_celda_value_test();");
-					input.setAttribute("onchange","get_celda_value_test();");
+					input.setAttribute("onclick","update_product_cu();");
+					input.setAttribute("onkeyup","update_product_cu();");
+					input.setAttribute("onchange","update_product_cu();");
 					//input.setAttribute("onchange","enviar_index();");
 
 					input.setAttribute("class","input_style_hidden");
@@ -190,6 +190,173 @@ function create_table(){
 	return null;
 }
 
+
+function create_table_lp(){
+
+	//----------------------------------------------------------------
+	//Nombre de las celdas value--------------------------------------
+	var name_cel = ["Nombre", "Cantidad", "Ganancia C/U", "Precio (Entrada)", "Precio (Salida)", "Borrar"];
+	var name_siz = name_cel.length;
+	//----------------------------------------------------------------
+
+	var sect_table = document.getElementById("sect_lp");
+
+	sect_table.innerHTML = "";
+
+	var tabla = document.createElement("table");
+	tabla.setAttribute("id", "table_lp");
+
+	// Creamos un elemento <table> y un elemento <tbody>
+	var tblBody = document.createElement("tbody");
+
+	// Creamos las celdas
+	var siz_col = gl_mobil? 2:name_siz;
+	var siz_fil = gl_mobil? name_siz:2;
+	for (var j = 0; j < siz_fil; j++) {
+		// Creamos las hileras de la tabla
+		var fila = document.createElement("tr");
+
+		fila.setAttribute("id", "filalp"+j);
+
+		var multiplo = (j*table_col);
+		save_id_filas[j] = j+multiplo;
+		for (var i = 0; i < siz_col; i++) {
+
+			var siz_f = gl_mobil?i:j;
+			var siz_c = gl_mobil?j:i;
+			var celda_id = siz_f+""+siz_c;
+			
+			//Cuadros de nombres de columnas
+			if(siz_f==0){
+				var celda = document.createElement("td");
+				celda.setAttribute("id", "celdlp"+celda_id)
+				celda.setAttribute("class","celda_style");
+				celda.style.width = gl_mobil?"0.5%":"100px"
+				if(siz_c < 5){
+					// Creamos 2 elementos de entrada
+					var input = document.createElement("input");
+					input.setAttribute("id", "inputlp"+celda_id);
+					input.setAttribute("type", "number");
+					var tex_mask = document.createElement("input");
+					input.setAttribute(edit_mode?"readwrite":"readonly", "");
+
+					tex_mask.setAttribute("readonly", "");
+					tex_mask.setAttribute("class", "input_style_edicion_td");
+
+					input.setAttribute("type", "text");
+					input.setAttribute("value", name_cel[siz_c]);
+					input.setAttribute("readonly", "");
+					input.setAttribute("class","colum_name_style");
+					//input.style.width = gl_mobil?"1%":"100px"
+					celda.innerHTML= input.outerHTML;
+				
+				}
+				else {
+					celda.setAttribute("class",  edit_mode?"celda_style_x":"input_style_hidden");
+					var div = document.createElement("div");
+					div.setAttribute("class","input_style_edicion_td");
+					div.setAttribute("id", "listp_div");
+					div.innerHTML= "Confirmar:";
+					input.setAttribute("type","checkbox");
+					input.setAttribute("id", "listp_check");
+					input.setAttribute("class","colum_name_style");
+					if(!gl_mobil) input.style.width = "150px";
+					div.appendChild(input);
+					celda.appendChild(div);
+				}
+
+				fila.appendChild(celda);
+			}
+			//--------------------------------------------------------------------------------------------------
+
+			else if(siz_f==1){
+				var celda = document.createElement("td");
+				celda.setAttribute("id", "celdlp"+celda_id)
+
+				// Creamos 2 elementos de entrada
+				var input = document.createElement("input");
+				input.setAttribute("type", "number");
+				var tex_mask = document.createElement("input");
+				tex_mask.setAttribute("readonly", "");
+				tex_mask.setAttribute("class", "input_style_edicion_td");
+				tex_mask.setAttribute("placeholder", "Ingrese Valor");
+				input.setAttribute("id", "inputlp"+celda_id);
+				input.setAttribute("placeholder", "Ingrese Valor");
+
+				//Cuadro De nombres
+				if (siz_c==0){
+					input.setAttribute("class","input_style_td");
+					input.setAttribute("class","input_style_edicion_td");
+					input.setAttribute("type", "text");
+					celda.appendChild(input);
+					input.setAttribute("onFocus", "ocultar_input();");
+				}
+				//Cuadro cantidad
+				if (siz_c==1){
+					input.setAttribute("class","input_style_td");
+					input.setAttribute("class","input_style_edicion_td");
+					input.setAttribute("type", "number");
+					celda.appendChild(input);
+					input.setAttribute("onFocus", "ocultar_input();");
+				}
+				//Cuadros de entrada numerica
+				if(siz_c==2 || siz_c==3){
+					input.setAttribute("class","input_style_td");
+					input.setAttribute("onclick","update_product_cu();");
+					input.setAttribute("onkeyup","update_product_cu();");
+					input.setAttribute("onchange","update_product_cu();");
+					input.setAttribute("class","input_style_hidden");
+					input.setAttribute("step", "0.10");
+					input.setAttribute("min", "0.00");
+					input.setAttribute("lang", "en");
+
+					//para la mask del cuadro
+					tex_mask.setAttribute("id", "text_masklp"+celda_id);
+					celda.appendChild(tex_mask);
+					celda.appendChild(input);
+
+					var total_id_a = j;
+					var total_id_b = multiplo;
+					tex_mask.setAttribute("onClick", "mostrar_input();");
+					tex_mask.setAttribute("onSelect", "mostrar_input();");
+					input.setAttribute("onFocus", "ocultar_input();");
+
+				}
+				//Cuadros de solo lectura
+				if (siz_c == 4){
+					input.setAttribute("class","input_style_td");
+					input.setAttribute("class","input_style_td");
+					input.setAttribute("type", "text");
+					input.setAttribute("readonly", "");
+					celda.appendChild(input);
+					input.setAttribute("onFocus", "ocultar_input();");
+				}
+				if(siz_c==5){
+					celda.setAttribute("class",  edit_mode?"celda_style_x":"input_style_hidden");
+					var button = document.createElement("button");
+					button.setAttribute("class","mask_style");
+					button.setAttribute("type", "button");
+					button.innerHTML= "Borrar Producto";
+					button.setAttribute("onclick","remove_product();");
+					button.setAttribute("id", "buttlp"+j);
+					celda.appendChild(button);
+				}
+				fila.appendChild(celda);
+			}
+		}
+		tblBody.appendChild(fila);
+	}
+
+	// posicionamos el <tbody> debajo del elemento <table>
+	tabla.appendChild(tblBody);
+
+	sect_table.appendChild(tabla);  ///innerHTML = tabla.innerHTML;
+
+	return null;
+}
+
+
+
 function create_table_rp(){
 
 	//----------------------------------------------------------------
@@ -246,7 +413,6 @@ function create_table_rp(){
 				input.setAttribute("value", name_cel[siz_c]);
 				input.setAttribute("readonly", "");
 				input.setAttribute("class","colum_name_style");
-				//celda.appendChild(input);
 				celda.innerHTML= input.outerHTML;
 			
 				fila.appendChild(celda);
@@ -255,8 +421,6 @@ function create_table_rp(){
 			//--------------------------------------------------------------------------------------------------
 
 			else if(siz_f==1){
-				//lista_tx += add_text_fila(j);
-
 				var celda = document.createElement("td");
 				celda.setAttribute("id", "celdrp"+celda_id)
 
@@ -296,7 +460,6 @@ function create_table_rp(){
 					input.setAttribute("onclick","get_celda_value_rp();");
 					input.setAttribute("onkeyup","get_celda_value_rp();");
 					input.setAttribute("onchange","get_celda_value_rp();");
-					//input.setAttribute("onchange","enviar_index();");
 
 					input.setAttribute("class","input_style_hidden");
 
@@ -311,7 +474,6 @@ function create_table_rp(){
 
 					var total_id_a = j;
 					var total_id_b = multiplo;
-					//input.setAttribute("onkeyup", "enviar_index("+total_id_a+","+total_id_b+");" );
 					tex_mask.setAttribute("onClick", "mostrar_input();");
 					tex_mask.setAttribute("onSelect", "mostrar_input();");
 					input.setAttribute("onFocus", "ocultar_input();");
@@ -417,11 +579,6 @@ function create_table_rv(){
 
 				//Cuadros de cantidad
 				if (siz_c==4){
-					//input.setAttribute("onclick","get_celda_value_test();");
-					//input.setAttribute("onkeyup","get_celda_value_test();");
-					//input.setAttribute("onwheel","get_celda_value_test();");
-					//input.setAttribute("onchange","enviar_index();");
-
 					input.setAttribute("class","input_style_visible");
 					input.setAttribute("type", "number");
 					input.setAttribute("step", "1");
@@ -430,23 +587,15 @@ function create_table_rv(){
 					celda.appendChild(input);
 					input.setAttribute("onFocus", "ocultar_input();");
 				}
-				//Cuadros de entrada numerica
+
+				//Cuadros de solo lectura
 				else if (siz_c != 5){
 					input.setAttribute("class","input_style_td");
-					//input.setAttribute("onchange","enviar_index();");
-
 					input.setAttribute("class","input_style_td");
 					input.setAttribute("type", "text");
 					input.setAttribute("readonly", "");
-
 					celda.appendChild(input);
-
-					var total_id_a = siz_f;
-					var total_id_b = multiplo;
-					//input.setAttribute("onkeyup", "enviar_index("+total_id_a+","+total_id_b+");" );
-
 					input.setAttribute("onFocus", "ocultar_input();");
-
 				}
 				if(siz_c==5){
 					celda.setAttribute("class", "button_style_r");
