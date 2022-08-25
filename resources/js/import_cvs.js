@@ -1,16 +1,31 @@
 
 var gl_save_list = new save_list_ex();
 
+var gl_type = [	"application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+				"application/vnd.ms-excel.sheet.macroEnabled.12", "application/vnd.ms-excel", "text/csv"
+			];
+
 function importar_main() {
 
-	importar_datos();
 	//importar_simple_list();
 	impor_chag_mode();
+
 
 	var input_advan = document.getElementById("advan_mode");
 	input_advan.addEventListener("change", function(){
 		impor_chag_mode();
 	});
+
+
+	// Modo simple
+	var simp_file = document.getElementById("file_simp");
+	importar_simp_list(simp_file);
+	simp_file.addEventListener("change", function(){importar_simp_list(simp_file)});
+
+	// Modo avanzado
+	var adv_file = document.getElementById("archivos");
+	importar_advan_list(adv_file);
+	adv_file.addEventListener("change", function(){importar_advan_list(adv_file)});
 }
 
 function impor_chag_mode() {
@@ -28,81 +43,67 @@ function impor_chag_mode() {
 	}
 }
 
-function importar_simple_list() {
-	var files = document.getElementById("file_simp");
-	var type = "text/csv";
-	files.addEventListener("change", function(e) {
-		var file_date = e.target.files[0];
-		if(file_date){
-			var current_type = file_date.type;
-			//console.log(current_type);
-			if(current_type == type){
-				Papa.parse(file_date,{
-					config: {
-						delimiter: "auto"
-					},
-					complete: function(results) {
-						save_exp_date(results.data);
-						//console.log("Finished:",results.data);
-						mostrar_tabla();
-					}
-				});
-			}
-		}
-	});
-}
-
-function importar_datos() {
-	var files = document.getElementById("archivos");
-	var type_1 = "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet";
-	var type_3 = "application/vnd.ms-excel.sheet.macroEnabled.12"
-	var type_4 = "application/vnd.ms-excel"
-	var type_2 = "text/csv";
-	files.addEventListener("change", function(e) {
-		var file_date = e.target.files[0];
-		if(file_date){
-			var current_type = file_date.type;
-			//console.log(current_type);
-			if(current_type == type_1 || current_type == type_3 || current_type == type_4){
-				var reader = new FileReader();
-				reader.readAsArrayBuffer(file_date);
-				reader.onload = function(e) {
-					var data = new Uint8Array(reader.result);
-					var wb = XLSX.read(data,{type:'array'});
-					var htmlstr = XLSX.write(wb,{sheet:wb.SheetNames[0], type:'binary',bookType:'csv'});
-
-					//save_exp_date([htmlstr]);				//gloval_test = file_date.type;
-
-					Papa.parse(htmlstr,{
-						config: {
-							delimiter: "auto"
-						},
-						complete: function(results) {
-							save_exp_date(results.data);
-							mostrar_tabla();
-						}
-					});
-
+function importar_simp_list(elem) {
+	var file_date = elem.files[0];
+	if(file_date){
+		var current_type = file_date.type;
+		//console.log(current_type);
+		if(current_type == gl_type[3]){
+			Papa.parse(file_date,{
+				config: {
+					delimiter: "auto"
+				},
+				complete: function(results) {
+					save_exp_date(results.data);
+					//console.log("Finished:",results.data);
 				}
-			}
-			if(current_type == type_2){
-				Papa.parse(file_date,{
+			});
+		}
+	}
+}
+
+
+function importar_advan_list(elem) {
+
+	var file_date = elem.files[0];
+	if(file_date){
+		var current_type = file_date.type;
+		console.log(current_type);
+		if(current_type == gl_type[0] || current_type == gl_type[1] || current_type == gl_type[2]){
+			var reader = new FileReader();
+			reader.readAsArrayBuffer(file_date);
+			reader.onload = function(e) {
+				var data = new Uint8Array(reader.result);
+				var wb = XLSX.read(data,{type:'array'});
+				var htmlstr = XLSX.write(wb,{sheet:wb.SheetNames[0], type:'binary',bookType:'csv'});
+
+				//save_exp_date([htmlstr]);				//gloval_test = file_date.type;
+
+				Papa.parse(htmlstr,{
 					config: {
 						delimiter: "auto"
 					},
 					complete: function(results) {
 						save_exp_date(results.data);
-						//console.log("Finished:",results.data);
 						mostrar_tabla();
 					}
 				});
+
 			}
 		}
-	});
-}
-
-function importar_advan_list() {
-
+		if(current_type == gl_type[3]){
+			Papa.parse(file_date,{
+				config: {
+					delimiter: "auto"
+				},
+				complete: function(results) {
+					save_exp_date(results.data);
+					//console.log("Finished:",results.data);
+					mostrar_tabla();
+				}
+			});
+		}
+	}
 }
 
 function mostrar_tabla() {
@@ -160,10 +161,12 @@ var gl_result_temp = new reg_products();
 function recovery_simple_list() {
 	var siz = save_expdate.length;
     for (var i = 1; i < siz ; i++) {
-		gl_result_temp.nombre[i] = save_expdate[i][0];
-		gl_result_temp.cantidad[i] = save_expdate[i][1];
-		gl_result_temp.precio[i] = save_expdate[i][2];
-		gl_result_temp.margen[i] = save_expdate[i][3];
+		if(save_expdate[i][0] == "")
+			continue;
+		gl_result_temp.nombre.push(save_expdate[i][0]);
+		gl_result_temp.cantidad.push(save_expdate[i][1]);
+		gl_result_temp.precio.push(save_expdate[i][2]);
+		gl_result_temp.margen.push(save_expdate[i][3]);
 	}
 	if(siz > 0){
 		gl_products = gl_result_temp;
