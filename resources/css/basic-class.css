@@ -579,6 +579,23 @@ input[type='file'] {
 	font-size:var(--siz-text);
 	width: 100%;
 }
+
+input[type=file]::file-selector-button {
+	text-align: center;
+	font-weight: bold;
+	font-size: 90%;
+
+	color: #ffffff;
+	width: 90px;
+	height:var(--all-height);
+
+	background: rgba(55, 64, 145, 0.4);
+	overflow: hidden;
+
+	margin:2px;
+	transition: 1s;
+}
+
 button {
 	border-radius: 5px;
 

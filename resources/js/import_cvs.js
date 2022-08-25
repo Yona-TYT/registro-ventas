@@ -4,6 +4,7 @@ var gl_save_list = new save_list_ex();
 function importar_main() {
 
 	importar_datos();
+	//importar_simple_list();
 	impor_chag_mode();
 
 	var input_advan = document.getElementById("advan_mode");
@@ -27,6 +28,30 @@ function impor_chag_mode() {
 	}
 }
 
+function importar_simple_list() {
+	var files = document.getElementById("file_simp");
+	var type = "text/csv";
+	files.addEventListener("change", function(e) {
+		var file_date = e.target.files[0];
+		if(file_date){
+			var current_type = file_date.type;
+			//console.log(current_type);
+			if(current_type == type){
+				Papa.parse(file_date,{
+					config: {
+						delimiter: "auto"
+					},
+					complete: function(results) {
+						save_exp_date(results.data);
+						//console.log("Finished:",results.data);
+						mostrar_tabla();
+					}
+				});
+			}
+		}
+	});
+}
+
 function importar_datos() {
 	var files = document.getElementById("archivos");
 	var type_1 = "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet";
@@ -37,7 +62,7 @@ function importar_datos() {
 		var file_date = e.target.files[0];
 		if(file_date){
 			var current_type = file_date.type;
-			console.log(current_type);
+			//console.log(current_type);
 			if(current_type == type_1 || current_type == type_3 || current_type == type_4){
 				var reader = new FileReader();
 				reader.readAsArrayBuffer(file_date);
@@ -76,6 +101,10 @@ function importar_datos() {
 	});
 }
 
+function importar_advan_list() {
+
+}
+
 function mostrar_tabla() {
 	var select = document.getElementById("startfila");
 	var st_value = select.options[select.selectedIndex];
@@ -92,6 +121,8 @@ function mostrar_tabla() {
 		}
     }
 }
+
+var save_expdate = new Array();
 
 function save_exp_date(results) {
     var data = results
@@ -125,6 +156,32 @@ function save_exp_date(results) {
 }
 
 var gl_result_temp = new reg_products();
+
+function recovery_simple_list() {
+	var siz = save_expdate.length;
+    for (var i = 1; i < siz ; i++) {
+		gl_result_temp.nombre[i] = save_expdate[i][0];
+		gl_result_temp.cantidad[i] = save_expdate[i][1];
+		gl_result_temp.precio[i] = save_expdate[i][2];
+		gl_result_temp.margen[i] = save_expdate[i][3];
+	}
+	if(siz > 0){
+		gl_products = gl_result_temp;
+
+		//crea las listas de productos -------------------------------
+		crear_datalist(gl_products.nombre, "listproducts");
+		crear_lista_productos();
+		//------------------------------------------------------------
+
+
+		gl_result_temp = new reg_products();
+		alert("Lista Guardada Correctamente.");
+	}
+	else {
+		alert("La Lista esta Vacia!.");
+		gl_result_temp = new reg_products();
+	}
+}
 function recovery_data() {
 	gl_result_temp = new reg_products();
 
@@ -171,6 +228,7 @@ function recovery_data() {
 
 
 	gl_result_temp = new reg_products();
+	save_expdate = new Array;
 	alert("Lista Guardada Correctamente.");
 }
 

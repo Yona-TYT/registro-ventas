@@ -1,7 +1,4 @@
 
-var save_expdate = new Array();
-var save_expdate_cell = new Array();
-
 var fila_selec = new Array(3);
 var col_selec = new Array(6);
 
