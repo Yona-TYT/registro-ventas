@@ -39,7 +39,7 @@ function create_table_lp(){
 				var celda = document.createElement("td");
 				celda.setAttribute("id", "celdlp"+celda_id)
 				celda.setAttribute("class","celda_style");
-				celda.style.width = gl_mobil?"2%":"100px"
+				if(!gl_mobil) celda.style.width = "100px"
 				if(siz_c < 5){
 					// Creamos 2 elementos de entrada
 					var input = document.createElement("input");
@@ -55,7 +55,7 @@ function create_table_lp(){
 					input.setAttribute("value", name_cel[siz_c]);
 					input.setAttribute("readonly", "");
 					input.setAttribute("class","colum_name_style");
-					if(gl_mobil) input.style.width = "100%";
+
 					celda.innerHTML= input.outerHTML;
 				
 				}
