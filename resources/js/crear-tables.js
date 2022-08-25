@@ -72,7 +72,7 @@ function create_table_lp(){
 					div.appendChild(input);
 					celda.appendChild(div);
 				}
-				if(gl_mobil) celda.style.width = "90%"
+				if(gl_mobil) celda.style.width = "80%"
 				fila.appendChild(celda);
 			}
 			//--------------------------------------------------------------------------------------------------
