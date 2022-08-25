@@ -149,6 +149,7 @@ function create_table_lp(){
 					button.setAttribute("id", "buttlp"+j);
 					celda.appendChild(button);
 				}
+				if(gl_mobil) celda.style.width = "1%";
 				fila.appendChild(celda);
 			}
 		}
