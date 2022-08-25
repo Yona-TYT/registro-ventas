@@ -128,7 +128,7 @@ function mostrar_producto(clave) {
 function obtener_producto(evento) {
 	var resultado = evento.target.result;
 	if(resultado){
-		//gl_products = resultado.products;
+		gl_products = resultado.products;
 		crear_datalist(gl_products.nombre, "listproducts");
 		//console.log(""+gl_products.nombre[0]+" ??  " );
 	}
