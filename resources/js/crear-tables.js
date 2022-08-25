@@ -72,7 +72,7 @@ function create_table_lp(){
 					div.appendChild(input);
 					celda.appendChild(div);
 				}
-				if(gl_mobil) celda.style.width = "80%"
+				if(gl_mobil) celda.style.width = "300px"
 				fila.appendChild(celda);
 			}
 			//--------------------------------------------------------------------------------------------------
@@ -149,7 +149,7 @@ function create_table_lp(){
 					button.setAttribute("id", "buttlp"+j);
 					celda.appendChild(button);
 				}
-				if(gl_mobil) celda.style.width = "90%";
+				if(gl_mobil) celda.style.width = "60%";
 				fila.appendChild(celda);
 			}
 		}
