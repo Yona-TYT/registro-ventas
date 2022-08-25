@@ -56,7 +56,7 @@ function selec_estado(id) {
 	var current_opt = selec.options[selec.selectedIndex];
 	gl_curr_etd_sel = current_opt.value;
 
-		console.log(gl_curr_etd_sel);
+	//console.log(gl_curr_etd_sel);
 	crea_hist_list();
 }
 

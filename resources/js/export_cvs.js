@@ -120,11 +120,11 @@ function crear_array_produ() {
 	result.push("Ganancia (%)");
 	result.push("Precio de entrada ("+gl_mon_b+")");
 	result.push("\n");
-	for (var j = 0 ; j < gl_products.list_prd.nombre.length ; j++) {
-		var nombre = gl_products.list_prd.nombre[j]?gl_products.list_prd.nombre[j]:"";
-		var cant = gl_products.list_prd.cantidad[j]?gl_products.list_prd.cantidad[j]:0;
-		var marg = gl_products.list_prd.margen[j]?gl_products.list_prd.margen[j]:0;
-		var prec = gl_products.list_prd.precio[j]?gl_products.list_prd.precio[j]:0;
+	for (var j = 0 ; j < gl_products.nombre.length ; j++) {
+		var nombre = gl_products.nombre[j]?gl_products.nombre[j]:"";
+		var cant = gl_products.cantidad[j]?gl_products.cantidad[j]:0;
+		var marg = gl_products.margen[j]?gl_products.margen[j]:0;
+		var prec = gl_products.precio[j]?gl_products.precio[j]:0;
 
 		result.push(verificar_text(nombre));
 		result.push(verificar_text(cant));

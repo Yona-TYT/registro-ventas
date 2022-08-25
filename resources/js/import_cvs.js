@@ -2,6 +2,29 @@
 var gl_save_list = new save_list_ex();
 
 function importar_main() {
+
+	importar_datos();
+	impor_chag_mode();
+
+	var input_advan = document.getElementById("advan_mode");
+	input_advan.addEventListener("change", function(){
+		impor_chag_mode();
+	});
+}
+
+function impor_chag_mode() {
+	sec1 = document.getElementById("sec_import1");
+	sec2 = document.getElementById("sec_import2");
+
+	var input_advan = document.getElementById("advan_mode");
+	if(input_advan.checked) {
+		sec1.setAttribute("class","element_style_hidden");
+		sec2.setAttribute("class","cajas_style");	
+	}
+	else {
+		sec1.setAttribute("class","cajas_style");
+		sec2.setAttribute("class","element_style_hidden");	
+	}
 }
 
 function importar_datos() {
@@ -101,9 +124,9 @@ function save_exp_date(results) {
     }
 }
 
-var gl_result_temp = new prod_detalles();
+var gl_result_temp = new reg_products();
 function recovery_data() {
-	gl_result_temp = new prod_detalles();
+	gl_result_temp = new reg_products();
 
 
 	var select = document.getElementById("listbasedato");
@@ -135,9 +158,19 @@ function recovery_data() {
 	remove_empy_name();			//Quita filas con nombres vacios
 	var opt = 1;
 	start_one = true;
-	agregar_producto(gl_result_temp, parseInt(clave), opt);
+	gl_result_temp.clave = gl_currt_list_selec;
+	agregar_producto(gl_result_temp);
  	reset_preview();
-	gl_result_temp = new result_list_a();
+
+	gl_products = gl_result_temp;
+
+	//crea las listas de productos -------------------------------
+	crear_datalist(gl_products.nombre, "listproducts");
+	crear_lista_productos();
+	//------------------------------------------------------------
+
+
+	gl_result_temp = new reg_products();
 	alert("Lista Guardada Correctamente.");
 }
 

@@ -129,12 +129,12 @@ function obtener_producto(evento) {
 	var resultado = evento.target.result;
 	if(resultado){
 		gl_products = resultado.products;
-		crear_datalist(gl_products.list_prd.nombre, "listproducts");
+		crear_datalist(gl_products.nombre, "listproducts");
 		//console.log(""+gl_products.nombre[0]+" ??  " );
 	}
 	else {
 		gl_products = new reg_products();
-		crear_datalist(gl_products.list_prd.nombre, "listproducts");
+		crear_datalist(gl_products.nombre, "listproducts");
 	}
 	preloder_filtro_lista();
 	ventas_main();
@@ -164,10 +164,13 @@ function obtener_prod_opt(evento, max) {
 		var produc = resultado.products;
 		var list = cop_list[produc.clave];
 		for(var j=0; j<list.index.length;j++) {
-			var can = parseFloat(produc.list_prd.cantidad[list.index[j]]);
-			var num = parseFloat(list.num[j]);
-			produc.list_prd.cantidad[list.index[j]] = (can + num);
-			//console.log(""+list.index[j]+" :: "+list.num[j] +" :: "+can)
+			var curr_can = produc.cantidad;
+			if(curr_can){
+				var can = parseFloat(curr_can[list.index[j]]);
+				var num = parseFloat(list.num[j]);
+				produc.cantidad[list.index[j]] = (can + num);
+				//console.log(""+list.index[j]+" :: "+list.num[j] +" :: "+can)
+			}
 		}
 		agregar_producto(produc);
 		max--;
@@ -268,8 +271,9 @@ function obtener_selec_hist(evento) {
 	if(resultado){
 		//var id = resultado.id;
 		gl_hist_save = resultado.rventas;
-		crea_hist_list();	
+
 	}
+	crea_hist_list();
 }
 //===========================================================================================
 
@@ -350,8 +354,13 @@ function reg_ventas() {
 //Lista de productos
 function reg_products() {
 	this.list_id = [0, 1, 2, 3, 4, 5];
-	this.list_prd = new prod_detalles();
+//	this.list_prd = new prod_detalles();
 	this.clave = 0;
+
+	this.nombre = new Array();
+	this.cantidad = new Array();
+	this.margen = new Array();
+	this.precio = new Array();
 }
 
 // Copia de Lista de productos
@@ -366,7 +375,6 @@ function cop_products() {
 }
 
 function prod_detalles() {
-	this.listatamaño = 0;
 	this.nombre = new Array();
 	this.cantidad = new Array();
 	this.margen = new Array();

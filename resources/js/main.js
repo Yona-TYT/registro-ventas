@@ -26,8 +26,6 @@ var gloval_test = "";
 // Datos generales
 var gl_general = new general_datos();
 
-var gl_result = new prod_detalles();
-
 //Datos de los productos
 var gl_products = new reg_products();
 
@@ -117,8 +115,8 @@ function init(){
 	//Iniciaaliza la base de datos
 	set_basededatos("registro3");
 
-	//Leer documentos tipo hojas de datos
-	importar_datos();
+	//Inicializa la seccion de Leer documentos tipo hojas de datos
+	importar_main();
 
 	//Tabal vista previa de documentos
 	table_preview_ex()

@@ -106,16 +106,6 @@ function visible_element(opt) {
 	}
 }
 
-function crear_datalist(list,id) {
-	var data_lista = document.getElementById(id);
-	data_lista.innerHTML = "";
-	//console.log("Finished:"+gl_general.cl_save_id)
-	for (var j = 0; j <list.length; j++) {
-		//console.log("Nr: "+j+" Name: "+gl_general.cuentlist[j]+" Estd: "+list[j] );
-		data_lista.innerHTML += "<option value='"+list[j]+"'>";
-	}
-}
-
 function mostrar_input() {
 	var mask = document.activeElement;
 	mask.setAttribute("placeholder", "");

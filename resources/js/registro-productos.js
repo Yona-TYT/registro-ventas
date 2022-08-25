@@ -7,22 +7,23 @@ function guardar_rp(){
 	var margen_mask = document.getElementById("text_maskrp12");
 	var precio_mask = document.getElementById("text_maskrp13");
 
-	//console.log(gl_products.list_prd.nombre[table_fila]);
+	//console.log(gl_products.nombre[table_fila]);
 	if(nombre.value != "" && precio.value != ""){
-		gl_products.list_prd.nombre.push(nombre.value);
-		gl_products.list_prd.cantidad.push(cantidad.value);
-		gl_products.list_prd.margen.push(margen.value);
-		gl_products.list_prd.precio.push(precio.value);
+		gl_products.nombre.push(nombre.value);
+		gl_products.cantidad.push(cantidad.value);
+		gl_products.margen.push(margen.value);
+		gl_products.precio.push(precio.value);
 
-		gl_products.list_prd.listatamaño++;
-		table_fila = gl_products.list_prd.listatamaño;
+		table_fila = gl_products.listatamaño;
 
 		gl_products.clave = gl_currt_list_selec;
-		crear_datalist(gl_products.list_prd.nombre, "listproducts");
+
 		agregar_producto(gl_products);		//Guarda los valores de productos
 
-		//crea la lista de productos
+		//crea las listas de productos -------------------------------
+		crear_datalist(gl_products.nombre, "listproducts");
 		crear_lista_productos();
+		//------------------------------------------------------------
 
 		nombre.value = "";
 		cantidad.value = "";

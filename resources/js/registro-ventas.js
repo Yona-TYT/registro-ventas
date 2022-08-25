@@ -23,18 +23,18 @@ function buscar_lista_rv(id)
 	var result = false;
 	var count = 1;
 	//console.log("Finished: ");
-	var max = gl_products.list_prd.nombre.length;
+	var max = gl_products.nombre.length;
 	//console.log("Finished: "+max);
 	for (var j = 0; j<max; j++) {
 		if(count>4) break;
-		var nombre = gl_products.list_prd.nombre[j];
+		var nombre = gl_products.nombre[j];
 		if (nombre!=null) nombre = nombre.toLowerCase();
 		else continue;
 		result = nombre.includes(text.toLowerCase());
 		if(result){
-			var cantidad = parseInt(gl_products.list_prd.cantidad[j])?gl_products.list_prd.cantidad[j]:0;
-			var margen = gl_products.list_prd.margen[j];
-			var precio = gl_products.list_prd.precio[j];
+			var cantidad = parseInt(gl_products.cantidad[j])?gl_products.cantidad[j]:0;
+			var margen = gl_products.margen[j];
+			var precio = gl_products.precio[j];
 			var genmargen = gl_general.gen_margen;
 			var genprecbs = gl_general.gen_bs;
 
@@ -87,7 +87,7 @@ function button_reg_venta(nr) {
 		var sel_nombre = select.options[select.selectedIndex].innerHTML;
 
 		var clave = gl_lista_rv.clave[nr];
-//	console.log("Finished:"+clave +"  "+gl_products.list_prd.clave);
+//	console.log("Finished:"+clave +"  "+gl_products.clave);
 
 		var index = gl_lista_rv.index[nr];
 		var nombre = gl_lista_rv.nombre[nr];
