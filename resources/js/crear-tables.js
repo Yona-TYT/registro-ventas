@@ -60,7 +60,7 @@ function create_table_lp(){
 				
 				}
 				else {
-					celda.setAttribute("class",  edit_mode?"celda_style_x":"input_style_hidden");
+					celda.setAttribute("class", "celda_style_x");
 					var div = document.createElement("div");
 					div.setAttribute("class","input_style_edicion_td");
 					div.setAttribute("id", "listp_div");
@@ -140,7 +140,7 @@ function create_table_lp(){
 					input.setAttribute("onFocus", "ocultar_input();");
 				}
 				if(siz_c==5){
-					celda.setAttribute("class",  edit_mode?"celda_style_x":"input_style_hidden");
+					celda.setAttribute("class", "celda_style_x");
 					var button = document.createElement("button");
 					button.setAttribute("class","mask_style");
 					button.setAttribute("type", "button");

@@ -40,25 +40,39 @@ function check_edit_mode(){
 }
 
 function activadesactiva_editmode(){
-	//console.log("tes selc: aquiiii ")
+	console.log("tes selc: aquiiii ")
 	var input_edit = document.getElementById("edit_mode");
+	var id_list = ["inputlistaname", "inputlp10", "inputlp11", "text_masklp12", "text_masklp13"];
+	var butt = document.getElementById("buttlp1");
 	edit_mode = input_edit.checked;
 
 	//table.remove();
-	var select_name = document.getElementById("selectlistaname");
-	var input_name = document.getElementById("inputlistaname");
-	if(edit_mode){
 
-		input_name.setAttribute("class","mask_style");
-		input_name.removeAttribute("readonly");
-		//select_name.setAttribute("class","element_style_hidden");
+	if(edit_mode){
+		butt.removeAttribute("disabled");
+		butt.setAttribute("class", "mask_style");
+
+		for (var j = 0; j < id_list.length; j++) {
+			var input = document.getElementById(id_list[j]);
+			input.setAttribute("class","mask_style");
+			input.removeAttribute("readonly");
+			input.removeAttribute("disabled");
+		}
+
 	}
 	else{
-		input_name.setAttribute("readonly", "");
-		input_name.setAttribute("class","element_style_disable");
+		butt.setAttribute("disabled", "");
+		butt.setAttribute("class", "button_style_disable");
+
+		for (var j = 0; j < id_list.length; j++) {
+			var input = document.getElementById(id_list[j]);
+			input.setAttribute("readonly", "");
+			input.setAttribute("class","element_style_disable");
+			input.setAttribute("disabled", "");
+		}
 	}
 
-	create_table_lp();
+
 
 	if(gl_current_selec != null){
 		button_selec_product(gl_current_selec);
