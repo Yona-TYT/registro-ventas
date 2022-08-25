@@ -170,6 +170,7 @@ function recovery_simple_list() {
 	}
 	if(siz > 0){
 
+		//Guarda la nueva lista
 		gl_result_temp.clave = gl_currt_list_selec;
 		agregar_producto(gl_result_temp);
 		gl_products = gl_result_temp;
@@ -178,7 +179,6 @@ function recovery_simple_list() {
 		crear_datalist(gl_products.nombre, "listproducts");
 		crear_lista_productos();
 		//------------------------------------------------------------
-
 
 		gl_result_temp = new reg_products();
 		alert("Lista Guardada Correctamente.");
@@ -189,9 +189,6 @@ function recovery_simple_list() {
 	}
 }
 function get_string_num(text) {
-
-
-
 	var tx = "";
 	var punto = true;
 	for (var j = 0; j < text.length; j++) {
@@ -200,24 +197,22 @@ function get_string_num(text) {
 			continue;
 		}
 		if( text[j] == "." && punto){
-				tx += text[j];
-				punto = false;
-				continue;
+			tx += text[j];
+			punto = false;
+			continue;
 		}
 	}
-	console.log("Este es el bueno : " +tx);
+	//console.log("Este es el bueno : " +tx);
 	return tx;
 }
 
 function recovery_data() {
 	gl_result_temp = new reg_products();
 
-
 	var select = document.getElementById("listbasedato");
 
 	var current_opt = select.options[select.selectedIndex];
 	var clave = current_opt.value;
-
 
 	gl_result_temp.listatamaño=doc_siz_fila;
 
@@ -243,6 +238,7 @@ function recovery_data() {
 	var opt = 1;
 	start_one = true;
 
+	//Guarda la nueva lista
 	gl_result_temp.clave = gl_currt_list_selec;
 	agregar_producto(gl_result_temp);
 	gl_products = gl_result_temp;

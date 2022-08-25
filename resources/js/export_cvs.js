@@ -137,8 +137,13 @@ function crear_array_produ() {
 }
 
 function verificar_text(text) {
-	text = text.replaceAll(',', '');
-	text = text.replaceAll(';', '');
+	if(text){
+		text = text.replaceAll(',', '');
+		text = text.replaceAll(';', '');
+	}
+	else
+		text = "";
+
 	return text;
 }
 
