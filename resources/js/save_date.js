@@ -222,11 +222,11 @@ function mostrar_exp_ventas(max) {
 
 function obtener_exp_ventas(evento, max) {
 	var resultado = evento.target.result;
-	console.log("-- Clv: "+resultado.rventas.clave)
+	//console.log("-- Clv: "+resultado.rventas.clave)
 	if(resultado){
 		var ventas =  resultado.rventas;
 		var siz = ventas.pdtindex.length;
-		console.log("-- Siz: "+siz)
+		//console.log("-- Siz: "+siz)
 		for(var j=0; j<siz ;j++) {
 			gl_ventas_save.cliente.push(ventas.cliente[j]);
 			gl_ventas_save.totaldol.push("Total: "+get_mask(ventas.totaldol[j], gl_mon_b));
@@ -242,14 +242,14 @@ function obtener_exp_ventas(evento, max) {
 			gl_ventas_save.pdtcantidad.push(ventas.pdtcantidad[j]);
 			gl_ventas_save.pdtdesc.push(ventas.pdtdesc[j]);
 		}
-		max--;
-		console.log("-- Max: "+max)
-		mostrar_exp_ventas(max);
+	}
+	max--;
+	//console.log("-- Max: "+max)
+	mostrar_exp_ventas(max);
 
-		if(max<0){
-			hist_datos_to_csv();
-			gl_ventas_save = new reg_ventas();
-		}
+	if(max<0){
+		hist_datos_to_csv();
+		gl_ventas_save = new reg_ventas();
 	}
 }
 //------------------------------------------------------------------------------------------------

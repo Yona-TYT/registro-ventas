@@ -81,7 +81,7 @@ function importar_advan_list(elem) {
 
 				Papa.parse(htmlstr,{
 					config: {
-						delimiter: "auto"
+						delimiter: ";"
 					},
 					complete: function(results) {
 						save_exp_date(results.data);
@@ -94,7 +94,7 @@ function importar_advan_list(elem) {
 		if(current_type == gl_type[3]){
 			Papa.parse(file_date,{
 				config: {
-					delimiter: "auto"
+					delimiter: ";"
 				},
 				complete: function(results) {
 					save_exp_date(results.data);
@@ -164,11 +164,14 @@ function recovery_simple_list() {
 		if(save_expdate[i][0] == "")
 			continue;
 		gl_result_temp.nombre.push(save_expdate[i][0]);
-		gl_result_temp.cantidad.push(save_expdate[i][1]);
-		gl_result_temp.precio.push(save_expdate[i][2]);
-		gl_result_temp.margen.push(save_expdate[i][3]);
+		gl_result_temp.cantidad.push(get_string_num(save_expdate[i][1]));
+		gl_result_temp.precio.push(get_string_num(save_expdate[i][2]));
+		gl_result_temp.margen.push(get_string_num(save_expdate[i][3]));
 	}
 	if(siz > 0){
+
+		gl_result_temp.clave = gl_currt_list_selec;
+		agregar_producto(gl_result_temp);
 		gl_products = gl_result_temp;
 
 		//crea las listas de productos -------------------------------
@@ -185,6 +188,27 @@ function recovery_simple_list() {
 		gl_result_temp = new reg_products();
 	}
 }
+function get_string_num(text) {
+
+
+
+	var tx = "";
+	var punto = true;
+	for (var j = 0; j < text.length; j++) {
+		if(parseInt(text[j])){
+			tx += text[j];
+			continue;
+		}
+		if( text[j] == "." && punto){
+				tx += text[j];
+				punto = false;
+				continue;
+		}
+	}
+	console.log("Este es el bueno : " +tx);
+	return tx;
+}
+
 function recovery_data() {
 	gl_result_temp = new reg_products();
 
@@ -200,8 +224,8 @@ function recovery_data() {
 	var index = gl_save_list.start_filas_index;
 
 	//console.log(index);
-    for (var i = index; (save_expdate[0] && i < doc_siz_fila ); i++) {
-        for (var j = 0;( j < save_expdate[0].length); j++) {
+	for (var i = index; (save_expdate[0] && i < doc_siz_fila ); i++) {
+		for (var j = 0;( j < save_expdate[0].length); j++) {
 			if(j == gl_save_list.nombre_index){
 				gl_result_temp.nombre[i-index] = save_expdate[i][j];
 			}
@@ -218,10 +242,9 @@ function recovery_data() {
 	remove_empy_name();			//Quita filas con nombres vacios
 	var opt = 1;
 	start_one = true;
+
 	gl_result_temp.clave = gl_currt_list_selec;
 	agregar_producto(gl_result_temp);
- 	reset_preview();
-
 	gl_products = gl_result_temp;
 
 	//crea las listas de productos -------------------------------
@@ -229,7 +252,7 @@ function recovery_data() {
 	crear_lista_productos();
 	//------------------------------------------------------------
 
-
+ 	reset_preview();
 	gl_result_temp = new reg_products();
 	save_expdate = new Array;
 	alert("Lista Guardada Correctamente.");
