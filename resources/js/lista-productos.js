@@ -40,25 +40,23 @@ function check_edit_mode(){
 }
 
 function activadesactiva_editmode(){
-	console.log("tes selc: aquiiii ")
+	//console.log("tes selc: aquiiii ")
 	var input_edit = document.getElementById("edit_mode");
-	var id_list = ["inputlistaname", "inputlp10", "inputlp11", "text_masklp12", "text_masklp13", "inputlp14"];
+	var id_list = ["listp_check", "inputlistaname", "text_mask04", "inputlp10",
+				 "inputlp11", "text_masklp12", "text_masklp13", "inputlp14"];
 	var butt = document.getElementById("buttlp15");
 	edit_mode = input_edit.checked;
-
-	//table.remove();
-
 	if(edit_mode){
 		butt.removeAttribute("disabled");
 		butt.setAttribute("class", "mask_style");
 		
 		for (var j = 0; j < id_list.length; j++) {
-			var input = document.getElementById(id_list[j]);
+			var id = id_list[j];
+			var input = document.getElementById(id);
 			input.setAttribute("class","mask_style");
-			input.removeAttribute("readonly");
+			(j==7)?"":input.removeAttribute("readonly");
 			input.removeAttribute("disabled");
 		}
-
 	}
 	else{
 		butt.setAttribute("disabled", "");
@@ -71,9 +69,6 @@ function activadesactiva_editmode(){
 			input.setAttribute("disabled", "");
 		}
 	}
-
-
-
 	if(gl_current_selec != null){
 		button_selec_product(gl_current_selec);
 	}
@@ -186,17 +181,18 @@ function buscar_lista(text) {
 }
 
 function load_general_data() {
-
 	//Precio de dolar en Bs
 	var celd_bolivares = document.getElementById("input_dolar");
+	celd_bolivares.setAttribute("onblur",'ocultar_input(\''+true+'\');');
+
 	var celd_bolivares_mask = document.getElementById("text_mask_dolar");
 	celd_bolivares.value = gl_general.gen_bs;
 	celd_bolivares_mask.value = get_mask(gl_general.gen_bs,gl_mon_a);
 
-
-
 	//Margen de ganancias
 	var celd_margen = document.getElementById("input04");
+	celd_margen.setAttribute("onblur",'ocultar_input(\''+true+'\');');
+
 	var celd_margen_mask = document.getElementById("text_mask04");
 	celd_margen.value = gl_general.gen_margen;
 	celd_margen_mask.value = get_mask_simple(gl_general.gen_margen,"%");

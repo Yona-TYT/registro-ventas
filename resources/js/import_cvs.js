@@ -6,16 +6,13 @@ var gl_type = [	"application/vnd.openxmlformats-officedocument.spreadsheetml.she
 			];
 
 function importar_main() {
-
 	//importar_simple_list();
 	impor_chag_mode();
-
 
 	var input_advan = document.getElementById("advan_mode");
 	input_advan.addEventListener("change", function(){
 		impor_chag_mode();
 	});
-
 
 	// Modo simple
 	var simp_file = document.getElementById("file_simp");
@@ -51,13 +48,30 @@ function importar_simp_list(elem) {
 		if(current_type == gl_type[3]){
 			Papa.parse(file_date,{
 				config: {
-					delimiter: "auto"
+					delimiter: ";"
 				},
 				complete: function(results) {
 					save_exp_date(results.data);
 					//console.log("Finished:",results.data);
 				}
 			});
+		}
+		if(current_type == gl_type[0] || current_type == gl_type[1] || current_type == gl_type[2]){
+			var reader = new FileReader();
+			reader.readAsArrayBuffer(file_date);
+			reader.onload = function(e) {
+				var data = new Uint8Array(reader.result);
+				var wb = XLSX.read(data,{type:'array'});
+				var htmlstr = XLSX.write(wb,{sheet:wb.SheetNames[0], type:'binary',bookType:'csv'});
+				Papa.parse(htmlstr,{
+					config: {
+						delimiter: ";"
+					},
+					complete: function(results) {
+						save_exp_date(results.data);
+					}
+				});
+			}
 		}
 	}
 }
@@ -76,9 +90,6 @@ function importar_advan_list(elem) {
 				var data = new Uint8Array(reader.result);
 				var wb = XLSX.read(data,{type:'array'});
 				var htmlstr = XLSX.write(wb,{sheet:wb.SheetNames[0], type:'binary',bookType:'csv'});
-
-				//save_exp_date([htmlstr]);				//gloval_test = file_date.type;
-
 				Papa.parse(htmlstr,{
 					config: {
 						delimiter: ";"
@@ -88,7 +99,6 @@ function importar_advan_list(elem) {
 						mostrar_tabla();
 					}
 				});
-
 			}
 		}
 		if(current_type == gl_type[3]){
@@ -131,7 +141,6 @@ function save_exp_date(results) {
 	doc_siz_fila = data.length;
 	gl_save_list.filas = data.length;
     for (var i = 0; i < data.length; i++) {
-
         var row = data[i];
         var cells = row.join(",").split(",");
 		save_expdate[i] = new Array();
@@ -148,8 +157,7 @@ function save_exp_date(results) {
 			if(cells[j].includes("ã"))
 				cells[j] = cells[j].replaceAll("ã", "ñ");
 
-			save_expdate[i][j] = cells[j];
-			
+			save_expdate[i][j] = cells[j];	
         }
 		if(i==0)
 		doc_siz_col = cells.length;
@@ -169,7 +177,6 @@ function recovery_simple_list() {
 		gl_result_temp.margen.push(get_string_num(save_expdate[i][3]));
 	}
 	if(siz > 0){
-
 		//Guarda la nueva lista
 		gl_result_temp.clave = gl_currt_list_selec;
 		agregar_producto(gl_result_temp);
@@ -192,7 +199,7 @@ function get_string_num(text) {
 	var tx = "";
 	var punto = true;
 	for (var j = 0; j < text.length; j++) {
-		if(parseInt(text[j])){
+		if(parseInt(text[j]) || text[j] == "0"){
 			tx += text[j];
 			continue;
 		}
@@ -217,7 +224,6 @@ function recovery_data() {
 	gl_result_temp.listatamaño=doc_siz_fila;
 
 	var index = gl_save_list.start_filas_index;
-
 	//console.log(index);
 	for (var i = index; (save_expdate[0] && i < doc_siz_fila ); i++) {
 		for (var j = 0;( j < save_expdate[0].length); j++) {
@@ -225,10 +231,10 @@ function recovery_data() {
 				gl_result_temp.nombre[i-index] = save_expdate[i][j];
 			}
 			if(j == gl_save_list.cantida_index){
-				gl_result_temp.cantidad[i-index] = save_expdate[i][j];
+				gl_result_temp.cantidad[i-index] = get_string_num(save_expdate[i][j]);
 			}
 			if(j == gl_save_list.precio_index){
-				gl_result_temp.precio[i-index] = save_expdate[i][j];
+				gl_result_temp.precio[i-index] = get_string_num(save_expdate[i][j]);
 			}
 			//console.log(gl_result_temp.precio[i]);
 			gl_result_temp.margen[i] = 0;		
@@ -430,7 +436,6 @@ var in_use = [false, false, false, false, false, false, false, false];
 var in_selec = [false, false, false, false, false, false, false, false];
 var in_colum = [null, null, null, null, null, null, null, null];
 function button_selelc_fila(){
-
 	var sel_start = document.getElementById("startfila");
 	var st_value = sel_start.options[sel_start.selectedIndex];
 	var start = parseInt(st_value.value);
@@ -447,67 +452,52 @@ function button_selelc_fila(){
 
 	gl_save_list.start_filas_index = inc+start;
 	var select = document.getElementById("listcolum");
-
 	var col_nr = 0;
-
-
 	for (var i = 0; i<7 ; i++) {
 		if(col_nr>2) break;
 		var input_colum = document.getElementById("check0"+i+"");
 		var sel_value = select.value=="default"?col_nr:select.value;
 		if(input_colum.checked){
-
 			if(!in_use[i]){
-			if(!in_selec[sel_value]){
+				if(!in_selec[sel_value]){
+					for (var j = 0; j<4 && save_expdate[(j+start)]; j++) {
+						var exinput= document.getElementById("exinput2"+j+""+(sel_value));
+						if(j>=opt){
+							if(exinput){
 
-				for (var j = 0; j<4 && save_expdate[(j+start)]; j++) {
-					var exinput= document.getElementById("exinput2"+j+""+(sel_value));
-					if(j>=opt){
-						if(exinput){
+								//add_message(save_celda[2][0]);
+								exinput.value= save_expdate[j+start][input_colum.value];
+								if(sel_value==0){
+									//console.log("Nombre:" +gl_save_list.nombre_index + " "+sel_value);
+									gl_save_list.nombre_index = input_colum.value;
+									//console.log("Nombre:" +save_expdate[0].length);
+								}
 
-							//add_message(save_celda[2][0]);
-							exinput.value= save_expdate[j+start][input_colum.value];
-							if(sel_value==0){
-								//console.log("Nombre:" +gl_save_list.nombre_index + " "+sel_value);
-								gl_save_list.nombre_index = input_colum.value;
-								//console.log("Nombre:" +save_expdate[0].length);
+								if(sel_value==1){
+									gl_save_list.cantida_index = input_colum.value;
+									//console.log("Cantidad:" +gl_save_list.cantida_index);
+								}
+
+								if(sel_value==2){
+									gl_save_list.precio_index = input_colum.value;
+									//console.log("Precio:" +gl_save_list.precio_index);
+								}
 							}
-
-							if(sel_value==1){
-								gl_save_list.cantida_index = input_colum.value;
-								//console.log("Cantidad:" +gl_save_list.cantida_index);
-							}
-
-							if(sel_value==2){
-								gl_save_list.precio_index = input_colum.value;
-								//console.log("Precio:" +gl_save_list.precio_index);
-							}
-		
+						}
+						else {
+							exinput.value= "";
 						}
 					}
-					else {
-						exinput.value= "";
-					}
+					in_selec[sel_value]=true;
+					in_use[input_colum.value]=true;
+					in_colum[sel_value]=i;
 				}
-				in_selec[sel_value]=true;
-				in_use[input_colum.value]=true;
-				in_colum[sel_value]=i;
-		}
-				//if(col_nr == sel_value)
 
-				//col_nr++;
-				//continue;
 			}
-
-
 			col_nr++;
 		}
 		else {
-
 			if(select.value=="default"){
-				//console.log("block i:"+i+"--"+in_use[i]);
-				//console.log("block in_selec:"+sel_value+"--"+in_selec[sel_value]);
-				//console.log("block col_nr:"+col_nr+"--"+in_use[col_nr]);
 				if (in_use[i]){
 					for (var col = 0; col<3; col++) {
 						if (in_colum[col]==i){

@@ -90,7 +90,6 @@ function crear_datalist(list,id) {
 	}
 }
 
-
 //Compara las fechas para incrementar el index y crear lista de fechas para el selector
 function check_current_fech(curr_fecha) {
 	var fecha = gl_general.fecha;
@@ -107,7 +106,6 @@ function check_current_fech(curr_fecha) {
 		}
 	}
 }
-
 
 function valid_current_fech() {
 	var hoy = new Date();

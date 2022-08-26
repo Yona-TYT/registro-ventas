@@ -113,6 +113,7 @@ function create_table_lp(){
 					input.setAttribute("onclick","update_product_cu();");
 					input.setAttribute("onkeyup","update_product_cu();");
 					input.setAttribute("onchange","update_product_cu();");
+					input.setAttribute("onblur",'ocultar_input(\''+true+'\');');
 					input.setAttribute("class","input_style_hidden");
 					input.setAttribute("step", "0.10");
 					input.setAttribute("min", "0.00");
@@ -128,7 +129,7 @@ function create_table_lp(){
 				}
 				//Cuadros de solo lectura
 				else if (siz_c == 4){
-					console.log("siz: "+input);
+					//console.log("siz: "+input);
 					//input.setAttribute("class","input_style_td");
 					//input.setAttribute("type", "text");
 					//input.setAttribute("readonly", "");
@@ -164,7 +165,6 @@ function create_table_lp(){
 
 
 function create_table_rp(){
-
 	//----------------------------------------------------------------
 	//Nombre de las celdas value--------------------------------------
 	var name_cel = ["Nombre", "Cantidad", "Ganancia C/U", "Precio", "Accion"];
@@ -193,11 +193,9 @@ function create_table_rp(){
 		var multiplo = (j*table_col);
 		save_id_filas[j] = j+multiplo;
 		for (var i = 0; i < siz_col; i++) {
-
 			var siz_f = gl_mobil?i:j;
 			var siz_c = gl_mobil?j:i;
 			var celda_id = siz_f+""+siz_c;
-			
 			//Cuadros de nombres de columnas
 			if(siz_f==0){
 				var celda = document.createElement("td");
@@ -225,13 +223,9 @@ function create_table_rp(){
 
 			}
 			//--------------------------------------------------------------------------------------------------
-
 			else if(siz_f==1){
 				var celda = document.createElement("td");
-				celda.setAttribute("id", "celdrp"+celda_id)
-
-				
-
+				celda.setAttribute("id", "celdrp"+celda_id);
 				// Creamos 2 elementos de entrada
 				var input = document.createElement("input");
 				input.setAttribute("type", "number");
@@ -266,9 +260,9 @@ function create_table_rp(){
 					input.setAttribute("onclick","get_celda_value_rp();");
 					input.setAttribute("onkeyup","get_celda_value_rp();");
 					input.setAttribute("onchange","get_celda_value_rp();");
+					input.setAttribute("onblur",'ocultar_input(\''+true+'\');');
 
 					input.setAttribute("class","input_style_hidden");
-
 					input.setAttribute("step", "0.10");
 					input.setAttribute("min", "0.00");
 					input.setAttribute("lang", "en");
