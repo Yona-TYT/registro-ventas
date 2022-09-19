@@ -107,7 +107,7 @@ function cursor_no_button(id)
 
 function init(){
 	//Identifica si es firefox
-	gl_browser = is_browser_active("firefox");.
+	gl_browser = is_browser_active("firefox");
 
 	check_windows_siz();
 
