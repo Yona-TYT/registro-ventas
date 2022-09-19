@@ -150,3 +150,11 @@ function valid_current_fech() {
 	gl_general.year = curr_y;
 	return true;
 }
+
+function is_browser_active(name){
+	var result = navigator.userAgent.toLowerCase().indexOf(name) > -1;
+	if(result){
+		return true;
+	}
+	return false;
+}

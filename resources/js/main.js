@@ -35,6 +35,8 @@ var gl_mon_a = "Bs";
 var gl_mon_b = "$";
 //---------------------------
 
+//Es firefox ?
+var gl_browser = false;
 
 function add_message(text)
 {
@@ -104,6 +106,8 @@ function cursor_no_button(id)
 }
 
 function init(){
+	//Identifica si es firefox
+	gl_browser = is_browser_active("firefox");.
 
 	check_windows_siz();
 
@@ -238,11 +242,13 @@ function soltar_tecla(e){
 }
 
 function remplace_test(num) {
-	//num = num.replace(/(\.)(\d){2,}/g, 128);
-	 num = num.replace(/($)/g, ".00");
-	 //num.replace(/\.$/, "128");
-	// num.replace(/[\.]$/, 128);
-	//add_message(num);
+	if(gl_browser){
+		//num = num.replace(/(\.)(\d){2,}/g, 128);
+		 num = num.replace(/($)/g, ".00");
+		 //num.replace(/\.$/, "128");
+		// num.replace(/[\.]$/, 128);
+		//add_message(num);
+	}
 	return num;
 }
 
