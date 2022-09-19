@@ -243,7 +243,7 @@ function soltar_tecla(e){
 
 function remplace_test(num) {
 	if(gl_browser){
-		alert(get_dignr(num))
+		//alert(get_dignr(num))
 		//num = num.replace(/(\.)(\d){2,}/g, 128);
 		if(get_dignr(num) == 0)
 			num = num.replace(/($)/g, ".00");
@@ -254,7 +254,7 @@ function remplace_test(num) {
 		//add_message(num);
 	}
 	else{
-		alert(get_dignr(num))
+		//alert(get_dignr(num))
 		//num = num.replace(/(\.)(\d){2,}/g, 128);
 		if(get_dignr(num) == 0)
 			num = num.replace(/($)/g, ".00");
