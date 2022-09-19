@@ -253,7 +253,7 @@ function remplace_test(num) {
 		// num.replace(/[\.]$/, 128);
 		//add_message(num);
 	//}
-	return num;
+	return gl_browser?num:parseFloat(num);
 }
 
 
