@@ -42,7 +42,7 @@ function impor_chag_mode() {
 
 function importar_simp_list(elem) {
 	var butt = document.getElementById("butlistimport");
-	butt.removeAttribute("disabled");
+	butt.disabled = false;
 	butt.setAttribute("class", "mask_style");
 
 	var file_date = elem.files[0];
@@ -83,7 +83,7 @@ function importar_simp_list(elem) {
 
 function importar_advan_list(elem) {
 	var butt = document.getElementById("butsavelist");
-	butt.removeAttribute("disabled");
+	butt.disabled = false;
 	butt.setAttribute("class", "mask_style");
 
 	var file_date = elem.files[0];
@@ -173,15 +173,13 @@ function save_exp_date(results) {
 
 var gl_result_temp = new reg_products();
 
-var gl_simp_list = true;
 function recovery_simple_list() {
 	var butt = document.getElementById("butlistimport");
-	butt.setAttribute("disabled", "");
+	butt.disabled = true;
 	butt.setAttribute("class", "button_style_disable");
-	
+
 	alert("Esperar")
-	if(gl_simp_list) gl_simp_list = false;
-	else return null
+
 	var siz = save_expdate.length;
     for (var i = 1; i < siz ; i++) {
 		if(save_expdate[i][0] == "")
@@ -205,10 +203,8 @@ function recovery_simple_list() {
 		gl_result_temp = new reg_products();
 		alert("Lista Guardada Correctamente.");
 
-		butt.removeAttribute("disabled");
+		butt.disabled = false;
 		butt.setAttribute("class", "mask_style");
-
-		gl_simp_list = true;
 	}
 	else {
 		alert("La Lista esta Vacia!.");
@@ -235,7 +231,7 @@ function get_string_num(text) {
 
 function recovery_data() {
 	var butt = document.getElementById("butsavelist");
-	butt.setAttribute("disabled", "");
+	butt.disabled = true;
 	butt.setAttribute("class", "button_style_disable");
 
 	gl_result_temp = new reg_products();
@@ -283,7 +279,7 @@ function recovery_data() {
 	save_expdate = new Array;
 	alert("Lista Guardada Correctamente.");
 
-	butt.removeAttribute("disabled");
+	butt.disabled = false;
 	butt.setAttribute("class", "mask_style");
 }
 
