@@ -173,12 +173,16 @@ function save_exp_date(results) {
 
 var gl_result_temp = new reg_products();
 
-function recovery_simple_list() {
+var timeoutID;
+function start_read_list() {
 	var butt = document.getElementById("butlistimport");
 	butt.disabled = true;
 	butt.setAttribute("class", "button_style_disable");
+	timeoutID = setTimeout(recovery_simple_list, 10000);
+}
 
-	return null
+function recovery_simple_list() {
+	 clearTimeout(timeoutID);
 
 	var siz = save_expdate.length;
     for (var i = 1; i < siz ; i++) {
