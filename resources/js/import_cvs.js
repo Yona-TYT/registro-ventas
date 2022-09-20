@@ -178,6 +178,8 @@ function recovery_simple_list() {
 	butt.setAttribute("disabled", "");
 	butt.setAttribute("class", "button_style_disable");
 
+	alert("Esperar")
+
 	var siz = save_expdate.length;
     for (var i = 1; i < siz ; i++) {
 		if(save_expdate[i][0] == "")
