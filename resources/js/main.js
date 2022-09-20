@@ -256,10 +256,9 @@ function remplace_test(num) {
 	else{
 		//alert(get_dignr(num))
 		//num = num.replace(/(\.)(\d){2,}/g, 128);
-		if(get_dignr(num) == 0)
-			num = num.replace(/($)/g, ".00");
 
-		else num = num+".00"
+
+		 num = num+".00"
 		 //num.replace(/\.$/, "128");
 		// num.replace(/[\.]$/, 128);
 		//add_message(num);
