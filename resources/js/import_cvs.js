@@ -231,10 +231,10 @@ function recovery_data() {
 				gl_result_temp.nombre[i-index] = save_expdate[i][j];
 			}
 			if(j == gl_save_list.cantida_index){
-				gl_result_temp.cantidad[i-index] = get_string_num(save_expdate[i][j]);
+				gl_result_temp.cantidad[i-index] = save_expdate[i][j];//get_string_num(save_expdate[i][j]);
 			}
 			if(j == gl_save_list.precio_index){
-				gl_result_temp.precio[i-index] = get_string_num(save_expdate[i][j]);
+				gl_result_temp.precio[i-index] = save_expdate[i][j];// get_string_num(save_expdate[i][j]);
 			}
 			//console.log(gl_result_temp.precio[i]);
 			gl_result_temp.margen[i] = 0;		
