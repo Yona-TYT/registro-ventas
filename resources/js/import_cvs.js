@@ -190,8 +190,8 @@ function recovery_simple_list() {
 			continue;
 		gl_result_temp.nombre.push(save_expdate[i][0]);
 		gl_result_temp.cantidad.push(get_string_num(save_expdate[i][1]));
-		gl_result_temp.precio.push(get_string_num(save_expdate[i][2]));
-		gl_result_temp.margen.push(get_string_num(save_expdate[i][3]));
+		gl_result_temp.margen.push(get_string_num(save_expdate[i][2]));
+		gl_result_temp.precio.push(get_string_num(save_expdate[i][3]));
 	}
 	if(siz > 0){
 		//Guarda la nueva lista
