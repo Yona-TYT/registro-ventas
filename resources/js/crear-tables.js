@@ -45,6 +45,7 @@ function create_table_lp(){
 					var input = document.createElement("input");
 					input.setAttribute("id", "inputlp"+celda_id);
 					input.setAttribute("type", "number");
+					input.setAttribute("step", "any");
 					var tex_mask = document.createElement("input");
 					input.setAttribute(edit_mode?"readwrite":"readonly", "");
 
@@ -84,6 +85,7 @@ function create_table_lp(){
 				// Creamos 2 elementos de entrada
 				var input = document.createElement("input");
 				input.setAttribute("type", "number");
+				input.setAttribute("step", "any");
 				var tex_mask = document.createElement("input");
 				tex_mask.setAttribute("readonly", "");
 				tex_mask.setAttribute("class", "input_style_edicion_td");
@@ -104,6 +106,7 @@ function create_table_lp(){
 					input.setAttribute("class","input_style_td");
 					input.setAttribute("class","input_style_edicion_td");
 					input.setAttribute("type", "number");
+					input.setAttribute("step", "any");
 					input.setAttribute("onFocus", "ocultar_input();");
 					celda.appendChild(input);
 				}
@@ -115,9 +118,6 @@ function create_table_lp(){
 					input.setAttribute("onchange","update_product_cu();");
 					input.setAttribute("onblur",'ocultar_input(\''+true+'\');');
 					input.setAttribute("class","input_style_hidden");
-					input.setAttribute("step", "0.10");
-					input.setAttribute("min", "0.00");
-					input.setAttribute("lang", "en");
 
 					//para la mask del cuadro
 					tex_mask.setAttribute("id", "text_masklp"+celda_id);
@@ -207,6 +207,7 @@ function create_table_rp(){
 				var input = document.createElement("input");
 				input.setAttribute("id", "inputrp"+celda_id);
 				input.setAttribute("type", "number");
+				input.setAttribute("step", "any");
 				var tex_mask = document.createElement("input");
 				input.setAttribute(edit_mode?"readwrite":"readonly", "");
 
@@ -229,6 +230,7 @@ function create_table_rp(){
 				// Creamos 2 elementos de entrada
 				var input = document.createElement("input");
 				input.setAttribute("type", "number");
+				input.setAttribute("step", "any");
 				var tex_mask = document.createElement("input");
 
 				tex_mask.setAttribute("readonly", "");
@@ -251,6 +253,7 @@ function create_table_rp(){
 					input.setAttribute("class","input_style_td");
 					input.setAttribute("class","input_style_edicion_td");
 					input.setAttribute("type", "number");
+					input.setAttribute("step", "any");
 					celda.appendChild(input);
 					input.setAttribute("onFocus", "ocultar_input();");
 				}
@@ -263,9 +266,6 @@ function create_table_rp(){
 					input.setAttribute("onblur",'ocultar_input(\''+true+'\');');
 
 					input.setAttribute("class","input_style_hidden");
-					input.setAttribute("step", "0.10");
-					input.setAttribute("min", "0.00");
-					input.setAttribute("lang", "en");
 
 					//para la mask del cuadro
 					tex_mask.setAttribute("id", "text_maskrp"+celda_id);
@@ -348,19 +348,11 @@ function create_table_rv(){
 				// Creamos 2 elementos de entrada
 				var input = document.createElement("input");
 				input.setAttribute("id", "inputrv"+celda_id);
-				input.setAttribute("type", "number");
-				var tex_mask = document.createElement("input");
-				input.setAttribute(edit_mode?"readwrite":"readonly", "");
-
-				tex_mask.setAttribute("readonly", "");
-				tex_mask.setAttribute("class", "input_style_edicion_td");
-
 				input.setAttribute("type", "text");
 				input.setAttribute("value", name_cel[siz_c]);
 				input.setAttribute("readonly", "");
 				input.setAttribute("class","colum_name_style");
-				//celda.appendChild(input);
-				celda.innerHTML= input.outerHTML;
+				celda.appendChild(input);
 			
 				fila.appendChild(celda);
 
@@ -372,18 +364,12 @@ function create_table_rv(){
 				celda.setAttribute("id", "celdrv"+celda_id)
 				// Creamos 2 elementos de entrada
 				var input = document.createElement("input");
-				input.setAttribute("type", "number");
-
 				input.setAttribute("id", "rvinput"+celda_id);
-
-
 				//Cuadros de cantidad
 				if (siz_c==4){
 					input.setAttribute("class","input_style_visible");
 					input.setAttribute("type", "number");
-					input.setAttribute("step", "1");
-					input.setAttribute("min", "1");
-					input.setAttribute("lang", "en");
+					input.setAttribute("step", "any");
 					celda.appendChild(input);
 					input.setAttribute("onFocus", "ocultar_input();");
 				}
@@ -397,6 +383,7 @@ function create_table_rv(){
 					celda.appendChild(input);
 					input.setAttribute("onFocus", "ocultar_input();");
 				}
+				//Boton de accion
 				if(siz_c==5){
 					celda.setAttribute("class", "button_style_r");
 					var button = document.createElement("button");
