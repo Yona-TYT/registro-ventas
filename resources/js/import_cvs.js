@@ -41,6 +41,7 @@ function impor_chag_mode() {
 }
 
 function importar_simp_list(elem) {
+	
 	var file_date = elem.files[0];
 	if(file_date){
 		var current_type = file_date.type;
@@ -167,6 +168,10 @@ function save_exp_date(results) {
 var gl_result_temp = new reg_products();
 
 function recovery_simple_list() {
+	var butt = document.getElementById("butlistimport");
+	butt.setAttribute("disabled", "");
+	butt.setAttribute("class", "button_style_disable");
+
 	var siz = save_expdate.length;
     for (var i = 1; i < siz ; i++) {
 		if(save_expdate[i][0] == "")
@@ -189,6 +194,9 @@ function recovery_simple_list() {
 
 		gl_result_temp = new reg_products();
 		alert("Lista Guardada Correctamente.");
+
+		butt.removeAttribute("disabled");
+		butt.setAttribute("class", "mask_style");
 	}
 	else {
 		alert("La Lista esta Vacia!.");
@@ -214,6 +222,10 @@ function get_string_num(text) {
 }
 
 function recovery_data() {
+	var butt = document.getElementById("butlistimport");
+	butt.setAttribute("disabled", "");
+	butt.setAttribute("class", "button_style_disable");
+
 	gl_result_temp = new reg_products();
 
 	var select = document.getElementById("listbasedato");
@@ -258,6 +270,9 @@ function recovery_data() {
 	gl_result_temp = new reg_products();
 	save_expdate = new Array;
 	alert("Lista Guardada Correctamente.");
+
+	butt.removeAttribute("disabled");
+	butt.setAttribute("class", "mask_style");
 }
 
 function remove_empy_name(){
