@@ -71,12 +71,15 @@ function comprobar_mensaje(elm, i, j) {
 
 //Genera la lista ventas en el histoprial
 function crea_hist_list(){
+	var input = document.getElementById("totalhist");
 	var secc_his = document.getElementById("historialventa");
 	secc_his.innerHTML ="";
+	var total = 0;
 	var nr = gl_hist_save.index;
 	for (var j = nr-1;  j >= 0; j--) {
-		crear_historial(j);
+		total += crear_historial(j);
 	}
+	input.value = get_mask(total, gl_mon_b);
 }
 
 //Genera los datalist
