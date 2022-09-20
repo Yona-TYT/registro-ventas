@@ -173,13 +173,15 @@ function save_exp_date(results) {
 
 var gl_result_temp = new reg_products();
 
+var gl_simp_list = true;
 function recovery_simple_list() {
 	var butt = document.getElementById("butlistimport");
 	butt.setAttribute("disabled", "");
 	butt.setAttribute("class", "button_style_disable");
-
+	
 	alert("Esperar")
-
+	if(gl_simp_list) gl_simp_list = false;
+	else return null
 	var siz = save_expdate.length;
     for (var i = 1; i < siz ; i++) {
 		if(save_expdate[i][0] == "")
@@ -205,6 +207,8 @@ function recovery_simple_list() {
 
 		butt.removeAttribute("disabled");
 		butt.setAttribute("class", "mask_style");
+
+		gl_simp_list = true;
 	}
 	else {
 		alert("La Lista esta Vacia!.");
