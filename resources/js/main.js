@@ -153,6 +153,7 @@ window.addEventListener("keypress", function() {
 
 	//console.log("key"+class_name);
 	if(class_name == "input_style_visible"){
+		soltar_tecla(event);
 		return soloNumeros(event);
 	}
 });
