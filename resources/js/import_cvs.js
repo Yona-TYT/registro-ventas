@@ -41,7 +41,10 @@ function impor_chag_mode() {
 }
 
 function importar_simp_list(elem) {
-	
+	var butt = document.getElementById("butlistimport");
+	butt.removeAttribute("disabled");
+	butt.setAttribute("class", "mask_style");
+
 	var file_date = elem.files[0];
 	if(file_date){
 		var current_type = file_date.type;
@@ -79,6 +82,9 @@ function importar_simp_list(elem) {
 
 
 function importar_advan_list(elem) {
+	var butt = document.getElementById("butsavelist");
+	butt.removeAttribute("disabled");
+	butt.setAttribute("class", "mask_style");
 
 	var file_date = elem.files[0];
 	if(file_date){
