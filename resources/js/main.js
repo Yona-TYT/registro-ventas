@@ -153,7 +153,8 @@ window.addEventListener("keypress", function() {
 
 	//console.log("key"+class_name);
 	if(class_name == "input_style_visible"){
-		soltar_tecla(event);
+		if(!gl_browser)
+			soltar_tecla(event);
 		return soloNumeros(event);
 	}
 });
@@ -164,8 +165,9 @@ window.addEventListener("keyup", function() {
 
 	current_key = null;
 	if(class_name == "input_style_visible"){
-		input.addEventListener("keyup", function(){ 
-		return soltar_tecla(event);
+		input.addEventListener("keyup", function(){
+		if(gl_browser)
+			return soltar_tecla(event);
 		}, false);
 	}
 
@@ -243,7 +245,7 @@ function soltar_tecla(e){
 }
 
 function remplace_test(num) {
-	if(gl_browser){
+	
 		//alert(get_dignr(num))
 		//num = num.replace(/(\.)(\d){2,}/g, 128);
 		if(get_dignr(num) == 0)
@@ -253,17 +255,7 @@ function remplace_test(num) {
 		 //num.replace(/\.$/, "128");
 		// num.replace(/[\.]$/, 128);
 		//add_message(num);
-	}
-	else{
-		alert(num)
-		//num = num.replace(/(\.)(\d){2,}/g, 128);
-
-
-		 num = num+".00"
-		 //num.replace(/\.$/, "128");
-		// num.replace(/[\.]$/, 128);
-		//add_message(num);
-	}
+	
 	return num;
 }
 
