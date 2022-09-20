@@ -222,7 +222,7 @@ function get_string_num(text) {
 }
 
 function recovery_data() {
-	var butt = document.getElementById("butlistimport");
+	var butt = document.getElementById("butsavelist");
 	butt.setAttribute("disabled", "");
 	butt.setAttribute("class", "button_style_disable");
 
