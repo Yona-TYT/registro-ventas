@@ -234,27 +234,3 @@ function soltar_tecla(e){
 		}
 	}
 }
-
-function remplace_doble_punto() {
-		var input = document.activeElement;
-		var type = input.getAttribute('type');
-
-		var val = input.value;
-		var dig = (val);
-		if (val==="0")
-
-			return null;
-
-		else if (!parseFloat(val) && current_key ==".")
-			input.value = "0.";
-		//if(get_dignr(num) == 0)
-			//num = num.replace(/($)/g, ".00");
-
-		//else num = num+".00"
-		 //num.replace(/\.$/, "128");
-		// num.replace(/[\.]$/, 128);
-		//add_message(num);
-	
-}
-
-

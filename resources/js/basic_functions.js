@@ -151,6 +151,21 @@ function valid_current_fech() {
 	return true;
 }
 
+function remplace_doble_punto(){
+	var input = document.activeElement;
+	var type = input.getAttribute('type');
+	if(type == "number"){
+		var val = input.value;
+		var dig = (val);
+		if (val==="0")
+
+			return null;
+
+		else if (!parseFloat(val) && current_key ==".")
+			input.value = "0.";
+	}
+}
+
 function is_browser_active(name){
 	var result = navigator.userAgent.toLowerCase().indexOf(name) > -1;
 	if(result){
@@ -158,3 +173,4 @@ function is_browser_active(name){
 	}
 	return false;
 }
+
