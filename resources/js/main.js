@@ -254,7 +254,7 @@ function remplace_test(num) {
 		//add_message(num);
 	}
 	else{
-		//alert(get_dignr(num))
+		alert(num)
 		//num = num.replace(/(\.)(\d){2,}/g, 128);
 
 
