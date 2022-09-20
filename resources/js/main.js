@@ -145,7 +145,6 @@ window.addEventListener("resize", check_windows_siz);
 
 window.addEventListener("keypress", function() {
 	var key = window.event.key;
-
 	current_key = key;
 	//add_message("");
 	var input = document.activeElement;
@@ -160,22 +159,22 @@ window.addEventListener("keypress", function() {
 window.addEventListener("keyup", function() {
 	var input = document.activeElement;
 	var class_name = input.className;
-
+remplace_doble_punto();
 	current_key = null;
 
-var key = window.event.key;
-if(key == "Enter"){
-	var id_name = input.id;
-			//add_message(id_name);
-	if(id_name.includes("input")){
-		var class_name = input.className;
-		//add_message(class_name);
-		if(class_name == "input_style_visible"){
-			ocultar_input()
+	var key = window.event.key;
+	if(key == "Enter"){
+		var id_name = input.id;
+				//add_message(id_name);
+		if(id_name.includes("input")){
+			var class_name = input.className;
+			//add_message(class_name);
+			if(class_name == "input_style_visible"){
+				ocultar_input()
+			}
 		}
+		input.blur();
 	}
-	input.blur();
-}
 
 if(key == "Tab"){
 	var id_name = input.id;
@@ -236,10 +235,18 @@ function soltar_tecla(e){
 	}
 }
 
-function remplace_test(num) {
-	
-		//alert(get_dignr(num))
-		//num = num.replace(/(\.)(\d){2,}/g, 128);
+function remplace_doble_punto() {
+		var input = document.activeElement;
+		var type = input.getAttribute('type');
+
+		var val = input.value;
+		var dig = (val);
+		if (val==="0")
+
+			return null;
+
+		else if (!parseFloat(val) && current_key ==".")
+			input.value = "0.";
 		//if(get_dignr(num) == 0)
 			//num = num.replace(/($)/g, ".00");
 
@@ -248,7 +255,6 @@ function remplace_test(num) {
 		// num.replace(/[\.]$/, 128);
 		//add_message(num);
 	
-	return num;
 }
 
 
