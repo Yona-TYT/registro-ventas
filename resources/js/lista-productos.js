@@ -217,6 +217,9 @@ function update_celdas_generales(){
 	gl_general.gen_margen = gen_margen;
 	agregar_gene_datos(gl_general);		
 
+	//Actualiza valores del redistro de productos
+	get_celda_value_rp();
+
 	update_product_cu();
 	buscar_lista_rv("buscar_rv");
 }
@@ -262,8 +265,7 @@ function update_product_cu(){
 }
 
 function update_input_lectura(){
-		var pdol = document.getElementById("inputlp14");
-		var pbsf = document.getElementById("inputlp14");
+		var input = document.getElementById("inputlp14");
 
 		//Se otienen los valores generles
 		var gen_margen = gl_general.gen_margen;
@@ -278,8 +280,7 @@ function update_input_lectura(){
 		var calc = calc_bolivarprecio(gen_bsf, dolar).toFixed(2);
 
 		//Valores de inputs solo lectura
-		pdol.value = ""+get_mask(dolar,gl_mon_b)+" / "+get_mask(calc,gl_mon_a);
-		//pbsf.value = get_mask(calc,gl_mon_a);
+		input.value = ""+get_mask(dolar,gl_mon_b)+" / "+get_mask(calc,gl_mon_a);
 }
 
 function remove_product(){

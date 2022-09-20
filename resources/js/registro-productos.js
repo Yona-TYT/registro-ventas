@@ -45,4 +45,24 @@ function get_celda_value_rp(){
 
 	margen_mask.value = get_mask_simple(margen.value,"%");
 	precio_mask.value = get_mask(precio.value,gl_mon_b);
+
+	//Muestra los valores de precios de salida ---------------------------------------
+	var salida = document.getElementById("inputrp14");
+
+	//Se otienen los valores generles
+	var gen_margen = gl_general.gen_margen;
+	var gen_bsf = gl_general.gen_bs;
+
+	//Se calculan los precios
+	var dolar = calc_dolarporunidad(gen_margen, margen.value, precio.value).toFixed(2);
+	var calc = calc_bolivarprecio(gen_bsf, dolar).toFixed(2);
+
+	//Valores de inputs solo lectura
+	salida.value = ""+get_mask(dolar,gl_mon_b)+" / "+get_mask(calc,gl_mon_a);
+	//---------------------------------------------------------------------------------
+
+}
+
+function update_input_lectura_rp(){
+		
 }

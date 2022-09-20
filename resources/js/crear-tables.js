@@ -167,7 +167,7 @@ function create_table_lp(){
 function create_table_rp(){
 	//----------------------------------------------------------------
 	//Nombre de las celdas value--------------------------------------
-	var name_cel = ["Nombre", "Cantidad", "Ganancia C/U", "Precio", "Accion"];
+	var name_cel = ["Nombre", "Cantidad", "Ganancia C/U", "Precio", "Precio (Salida)", "Accion"];
 	var name_siz = name_cel.length;
 	//----------------------------------------------------------------
 
@@ -280,6 +280,9 @@ function create_table_rp(){
 
 				}
 				if(siz_c==4){
+					celda.innerHTML = "<input type='text' id='inputrp14' class='input_style_td' onfocus='ocultar_input();' readonly='';>"
+				}
+				if(siz_c==5){
 					celda.setAttribute("class", "button_style_r");
 					var button = document.createElement("button");
 					button.setAttribute("class", "mask_style");
