@@ -178,7 +178,7 @@ function recovery_simple_list() {
 	butt.disabled = true;
 	butt.setAttribute("class", "button_style_disable");
 
-	alert("Esperar")
+	return null
 
 	var siz = save_expdate.length;
     for (var i = 1; i < siz ; i++) {
