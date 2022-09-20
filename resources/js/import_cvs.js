@@ -178,7 +178,7 @@ function start_read_list() {
 	var butt = document.getElementById("butlistimport");
 	butt.disabled = true;
 	butt.setAttribute("class", "button_style_disable");
-	timeoutID = setTimeout(recovery_simple_list, 10000);
+	timeoutID = setTimeout(recovery_simple_list, 100);
 }
 
 function recovery_simple_list() {
@@ -207,6 +207,7 @@ function recovery_simple_list() {
 		gl_result_temp = new reg_products();
 		alert("Lista Guardada Correctamente.");
 
+		var butt = document.getElementById("butlistimport");
 		butt.disabled = false;
 		butt.setAttribute("class", "mask_style");
 	}
