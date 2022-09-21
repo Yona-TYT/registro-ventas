@@ -160,12 +160,14 @@ function remplace_doble_punto(){
 	if(type == "number"){
 		var val = input.value;
 		var dig = (val);
+		console.log(""+val+"::"+dig)
 		if (val==="0")
-
 			return null;
 
-		else if (!parseFloat(val) && current_key ==".")
+		else if (gl_browser && !parseFloat(val) && current_key =="."){
 			input.value = "0.";
+
+		}
 	}
 }
 
