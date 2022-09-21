@@ -3,6 +3,7 @@ function guardar_rp(){
 	var cantidad = document.getElementById("inputrp11");
 	var margen = document.getElementById("inputrp12");
 	var precio = document.getElementById("inputrp13");
+	var salida = document.getElementById("inputrp14");
 
 	var margen_mask = document.getElementById("text_maskrp12");
 	var precio_mask = document.getElementById("text_maskrp13");
@@ -29,6 +30,7 @@ function guardar_rp(){
 		cantidad.value = "";
 		margen.value = "";
 		precio.value = "";
+		salida.value = "";
 
 		margen_mask.value = get_mask_simple(0, "%");
 		precio_mask.value = get_mask(0, gl_mon_b);
