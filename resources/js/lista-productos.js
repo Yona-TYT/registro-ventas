@@ -235,7 +235,7 @@ function update_celdas_generales(){
 	get_celda_value_rp();
 
 	update_product_cu();
-	buscar_lista_rv("buscar_rv");
+	buscar_lista_rv("buscar_rv", false);
 }
 
 function update_product_cu(){

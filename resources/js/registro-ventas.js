@@ -12,7 +12,7 @@ function ventas_main(){
 	input_buscar_rv.addEventListener("input", function(){buscar_lista_rv("buscar_rv");});
 }
 
-function buscar_lista_rv(id)
+function buscar_lista_rv(id, unsel = true)
 {
 	var text = document.getElementById(id).value;
 	reset_inputs_rv();
@@ -30,7 +30,7 @@ function buscar_lista_rv(id)
 		//Deselecciona el elemento para ocultar teclado en android
 		var test = nombre.search(new RegExp("(^)" + text + "($)"));
 		console.log("Test: "+test)
-		if( test != -1){
+		if( test != -1 && unsel){
 			el_unselec();
 		}
 
