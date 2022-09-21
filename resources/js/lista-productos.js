@@ -171,7 +171,18 @@ function buscar_lista(text) {
 		var div = document.getElementById("divlp"+j);
 		//Obtine todas las columnas de nombres
 		var nombre = gl_products.nombre[j]?gl_products.nombre[j]:"";
-		var tx = nombre.toLowerCase();
+
+		if (nombre!=null) nombre = nombre.toLowerCase();
+		else continue;
+
+		//Deselecciona el elemento para ocultar teclado en android
+		var test = nombre.search(new RegExp("(^)" + text + "($)"));
+		//console.log("Test: "+test)
+		if( test != -1){
+			el_unselec();
+		}
+
+		var tx = nombre;
 		result = tx.includes(text.toLowerCase());
 		//console.log("a:"+tx+"b:"+text.toLowerCase());
 		if(!result){
@@ -180,14 +191,6 @@ function buscar_lista(text) {
 		else{
 			div.setAttribute("class","div_list_style");
 		}
-
-		//Deselecciona el elemento para ocultar teclado en android
-		var test = nombre.search(new RegExp("(^)" + text + "($)"));
-		//console.log("Test: "+test)
-		if( test != -1){
-			el_unselec();
-		}
-		//gloval_test += "result:"+result+ " ";
 	}
 }
 
