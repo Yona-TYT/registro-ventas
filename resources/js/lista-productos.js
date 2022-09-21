@@ -6,6 +6,10 @@ function lista_produc_main() {
 	activadesactiva_editmode();
 	//-------------------------------------------
 
+	//Buscador para la lista de productos
+	var input_buscar = document.getElementById("buscar");
+	input_buscar.addEventListener("input", function(){buscar_lista(input_buscar.value);});
+
 	selec_to_input();
 
 	var butt = document.getElementById("butlistsave");
@@ -166,8 +170,8 @@ function buscar_lista(text) {
 	for (var j = 0; j < max; j++) {
 		var div = document.getElementById("divlp"+j);
 		//Obtine todas las columnas de nombres
-		var r_nombre = gl_products.nombre[j]?gl_products.nombre[j]:"";
-		var tx = r_nombre.toLowerCase();
+		var nombre = gl_products.nombre[j]?gl_products.nombre[j]:"";
+		var tx = nombre.toLowerCase();
 		result = tx.includes(text.toLowerCase());
 		//console.log("a:"+tx+"b:"+text.toLowerCase());
 		if(!result){
@@ -175,6 +179,13 @@ function buscar_lista(text) {
 		}
 		else{
 			div.setAttribute("class","div_list_style");
+		}
+
+		//Deselecciona el elemento para ocultar teclado en android
+		var test = nombre.search(new RegExp("(^)" + text + "($)"));
+		//console.log("Test: "+test)
+		if( test != -1){
+			el_unselec();
 		}
 		//gloval_test += "result:"+result+ " ";
 	}

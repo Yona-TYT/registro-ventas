@@ -7,10 +7,6 @@ function ventas_main(){
 
 	buscar_lista_rv("buscar_rv");
 
-	//Buscador para la lista de productos
-	var input_buscar = document.getElementById("buscar");
-	input_buscar.addEventListener("input", function(){buscar_lista(input_buscar.value);});
-
 	//Buscador para el registro de ventas
 	var input_buscar_rv = document.getElementById("buscar_rv");
 	input_buscar_rv.addEventListener("input", function(){buscar_lista_rv("buscar_rv");});
@@ -30,6 +26,14 @@ function buscar_lista_rv(id)
 		var nombre = gl_products.nombre[j];
 		if (nombre!=null) nombre = nombre.toLowerCase();
 		else continue;
+
+		//Deselecciona el elemento para ocultar teclado en android
+		var test = nombre.search(new RegExp("(^)" + text + "($)"));
+		//console.log("Test: "+test)
+		if( test != -1){
+			el_unselec();
+		}
+
 		result = nombre.includes(text.toLowerCase());
 		if(result){
 			var cantidad = parseInt(gl_products.cantidad[j])?gl_products.cantidad[j]:0;
