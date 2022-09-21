@@ -60,7 +60,7 @@ function start_save(text, name) {
 		save.href = event.target.result;
 		save.target = '_blank';
 		//aquí le damos nombre al archivo
-		save.download = tx_name + "_"+ d.getDate() + "_" + (d.getMonth()+1) + "_" + d.getFullYear() + "_" + d.getHours() + d.getMinutes() + d.getSeconds()+".csv";
+		save.download = tx_name + "_"+ d.getDate() + "-" + (d.getMonth()+1) + "-" + d.getFullYear() + "_(" + d.getHours() + "," + d.getMinutes() + "," + d.getSeconds()+").csv";
 		try {
 			//creamos un evento click
 			clicEvent = new MouseEvent('click', {

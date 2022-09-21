@@ -29,7 +29,7 @@ function buscar_lista_rv(id)
 
 		//Deselecciona el elemento para ocultar teclado en android
 		var test = nombre.search(new RegExp("(^)" + text + "($)"));
-		//console.log("Test: "+test)
+		console.log("Test: "+test)
 		if( test != -1){
 			el_unselec();
 		}
