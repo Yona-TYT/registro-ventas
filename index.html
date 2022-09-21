@@ -90,7 +90,7 @@
 			</div>
 			<div class="cajas_style">Precio Dolar: 
 				<input readonly="" class="mask_style" id="text_mask_dolar" onclick="mostrar_input();" onselect="mostrar_input();">
-				<input type="number" class="input_style_hidden" id="input_dolar" onkeyup="update_celdas_generales();" onchange="update_celdas_generales();" step="10" min="1" onfocus="ocultar_input();" lang="en" >
+				<input type="number" class="input_style_hidden" id="input_dolar" oninput="update_celdas_generales();" step="any" onfocus="ocultar_input();" lang="en" >
 			</div>
 		</section>
 
@@ -157,7 +157,7 @@
 				<div class="cajas_style">
 					Margen Global:
 					<input readonly="" class="input_style_edicion_td" id="text_mask04" onclick="mostrar_input();" onselect="mostrar_input();">
-					<input type="number" readwrite="" class="input_style_hidden" onkeyup="update_celdas_generales();" onclick="update_celdas_generales();" onchange="update_celdas_generales();" step="10" min="1" id="input04" onfocus="ocultar_input();" lang="en">
+					<input type="number" readwrite="" class="input_style_hidden" onkeyup="update_celdas_generales();" onclick="update_celdas_generales();" onchange="update_celdas_generales();" step="any" id="input04" onfocus="ocultar_input();" lang="en">
 				</div>
 				<div class="cajas_style">
 					<button class="mask_style" type="button" id="butlistsave">
