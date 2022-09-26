@@ -369,14 +369,22 @@ function descontar_pdt(lindex) {
 		var index = listindex[j];
 		var clave = listclave[j];
 
-		cop_list.clave.push(clave);
-		cop_list.index.push(index);
-		cop_list.num.push(num);
+		var prod = gl_products[index].products;
+		//console.log("Name:"+prod.nombre+" Cant: "+prod.cantidad+" New Can: "+ (prod.cantidad + num))
+		prod.cantidad = parseFloat(prod.cantidad)? parseFloat(prod.cantidad):0;
+		prod.cantidad += num;
 
+		var curr_prod = new r_product();
+		curr_prod.id = index;
+		curr_prod.products = prod;
+		//gl_products[index].products.cantidad += num;
+		agregar_all_producto(curr_prod);
 	}
 
+	buscar_lista_rv("buscar_rv", false);
+
 	//console.log("Finished::" +cop_list.num[0] )
-	mostrar_prod_opt((cop_list.index.length -1)) //Clave para ubicar la lista, index para encontrar el producto,  num la cantidad rewsultante 
+	//mostrar_prod_opt((cop_list.index.length -1)) //Clave para ubicar la lista, index para encontrar el producto,  num la cantidad rewsultante 
 	//start_one = true;
 	//mostrar_lista(gl_currt_list_selec);
 }

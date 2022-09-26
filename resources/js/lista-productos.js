@@ -324,15 +324,6 @@ function update_product_cu(){
 		var values_tx = nombre.value+" Cantidad ("+cantidad.value+") Margen c/u ("+margen_mask.value+") Entrada c/u ("+precio_mask.value+")";
 		sect_div.innerHTML = "<button type='button' class='butt_style' onclick='button_selec_product("+gl_current_selec+");'>Seleccionar</button> "+values_tx;
 
-
-
-		//Se actualizan las variable globales de los productos
-		gl_products[gl_current_selec].products.nombre = nombre.value;
-		gl_products[gl_current_selec].products.cantidad = cantidad.value;
-		gl_products[gl_current_selec].products.margen = margen.value;
-		gl_products[gl_current_selec].products.precio = precio.value;
-
-
 		var product = new reg_curr_prod();
 		var curr_prod = new r_product();
 
@@ -342,6 +333,12 @@ function update_product_cu(){
 		product.margen = parseFloat(margen.value)? parseFloat(margen.value):0;
 		product.precio = parseFloat(precio.value)? parseFloat(precio.value):0;
 
+		//Se actualizan las variable globales de los productos
+		gl_products[gl_current_selec].products.nombre = product.nombre;
+		gl_products[gl_current_selec].products.cantidad = product.cantidad;
+		gl_products[gl_current_selec].products.margen = product.margen;
+		gl_products[gl_current_selec].products.precio = product.precio;
+
 		curr_prod.id = gl_current_selec;
 		curr_prod.products = product;
 		agregar_all_producto(curr_prod);
@@ -349,9 +346,10 @@ function update_product_cu(){
 		//Se actualizan los inputs de solo lectura
 		update_input_lectura();
 
-		crear_datalist(gl_products, "listproducts");
+		set_datalist_list(gl_current_selec);
 
 		//console.log(gl_products[gl_current_selec]);
+		buscar_lista_rv("buscar_rv", false);
 	}
 }
 
@@ -389,10 +387,5 @@ function remove_product(){
 		curr_prod.products = gl_products[gl_current_selec].products;
 
 		agregar_all_producto(curr_prod);
-
-
-		crear_datalist(gl_products, "listproducts");
-
-		crear_lista_productos();
 	}
 }

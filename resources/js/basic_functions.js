@@ -103,6 +103,12 @@ function crear_datalist(list,id) {
 	}
 }
 
+//Genera los datalist
+function set_datalist_list(index) {
+	var data_lista = document.getElementById('optlist'+index);
+	data_lista.value = gl_products[index].products.nombre;
+}
+
 //Compara las fechas para incrementar el index y crear lista de fechas para el selector
 function check_current_fech(curr_fecha) {
 	var fecha = gl_general.fecha;

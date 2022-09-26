@@ -170,13 +170,17 @@ function button_reint_hist(index) {
 			var clave = parseInt(listclave[j]);
 			var num = listdesc[j];
 
-		//	console.log("Finished::" +index )
+			var prod = gl_products[lindex].products;
+			//console.log("Name:"+prod.nombre+" Cant: "+prod.cantidad+" New Can: "+ (prod.cantidad + num))
+			prod.cantidad = parseFloat(prod.cantidad)? parseFloat(prod.cantidad):0;
+			prod.cantidad += num;
 
-			cop_list.clave.push(clave);
-			cop_list.index.push(lindex);
-			cop_list.num.push(num);
+			var curr_prod = new r_product();
+			curr_prod.id = lindex;
+			curr_prod.products = prod;
+			agregar_all_producto(curr_prod);
 		}
-		mostrar_prod_opt((cop_list.index.length -1)) //Clave para ubicar la lista, index para encontrar el producto,  num la cantidad rewsultante 
+		buscar_lista_rv("buscar_rv", false);
 
 		//console.log("index"+" "+index);
 		var txesta = document.getElementById("txesta"+index);
@@ -196,7 +200,6 @@ function button_reint_hist(index) {
 		gl_hist_save.estado[index] = etd;			//Cambia el estado de la venta seleccionada
 		gl_hist_save.clave = gl_curr_optsel;		//Valor de la clave segun el selector de fechas
 		agregar_ventas(gl_hist_save);				//Envia los datos para ser guardados
-		//mostrar_lista(gl_currt_list_selec);
 	}
 }
 
@@ -216,15 +219,17 @@ function button_desh_hist(index) {
 			var clave = parseInt(listclave[j]);
 			var num = (listdesc[j])*(-1);
 			  
-			//console.log("Finished::" +num +" :: "+lindex )
-			if (!cop_list[clave])
-				cop_list[clave] = new cop_products();
+			var prod = gl_products[lindex].products;
+			//console.log("Name:"+prod.nombre+" Cant: "+prod.cantidad+" New Can: "+ (prod.cantidad + num))
+			prod.cantidad = parseFloat(prod.cantidad)? parseFloat(prod.cantidad):0;
+			prod.cantidad += num;
 
-			cop_list.clave.push(clave);
-			cop_list.index.push(lindex);
-			cop_list.num.push(num);
+			var curr_prod = new r_product();
+			curr_prod.id = lindex;
+			curr_prod.products = prod;
+			agregar_all_producto(curr_prod);
 		}
-		mostrar_prod_opt(cop_list.index.length) //Clave para ubicar la lista, index para encontrar el producto,  num la cantidad rewsultante 
+		buscar_lista_rv("buscar_rv", false);
 
 		//console.log("index"+" "+index);
 		var txesta = document.getElementById("txesta"+index);

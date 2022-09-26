@@ -355,10 +355,10 @@ function remove_datos(clave) {
 	almacen.delete(clave);
 }
 
-function remove_his_data(clave) {
+function remove_his_data() {
 	var transaccion = bd.transaction(["history_data"], "readwrite");
 	var almacen = transaccion.objectStore("history_data");
-	almacen.delete(clave);
+	almacen.clear();
 }
 
 function remove_product(clave) {

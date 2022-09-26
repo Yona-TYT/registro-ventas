@@ -83,7 +83,9 @@ function create_table_lp(){
 				//Cuadro De nombres
 				if (siz_c==0){
 					input.setAttribute("class","input_style_td");
-					input.setAttribute("class","input_style_edicion_td");
+					input.setAttribute("onclick","update_product_cu();");
+					input.setAttribute("onkeyup","update_product_cu();");
+					input.setAttribute("onchange","update_product_cu();");
 					input.setAttribute("type", "text");
 					input.setAttribute("onFocus", "ocultar_input();");
 					celda.appendChild(input);

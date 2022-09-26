@@ -20,8 +20,6 @@ function guardar_rp(){
 		product.margen = margen.value;
 		product.precio = precio.value;
 
-		table_fila = curr_prod.listatamaño;
-
 		curr_prod.clave = gl_currt_list_selec;
 
 		agregar_producto(product);		//Guarda los valores de productos
