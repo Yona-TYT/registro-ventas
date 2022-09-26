@@ -9,36 +9,52 @@ function ventas_main(){
 
 	//Buscador para el registro de ventas
 	var input_buscar_rv = document.getElementById("buscar_rv");
-	input_buscar_rv.addEventListener("input", function(){buscar_lista_rv("buscar_rv");});
+	input_buscar_rv.addEventListener("input", function(){start_buscar("buscar_rv");});
+}
+
+var time_buscar;
+function start_buscar() {
+
+	time_buscar = setTimeout( function(){buscar_lista_rv("buscar_rv");}, 400);
 }
 
 function buscar_lista_rv(id, unsel = true)
 {
+	active_butt();
+	clearTimeout(time_buscar);
 	var text = document.getElementById(id).value;
+	var tx_siz = text.length;
 	reset_inputs_rv();
 	var result = false;
 	var count = 1;
 	//console.log("Finished: ");
-	var max = gl_products.nombre.length;
-	//console.log("Finished: "+max);
-	for (var j = 0; j<max; j++) {
+	var siz = gl_products.length;
+	//console.log("Finished: "+siz);
+	for (var j = 0; j<siz; j++) {
 		if(count>4) break;
-		var nombre = gl_products.nombre[j];
+		var nombre = gl_products[j].products.nombre;
 		if (nombre!=null) nombre = nombre.toLowerCase();
 		else continue;
 
-		//Deselecciona el elemento para ocultar teclado en android
-		var test = nombre.search(new RegExp("(^)" + text + "($)"));
-		console.log("Test: "+test)
-		if( test != -1 && unsel){
-			el_unselec();
-		}
 
 		result = nombre.includes(text.toLowerCase());
 		if(result){
-			var cantidad = parseInt(gl_products.cantidad[j])?gl_products.cantidad[j]:0;
-			var margen = gl_products.margen[j];
-			var precio = gl_products.precio[j];
+			//Deselecciona el elemento para ocultar teclado en android
+			const regex_a = /[^\w\.@-]/ig;		//Exp Regula, Elimina Caracteres especiales
+			text = text.replaceAll(regex_a, '')
+			//console.log("Text: "+text)
+			var regex_b = new RegExp("(^)" + text + "($)");
+			var test = nombre.search(regex_b);
+			//console.log("Test: "+text.length)
+			if( test != -1 && tx_siz.length>1 && unsel){
+				el_unselec();
+			}
+			var cantidad = parseInt(gl_products[j].products.cantidad)?gl_products[j].products.cantidad:0;
+			var margen = gl_products[j].products.margen;
+			var precio = gl_products[j].products.precio;
+			var index = gl_products[j].id;
+			//console.log("id: "+index)
+
 			var genmargen = gl_general.gen_margen;
 			var genprecbs = gl_general.gen_bs;
 
@@ -65,7 +81,7 @@ function buscar_lista_rv(id, unsel = true)
 			//----------------------------------------------------------------
 
 			gl_lista_rv.clave[count] = gl_currt_list_selec;
-			gl_lista_rv.index[count] = j;
+			gl_lista_rv.index[count] = index;
 			gl_lista_rv.nombre[count] = nombre;
 			gl_lista_rv.cantidad[count] = cantidad;
 			gl_lista_rv.precio[count] = precio;
@@ -86,7 +102,13 @@ var nw_cantidad = new Array();
 var nw_desc = new Array();
 function button_reg_venta(nr) {
 
+
+
 	if(gl_lista_rv.index[nr] != null){
+		var butt = document.getElementById("buttrv"+nr+"5");
+		butt.disabled = true;
+		butt.setAttribute("class", "button_style_disable");
+
 		var select = document.getElementById("selcregvent");
 		var sel_nombre = select.options[select.selectedIndex].innerHTML;
 
@@ -102,7 +124,8 @@ function button_reg_venta(nr) {
 		var genmargen = gl_general.gen_margen;
 		var genprecbs = gl_general.gen_bs;
 
-		if(clave == gl_currt_list_selec){
+		var comp = comparar_rv(index);
+		if(comp){
 			//Para guardar datos de producto
 			nw_index[gl_venta_rv.count] = index;
 			nw_clave[gl_venta_rv.count] = clave;
@@ -120,11 +143,8 @@ function button_reg_venta(nr) {
 
 			gl_venta_rv.prdol[gl_venta_rv.count] = calc_precio;
 			gl_venta_rv.prbsf[gl_venta_rv.count] = calc_precbs;
-		}
 
-		var comp = comparar_rv(index);
-
-		if(comp){
+			//console.log(gl_venta_rv.count)
 			gl_venta_rv.count++;
 			mostrar_lista_rv();
 		}
@@ -133,6 +153,17 @@ function button_reg_venta(nr) {
 		}
 	}
 }
+
+function active_butt(){
+	var id_list = ["buttrv15", "buttrv25", "buttrv35", "buttrv45"]
+	for (var j = 0; j < id_list.length; j++) {
+		var id = id_list[j];
+		var butt = document.getElementById(id);
+		butt.disabled = false;
+		butt.setAttribute("class", "mask_style");
+	}
+}
+
 
 function comparar_rv(index) {
 	var nr = gl_venta_rv.count;
@@ -203,7 +234,7 @@ function mostrar_lista_rv() {
 
 }
 function button_borr_venta(index){
-	
+	active_butt();
 	var clave = gl_venta_rv.clave[index];
 	//if(clave==gl_list[gl_currt_list_selec].clave){
 		document.getElementById("divrv"+index).remove();
@@ -324,29 +355,28 @@ function guardar_venta() {
 	}
 }
 
-var cop_list = new Array();
+var cop_list = new cop_products();
 function descontar_pdt(lindex) {
 	var listindex = gl_lista_ventas.pdtindex[lindex];
 	var listclave = gl_lista_ventas.pdtclave[lindex];
 	var listcantidad = gl_lista_ventas.pdtcantidad[lindex];
 	var listdesc = gl_lista_ventas.pdtdesc[lindex];
+	cop_list = new cop_products();
 	for (var j = 0; j < listindex.length ; j++) {
 		var nr_a = listcantidad[j];
 		var nr_b = listdesc[j];
 		var num = (nr_b)*(-1);
-		//console.log("Finished::" +num )
 		var index = listindex[j];
 		var clave = listclave[j];
 
-		if (!cop_list[clave])
-			cop_list[clave] = new cop_products();
+		cop_list.clave.push(clave);
+		cop_list.index.push(index);
+		cop_list.num.push(num);
 
-		cop_list[clave].clave = clave;
-		cop_list[clave].index.push(index);
-		cop_list[clave].num.push(num);
 	}
-	var cl_max = 6;
-	mostrar_prod_opt(cl_max) //Clave para ubicar la lista, index para encontrar el producto,  num la cantidad rewsultante 
+
+	//console.log("Finished::" +cop_list.num[0] )
+	mostrar_prod_opt((cop_list.index.length -1)) //Clave para ubicar la lista, index para encontrar el producto,  num la cantidad rewsultante 
 	//start_one = true;
 	//mostrar_lista(gl_currt_list_selec);
 }

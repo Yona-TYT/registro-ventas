@@ -89,7 +89,7 @@ function crear_datalist(list,id) {
 	//console.log("Finished:"+gl_general.cl_save_id)
 	for (var j = 0; j <list.length; j++) {
 		//console.log("Nr: "+j+" Name: "+gl_general.cuentlist[j]+" Estd: "+list[j] );
-		data_lista.innerHTML += "<option value='"+list[j]+"'>";
+		//data_lista.innerHTML += "<option value='"+list[j].nombre+"'>";
 	}
 }
 
@@ -167,6 +167,42 @@ function remplace_doble_punto(){
 		else if (gl_browser && !parseFloat(val) && current_key =="."){
 			input.value = "0.";
 
+		}
+	}
+}
+function action_compatibility(opt){
+	//Compatibilidad para pasar lista a modo de clave individual
+	if(opt == 1){
+		var list_prodt = new Array();
+		var list = gl_products[0].products.nombre;
+		if(list !== undefined){
+			for (var j = 0; j <list.length; j++) {
+				var product = new reg_curr_prod();
+				var curr_prod = new r_product();
+
+				var nombre = gl_products[0].products.nombre[j];
+				var cantidad = gl_products[0].products.cantidad[j];
+				var margen = gl_products[0].products.margen[j];
+				var precio = gl_products[0].products.precio[j];
+
+				product.active = true;
+				product.nombre = !Array.isArray(nombre)?nombre:"";
+				product.cantidad = parseFloat(cantidad)? parseFloat(cantidad):0;
+				product.margen = parseFloat(margen)? parseFloat(margen):0;
+				product.precio = parseFloat(precio)? parseFloat(precio):0;
+
+				curr_prod.id = j;
+				curr_prod.products = product;
+
+				agregar_all_producto(curr_prod);
+
+				list_prodt.push(curr_prod);
+
+			}
+			gl_products = list_prodt;
+
+			gl_general.comp = false;
+			agregar_gene_datos(gl_general);		//Se guarda el estado de compatibilidad
 		}
 	}
 }

@@ -54,7 +54,7 @@ function start_save(text, name) {
 
 
 	reader.onload = function (event, name) {
-			console.log(""+tx_name);
+		//console.log(""+tx_name);
 		//escuchamos su evento load y creamos un enlace en dom
 		save = document.createElement('a');
 		save.href = event.target.result;
@@ -120,16 +120,16 @@ function crear_array_produ() {
 	result.push("Ganancia (%)");
 	result.push("Precio de entrada ("+gl_mon_b+")");
 	result.push("\n");
-	for (var j = 0 ; j < gl_products.nombre.length ; j++) {
-		var nombre = gl_products.nombre[j]?gl_products.nombre[j]:"";
-		var cant = gl_products.cantidad[j]?gl_products.cantidad[j]:0;
-		var marg = gl_products.margen[j]?gl_products.margen[j]:0;
-		var prec = gl_products.precio[j]?gl_products.precio[j]:0;
+	for (var j = 0 ; j < gl_products.length ; j++) {
+		var nombre = gl_products[j].products.nombre;
+		var cant = gl_products[j].products.cantidad;
+		var marg = gl_products[j].products.margen;
+		var prec = gl_products[j].products.precio;
 
-		result.push(verificar_text(nombre));
-		result.push(verificar_text(cant));
-		result.push(verificar_text(marg));
-		result.push(verificar_text(prec));
+		result.push(verificar_text(""+nombre));
+		result.push(verificar_text(""+cant));
+		result.push(verificar_text(""+marg));
+		result.push(verificar_text(""+prec));
 		result.push("\n");
 
 	}
@@ -137,6 +137,7 @@ function crear_array_produ() {
 }
 
 function verificar_text(text) {
+	console.log(text);
 	if(text){
 		text = text.replaceAll(',', '');
 		text = text.replaceAll(';', '');

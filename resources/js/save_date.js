@@ -1,9 +1,10 @@
 
 var bd;	//Para la base de datos
+var gl_comp = true;
 
-function set_basededatos(name)
+function set_basededatos(name, nr)
 {
-	var solicitud = indexedDB.open(name, 3);
+	var solicitud = indexedDB.open(name, nr);
 	solicitud.addEventListener("error", mostrarerror);
 	solicitud.addEventListener("success", comenzar);
 	solicitud.addEventListener("upgradeneeded", crearbd);
@@ -30,10 +31,6 @@ function crearbd(evento) {
 	//Guarda lista de Productos
 	var alma_productos = basededatos.createObjectStore("productos_lista", {keyPath:"id", autoIncrement: true});
 	alma_productos.createIndex("buscarnombre", "nombre", {unique: true});
-
-	//Guarda lista de Clientes
-	//var alma_nombreslista = basededatos.createObjectStore("nombre_saves", {keyPath:"id", autoIncrement: true});
-	//alma_nombreslista.createIndex("buscarnombre", "nombre", {unique: true});
 
 	//Guarda los registros de ventas
 	var alma_ventas = basededatos.createObjectStore("ventas_saves", {keyPath:"id", autoIncrement: true});
@@ -71,8 +68,16 @@ function agregar_his_data(data) {
 function agregar_producto(data) {
 	var transaccion = bd.transaction(["productos_lista"], "readwrite");
 	var almacen = transaccion.objectStore("productos_lista");
-	var solicitud = almacen.put({id: data.clave, products: data});
+	var solicitud = almacen.put({products: data});
 }
+
+//Guarda la lista completa de productos
+function agregar_all_producto(data) {
+	var transaccion = bd.transaction(["productos_lista"], "readwrite");
+	var almacen = transaccion.objectStore("productos_lista");
+	var solicitud = almacen.put({id : data.id , products: data.products});
+}
+
 
 //----------------------------------------------------------------------------------------------------------------------------------------
 
@@ -90,6 +95,11 @@ function obtener_general(evento) {
 
 	if(resultado){
 		gl_general = resultado.datos_gene;
+		//console.log(gl_general.comp);
+		if(gl_general.comp === undefined){
+			//console.log(gl_general.comp);
+			gl_general.comp = true;
+		}
 
 		var hoy = new Date();
 		var curr_fecha = hoy.getDate()+ "-" + ( hoy.getMonth() + 1 ) + "-" + hoy.getFullYear();
@@ -101,31 +111,76 @@ function obtener_general(evento) {
 
 		//console.log("Start selec: "+gl_currt_list_selec);
 
-		mostrar_producto(gl_currt_list_selec);
+		//Carga la lista de producto por primera vez
+		mostrar_inic_prod();
 		mostrar_ventas(gl_general.clv_max);
 
-		crear_datalist(gl_general.nomblist, "list_datacl");
+		crear_datalist(gl_general.nomblist, "list_datacl", false);
 
 		load_general_data();	//Se cargan precios del dolar y margen de ganancia
 	}
 	else {
 		preloder_filtro_lista();
-		mostrar_producto(gl_currt_list_selec);
+		mostrar_inic_prod();
 	}
 }
 
 //-----------------------------------------------------------------------------------------------------------
 
+// Carga la lista de productos al iniciar------------------------------------------------------------------------
+function mostrar_inic_prod() {
+	var transaccion = bd.transaction(["productos_lista"]);
+	var almacen = transaccion.objectStore("productos_lista");
+	var solicitud = almacen.getAll();
+	solicitud.addEventListener("success", obtener_inic_prod);
+
+}
+
+function obtener_inic_prod(evento) {
+  	//console.log(event.target.result.length);
+
+	var resultado = evento.target.result;
+	if(resultado){
+		gl_products = resultado;
+		if(gl_general.comp ){
+			action_compatibility(1);
+		}
+
+		//crear_datalist(gl_products, "listproducts");
+		//console.log(""+gl_products[0].products.nombre+" ??  " );
+		//console.log(gl_products );
+
+	}
+	else {
+		gl_products = new r_product();
+		//crear_datalist(gl_products, "listproducts");
+	}
+	preloder_filtro_lista();
+	ventas_main();
+
+}
+
 // Manejos de las listas de productos------------------------------------------------------------------------
 function mostrar_producto(clave) {
 	var transaccion = bd.transaction(["productos_lista"]);
 	var almacen = transaccion.objectStore("productos_lista");
-	var solicitud = almacen.get(clave);
+	var solicitud = almacen.openCursor();
 	solicitud.addEventListener("success", obtener_producto);
 
 }
 
 function obtener_producto(evento) {
+
+
+  const cursor = event.target.result;
+  if (cursor) {
+    console.log(cursor.value);
+    cursor.continue();
+  } else {
+    console.log("No more entries!");
+  }
+
+/*
 	var resultado = evento.target.result;
 	if(resultado){
 		gl_products = resultado.products;
@@ -138,23 +193,21 @@ function obtener_producto(evento) {
 	}
 	preloder_filtro_lista();
 	ventas_main();
-
+*/
 }
+
+
+
 
 //Funcion experimental para descontar/reintegrar productos -----------------------------------------------------------------
 function mostrar_prod_opt(max) {
-	//console.log(" max:: "+max)
+	console.log(" max:: "+max+ " index: "+cop_list.index[max])
 	var transaccion = bd.transaction(["productos_lista"]);
 	var almacen = transaccion.objectStore("productos_lista");
-	for(var j = max; j>=0; ){
-		if(!cop_list[j]){
-			j--;
-			continue;
-		}
+	if(max>=0){
 		//console.log(""+cop_list[j].start+" :: "+j+" :: "+cop_list[j].index[0] +" :: "+cop_list[j].num[0])
-		var solicitud = almacen.get(j);
-		solicitud.addEventListener("success", function(){obtener_prod_opt(event, j);});
-		break;
+		var solicitud = almacen.get(cop_list.index[max]);
+		solicitud.addEventListener("success", function(){obtener_prod_opt(event, max);});
 	}
 }
 
@@ -162,23 +215,33 @@ function obtener_prod_opt(evento, max) {
 	var resultado = evento.target.result;
 	if(resultado){
 		var produc = resultado.products;
-		var list = cop_list[produc.clave];
-		for(var j=0; j<list.index.length;j++) {
-			var curr_can = produc.cantidad;
-			if(curr_can){
-				var can = parseFloat(curr_can[list.index[j]]);
-				var num = parseFloat(list.num[j]);
-				produc.cantidad[list.index[j]] = (can + num);
-				//console.log(""+list.index[j]+" :: "+list.num[j] +" :: "+can)
-			}
-		}
-		agregar_producto(produc);
+
+		var curr_can = produc.cantidad;
+		//console.log("index "+resultado.id +" nomb: "+ produc.nombre+ "can: "+list.num[j])
+
+		var can = parseFloat(curr_can);
+		var num = parseFloat(cop_list.num[max]);
+
+		console.log("max "+max+" index "+resultado.id +" nomb: "+ produc.nombre+ " can: "+cop_list.num[j] + "Curr Cant "+curr_can)
+
+		produc.cantidad = (can + num);
+
+		//console.log(produc.cantidad)
+
+		var product = new reg_curr_prod();
+		var curr_prod = new r_product();
+		curr_prod.id = resultado.id;
+		curr_prod.products = produc;
+		agregar_all_producto(curr_prod);
+		gl_products[resultado.id] = curr_prod;
+
+			
 		max--;
 		mostrar_prod_opt(max);
-		//console.log("-- "+max)
+		console.log("-- "+max)
 		if(max<0){
 			cop_list = new Array();	//Se restaura la copia temporal de descuento producto
-			mostrar_producto(gl_currt_list_selec);
+			buscar_lista_rv("buscar_rv", false);
 		}
 	}
 }
@@ -281,19 +344,31 @@ function obtener_selec_hist(evento) {
 function remover_ventas(clave) {
 	var transaccion = bd.transaction(["ventas_saves"], "readwrite");
 	var almacen = transaccion.objectStore("ventas_saves");
-	var solicitud = almacen.delete(clave);
+	almacen.delete(clave);
 }
 
 function remove_datos(clave) {
 	var transaccion = bd.transaction(["nombre_saves"], "readwrite");
 	var almacen = transaccion.objectStore("nombre_saves");
-	var solicitud = almacen.delete(clave);
+	almacen.delete(clave);
 }
 
 function remove_his_data(clave) {
 	var transaccion = bd.transaction(["history_data"], "readwrite");
 	var almacen = transaccion.objectStore("history_data");
-	var solicitud = almacen.delete(clave);
+	almacen.delete(clave);
+}
+
+function remove_product(clave) {
+	var transaccion = bd.transaction(["productos_lista"], "readwrite");
+	var almacen = transaccion.objectStore("productos_lista");
+	almacen.delete(clave);
+}
+
+function remove_all_product() {
+	var transaccion = bd.transaction(["productos_lista"], "readwrite");
+	var almacen = transaccion.objectStore("productos_lista");
+	almacen.clear();
 }
 //---------------------------------------------------------------------------------------
 
@@ -302,6 +377,7 @@ function remove_his_data(clave) {
 function general_datos() {
 	this.clave = 0;						//Clave para guardar/cargar el registro
 	this.demo = null;
+	this.comp = false;
 
 	//Guarda valor de input bolivares y margen
 	this.gen_bs = 0;
@@ -356,6 +432,7 @@ function reg_products() {
 	this.list_id = [0, 1, 2, 3, 4, 5];
 //	this.list_prd = new prod_detalles();
 	this.clave = 0;
+	this.active = new Array();
 
 	this.nombre = new Array();
 	this.cantidad = new Array();
@@ -363,15 +440,31 @@ function reg_products() {
 	this.precio = new Array();
 }
 
+//Lista del producto actual
+function reg_curr_prod() {
+	this.active = true;
+	this.nombre = "";
+	this.cantidad = 0;
+	this.margen = 0;
+	this.precio = 0;
+}
+
+//Lista del producto actual
+function r_product() {
+	this.id = 0;
+	this.products;
+}
+
 // Copia de Lista de productos
 function cop_products() {
 	this.start = false;
 
+	this.clave = new Array();
 	this.index = new Array();
 	this.num = new Array();
 
 	this.list_prd = new prod_detalles();
-	this.clave = 0;
+
 }
 
 function prod_detalles() {

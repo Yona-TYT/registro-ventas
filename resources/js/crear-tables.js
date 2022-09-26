@@ -104,7 +104,9 @@ function create_table_lp(){
 				//Cuadro cantidad
 				else if (siz_c==1){
 					input.setAttribute("class","input_style_td");
-					input.setAttribute("class","input_style_edicion_td");
+					input.setAttribute("onclick","update_product_cu();");
+					input.setAttribute("onkeyup","update_product_cu();");
+					input.setAttribute("onchange","update_product_cu();");
 					input.setAttribute("type", "number");
 					input.setAttribute("step", "any");
 					input.setAttribute("onFocus", "ocultar_input();");

@@ -24,7 +24,7 @@ var gloval_test = "";
 var gl_general = new general_datos();
 
 //Datos de los productos
-var gl_products = new reg_products();
+var gl_products = new Array();
 
 var start_one = true;
 var is_start = true;
@@ -121,7 +121,7 @@ function init(){
 	create_table_rp();
 
 	//Iniciaaliza la base de datos
-	set_basededatos("registro3");
+	set_basededatos("registro3", 3);
 
 	//Inicializa la seccion de Leer documentos tipo hojas de datos
 	importar_main();

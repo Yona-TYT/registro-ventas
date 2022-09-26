@@ -1,3 +1,5 @@
+//Datos de los productos
+
 function guardar_rp(){
 	var nombre = document.getElementById("inputrp10");
 	var cantidad = document.getElementById("inputrp11");
@@ -8,21 +10,26 @@ function guardar_rp(){
 	var margen_mask = document.getElementById("text_maskrp12");
 	var precio_mask = document.getElementById("text_maskrp13");
 
-	//console.log(gl_products.nombre[table_fila]);
+	//console.log(gl_curr_prod.nombre[table_fila]);
 	if(nombre.value != "" && precio.value != ""){
-		gl_products.nombre.push(nombre.value);
-		gl_products.cantidad.push(cantidad.value);
-		gl_products.margen.push(margen.value);
-		gl_products.precio.push(precio.value);
+		var product = new reg_curr_prod();
+		var curr_prod = new r_product();
+		product.active = true;
+		product.nombre = nombre.value;
+		product.cantidad = parseFloat(cantidad.value)? parseFloat(cantidad.value):0;
+		product.margen = margen.value;
+		product.precio = precio.value;
 
-		table_fila = gl_products.listatamaño;
+		table_fila = curr_prod.listatamaño;
 
-		gl_products.clave = gl_currt_list_selec;
+		curr_prod.clave = gl_currt_list_selec;
 
-		agregar_producto(gl_products);		//Guarda los valores de productos
+		agregar_producto(product);		//Guarda los valores de productos
+		curr_prod.products = product;
+		gl_products.push(curr_prod);
+
 
 		//crea las listas de productos -------------------------------
-		crear_datalist(gl_products.nombre, "listproducts");
 		crear_lista_productos();
 		//------------------------------------------------------------
 

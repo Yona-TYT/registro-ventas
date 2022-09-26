@@ -155,6 +155,7 @@ function button_pend_hist(index) {
 function button_reint_hist(index) {
 	var etd = "Reintegrada";
 	if(gl_hist_save.estado[index]=="Aprobada"){
+		cop_list = new cop_products();
 		//console.log(index);
 		var bott = document.getElementById("bott_reint"+index);
 		bott.setAttribute("class", "element_style_hidden");
@@ -167,16 +168,14 @@ function button_reint_hist(index) {
 			var lindex = parseInt(listindex[j]);
 			var clave = parseInt(listclave[j]);
 			var num = listdesc[j];
-			//console.log("Finished::" +num +" :: "+lindex )
-			if (!cop_list[clave])
-				cop_list[clave] = new cop_products();
 
-			cop_list[clave].clave = clave;
-			cop_list[clave].index.push(lindex);
-			cop_list[clave].num.push(num);
+		//	console.log("Finished::" +index )
+
+			cop_list.clave.push(clave);
+			cop_list.index.push(lindex);
+			cop_list.num.push(num);
 		}
-		var cl_max = 6;
-		mostrar_prod_opt(cl_max) //Clave para ubicar la lista, index para encontrar el producto,  num la cantidad rewsultante 
+		mostrar_prod_opt((cop_list.index.length -1)) //Clave para ubicar la lista, index para encontrar el producto,  num la cantidad rewsultante 
 
 		//console.log("index"+" "+index);
 		var txesta = document.getElementById("txesta"+index);
@@ -220,12 +219,11 @@ function button_desh_hist(index) {
 			if (!cop_list[clave])
 				cop_list[clave] = new cop_products();
 
-			cop_list[clave].clave = clave;
-			cop_list[clave].index.push(lindex);
-			cop_list[clave].num.push(num);
+			cop_list.clave.push(clave);
+			cop_list.index.push(lindex);
+			cop_list.num.push(num);
 		}
-		var cl_max = 6;
-		mostrar_prod_opt(cl_max) //Clave para ubicar la lista, index para encontrar el producto,  num la cantidad rewsultante 
+		mostrar_prod_opt(cop_list.index.length) //Clave para ubicar la lista, index para encontrar el producto,  num la cantidad rewsultante 
 
 		//console.log("index"+" "+index);
 		var txesta = document.getElementById("txesta"+index);
@@ -286,6 +284,9 @@ function clear_history(){
 
 	preloder_filtro_fec();
 	selec_fechas("selchisfec");
+
+	var secc_his = document.getElementById("historialventa");
+	secc_his.innerHTML = "";
 }
 
 

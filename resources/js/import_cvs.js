@@ -89,7 +89,7 @@ function importar_advan_list(elem) {
 	var file_date = elem.files[0];
 	if(file_date){
 		var current_type = file_date.type;
-		console.log(current_type);
+		//console.log(current_type);
 		if(current_type == gl_type[0] || current_type == gl_type[1] || current_type == gl_type[2]){
 			var reader = new FileReader();
 			reader.readAsArrayBuffer(file_date);
@@ -171,7 +171,7 @@ function save_exp_date(results) {
     }
 }
 
-var gl_result_temp = new reg_products();
+var gl_result_temp = new Array();
 
 var timeoutID;
 function start_read_list() {
@@ -184,27 +184,41 @@ function start_read_list() {
 function recovery_simple_list() {
 	 clearTimeout(timeoutID);
 
+	//Limpia la lista anterior
+	remove_all_product();
+
 	var siz = save_expdate.length;
+	var index = 0;
     for (var i = 1; i < siz ; i++) {
 		if(save_expdate[i][0] == "")
 			continue;
-		gl_result_temp.nombre.push(save_expdate[i][0]);
-		gl_result_temp.cantidad.push(get_string_num(save_expdate[i][1]));
-		gl_result_temp.margen.push(get_string_num(save_expdate[i][2]));
-		gl_result_temp.precio.push(get_string_num(save_expdate[i][3]));
+
+		var product = new reg_curr_prod();
+		var curr_prod = new r_product();
+
+		product.active = true;
+		product.nombre = save_expdate[i][0];
+		product.cantidad = get_string_num(""+save_expdate[i][1]);
+		product.margen = get_string_num(""+save_expdate[i][2])
+		product.precio = get_string_num(""+save_expdate[i][3])
+
+		//Guarda y agg productos
+		curr_prod.id = index;
+		curr_prod.products = product;
+		agregar_all_producto(curr_prod);
+
+		gl_result_temp.push(curr_prod);
+		index++;
+
 	}
 	if(siz > 0){
-		//Guarda la nueva lista
-		gl_result_temp.clave = gl_currt_list_selec;
-		agregar_producto(gl_result_temp);
 		gl_products = gl_result_temp;
 
 		//crea las listas de productos -------------------------------
-		crear_datalist(gl_products.nombre, "listproducts");
 		crear_lista_productos();
 		//------------------------------------------------------------
 
-		gl_result_temp = new reg_products();
+		gl_result_temp = new Array();
 		alert("Lista Guardada Correctamente.");
 
 		var butt = document.getElementById("butlistimport");
@@ -213,7 +227,7 @@ function recovery_simple_list() {
 	}
 	else {
 		alert("La Lista esta Vacia!.");
-		gl_result_temp = new reg_products();
+		gl_result_temp = new Array();
 	}
 }
 function get_string_num(text) {
@@ -231,15 +245,19 @@ function get_string_num(text) {
 		}
 	}
 	//console.log("Este es el bueno : " +tx);
-	return tx;
+	return parseFloat(tx)? parseFloat(tx) : 0;
 }
 
 function recovery_data() {
+
+	//Limpia la lista anterior
+	remove_all_product();
+
 	var butt = document.getElementById("butsavelist");
 	butt.disabled = true;
 	butt.setAttribute("class", "button_style_disable");
 
-	gl_result_temp = new reg_products();
+	gl_result_temp = new Array();
 
 	var select = document.getElementById("listbasedato");
 
@@ -250,37 +268,50 @@ function recovery_data() {
 
 	var index = gl_save_list.start_filas_index;
 	//console.log(index);
+	var num = 0;
 	for (var i = index; (save_expdate[0] && i < doc_siz_fila ); i++) {
+		var product = new reg_curr_prod();
+		var curr_prod = new r_product();
+
+		product.active = true;
+		product.margen = 0;		
 		for (var j = 0;( j < save_expdate[0].length); j++) {
+
 			if(j == gl_save_list.nombre_index){
-				gl_result_temp.nombre[i-index] = save_expdate[i][j];
+				product.nombre = save_expdate[i][j];
 			}
 			if(j == gl_save_list.cantida_index){
-				gl_result_temp.cantidad[i-index] = save_expdate[i][j];//get_string_num(save_expdate[i][j]);
+				product.cantidad = get_string_num(""+save_expdate[i][j]);
 			}
 			if(j == gl_save_list.precio_index){
-				gl_result_temp.precio[i-index] = save_expdate[i][j];// get_string_num(save_expdate[i][j]);
+				product.precio = get_string_num(""+save_expdate[i][j]);
 			}
 			//console.log(gl_result_temp.precio[i]);
-			gl_result_temp.margen[i] = 0;		
+
         }
+		//Guarda y agg productos
+		if(product.nombre != ""){
+			console.log(product.cantidad)
+			curr_prod.id = num;
+			num++;
+			curr_prod.products = product;
+			agregar_all_producto(curr_prod);
+
+			gl_result_temp.push(curr_prod);
+		}
     }
 	remove_empy_name();			//Quita filas con nombres vacios
 	var opt = 1;
 	start_one = true;
 
-	//Guarda la nueva lista
-	gl_result_temp.clave = gl_currt_list_selec;
-	agregar_producto(gl_result_temp);
 	gl_products = gl_result_temp;
 
 	//crea las listas de productos -------------------------------
-	crear_datalist(gl_products.nombre, "listproducts");
 	crear_lista_productos();
 	//------------------------------------------------------------
 
  	reset_preview();
-	gl_result_temp = new reg_products();
+	gl_result_temp = new Array();
 	save_expdate = new Array;
 	alert("Lista Guardada Correctamente.");
 
@@ -289,17 +320,14 @@ function recovery_data() {
 }
 
 function remove_empy_name(){
-	var siz = gl_result_temp.listatamaño;
+	var siz = gl_result_temp.length;
     for (var j = 0;j<siz ; j++) {
-		if(!gl_result_temp.nombre[j] ){
-			gl_result_temp.listatamaño--;
-		}
-		else if(gl_result_temp.nombre[j].length==0){
-			gl_result_temp.nombre.splice(j, 1);
-			gl_result_temp.cantidad.splice(j, 1);
-			gl_result_temp.margen.splice(j, 1);
-			gl_result_temp.precio.splice(j, 1);
-			gl_result_temp.listatamaño--;
+		var nombre = gl_result_temp[j].products.nombre;
+		if(nombre && nombre.length==0){
+			gl_result_temp.splice(j, 1);
+			gl_result_temp.splice(j, 1);
+			gl_result_temp.splice(j, 1);
+			gl_result_temp.splice(j, 1);
 		}
 	}
 }
