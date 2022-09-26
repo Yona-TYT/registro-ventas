@@ -124,7 +124,7 @@ function create_table_lp(){
 					//input.setAttribute("readonly", "");
 					//input.setAttribute("onFocus", "ocultar_input();");
 					//celda.appendChild(input);
-					celda.innerHTML = "<input type='text' id='inputlp14' class='input_style_td' onfocus='ocultar_input();' readonly='';>"
+					celda.innerHTML = "<input type='text' id='inputlp14' class='input_style_td'  readonly='';>"
 				}
 				//Boton de Accion
 				else if(siz_c==5){
@@ -270,7 +270,7 @@ function create_table_rp(){
 
 				}
 				if(siz_c==4){
-					celda.innerHTML = "<input type='text' id='inputrp14' class='input_style_td' onfocus='ocultar_input();' readonly='';>"
+					celda.innerHTML = "<input type='text' id='inputrp14' class='input_style_td' readonly='';>"
 				}
 				if(siz_c==5){
 					celda.setAttribute("class", "button_style_r");
@@ -374,7 +374,6 @@ function create_table_rv(){
 					input.setAttribute("type", "text");
 					input.setAttribute("readonly", "");
 					celda.appendChild(input);
-					input.setAttribute("onFocus", "ocultar_input();");
 				}
 				//Boton de accion
 				if(siz_c==5){
