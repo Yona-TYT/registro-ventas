@@ -156,7 +156,7 @@ function button_reg_venta(nr) {
 
 function active_butt(){
 	var id_list = ["buttrv15", "buttrv25", "buttrv35", "buttrv45"]
-	for (var j = 0; j < id_list.length; j++) {
+	for (var j = 0; j < (gl_mobil? 1 : id_list.length); j++) {
 		var id = id_list[j];
 		var butt = document.getElementById(id);
 		butt.disabled = false;
