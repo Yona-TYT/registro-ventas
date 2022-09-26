@@ -20,7 +20,8 @@ function preloder_filtro_fec() {
 	for (var j = index; j >= 0; j--) {
 		var name = gl_general.fechalist[j]
 
-		if(name && gl_general.fechetd[j] !== false){
+		if(name && (gl_general.fechetd[j] !== false || j == index)){
+			gl_general.fechetd[j] = true;
 			selc_tx += "<option id='fech"+j+"' value='"+j+"'>"+name+"</option>";
 		}
 	}
