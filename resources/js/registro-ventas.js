@@ -382,11 +382,6 @@ function descontar_pdt(lindex) {
 	}
 
 	buscar_lista_rv("buscar_rv", false);
-
-	//console.log("Finished::" +cop_list.num[0] )
-	//mostrar_prod_opt((cop_list.index.length -1)) //Clave para ubicar la lista, index para encontrar el producto,  num la cantidad rewsultante 
-	//start_one = true;
-	//mostrar_lista(gl_currt_list_selec);
 }
 
 function cliente_check(text) {
