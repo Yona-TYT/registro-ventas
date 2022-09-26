@@ -343,10 +343,10 @@ function obtener_selec_hist(evento) {
 //===========================================================================================
 
 //Eliminar objetos de la base de datos ------------------------------------------------------
-function remover_ventas(clave) {
+function remover_ventas() {
 	var transaccion = bd.transaction(["ventas_saves"], "readwrite");
 	var almacen = transaccion.objectStore("ventas_saves");
-	almacen.delete(clave);
+	almacen.clear();
 }
 
 function remove_datos(clave) {

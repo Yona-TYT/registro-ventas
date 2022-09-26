@@ -270,9 +270,7 @@ function eliminar_todo(opt){
 }
 function clear_history(){
 
-	for (var j = 0; j <= gl_general.clv_max; j++) {
-		remover_ventas(j);
-	}
+	remover_ventas();
 
 	gl_hist_save = new reg_ventas();
 	gl_lista_rv = new reg_ventas();
