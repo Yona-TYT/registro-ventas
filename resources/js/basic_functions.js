@@ -76,6 +76,16 @@ function crea_hist_list(){
 	secc_his.innerHTML ="";
 	var total = 0;
 	var nr = gl_hist_save.index;
+	if (nr == 0){
+		gl_general.fechetd[gl_curr_optsel] = false;
+		agregar_gene_datos(gl_general);
+		return preloder_filtro_fec();
+	}
+	else {
+		gl_general.fechetd[gl_curr_optsel] = true;
+		agregar_gene_datos(gl_general);
+	}
+
 	for (var j = nr-1;  j >= 0; j--) {
 		total += crear_historial(j);
 	}

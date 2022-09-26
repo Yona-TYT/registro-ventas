@@ -95,6 +95,7 @@ function obtener_general(evento) {
 
 	if(resultado){
 		gl_general = resultado.datos_gene;
+		if(!gl_general.fechetd) gl_general.fechetd = new Array();
 		//console.log(gl_general.comp);
 		if(gl_general.comp === undefined){
 			//console.log(gl_general.comp);
@@ -157,7 +158,6 @@ function obtener_inic_prod(evento) {
 	}
 	preloder_filtro_lista();
 	ventas_main();
-
 }
 
 // Manejos de las listas de productos------------------------------------------------------------------------
@@ -166,11 +166,9 @@ function mostrar_producto(clave) {
 	var almacen = transaccion.objectStore("productos_lista");
 	var solicitud = almacen.openCursor();
 	solicitud.addEventListener("success", obtener_producto);
-
 }
 
 function obtener_producto(evento) {
-
 
   const cursor = event.target.result;
   if (cursor) {
@@ -195,9 +193,6 @@ function obtener_producto(evento) {
 	ventas_main();
 */
 }
-
-
-
 
 //Funcion experimental para descontar/reintegrar productos -----------------------------------------------------------------
 function mostrar_prod_opt(max) {
@@ -391,6 +386,7 @@ function general_datos() {
 	this.clv_max = 0;					//Clave actual, va icrementando por dias
 	this.fecha = null;					//Fecha actual
 	this.fechalist = new Array(); 		//Lista de fechas, cada dia agg una nueva fecha
+	this.fechetd = new Array(); 		//Detecta si la fecha fue activada o no
 
 	//Validadores de Fechas
 	this.hour = null;
