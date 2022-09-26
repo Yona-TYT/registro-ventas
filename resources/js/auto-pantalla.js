@@ -23,6 +23,7 @@ function check_windows_siz() {
 			gl_mobil = true;
 			create_table_rv();
 			create_table_rp();
+			create_table_lp();
 		}
 	}
 	else if(ancho >= 1024) {
@@ -36,6 +37,7 @@ function check_windows_siz() {
 			gl_mobil = false;
 			create_table_rv();
 			create_table_rp();
+			create_table_lp();
 		}
 	}
 }

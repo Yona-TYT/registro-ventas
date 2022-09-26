@@ -558,7 +558,6 @@ tr, .fila_style:hover {
 }
 .element_style_disable {
 	color: #8cabb3;
-	text-align: center;
 	font-weight: bold;
 	font-size:var(--siz-text);
 

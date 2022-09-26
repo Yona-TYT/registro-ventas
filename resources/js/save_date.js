@@ -73,6 +73,11 @@ function agregar_producto(data) {
 
 //Guarda la lista completa de productos
 function agregar_all_producto(data) {
+
+		var prod_activ = data.products.active;
+
+		console.log(prod_activ);
+
 	var transaccion = bd.transaction(["productos_lista"], "readwrite");
 	var almacen = transaccion.objectStore("productos_lista");
 	var solicitud = almacen.put({id : data.id , products: data.products});

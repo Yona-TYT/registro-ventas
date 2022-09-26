@@ -34,7 +34,6 @@ function preloder_filtro_fec() {
 function preloder_filtro_etd() {
 	var selec = document.getElementById("selcthisetd");
 	var list = ["Todas", "Pendiente", "Aprobada", "Reintegrada"];
-	var index = gl_general.clv_max;
 	var selc_tx = "";
 	for (var j = 0; j < list.length; j++) {
 		var name = list[j]

@@ -3,7 +3,7 @@ function create_table_lp(){
 
 	//----------------------------------------------------------------
 	//Nombre de las celdas value--------------------------------------
-	var name_cel = ["Nombre", "Cantidad", "Ganancia C/U", "Precio (Entrada)", "Precio (Salida)", "Borrar"];
+	var name_cel = ["Nombre", "Cantidad", "Ganancia C/U", "Precio (Entrada)", "Precio (Salida)", "Activ/Desact"];
 	var name_siz = name_cel.length;
 	//----------------------------------------------------------------
 
@@ -40,7 +40,7 @@ function create_table_lp(){
 				celda.setAttribute("id", "celdlp"+celda_id)
 				celda.setAttribute("class","celda_style");
 
-				if(siz_c < 5){
+				if(siz_c < name_siz){
 					// Creamos 2 elementos de entrada
 					var input = document.createElement("input");
 					input.setAttribute("id", "inputlp"+celda_id);
@@ -59,19 +59,6 @@ function create_table_lp(){
 
 					celda.innerHTML= input.outerHTML;
 				
-				}
-				else {
-					celda.setAttribute("class", "celda_style_x");
-					var div = document.createElement("div");
-					div.setAttribute("class","input_style_edicion_td");
-					div.setAttribute("id", "listp_div");
-					div.innerHTML= "Confirmar:";
-					input.setAttribute("type","checkbox");
-					input.setAttribute("id", "listp_check");
-					input.setAttribute("class","colum_name_style");
-					if(!gl_mobil) input.style.width = "150px";
-					div.appendChild(input);
-					celda.appendChild(div);
 				}
 				if(gl_mobil) celda.style.width = "300px"
 				fila.appendChild(celda);
@@ -139,12 +126,13 @@ function create_table_lp(){
 					//celda.appendChild(input);
 					celda.innerHTML = "<input type='text' id='inputlp14' class='input_style_td' onfocus='ocultar_input();' readonly='';>"
 				}
+				//Boton de Accion
 				else if(siz_c==5){
 					celda.setAttribute("class", "celda_style_x");
 					var button = document.createElement("button");
 					button.setAttribute("class","mask_style");
 					button.setAttribute("type", "button");
-					button.innerHTML= "Borrar Producto";
+					button.innerHTML= "Activ / Desact";
 					button.setAttribute("onclick","remove_product();");
 					button.setAttribute("id", "buttlp"+celda_id);
 					celda.appendChild(button);
