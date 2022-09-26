@@ -40,6 +40,14 @@
 	</head>
 	<body onLoad="init();" >
 		<! <button class="" type="button" id="but_test" onclick="click_test();"><! Test</button> 
+
+		<! ---------------- Muestra una ventana emergente  ------------------>
+		<dialog id="dialog" class="input_style_visible">
+			<h2 class="input_style_td">Igrese Fecha y Hora para actualizar</h2>
+			<input class="mask_style" type="date" id="dateinput" name="trip-start" oninput="update_fech_hora();">
+			<button class="mask_style" type="button" id="buttupdfech" onclick = "acept_fech_hora();">
+				Aceptar
+		</dialog>
 		<section class="menu_style">
 
 			<h1 class="input_style_td">Lista de negocios</h1>
@@ -52,7 +60,7 @@
 					Registro de Venta
 				</div>
 				<div class="input_style_hidden" id="menulist">
-					<button class='menu_list_style' type="button" id="menuopt1" onclick="visible_element(1);">Registro de Ventas</button>
+					<button class='menu_list_style' type="button" id="menuopt1" onclick="">Registro de Ventas</button>
 					<button class='menu_list_style' type="button" id="menuopt2" onclick="visible_element(2);">Registro de Productos</button>
 					<button class='menu_list_style' type="button" id="menuopt3" onclick="visible_element(3);">Historial de Ventas</button>
 					<button class='menu_list_style' type="button" id="menuopt4" onclick="visible_element(4);">Lista de Productos</button>

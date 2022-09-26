@@ -95,6 +95,8 @@ function obtener_general(evento) {
 
 	if(resultado){
 		gl_general = resultado.datos_gene;
+		valid_current_fech();
+
 		if(!gl_general.fechetd) gl_general.fechetd = new Array();
 		//console.log(gl_general.comp);
 		if(gl_general.comp === undefined){

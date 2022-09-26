@@ -121,6 +121,7 @@ function check_current_fech(curr_fecha) {
 }
 
 function valid_current_fech() {
+	const messg = "Se detecto inconsistencia con fecha y hora del sistema, actualizar fecha y hora ?.";
 	var hoy = new Date();
 	var curr_h = hoy.getHours() +""+get_time_zero(hoy.getMinutes()) +""+ get_time_zero(hoy.getSeconds());
 	var curr_d = hoy.getDate();
@@ -132,36 +133,68 @@ function valid_current_fech() {
 	var year = gl_general.year;
 	curr_h = parseInt(curr_h);
 
+	var result = null;
 	if(hour){
 		if(year > curr_y) { 
-			alert("Error: La fecha y Hora del sistema son invalidas! ");
-			return false;
+			result = confirm(messg);
 		}
 		else if(year == curr_y) {
 			if(month > curr_m) { 
-				alert("Error: La fecha y Hora del sistema son invalidas! ");
-				return false;
+				result = confirm(messg);
 			}
 			else if(month == curr_m) {
 				if(day > curr_d) { 
-					alert("Error: La fecha y Hora del sistema son invalidas! ");
-					return false;
+					result = confirm(messg);
 				}
 				else if(day == curr_d) {
 				//console.log(" Validar fecha---"+ curr_h +" -- "+ +get_dignr(parseInt(curr_h))+"  --  "+hour +" - "+ curr_h);
 					if (hour > curr_h) { 
-						alert("Error: La fecha y Hora del sistema son invalidas! ");
-						return false;
+						result = confirm(messg);
 					}				
 				}
 			}
 		}
 	}
-	gl_general.hour = curr_h;
-	gl_general.day = curr_d;
-	gl_general.month = curr_m;
-	gl_general.year = curr_y;
-	return true;
+	if(result === null) {
+		gl_general.hour = curr_h;
+		gl_general.day = curr_d;
+		gl_general.month = curr_m;
+		gl_general.year = curr_y;
+
+		agregar_gene_datos(gl_general);
+	}
+	else if(result){
+		var dialogo = document.getElementById('dialog');
+		dialogo.show();
+	}
+}
+var gl_update_fech = null;
+function update_fech_hora(){
+	var input = document.activeElement;
+	gl_update_fech = input.value;
+}
+function acept_fech_hora(){
+	var input = document.getElementById('dateinput');
+	var dialogo = document.getElementById('dialog');
+
+	gl_update_fech = input.value;
+	if (gl_update_fech !== null) {
+		var d = new Date(input.value);
+
+		var day = d.getDate();
+		var month = d.getMonth();
+		var year = d.getFullYear();
+
+
+		gl_general.day = day;
+		gl_general.month = month;
+		gl_general.year = year;
+
+		agregar_gene_datos(gl_general);
+
+		dialogo.close();
+		//console.log(""+day+" :: "+ gl_general.day );
+	}
 }
 
 function remplace_doble_punto(){
