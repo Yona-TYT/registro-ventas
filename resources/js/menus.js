@@ -44,7 +44,7 @@ function visible_element(opt) {
 	if(bott)
 		bott.setAttribute("class","butt_selec_style");
 
-
+	console.log(opt);
 	var sec_regvent = document.getElementById("seccion1");
 	var sec_regpro = document.getElementById("seccion2");
 	var sec_hist = document.getElementById("seccion3");
