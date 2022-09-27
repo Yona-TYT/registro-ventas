@@ -128,9 +128,9 @@ function crear_lista_productos() {
 	data_lista.innerHTML = "";
 	var lista_tx = "";
 	var data_tx = "";
-	var max = gl_products.length;
-	//console.log("Finished: "+max);
-	for (var j = 0; j < max; j++) {
+	var siz = gl_products.length;
+	//console.log("Finished: "+siz);
+	for (var j = 0; j < siz; j++) {
 		lista_tx += add_text_fila(j,1);
 		data_tx += add_text_fila(j,2);
 	}
@@ -218,17 +218,16 @@ function button_selec_product(index){
 
 function buscar_lista(text) {
 	var result = true;
-	var max = gl_products.length;
-	//console.log("Finished: "+max);
-	for (var j = 0; j < max; j++) {
+	var siz = gl_products.length;
+	var tx_siz = text.length;
+	//console.log("Finished: "+siz);
+	for (var j = 0; j < siz; j++) {
 		var div = document.getElementById("divlp"+j);
 		//Obtine todas las columnas de nombres
 		var nombre = gl_products[j].products.nombre?gl_products[j].products.nombre:"";
 
 		if (nombre!=null) nombre = nombre.toLowerCase();
 		else continue;
-
-
 
 		var tx = nombre;
 		result = tx.includes(text.toLowerCase());
@@ -240,11 +239,12 @@ function buscar_lista(text) {
 			//Deselecciona el elemento para ocultar teclado en android
 			const regex_a = /[^\w\.@-]/ig;		//Exp Regula, Elimina Caracteres especiales
 			text = text.replaceAll(regex_a, '')
+			nombre = nombre.replaceAll(regex_a, '')
 			//console.log("Text: "+text)
 			var regex_b = new RegExp("(^)" + text + "($)");
 			var test = nombre.search(regex_b);
-			//console.log("Test: "+test)
-			if( test != -1 && text.length>1){
+			console.log("Test: "+test+ " TxSiz: "+tx_siz)
+			if( test != -1 && tx_siz>0){
 				el_unselec();
 			}
 			div.setAttribute("class","div_list_style");

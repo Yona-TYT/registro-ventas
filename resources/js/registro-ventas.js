@@ -41,12 +41,11 @@ function buscar_lista_rv(id, unsel = true)
 			const regex_a = /[^\w\.@-]/ig;		//Exp Regula, Elimina Caracteres especiales
 			text = text.replaceAll(regex_a, '')
 			nombre = nombre.replaceAll(regex_a, '')
-
 			//console.log("Text: "+text)
 			var regex_b = new RegExp("(^)" + text + "($)");
 			var test = nombre.search(regex_b);
-			console.log("Test: "+test)
-			if( test != -1 && unsel){
+			console.log("Test: "+test+ " TxSiz: "+tx_siz)
+			if( test != -1 && tx_siz>0){
 				el_unselec();
 			}
 			var cantidad = parseInt(gl_products[j].products.cantidad)?gl_products[j].products.cantidad:0;
