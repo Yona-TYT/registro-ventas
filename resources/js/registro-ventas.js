@@ -9,7 +9,7 @@ function ventas_main(){
 
 	//Buscador para el registro de ventas
 	var input_buscar_rv = document.getElementById("buscar_rv");
-	input_buscar_rv.addEventListener("input", function(){start_buscar("buscar_rv");});
+	input_buscar_rv.addEventListener("input", function(){buscar_lista_rv("buscar_rv");});
 }
 
 var time_buscar;
