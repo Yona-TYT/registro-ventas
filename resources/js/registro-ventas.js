@@ -48,7 +48,7 @@ function buscar_lista_rv(id, unsel = true)
 				//console.log("Text: "+text)
 				var regex_b = new RegExp("(^)" + text + "($)");
 				var test = nombre.search(regex_b);
-				console.log("Test: "+test+ " TxSiz: "+tx_siz)
+				//console.log("Test: "+test+ " TxSiz: "+tx_siz)
 				if( test != -1 && tx_siz>0){
 					el_unselec();
 				}
