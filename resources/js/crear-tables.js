@@ -181,7 +181,9 @@ function create_table_lp(){
 				tex_mask.setAttribute("readonly", "");
 				tex_mask.setAttribute("class", "input_style_edicion_td");
 				tex_mask.setAttribute("placeholder", "Ingrese Valor");
-				input.setAttribute("id", "inputlp"+celda_id);
+
+				var name_id = "inputlp"+celda_id;
+				input.setAttribute("id", name_id);
 				siz_c!=4?input.setAttribute("placeholder", "Ingrese Valor"):"";
 
 				//Cuadro De nombres
@@ -202,7 +204,7 @@ function create_table_lp(){
 					input.setAttribute("onchange","update_product_cu();");
 					input.setAttribute("type", "number");
 					input.setAttribute("step", "any");
-					input.setAttribute("onFocus", 'ocultar_input(\''+celda_id+'\');');
+					input.setAttribute("onFocus", 'ocultar_input();');
 					celda.appendChild(input);
 				}
 				//Cuadros de entrada numerica
@@ -218,7 +220,7 @@ function create_table_lp(){
 					tex_mask.setAttribute("id", "text_masklp"+celda_id);
 					tex_mask.setAttribute("onClick", "mostrar_input();");
 					tex_mask.setAttribute("onSelect", "mostrar_input();");
-					input.setAttribute("onFocus", 'ocultar_input(\''+celda_id+'\');');
+					tex_mask.setAttribute("onFocus", 'ocultar_input(\''+name_id+'\');');
 					celda.appendChild(tex_mask);
 					celda.appendChild(input);
 				}
@@ -333,7 +335,7 @@ function create_table_rp(){
 				tex_mask.setAttribute("class", "input_style_edicion_td");
 				tex_mask.setAttribute("placeholder", "Ingrese Valor");
 
-				var name_id = "inputrp"+celda_id
+				var name_id = "inputrp"+celda_id;
 				input.setAttribute("id", name_id);
 				input.setAttribute("placeholder", "Ingrese Valor");
 

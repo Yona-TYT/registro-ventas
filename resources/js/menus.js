@@ -99,8 +99,10 @@ function visible_element(opt) {
 
 function mostrar_input() {
 	var mask = document.activeElement;
-	mask.setAttribute("placeholder", "");
 	var id_name = mask.id;
+
+
+	mask.setAttribute("placeholder", "");
 	var id_input = id_name.replace("text_mask", "input"); //remplaza  palabaras en cadenas de texto
 
 	var input = document.getElementById(id_input);
@@ -126,18 +128,27 @@ function mostrar_input() {
 function ocultar_input(id = null) {
 	var current_input = document.activeElement;
 	var current_id_name = current_input.id;
+
+
 	var input_old = current_element;
 
-	console.log("old"+input_old);
+	console.log(id +" :: "+current_element +" :: "+current_id_name);
 	if(id){
 		var input = document.getElementById(id);
-		var id_mask = id.replace("input", "text_mask"); //remplaza  palabaras en cadenas de texto
-		var mask = document.getElementById(id_mask);
+		if(input){
+			var id_mask = id.replace("input", "text_mask"); //remplaza  palabaras en cadenas de texto
+			console.log(id_mask)
+			var mask = document.getElementById(id_mask);
 
-		input.setAttribute("class","input_style_visible");
-		mask.setAttribute("disabled", "");
-		input.focus();
-		current_element = input;
+			input.setAttribute("class","input_style_visible");
+			mask.setAttribute("disabled", "");
+			input.focus();
+			input.select();
+			current_element = input;
+		}
+	}
+	else if(current_id_name!=""){
+		el_selec(current_id_name);
 	}
 	
 	if(input_old ){

@@ -39,7 +39,7 @@ function buscar_lista_rv(id, unsel = true)
 		else continue;
 		result = nombre.includes(text);
 		if(result){
-			if(test_ok){
+			if(test_ok && unsel){
 				test_ok = false;
 				//Deselecciona el elemento para ocultar teclado en android
 				const regex_a = /[^\w\.@-]/ig;		//Exp Regula, Elimina Caracteres especiales
