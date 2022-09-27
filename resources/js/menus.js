@@ -137,8 +137,11 @@ function ocultar_input(otros = false) {
 			result = false;
 		}
 	}
-	if(current_id_name.includes("text_mask"))
-		alert("Ocultar: "+current_id_name +" "+current_id_name.includes("text_mask"))
+
+	if(input_old){
+		console.log(""+input_old.id);
+		alert("Ocultar: Old: "+input_old.id +" Curr: "+current_id_name)
+	}
 	
 	if(input_old && result){
 		var id_name_old = input_old.id;
