@@ -109,6 +109,7 @@ function mostrar_input() {
 	//var input = document.getElementById("input"+id_c);
 	//var mask = document.getElementById("text_mask"+id_d);
 
+	alert(""+input +" "+id_name.includes("text_mask"))
 	if(input && id_name.includes("text_mask")){
 		input.setAttribute("class","input_style_visible");
 		mask.setAttribute("disabled", "");
@@ -142,7 +143,7 @@ function ocultar_input(otros = false)
 		var id_name_old = input_old.id;
 		var id_mask_old = id_name_old.replace("input", "text_mask"); //remplaza  palabaras en cadenas de texto
 		var mask_old = document.getElementById(id_mask_old);
-		if(mask_old && id_name_old.includes("input") && id_name_old != current_id_name){
+		if(mask_old && id_name_old.includes("input")){
 			input_old.setAttribute("class","input_style_hidden");
 			mask_old.setAttribute("placeholder", "Ingrese Valor");
 			mask_old.disabled=false;

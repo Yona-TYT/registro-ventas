@@ -176,17 +176,7 @@ remplace_doble_punto();
 		input.blur();
 	}
 
-if(key == "Tab"){
-	var id_name = input.id;
-	//id_name = id_name.replace("text_mask", "input"); //remplaza  palabaras en cadenas de texto
-	//add_message(id_name);
-	var mask = document.getElementById(id_name.replace("input", "text_mask"));
-	if(mask && id_name.includes("input")){
-		input.setAttribute("class","input_style_hidden");
-		mask.setAttribute("readwrite", "");
-		mask.focus();
-	}
-}
+
 });
 
 //Solo permite introducir números.
