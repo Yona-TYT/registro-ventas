@@ -123,27 +123,19 @@ function mostrar_input() {
 	return null
 }
 
-function ocultar_input(otros = false) {
+function ocultar_input(id = null) {
 	var current_input = document.activeElement;
 	var current_id_name = current_input.id;
 	var input_old = current_element;
 
-	var result = true;
-	if(!otros){				//Otros inputs distintos a los de ingresar valores numericos
-		try {
-			el_selec(current_id_name);
-		}
-		catch (err) {
-			result = false;
-		}
-	}
-
-	if(input_old){
-		console.log(""+input_old.id);
-		alert("Ocultar: Old: "+input_old.id +" Curr: "+current_id_name)
+	console.log(""+id);
+	if(id){
+		var input = document.getElementById(id);
+		input.setAttribute("class","input_style_visible");
+		alert("Ocultar:  Curr: "+id)
 	}
 	
-	if(input_old && result){
+	if(input_old ){
 		var id_name_old = input_old.id;
 		var id_mask_old = id_name_old.replace("input", "text_mask"); //remplaza  palabaras en cadenas de texto
 		var mask_old = document.getElementById(id_mask_old);
