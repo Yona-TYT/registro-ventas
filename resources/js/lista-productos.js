@@ -234,7 +234,7 @@ function buscar_lista(text) {
 		result = nombre.includes(text);
 		//console.log("a:"+tx+"b:"+text.toLowerCase());
 		if(result){
-			if(test_ok){
+			/*if(test_ok){
 				test_ok = false;
 				//Deselecciona el elemento para ocultar teclado en android
 				const regex_a = /[^\w\.@-]/ig;		//Exp Regula, Elimina Caracteres especiales
@@ -247,7 +247,7 @@ function buscar_lista(text) {
 				if( test != -1 && tx_siz>0){
 					el_unselec();
 				}
-			}
+			}*/
 
 			div.setAttribute("class","div_list_style");
 		}
