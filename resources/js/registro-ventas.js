@@ -23,30 +23,35 @@ function buscar_lista_rv(id, unsel = true)
 	active_butt();
 	clearTimeout(time_buscar);
 	var text = document.getElementById(id).value;
+	text = text.toLowerCase();
 	var tx_siz = text.length;
 	reset_inputs_rv();
 	var result = false;
 	var count = 1;
 	//console.log("Finished: ");
 	var siz = gl_products.length;
+	var test_ok = true;
 	//console.log("Finished: "+siz);
 	for (var j = 0; j<siz; j++) {
 		if(count>4) break;
 		var nombre = gl_products[j].products.nombre;
 		if (nombre!=null) nombre = nombre.toLowerCase();
 		else continue;
-		result = nombre.includes(text.toLowerCase());
+		result = nombre.includes(text);
 		if(result){
-			//Deselecciona el elemento para ocultar teclado en android
-			const regex_a = /[^\w\.@-]/ig;		//Exp Regula, Elimina Caracteres especiales
-			text = text.replaceAll(regex_a, '')
-			nombre = nombre.replaceAll(regex_a, '')
-			//console.log("Text: "+text)
-			var regex_b = new RegExp("(^)" + text + "($)");
-			var test = nombre.search(regex_b);
-			console.log("Test: "+test+ " TxSiz: "+tx_siz)
-			if( test != -1 && tx_siz>0){
-				el_unselec();
+			if(test_ok){
+				test_ok = false;
+				//Deselecciona el elemento para ocultar teclado en android
+				const regex_a = /[^\w\.@-]/ig;		//Exp Regula, Elimina Caracteres especiales
+				text = text.replaceAll(regex_a, '')
+				nombre = nombre.replaceAll(regex_a, '')
+				//console.log("Text: "+text)
+				var regex_b = new RegExp("(^)" + text + "($)");
+				var test = nombre.search(regex_b);
+				console.log("Test: "+test+ " TxSiz: "+tx_siz)
+				if( test != -1 && tx_siz>0){
+					el_unselec();
+				}
 			}
 			var cantidad = parseInt(gl_products[j].products.cantidad)?gl_products[j].products.cantidad:0;
 			var margen = gl_products[j].products.margen;
