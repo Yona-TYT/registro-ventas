@@ -109,7 +109,7 @@ function mostrar_input() {
 	//var input = document.getElementById("input"+id_c);
 	//var mask = document.getElementById("text_mask"+id_d);
 
-	alert("Mostrar: "+input +" "+id_name.includes("text_mask"))
+	//alert("Mostrar: "+input +" "+id_name.includes("text_mask"))
 	if(input && id_name.includes("text_mask")){
 		input.setAttribute("class","input_style_visible");
 		mask.setAttribute("disabled", "");
@@ -128,11 +128,16 @@ function ocultar_input(id = null) {
 	var current_id_name = current_input.id;
 	var input_old = current_element;
 
-	console.log(""+id);
+	console.log("old"+input_old);
 	if(id){
 		var input = document.getElementById(id);
+		var id_mask = id.replace("input", "text_mask"); //remplaza  palabaras en cadenas de texto
+		var mask = document.getElementById(id_mask);
+
 		input.setAttribute("class","input_style_visible");
-		alert("Ocultar:  Curr: "+id)
+		mask.setAttribute("disabled", "");
+		input.focus();
+		current_element = input;
 	}
 	
 	if(input_old ){
