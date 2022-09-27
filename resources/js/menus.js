@@ -109,7 +109,7 @@ function mostrar_input() {
 	//var input = document.getElementById("input"+id_c);
 	//var mask = document.getElementById("text_mask"+id_d);
 
-	alert(""+input +" "+id_name.includes("text_mask"))
+	alert("Mostrar: "+input +" "+id_name.includes("text_mask"))
 	if(input && id_name.includes("text_mask")){
 		input.setAttribute("class","input_style_visible");
 		mask.setAttribute("disabled", "");
@@ -123,8 +123,7 @@ function mostrar_input() {
 	return null
 }
 
-function ocultar_input(otros = false)
-{
+function ocultar_input(otros = false) {
 	var current_input = document.activeElement;
 	var current_id_name = current_input.id;
 	var input_old = current_element;
@@ -138,6 +137,8 @@ function ocultar_input(otros = false)
 			result = false;
 		}
 	}
+	if(current_id_name.includes("text_mask"))
+		alert("Ocultar: "+current_id_name +" "+current_id_name.includes("text_mask"))
 	
 	if(input_old && result){
 		var id_name_old = input_old.id;
