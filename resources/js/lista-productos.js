@@ -129,7 +129,17 @@ function crear_lista_productos() {
 	var lista_tx = "";
 	var data_tx = "";
 	var siz = gl_products.length;
-	//console.log("Finished: "+siz);
+
+	//Determina el nivel dependiendo del tamaño de la lista
+	if (siz < 50) gl_list_lv = 0;
+	else if (siz < 100) gl_list_lv = 1;
+	else if (siz < 500) gl_list_lv = 2;
+	else if (siz < 1000) gl_list_lv = 3;
+	else gl_list_lv = 4;
+
+	console.log("Finished: "+gl_list_lv);
+
+
 	for (var j = 0; j < siz; j++) {
 		lista_tx += add_text_fila(j,1);
 		data_tx += add_text_fila(j,2);

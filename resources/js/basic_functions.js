@@ -219,6 +219,26 @@ function remplace_doble_punto(){
 		}
 	}
 }
+
+function set_lev_datalist(siz){
+	var input = document.activeElement;
+	if(siz == gl_list_lv) {
+		input.setAttribute("list","listproducts");
+		input.setAttribute("onfocus","el_selec(false);");
+		input.blur();
+		input.focus();
+		input.setAttribute("onfocus","el_selec(true);");
+	}
+	if(siz < gl_list_lv)
+		input.removeAttribute("list");
+}
+
+function elm_show_list(){
+	var input = document.activeElement;
+	input.setAttribute("list","listproducts");
+}
+
+
 function action_compatibility(opt){
 	//Compatibilidad para pasar lista a modo de clave individual
 	if(opt == 1){

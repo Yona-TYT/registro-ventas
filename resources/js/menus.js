@@ -165,9 +165,9 @@ function ocultar_input(id = null) {
 	}
 }
 
-function el_selec(id){
-	var elm = document.getElementById(id);
-	elm.select();
+function el_selec(selec){
+	var elm = document.activeElement;
+	if(selec)elm.select();
 }
 function el_unselec(){
 	var elm = document.activeElement;

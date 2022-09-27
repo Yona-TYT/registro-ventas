@@ -18,6 +18,8 @@ function start_buscar() {
 	time_buscar = setTimeout( function(){buscar_lista_rv("buscar_rv");}, 400);
 }
 
+var gl_list_lv = 0;
+
 function buscar_lista_rv(id, unsel = true)
 {
 	active_butt();
@@ -25,6 +27,8 @@ function buscar_lista_rv(id, unsel = true)
 	var text = document.getElementById(id).value;
 	text = text.toLowerCase();
 	var tx_siz = text.length;
+	set_lev_datalist(tx_siz);
+
 	reset_inputs_rv();
 	var result = false;
 	var count = 1;
