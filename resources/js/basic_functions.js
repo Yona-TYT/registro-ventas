@@ -99,7 +99,7 @@ function crear_datalist(list,id) {
 	//console.log("Finished:"+gl_general.cl_save_id)
 	for (var j = 0; j <list.length; j++) {
 		//console.log("Nr: "+j+" Name: "+gl_general.cuentlist[j]+" Estd: "+list[j] );
-		//data_lista.innerHTML += "<option value='"+list[j].nombre+"'>";
+		data_lista.innerHTML += "<option value='"+list[j]+"'>";
 	}
 }
 

@@ -35,18 +35,18 @@ function buscar_lista_rv(id, unsel = true)
 		var nombre = gl_products[j].products.nombre;
 		if (nombre!=null) nombre = nombre.toLowerCase();
 		else continue;
-
-
 		result = nombre.includes(text.toLowerCase());
 		if(result){
 			//Deselecciona el elemento para ocultar teclado en android
 			const regex_a = /[^\w\.@-]/ig;		//Exp Regula, Elimina Caracteres especiales
 			text = text.replaceAll(regex_a, '')
+			nombre = nombre.replaceAll(regex_a, '')
+
 			//console.log("Text: "+text)
 			var regex_b = new RegExp("(^)" + text + "($)");
 			var test = nombre.search(regex_b);
-			//console.log("Test: "+text.length)
-			if( test != -1 && tx_siz.length>1 && unsel){
+			console.log("Test: "+test)
+			if( test != -1 && unsel){
 				el_unselec();
 			}
 			var cantidad = parseInt(gl_products[j].products.cantidad)?gl_products[j].products.cantidad:0;

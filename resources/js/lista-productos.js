@@ -387,5 +387,7 @@ function remove_product(){
 		curr_prod.products = gl_products[gl_current_selec].products;
 
 		agregar_all_producto(curr_prod);
+
+		update_product_cu();
 	}
 }

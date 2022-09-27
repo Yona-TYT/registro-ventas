@@ -73,16 +73,10 @@ function agregar_producto(data) {
 
 //Guarda la lista completa de productos
 function agregar_all_producto(data) {
-
-		var prod_activ = data.products.active;
-
-		console.log(prod_activ);
-
 	var transaccion = bd.transaction(["productos_lista"], "readwrite");
 	var almacen = transaccion.objectStore("productos_lista");
 	var solicitud = almacen.put({id : data.id , products: data.products});
 }
-
 
 //----------------------------------------------------------------------------------------------------------------------------------------
 
@@ -123,7 +117,8 @@ function obtener_general(evento) {
 		mostrar_inic_prod();
 		mostrar_ventas(gl_general.clv_max);
 
-		crear_datalist(gl_general.nomblist, "list_datacl", false);
+
+		crear_datalist(gl_general.nomblist, "list_datacl");
 
 		load_general_data();	//Se cargan precios del dolar y margen de ganancia
 	}
