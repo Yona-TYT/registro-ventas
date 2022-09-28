@@ -19,7 +19,7 @@ function buscar_lista_rv(id, unsel = true) {
 	var text = document.getElementById(id).value;
 	text = text.toLowerCase();
 	var tx_siz = text.length;
-	set_lev_datalist(tx_siz);
+	if(unsel) set_lev_datalist(tx_siz);
 
 	reset_inputs_rv();
 	var result = false;
@@ -27,7 +27,7 @@ function buscar_lista_rv(id, unsel = true) {
 	//console.log("Finished: ");
 	var siz = gl_products.length;
 	var test_ok = true;
-	alert("Finished: "+unsel);
+	//alert("Finished: "+unsel);
 	for (var j = 0; j<siz; j++) {
 		if(count>4) break;
 		var nombre = gl_products[j].products.nombre;

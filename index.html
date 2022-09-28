@@ -110,8 +110,8 @@
 				<input class="mask_style" type="search" id="buscar_rv" placeholder="Ingrese Nombre de Producto" onfocus="el_selec(true);" onclick="elm_show_list();">
 			</div>
 			<section class="label_style" id="sect_rv"></section>
-			<div class="cajas_style">Total en Dolar: <input class="input_style_td" type="text" id="rv_totaldol" value="0" readonly></div>
-			<div class="cajas_style">Total en Bsf: <input class="input_style_td" type="text" id="rv_totalbsf" value="0" readonly></div>
+			<div class="cajas_style">Total en Dolar: <input class="input_style_td" type="text" id="rv_totaldol" value="0" disabled></div>
+			<div class="cajas_style">Total en Bsf: <input class="input_style_td" type="text" id="rv_totalbsf" value="0" disabled></div>
 			<div class="cajas_style">Nombre Cliente: <input class="mask_style" type="text" id="rv_clnombre" placeholder="Ingrese Nombre de Cliente" list="list_datacl"></div>
 			<datalist id="list_datacl"></datalist>
 
@@ -135,7 +135,7 @@
 				<select class="mask_style" id="selcthisetd"></select>
 			</div>
 			<div class="cajas_style">Total: 
-				<input readonly="" class="mask_style" id="totalhist">
+				<input disabled="" class="mask_style" id="totalhist">
 			</div>
 			<div class="cajas_style">
 				<button class="mask_style" type="button" id="buthistsave">
