@@ -167,9 +167,8 @@ function button_reint_hist(index) {
 		var listdesc = gl_hist_save.pdtdesc[index];
 		for (var j = 0; j < listindex.length ; j++) {
 			var lindex = parseInt(listindex[j]);
-			var clave = parseInt(listclave[j]);
 			var num = listdesc[j];
-			alert(num);
+			alert("index: "lindex);
 			var prod = gl_products[lindex].products;
 			//console.log("Name:"+prod.nombre+" Cant: "+prod.cantidad+" New Can: "+ (prod.cantidad + num))
 			prod.cantidad = parseFloat(prod.cantidad)? parseFloat(prod.cantidad):0;
@@ -216,7 +215,6 @@ function button_desh_hist(index) {
 		var listdesc = gl_hist_save.pdtdesc[index];
 		for (var j = 0; j < listindex.length ; j++) {
 			var lindex = parseInt(listindex[j]);
-			var clave = parseInt(listclave[j]);
 			var num = (listdesc[j])*(-1);
 			  
 			var prod = gl_products[lindex].products;
