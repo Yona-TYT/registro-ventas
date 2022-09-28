@@ -62,6 +62,7 @@ function create_table_rv(){
 				// Creamos 2 elementos de entrada
 				var input = document.createElement("input");
 				input.setAttribute("id", "rvinput"+celda_id);
+				input.setAttribute("placeholder", "Vacio");
 				//Cuadros de cantidad
 				if (siz_c==4){
 					input.setAttribute("class","input_style_visible");
@@ -75,7 +76,6 @@ function create_table_rv(){
 
 				//Cuadros de solo lectura
 				else if (siz_c != 5){
-					input.setAttribute("placeholder", "Vacio");
 					input.setAttribute("class","input_style_td");
 					input.setAttribute("class","input_style_td");
 					input.setAttribute("type", "text");
