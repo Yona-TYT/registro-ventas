@@ -168,7 +168,7 @@ function button_reint_hist(index) {
 		for (var j = 0; j < listindex.length ; j++) {
 			var lindex = parseInt(listindex[j]);
 			var num = listdesc[j];
-			alert("index: "lindex);
+			alert("index: "+lindex);
 			var prod = gl_products[lindex].products;
 			//console.log("Name:"+prod.nombre+" Cant: "+prod.cantidad+" New Can: "+ (prod.cantidad + num))
 			prod.cantidad = parseFloat(prod.cantidad)? parseFloat(prod.cantidad):0;
