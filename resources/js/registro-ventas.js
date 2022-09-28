@@ -5,7 +5,7 @@ function ventas_main(){
 	//crea la lista de productos
 	crear_lista_productos();
 
-	buscar_lista_rv("buscar_rv");
+	buscar_lista_rv("buscar_rv",false);
 
 	//Buscador para el registro de ventas
 	var input_buscar_rv = document.getElementById("buscar_rv");
