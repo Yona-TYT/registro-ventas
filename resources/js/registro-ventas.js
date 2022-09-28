@@ -109,9 +109,6 @@ var nw_clave = new Array();
 var nw_cantidad = new Array();
 var nw_desc = new Array();
 function button_reg_venta(nr) {
-
-
-
 	if(gl_lista_rv.index[nr] != null){
 		var butt = document.getElementById("buttrv"+nr+"5");
 		butt.disabled = true;

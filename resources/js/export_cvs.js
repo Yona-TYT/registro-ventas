@@ -119,6 +119,8 @@ function crear_array_produ() {
 	result.push("Cantidad");
 	result.push("Ganancia (%)");
 	result.push("Precio de entrada ("+gl_mon_b+")");
+	result.push("Ganancia Global:");
+	result.push(gl_general.gen_margen);
 	result.push("\n");
 	for (var j = 0 ; j < gl_products.length ; j++) {
 		var nombre = gl_products[j].products.nombre;
@@ -137,7 +139,7 @@ function crear_array_produ() {
 }
 
 function verificar_text(text) {
-	console.log(text);
+	//console.log(text);
 	if(text){
 		text = text.replaceAll(',', '');
 		text = text.replaceAll(';', '');

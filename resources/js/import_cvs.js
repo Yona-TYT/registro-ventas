@@ -189,6 +189,8 @@ function recovery_simple_list() {
 
 	var siz = save_expdate.length;
 	var index = 0;
+	var margen = save_expdate[0][5];
+	margen = parseFloat(margen)? parseFloat(margen):0;
     for (var i = 1; i < siz ; i++) {
 		if(save_expdate[i][0] == "")
 			continue;
@@ -217,6 +219,15 @@ function recovery_simple_list() {
 		//crea las listas de productos -------------------------------
 		crear_lista_productos();
 		//------------------------------------------------------------
+
+		gl_general.gen_margen = margen;
+		agregar_gene_datos(gl_general);
+
+		//Margen de ganancias
+		var celd_margen = document.getElementById("input04");
+		var celd_margen_mask = document.getElementById("text_mask04");
+		celd_margen.value = margen;
+		celd_margen_mask.value = get_mask_simple(margen,"%");
 
 		gl_result_temp = new Array();
 		alert("Lista Guardada Correctamente.");

@@ -136,10 +136,7 @@ function crear_lista_productos() {
 	else if (siz < 500) gl_list_lv = 2;
 	else if (siz < 1000) gl_list_lv = 3;
 	else gl_list_lv = 4;
-
-	console.log("Finished: "+gl_list_lv);
-
-
+	//console.log("Finished: "+gl_list_lv);
 	for (var j = 0; j < siz; j++) {
 		lista_tx += add_text_fila(j,1);
 		data_tx += add_text_fila(j,2);
@@ -230,6 +227,7 @@ function buscar_lista(text) {
 	var result = true;
 	var siz = gl_products.length;
 	var tx_siz = text.length;
+	set_lev_datalist(tx_siz);
 	text = text.toLowerCase();
 	//console.log("Finished: "+siz);
 	var test_ok = true;
@@ -244,7 +242,7 @@ function buscar_lista(text) {
 		result = nombre.includes(text);
 		//console.log("a:"+tx+"b:"+text.toLowerCase());
 		if(result){
-			/*if(test_ok){
+			if(test_ok){
 				test_ok = false;
 				//Deselecciona el elemento para ocultar teclado en android
 				const regex_a = /[^\w\.@-]/ig;		//Exp Regula, Elimina Caracteres especiales
@@ -257,7 +255,7 @@ function buscar_lista(text) {
 				if( test != -1 && tx_siz>0){
 					el_unselec();
 				}
-			}*/
+			}
 
 			div.setAttribute("class","div_list_style");
 		}
