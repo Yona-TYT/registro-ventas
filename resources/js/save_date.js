@@ -238,7 +238,7 @@ function obtener_prod_opt(evento, max) {
 		console.log("-- "+max)
 		if(max<0){
 			cop_list = new Array();	//Se restaura la copia temporal de descuento producto
-			buscar_lista_rv("buscar_rv", false);
+			update_list_rv();
 		}
 	}
 }

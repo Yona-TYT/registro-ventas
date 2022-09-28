@@ -314,7 +314,7 @@ function update_celdas_generales(){
 	get_celda_value_rp();
 
 	update_product_cu();
-	buscar_lista_rv("buscar_rv", false);
+	update_list_rv();
 }
 
 function update_product_cu(){
@@ -369,8 +369,7 @@ function update_product_cu(){
 
 		set_datalist_list(gl_current_selec);
 
-		//console.log(gl_products[gl_current_selec]);
-		buscar_lista_rv("buscar_rv", false);
+		update_list_rv();
 	}
 }
 

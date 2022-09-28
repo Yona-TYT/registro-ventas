@@ -69,6 +69,8 @@ function create_table_rv(){
 					input.setAttribute("step", "any");
 					celda.appendChild(input);
 					input.setAttribute("onFocus", "ocultar_input();");
+					input.setAttribute("onchange","update_list_rv();");
+					input.setAttribute("oninput","update_list_rv();");
 				}
 
 				//Cuadros de solo lectura

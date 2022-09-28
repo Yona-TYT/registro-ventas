@@ -13,7 +13,7 @@ function ventas_main(){
 }
 
 var gl_list_lv = 0;
-
+var gl_temp_list;
 function buscar_lista_rv(id, unsel = true) {
 	active_butt();
 	var text = document.getElementById(id).value;
@@ -28,6 +28,9 @@ function buscar_lista_rv(id, unsel = true) {
 	var siz = gl_products.length;
 	var test_ok = true;
 	//alert("Finished: "+unsel);
+
+	//Inicializa las 4 filas del rv
+	gl_temp_list = [null, null, null, null];
 	for (var j = 0; j<siz; j++) {
 		if(count>4) break;
 		var nombre = gl_products[j].products.nombre;
@@ -49,11 +52,27 @@ function buscar_lista_rv(id, unsel = true) {
 					el_unselec();
 				}
 			}
-			var cantidad = parseInt(gl_products[j].products.cantidad)?gl_products[j].products.cantidad:0;
-			var margen = gl_products[j].products.margen;
-			var precio = gl_products[j].products.precio;
-			var index = gl_products[j].id;
-			//console.log("id: "+index)
+			gl_temp_list[count] = gl_products[j];
+
+			//gloval_test += "result:"+result+ " ";
+			count++;
+			
+		}
+	}
+
+	update_list_rv();
+}
+function update_list_rv(){
+	for (var j = 0; j<gl_temp_list.length; j++) {
+		var prod = 	gl_temp_list[j];
+		if(prod){
+			var nombre = prod.products.nombre;
+			var cantidad = prod.products.cantidad;
+			var margen = prod.products.margen;
+			var precio = prod.products.precio;
+			var index = prod.id;
+
+			console.log("Finished: "+nombre);
 
 			var genmargen = gl_general.gen_margen;
 			var genprecbs = gl_general.gen_bs;
@@ -61,11 +80,11 @@ function buscar_lista_rv(id, unsel = true) {
 			var calc_precio = calc_dolarporunidad(genmargen, margen, precio);
 			var calc_precbs = calc_bolivarprecio(genprecbs, calc_precio);
 
-			var input_nomb = document.getElementById("rvinput"+(gl_mobil?1:count)+""+0);
-			var input_cant = document.getElementById("rvinput"+(gl_mobil?1:count)+""+1);
-			var input_pdol = document.getElementById("rvinput"+(gl_mobil?1:count)+""+2);
-			var input_pbsf = document.getElementById("rvinput"+(gl_mobil?1:count)+""+3);
-			var input_tvent = document.getElementById("rvinput"+(gl_mobil?1:count)+""+4);
+			var input_nomb = document.getElementById("rvinput"+(gl_mobil?1:j)+""+0);
+			var input_cant = document.getElementById("rvinput"+(gl_mobil?1:j)+""+1);
+			var input_pdol = document.getElementById("rvinput"+(gl_mobil?1:j)+""+2);
+			var input_pbsf = document.getElementById("rvinput"+(gl_mobil?1:j)+""+3);
+			var input_tvent = document.getElementById("rvinput"+(gl_mobil?1:j)+""+4);
 
 			input_nomb.value = nombre;
 			input_cant.value = cantidad;
@@ -80,17 +99,13 @@ function buscar_lista_rv(id, unsel = true) {
 				input_pbsf.style.fontSize = "80%";
 			//----------------------------------------------------------------
 
-			gl_lista_rv.clave[count] = gl_currt_list_selec;
-			gl_lista_rv.index[count] = index;
-			gl_lista_rv.nombre[count] = nombre;
-			gl_lista_rv.cantidad[count] = cantidad;
-			gl_lista_rv.precio[count] = precio;
-			gl_lista_rv.margen[count] = margen;
-			gl_lista_rv.totalvent[count] = input_tvent;
-
-			//gloval_test += "result:"+result+ " ";
-			count++;
-			
+			gl_lista_rv.index[j] = index;
+			gl_lista_rv.nombre[j] = nombre;
+			gl_lista_rv.cantidad[j] = cantidad;
+			gl_lista_rv.precio[j] = precio;
+			gl_lista_rv.margen[j] = margen;
+			gl_lista_rv.totalvent[j] = parseFloat(input_tvent.value);
+			console.log("id: "+input_tvent.value)
 		}
 	}
 }
@@ -127,13 +142,13 @@ function button_reg_venta(nr) {
 			nw_index[gl_venta_rv.count] = index;
 			nw_clave[gl_venta_rv.count] = clave;
 			nw_cantidad[gl_venta_rv.count] = cantidad;
-			nw_desc[gl_venta_rv.count] = parseFloat(total.value);
+			nw_desc[gl_venta_rv.count] = total;
 
 			gl_venta_rv.listnomb[gl_venta_rv.count] = sel_nombre;
 			gl_venta_rv.clave[gl_venta_rv.count] = clave;
 			gl_venta_rv.index[gl_venta_rv.count] = index;
 			gl_venta_rv.nombre[gl_venta_rv.count] = nombre;
-			gl_venta_rv.totalvent[gl_venta_rv.count] = parseFloat(total.value);
+			gl_venta_rv.totalvent[gl_venta_rv.count] = total;
 
 			var calc_precio = calc_dolarporunidad(genmargen, margen, precio);
 			var calc_precbs = calc_bolivarprecio(genprecbs, calc_precio);
@@ -262,7 +277,7 @@ function reset_inputs_rv() {
 		input_cant.value = "";
 		input_pdol.value = "";
 		input_pdbs.value = "";
-		input_tvent.value = "1";
+		input_tvent.value = 1;
 	}
 	else {
 		var siz_fil = 5;
@@ -379,7 +394,7 @@ function descontar_pdt(lindex) {
 		agregar_all_producto(curr_prod);
 	}
 
-	buscar_lista_rv("buscar_rv", false);
+	update_list_rv();
 }
 
 function cliente_check(text) {

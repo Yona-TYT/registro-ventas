@@ -179,7 +179,7 @@ function button_reint_hist(index) {
 			curr_prod.products = prod;
 			agregar_all_producto(curr_prod);
 		}
-		buscar_lista_rv("buscar_rv", false);
+		update_list_rv();
 
 		//console.log("index"+" "+index);
 		var txesta = document.getElementById("txesta"+index);
@@ -227,7 +227,7 @@ function button_desh_hist(index) {
 			curr_prod.products = prod;
 			agregar_all_producto(curr_prod);
 		}
-		buscar_lista_rv("buscar_rv", false);
+		update_list_rv();
 
 		//console.log("index"+" "+index);
 		var txesta = document.getElementById("txesta"+index);
