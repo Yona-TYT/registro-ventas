@@ -247,7 +247,6 @@ function set_lev_datalist(siz){
 function elm_show_list(force = false){
 	var input = document.activeElement;
 	if(force){
-		input.setAttribute("onfocus","el_selec(false);");
 		input.blur();
 		input.focus();
 		input.setAttribute("onfocus","el_selec(true);");
