@@ -12,18 +12,10 @@ function ventas_main(){
 	input_buscar_rv.addEventListener("input", function(){buscar_lista_rv("buscar_rv");});
 }
 
-var time_buscar;
-function start_buscar() {
-
-	time_buscar = setTimeout( function(){buscar_lista_rv("buscar_rv");}, 400);
-}
-
 var gl_list_lv = 0;
 
-function buscar_lista_rv(id, unsel = true)
-{
+function buscar_lista_rv(id, unsel = true) {
 	active_butt();
-	clearTimeout(time_buscar);
 	var text = document.getElementById(id).value;
 	text = text.toLowerCase();
 	var tx_siz = text.length;
@@ -35,7 +27,7 @@ function buscar_lista_rv(id, unsel = true)
 	//console.log("Finished: ");
 	var siz = gl_products.length;
 	var test_ok = true;
-	//console.log("Finished: "+siz);
+	alert("Finished: "+unsel);
 	for (var j = 0; j<siz; j++) {
 		if(count>4) break;
 		var nombre = gl_products[j].products.nombre;
