@@ -24,6 +24,8 @@ function buscar_lista_rv(id, unsel = true) {
 	reset_inputs_rv();
 	var result = false;
 	var count = 1;
+	var max_c = gl_mobil?1:4;
+
 	//console.log("Finished: ");
 	var siz = gl_products.length;
 	var test_ok = true;
@@ -32,7 +34,7 @@ function buscar_lista_rv(id, unsel = true) {
 	//Inicializa las 4 filas del rv
 	gl_temp_list = [null, null, null, null];
 	for (var j = 0; j<siz; j++) {
-		if(count>4) break;
+		if(count>max_c) break;
 		var nombre = gl_products[j].products.nombre;
 		if (nombre!=null) nombre = nombre.toLowerCase();
 		else continue;
@@ -63,6 +65,7 @@ function buscar_lista_rv(id, unsel = true) {
 	update_list_rv();
 }
 function update_list_rv(){
+	var max_c = gl_mobil?1:4;
 	for (var j = 0; j<gl_temp_list.length; j++) {
 		var prod = 	gl_temp_list[j];
 		if(prod){
