@@ -104,9 +104,10 @@ function crear_datalist(list,id) {
 }
 
 //Genera los datalist
-function set_datalist_list(index) {
+function set_datalist_list(index, activ) {
 	var data_lista = document.getElementById('optlist'+index);
-	data_lista.value = gl_products[index].products.nombre;
+	if(activ)
+		data_lista.value = gl_products[index].products.nombre;
 }
 
 //Compara las fechas para incrementar el index y crear lista de fechas para el selector

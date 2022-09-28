@@ -147,50 +147,37 @@ function crear_lista_productos() {
 }
 
 function add_text_fila(index,opt){
-	//console.log("tes selc"+gl_currt_list_selec)
+
 	var r_nombre = gl_products[index].products.nombre?gl_products[index].products.nombre:"";
-	var r_cantidad = gl_products[index].products.cantidad?gl_products[index].products.cantidad:0;
-	var r_margen = gl_products[index].products.margen?gl_products[index].products.margen:0;
-	var r_precio = gl_products[index].products.precio?gl_products[index].products.precio:0;
-
+	r_nombre = r_nombre ?r_nombre.toLowerCase():"";
 	var prod_activ = gl_products[index].products.active;
-	if(gl_curr_list_etd_sel == "Todas") {
-		//console.log(r_nombre)
-		r_nombre = r_nombre ?r_nombre.toLowerCase():"";
+
+	if(opt == 1){
+		var r_cantidad = gl_products[index].products.cantidad?gl_products[index].products.cantidad:0;
+		var r_margen = gl_products[index].products.margen?gl_products[index].products.margen:0;
+		var r_precio = gl_products[index].products.precio?gl_products[index].products.precio:0;
+
 
 		var values_tx = (prod_activ?"":"(Inactivo) ")+r_nombre+" Cantidad ("+r_cantidad+") Margen c/u ("+get_mask_simple(r_margen,"%")+") Entrada c/u ("+get_mask(r_precio,gl_mon_b)+")";
-		if(opt==1){
-			return "<div class='"+(prod_activ?"div_list_style":"element_style_disable")+"' id='divlp"+index+"'><button type='button' class='butt_style' onclick='button_selec_product("+index+");'>Seleccionar</button> "+values_tx+"</div>";
+
+		var tx_a = "<div class='"+(prod_activ?"div_list_style":"element_style_disable")+"' id='divlp"+index+"' onclick='button_selec_product("+index+");'><button type='button' class='butt_style' onclick='button_selec_product("+index+");'>Seleccionar</button> "+values_tx+"</div>";
+
+		if(gl_curr_list_etd_sel == "Todas") {
+			return tx_a;
 		}
-		if(opt==2){
-			return "<option id='optlist"+index+"' value='"+r_nombre+"'>";
+
+		else if (gl_curr_list_etd_sel == "Activos" && prod_activ){
+			return tx_a;	
+		}
+
+		else if (gl_curr_list_etd_sel == "Inactivos" && !prod_activ){
+			return tx_a;
 		}
 	}
-	else if (gl_curr_list_etd_sel == "Activos" && prod_activ){
-		//console.log(r_nombre)
-		r_nombre = r_nombre ?r_nombre.toLowerCase():"";
-
-		var values_tx = (prod_activ?"":"(Inactivo) ")+r_nombre+" Cantidad ("+r_cantidad+") Margen c/u ("+get_mask_simple(r_margen,"%")+") Entrada c/u ("+get_mask(r_precio,gl_mon_b)+")";
-		if(opt==1){
-			return "<div class='"+(prod_activ?"div_list_style":"element_style_disable")+"' id='divlp"+index+"'><button type='button' class='butt_style' onclick='button_selec_product("+index+");'>Seleccionar</button> "+values_tx+"</div>";
-		}
-		if(opt==2){
-			return "<option id='optlist"+index+"' value='"+r_nombre+"'>";
-		}
+	else if (opt == 2 && prod_activ ){
+		var tx_b = "<option id='optlist"+index+"' value='"+r_nombre+"'>";
+		return tx_b;
 	}
-	else if (gl_curr_list_etd_sel == "Inactivos" && !prod_activ){
-		//console.log(r_nombre)
-		r_nombre = r_nombre ?r_nombre.toLowerCase():"";
-
-		var values_tx = (prod_activ?"":"(Inactivo) ")+r_nombre+" Cantidad ("+r_cantidad+") Margen c/u ("+get_mask_simple(r_margen,"%")+") Entrada c/u ("+get_mask(r_precio,gl_mon_b)+")";
-		if(opt==1){
-			return "<div class='"+(prod_activ?"div_list_style":"element_style_disable")+"' id='divlp"+index+"'><button type='button' class='butt_style' onclick='button_selec_product("+index+");'>Seleccionar</button> "+values_tx+"</div>";
-		}
-		if(opt==2){
-			return "<option id='optlist"+index+"' value='"+r_nombre+"'>";
-		}
-	}
-
 	return "";
 }
 
@@ -367,7 +354,7 @@ function update_product_cu(){
 		//Se actualizan los inputs de solo lectura
 		update_input_lectura();
 
-		set_datalist_list(gl_current_selec);
+		set_datalist_list(gl_current_selec, prod_activ);
 
 		update_list_rv();
 	}
@@ -398,16 +385,24 @@ function remove_product(){
 
 		var prod_activ = gl_products[gl_current_selec].products.active;
 
-		if(prod_activ)
-			gl_products[gl_current_selec].products.active = false;
-		else
-			gl_products[gl_current_selec].products.active = true;
+		var sect_div = document.getElementById("divlp"+gl_current_selec);
+		if(prod_activ){
+			prod_activ = false;
+			sect_div.setAttribute("class", "element_style_disable");
+		}
+		else {
+			prod_activ = true;
+			sect_div.setAttribute("class", "div_list_style");
+
+		}
 
 		curr_prod.id = gl_current_selec;
+
+		gl_products[gl_current_selec].products.active = prod_activ;
 		curr_prod.products = gl_products[gl_current_selec].products;
 
 		agregar_all_producto(curr_prod);
 
-		update_product_cu();
+		buscar_lista_rv("buscar_rv",false);
 	}
 }

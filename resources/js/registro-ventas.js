@@ -35,11 +35,12 @@ function buscar_lista_rv(id, unsel = true) {
 	gl_temp_list = [null, null, null, null];
 	for (var j = 0; j<siz; j++) {
 		if(count>max_c) break;
-		var nombre = gl_products[j].products.nombre;
+		var prod = gl_products[j].products
+		var nombre = prod.nombre;
 		if (nombre!=null) nombre = nombre.toLowerCase();
 		else continue;
 		result = nombre.includes(text);
-		if(result){
+		if(result && prod.active){
 			if(test_ok && unsel){
 				test_ok = false;
 				//Deselecciona el elemento para ocultar teclado en android
@@ -75,7 +76,7 @@ function update_list_rv(){
 			var precio = prod.products.precio;
 			var index = prod.id;
 
-			console.log("Finished: "+nombre);
+			//console.log("Finished: "+nombre);
 
 			var genmargen = gl_general.gen_margen;
 			var genprecbs = gl_general.gen_bs;
@@ -89,7 +90,7 @@ function update_list_rv(){
 			var input_pbsf = document.getElementById("rvinput"+(gl_mobil?1:j)+""+3);
 			var input_tvent = document.getElementById("rvinput"+(gl_mobil?1:j)+""+4);
 
-			input_nomb.value = nombre;
+			input_nomb.value = nombre.toLowerCase();
 			input_cant.value = cantidad;
 			input_pdol.value = get_mask(calc_precio,gl_mon_b);
 			input_pbsf.value = get_mask(calc_precbs,gl_mon_a);
@@ -108,7 +109,7 @@ function update_list_rv(){
 			gl_lista_rv.precio[j] = precio;
 			gl_lista_rv.margen[j] = margen;
 			gl_lista_rv.totalvent[j] = parseFloat(input_tvent.value);
-			console.log("id: "+input_tvent.value)
+			//console.log("id: "+input_tvent.value)
 		}
 	}
 }

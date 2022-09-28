@@ -89,7 +89,7 @@ function crear_historial(index) {
 
 		var inside = "<div class='element_style_hidden' id='divhis"+index+"'>"+ detalles + buttq + est_txb +"</div>";
 
-		secc_his.innerHTML +=  "<div class='div_list_style'>" + buttm  + titulo + inside + "</div>";
+		secc_his.innerHTML +=  "<div class='div_list_style' onclick='button_detalles("+index+");'>" + buttm  + titulo + inside + "</div>";
 		
 		return prdol;
 	}
