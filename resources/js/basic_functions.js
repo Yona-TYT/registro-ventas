@@ -106,8 +106,20 @@ function crear_datalist(list,id) {
 //Genera los datalist
 function set_datalist_list(index, activ) {
 	var data_lista = document.getElementById('optlist'+index);
-	if(activ)
-		data_lista.value = gl_products[index].products.nombre;
+	console.log(index)
+
+	var data_lista = document.getElementById("listproducts");
+	if(activ){
+		gl_data_list[index] = "<option id='optlist"+index+"' value='"+gl_products[index].products.nombre+"'>";
+		gl_data_list.join("");
+		data_lista.innerHTML = gl_data_list.join("");
+	}
+	else {
+
+		gl_data_list[index] = "";
+		gl_data_list.join("");
+		data_lista.innerHTML = gl_data_list.join("");
+	}
 }
 
 //Compara las fechas para incrementar el index y crear lista de fechas para el selector

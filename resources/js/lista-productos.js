@@ -1,4 +1,5 @@
 gl_curr_list_etd_sel = "Todas";
+gl_data_list = new Array();
 function lista_produc_main() {
 
 	//Comprueba y activa/desactiva el modo editor
@@ -138,46 +139,42 @@ function crear_lista_productos() {
 	else gl_list_lv = 4;
 	//console.log("Finished: "+gl_list_lv);
 	for (var j = 0; j < siz; j++) {
-		lista_tx += add_text_fila(j,1);
-		data_tx += add_text_fila(j,2);
+		lista_tx += add_text_fila(j);
 	}
 	// agregamos la hilera a la seccion de lista
 	sect_lista.innerHTML = lista_tx;
-	data_lista.innerHTML = data_tx;
+	data_lista.innerHTML = gl_data_list.join("");
 }
 
-function add_text_fila(index,opt){
+function add_text_fila(index){
 
 	var r_nombre = gl_products[index].products.nombre?gl_products[index].products.nombre:"";
 	r_nombre = r_nombre ?r_nombre.toLowerCase():"";
 	var prod_activ = gl_products[index].products.active;
 
-	if(opt == 1){
-		var r_cantidad = gl_products[index].products.cantidad?gl_products[index].products.cantidad:0;
-		var r_margen = gl_products[index].products.margen?gl_products[index].products.margen:0;
-		var r_precio = gl_products[index].products.precio?gl_products[index].products.precio:0;
+
+	prod_activ? gl_data_list.push("<option id='optlist"+index+"' value='"+r_nombre+"'>") : gl_data_list.push("");
 
 
-		var values_tx = (prod_activ?"":"(Inactivo) ")+r_nombre+" Cantidad ("+r_cantidad+") Margen c/u ("+get_mask_simple(r_margen,"%")+") Entrada c/u ("+get_mask(r_precio,gl_mon_b)+")";
+	var r_cantidad = gl_products[index].products.cantidad?gl_products[index].products.cantidad:0;
+	var r_margen = gl_products[index].products.margen?gl_products[index].products.margen:0;
+	var r_precio = gl_products[index].products.precio?gl_products[index].products.precio:0;
+	var values_tx = r_nombre+" Cantidad ("+r_cantidad+") Margen c/u ("+get_mask_simple(r_margen,"%")+") Entrada c/u ("+get_mask(r_precio,gl_mon_b)+")";
 
-		var tx_a = "<div class='"+(prod_activ?"div_list_style":"element_style_disable")+"' id='divlp"+index+"' onclick='button_selec_product("+index+");'><button type='button' id='buttsel"+index+"' class='butt_style'>Seleccionar</button> "+values_tx+"</div>";
+	var tx = "<div class='"+(prod_activ?"div_list_style":"element_style_disable")+"' id='divlp"+index+"' onclick='button_selec_product("+index+");'><button type='button' id='buttsel"+index+"' class='butt_style'>Seleccionar</button> "+values_tx+"</div>";
 
-		if(gl_curr_list_etd_sel == "Todas") {
-			return tx_a;
-		}
-
-		else if (gl_curr_list_etd_sel == "Activos" && prod_activ){
-			return tx_a;	
-		}
-
-		else if (gl_curr_list_etd_sel == "Inactivos" && !prod_activ){
-			return tx_a;
-		}
+	if(gl_curr_list_etd_sel == "Todas") {
+		return tx;
 	}
-	else if (opt == 2 && prod_activ ){
-		var tx_b = "<option id='optlist"+index+"' value='"+r_nombre+"'>";
-		return tx_b;
+
+	else if (gl_curr_list_etd_sel == "Activos" && prod_activ){
+		return tx;	
 	}
+
+	else if (gl_curr_list_etd_sel == "Inactivos" && !prod_activ){
+		return tx;
+	}
+
 	return "";
 }
 function button_unselc_style(id){
@@ -398,6 +395,7 @@ function remove_product(){
 		var prod_activ = gl_products[gl_current_selec].products.active;
 
 		var sect_div = document.getElementById("divlp"+gl_current_selec);
+
 		if(prod_activ){
 			prod_activ = false;
 			sect_div.setAttribute("class", "element_style_disable");
@@ -407,7 +405,6 @@ function remove_product(){
 			sect_div.setAttribute("class", "div_list_style");
 
 		}
-
 		curr_prod.id = gl_current_selec;
 
 		gl_products[gl_current_selec].products.active = prod_activ;
@@ -415,6 +412,8 @@ function remove_product(){
 
 		agregar_all_producto(curr_prod);
 
+
+		set_datalist_list(gl_current_selec, prod_activ)
 		buscar_lista_rv("buscar_rv",false);
 	}
 }
