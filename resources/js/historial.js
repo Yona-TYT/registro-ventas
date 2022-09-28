@@ -77,7 +77,7 @@ function crear_historial(index) {
 		var secc_his = document.getElementById("historialventa");
 		var titulo = "["+cl+", "+est_txa+ "], "+fecha+" "+hora+" <strong class='total_style'>Total: "+get_mask(prdol,gl_mon_b)+" / "+get_mask(prbsf,gl_mon_a+" </strong>");
 
-		var buttm = "<button type='button' class='butt_style'>Detalles</button>";
+		var buttm = "<button id='bottdetll"+index+"' type='button' class='butt_style'>Detalles</button>";
 
 		var buttq = "";
 		if(estado=="Aprobada")
@@ -122,6 +122,14 @@ function add_text_cl(index,opt){
 	}
 }
 function button_detalles(index) {
+	var butt = document.getElementById("bottdetll"+index);
+	var name = butt.className;
+	if(name=="butt_style")
+		butt.setAttribute("class", "butt_style_selc");
+	else
+		butt.setAttribute("class", "butt_style");
+
+
 	var secc_div = document.getElementById("divhis"+index);
 	var class_name = secc_div.className;
 	if(class_name == "element_style_hidden")

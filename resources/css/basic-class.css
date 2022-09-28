@@ -496,6 +496,10 @@ tr, .fila_style:hover {
 	background-color: rgba(206, 24, 30, 0.5);
 }
 
+.element_style_disable:hover {
+	background-color: rgba(100, 24, 10, 0.5);
+}
+
 .menu_list_style:hover {
 	background-color: rgba(206, 24, 30, 0.5);
 }
@@ -529,6 +533,21 @@ tr, .fila_style:hover {
 	margin:2px;
 
 	background: #6e3068;
+	overflow: hidden;
+}
+
+.butt_style_selc {
+	text-align: center;
+	font-weight: bold;
+	font-size:90%;
+
+	color: #ffffff;
+	width: 90px;
+	height: var(--all-height);
+
+	margin:2px;
+
+	background: #aa3c3c;
 	overflow: hidden;
 }
 

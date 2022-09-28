@@ -160,7 +160,7 @@ function add_text_fila(index,opt){
 
 		var values_tx = (prod_activ?"":"(Inactivo) ")+r_nombre+" Cantidad ("+r_cantidad+") Margen c/u ("+get_mask_simple(r_margen,"%")+") Entrada c/u ("+get_mask(r_precio,gl_mon_b)+")";
 
-		var tx_a = "<div class='"+(prod_activ?"div_list_style":"element_style_disable")+"' id='divlp"+index+"' onclick='button_selec_product("+index+");'><button type='button' class='butt_style'>Seleccionar</button> "+values_tx+"</div>";
+		var tx_a = "<div class='"+(prod_activ?"div_list_style":"element_style_disable")+"' id='divlp"+index+"' onclick='button_selec_product("+index+");'><button type='button' id='buttsel"+index+"' class='butt_style'>Seleccionar</button> "+values_tx+"</div>";
 
 		if(gl_curr_list_etd_sel == "Todas") {
 			return tx_a;
@@ -180,9 +180,21 @@ function add_text_fila(index,opt){
 	}
 	return "";
 }
+function button_unselc_style(id){
+	console.log(id)
+	var elm = document.getElementById(id);
+	elm.setAttribute("class", "butt_style");
+}
 
+var gl_curr_butt = null;
 function button_selec_product(index){
 	gl_current_selec = index;
+	var butt = document.getElementById("buttsel"+index);
+	butt.setAttribute("class", "butt_style_selc");
+	butt.setAttribute("onBlur" , 'button_unselc_style(\''+('buttsel'+index)+'\');')
+	if(gl_curr_butt)gl_curr_butt.setAttribute("class", "butt_style");
+	gl_curr_butt = butt;
+
 
 	var r_nombre = gl_products[index].products.nombre?gl_products[index].products.nombre:"";
 	var r_cantidad = gl_products[index].products.cantidad?gl_products[index].products.cantidad:0;
