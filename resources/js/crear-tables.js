@@ -3,7 +3,7 @@ function create_table_rv(){
 
 	//----------------------------------------------------------------
 	//Nombre de las celdas value--------------------------------------
-	var name_cel = ["Producto", "Cant. Dispon.", "En Dolar", "En Bs", "Cant. Venta", "Accion"];
+	var name_cel = ["Producto", "Cant. Dispon.", "En ("+gl_mon_b+")", "En ("+gl_mon_a+")", "Cant. Venta", "Accion"];
 	var name_siz = name_cel.length;
 	//----------------------------------------------------------------
 
@@ -47,6 +47,7 @@ function create_table_rv(){
 				input.setAttribute("type", "text");
 				input.setAttribute("value", name_cel[siz_c]);
 				input.setAttribute("readonly", "");
+				input.setAttribute("disabled", "");
 				input.setAttribute("class","colum_name_style");
 				celda.appendChild(input);
 			
@@ -76,6 +77,7 @@ function create_table_rv(){
 					input.setAttribute("class","input_style_td");
 					input.setAttribute("type", "text");
 					input.setAttribute("readonly", "");
+					input.setAttribute("disabled", "");
 					celda.appendChild(input);
 				}
 				//Boton de accion
@@ -104,7 +106,6 @@ function create_table_rv(){
 }
 
 function create_table_lp(){
-
 	//----------------------------------------------------------------
 	//Nombre de las celdas value--------------------------------------
 	var name_cel = ["Nombre", "Cantidad", "Ganancia C/U", "Precio (Entrada)", "Precio (Salida)", "Activ/Desact"];
@@ -150,15 +151,10 @@ function create_table_lp(){
 					input.setAttribute("id", "inputlp"+celda_id);
 					input.setAttribute("type", "number");
 					input.setAttribute("step", "any");
-					var tex_mask = document.createElement("input");
-					input.setAttribute(edit_mode?"readwrite":"readonly", "");
-
-					tex_mask.setAttribute("readonly", "");
-					tex_mask.setAttribute("class", "input_style_edicion_td");
-
+					input.setAttribute("readonly","");
+					input.setAttribute("disabled", "");
 					input.setAttribute("type", "text");
 					input.setAttribute("value", name_cel[siz_c]);
-					input.setAttribute("readonly", "");
 					input.setAttribute("class","colum_name_style");
 
 					celda.innerHTML= input.outerHTML;
@@ -180,15 +176,16 @@ function create_table_lp(){
 				var tex_mask = document.createElement("input");
 				tex_mask.setAttribute("readonly", "");
 				tex_mask.setAttribute("class", "input_style_edicion_td");
-				tex_mask.setAttribute("placeholder", "Ingrese Valor");
+				tex_mask.setAttribute("placeholder", "Vacio");
 
 				var name_id = "inputlp"+celda_id;
 				input.setAttribute("id", name_id);
-				siz_c!=4?input.setAttribute("placeholder", "Ingrese Valor"):"";
+				input.setAttribute("placeholder", "Vacio");
 
 				//Cuadro De nombres
 				if (siz_c==0){
-					input.setAttribute("class","input_style_td");
+					input.setAttribute("disabled", "");
+					input.setAttribute("class","input_style_edicion_td");
 					input.setAttribute("onclick","update_product_cu();");
 					input.setAttribute("onkeyup","update_product_cu();");
 					input.setAttribute("onchange","update_product_cu();");
@@ -198,7 +195,8 @@ function create_table_lp(){
 				}
 				//Cuadro cantidad
 				else if (siz_c==1){
-					input.setAttribute("class","input_style_td");
+					input.setAttribute("disabled", "");
+					input.setAttribute("class","input_style_edicion_td");
 					input.setAttribute("onclick","update_product_cu();");
 					input.setAttribute("onkeyup","update_product_cu();");
 					input.setAttribute("onchange","update_product_cu();");
@@ -209,6 +207,7 @@ function create_table_lp(){
 				}
 				//Cuadros de entrada numerica
 				else if(siz_c==2 || siz_c==3){
+					input.setAttribute("disabled", "");
 					input.setAttribute("class","input_style_td");
 					input.setAttribute("onclick","update_product_cu();");
 					input.setAttribute("onkeyup","update_product_cu();");
@@ -221,18 +220,19 @@ function create_table_lp(){
 					tex_mask.setAttribute("onClick", "mostrar_input();");
 					tex_mask.setAttribute("onSelect", "mostrar_input();");
 					tex_mask.setAttribute("onFocus", 'ocultar_input(\''+name_id+'\');');
+					tex_mask.setAttribute("disabled", "");
 					celda.appendChild(tex_mask);
 					celda.appendChild(input);
 				}
 				//Cuadros de solo lectura
 				else if (siz_c == 4){
-					//console.log("siz: "+input);
-					//input.setAttribute("class","input_style_td");
-					//input.setAttribute("type", "text");
-					//input.setAttribute("readonly", "");
-					//input.setAttribute("onFocus", "ocultar_input();");
-					//celda.appendChild(input);
-					celda.innerHTML = "<input type='text' id='inputlp14' class='input_style_td'  readonly='';>"
+					input.setAttribute("placeholder","0.00 "+gl_mon_b+" / 0.00 "+gl_mon_a);
+					input.setAttribute("class","input_style_td");
+					input.setAttribute("type", "text");
+					input.setAttribute("readonly", "");
+					input.setAttribute("disabled", "");
+					input.setAttribute("onFocus", "ocultar_input();");
+					celda.appendChild(input);
 				}
 				//Boton de Accion
 				else if(siz_c==5){
@@ -259,8 +259,6 @@ function create_table_lp(){
 
 	return null;
 }
-
-
 
 function create_table_rp(){
 	//----------------------------------------------------------------
@@ -297,29 +295,19 @@ function create_table_rp(){
 			//Cuadros de nombres de columnas
 			if(siz_f==0){
 				var celda = document.createElement("td");
-
 				celda.setAttribute("id", "celdrp"+celda_id)
 				celda.setAttribute("class","celda_style");
 
 				// Creamos 2 elementos de entrada
 				var input = document.createElement("input");
 				input.setAttribute("id", "inputrp"+celda_id);
-				input.setAttribute("type", "number");
-				input.setAttribute("step", "any");
-				var tex_mask = document.createElement("input");
-				input.setAttribute(edit_mode?"readwrite":"readonly", "");
-
-				tex_mask.setAttribute("readonly", "");
-				tex_mask.setAttribute("class", "input_style_edicion_td");
-
 				input.setAttribute("type", "text");
 				input.setAttribute("value", name_cel[siz_c]);
 				input.setAttribute("readonly", "");
+				input.setAttribute("disabled", "");
 				input.setAttribute("class","colum_name_style");
 				celda.innerHTML= input.outerHTML;
-			
 				fila.appendChild(celda);
-
 			}
 			//--------------------------------------------------------------------------------------------------
 			else if(siz_f==1){
@@ -341,7 +329,6 @@ function create_table_rp(){
 
 				//Cuadro De nombres
 				if (siz_c==0){
-					input.setAttribute("class","input_style_td");
 					input.setAttribute("class","input_style_edicion_td");
 					input.setAttribute("type", "text");
 					input.setAttribute("onFocus", "ocultar_input();");
@@ -349,7 +336,6 @@ function create_table_rp(){
 				}
 				//Cuadro cantidad
 				if (siz_c==1){
-					input.setAttribute("class","input_style_td");
 					input.setAttribute("class","input_style_edicion_td");
 					input.setAttribute("type", "number");
 					input.setAttribute("step", "any");
@@ -358,12 +344,10 @@ function create_table_rp(){
 				}
 				//Cuadros de entrada numerica
 				if(siz_c==2 || siz_c==3){
-					input.setAttribute("class","input_style_td");
 					input.setAttribute("onclick","get_celda_value_rp();");
 					input.setAttribute("onkeyup","get_celda_value_rp();");
 					input.setAttribute("onchange","get_celda_value_rp();");
 					input.setAttribute("onblur",'ocultar_input();');
-
 					input.setAttribute("class","input_style_hidden");
 
 					//para la mask del cuadro
@@ -374,8 +358,15 @@ function create_table_rp(){
 					celda.appendChild(tex_mask);
 					celda.appendChild(input);
 				}
+				//Cuadros de solo lectura
 				if(siz_c==4){
-					celda.innerHTML = "<input type='text' id='inputrp14' class='input_style_td' readonly='';>"
+					input.setAttribute("placeholder","0.00 "+gl_mon_b+" / 0.00 "+gl_mon_a);
+					input.setAttribute("class","input_style_td");
+					input.setAttribute("type", "text");
+					input.setAttribute("readonly", "");
+					input.setAttribute("disabled", "");
+					input.setAttribute("onFocus", "ocultar_input();");
+					celda.appendChild(input);
 				}
 				if(siz_c==5){
 					celda.setAttribute("class", "button_style_r");
@@ -395,9 +386,7 @@ function create_table_rp(){
 
 	// posicionamos el <tbody> debajo del elemento <table>
 	tabla.appendChild(tblBody);
-
 	sect_table.appendChild(tabla);  ///innerHTML = tabla.innerHTML;
-
 	return null;
 }
 

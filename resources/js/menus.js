@@ -128,18 +128,15 @@ function mostrar_input() {
 function ocultar_input(id = null) {
 	var current_input = document.activeElement;
 	var current_id_name = current_input.id;
-
-
 	var input_old = current_element;
 
-	console.log(id +" :: "+current_element +" :: "+current_id_name);
+	//console.log(id +" :: "+current_element +" :: "+current_id_name);
 	if(id){
 		var input = document.getElementById(id);
 		if(input){
 			var id_mask = id.replace("input", "text_mask"); //remplaza  palabaras en cadenas de texto
-			console.log(id_mask)
+			//console.log(id_mask)
 			var mask = document.getElementById(id_mask);
-
 			input.setAttribute("class","input_style_visible");
 			mask.setAttribute("disabled", "");
 			input.focus();

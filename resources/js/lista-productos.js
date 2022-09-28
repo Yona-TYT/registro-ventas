@@ -206,11 +206,18 @@ function button_selec_product(index){
 	var cantidad = document.getElementById("inputlp11");
 	var margen = document.getElementById("inputlp12");
 	var precio = document.getElementById("inputlp13");
-	var pdol = document.getElementById("inputlp14");
-	var pbsf = document.getElementById("inputlp14");
 
 	var margen_mask = document.getElementById("text_masklp12");
 	var precio_mask = document.getElementById("text_masklp13");
+
+	nombre.removeAttribute("disabled");
+	cantidad.removeAttribute("disabled");
+	margen.removeAttribute("disabled");
+	precio.removeAttribute("disabled");
+	margen_mask.removeAttribute("disabled");
+	precio_mask.removeAttribute("disabled");
+
+
 
 	nombre.value = r_nombre.toLowerCase();
 	cantidad.value = r_cantidad;
@@ -322,7 +329,7 @@ function update_product_cu(){
 
 		var prod_activ = gl_products[gl_current_selec].products.active;
 
-		console.log(prod_activ);
+		//console.log(prod_activ);
 
 		//Se obtienen los valores de cada uno
 		var unimargen = margen.value;
