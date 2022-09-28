@@ -160,7 +160,7 @@ function add_text_fila(index,opt){
 
 		var values_tx = (prod_activ?"":"(Inactivo) ")+r_nombre+" Cantidad ("+r_cantidad+") Margen c/u ("+get_mask_simple(r_margen,"%")+") Entrada c/u ("+get_mask(r_precio,gl_mon_b)+")";
 
-		var tx_a = "<div class='"+(prod_activ?"div_list_style":"element_style_disable")+"' id='divlp"+index+"' onclick='button_selec_product("+index+");'><button type='button' class='butt_style' onclick='button_selec_product("+index+");'>Seleccionar</button> "+values_tx+"</div>";
+		var tx_a = "<div class='"+(prod_activ?"div_list_style":"element_style_disable")+"' id='divlp"+index+"' onclick='button_selec_product("+index+");'><button type='button' class='butt_style'>Seleccionar</button> "+values_tx+"</div>";
 
 		if(gl_curr_list_etd_sel == "Todas") {
 			return tx_a;

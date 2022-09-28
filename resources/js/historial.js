@@ -77,7 +77,7 @@ function crear_historial(index) {
 		var secc_his = document.getElementById("historialventa");
 		var titulo = "["+cl+", "+est_txa+ "], "+fecha+" "+hora+" <strong class='total_style'>Total: "+get_mask(prdol,gl_mon_b)+" / "+get_mask(prbsf,gl_mon_a+" </strong>");
 
-		var buttm = "<button type='button' class='butt_style' onclick='button_detalles("+index+");'>Detalles</button>";
+		var buttm = "<button type='button' class='butt_style'>Detalles</button>";
 
 		var buttq = "";
 		if(estado=="Aprobada")
@@ -168,7 +168,6 @@ function button_reint_hist(index) {
 		for (var j = 0; j < listindex.length ; j++) {
 			var lindex = parseInt(listindex[j]);
 			var num = listdesc[j];
-			alert("index: "+lindex);
 			var prod = gl_products[lindex].products;
 			//console.log("Name:"+prod.nombre+" Cant: "+prod.cantidad+" New Can: "+ (prod.cantidad + num))
 			prod.cantidad = parseFloat(prod.cantidad)? parseFloat(prod.cantidad):0;
