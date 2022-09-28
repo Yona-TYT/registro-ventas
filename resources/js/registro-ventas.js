@@ -231,21 +231,22 @@ function mostrar_lista_rv() {
 
 }
 function button_borr_venta(index){
+	var butt = document.activeElement;
 	active_butt();
 	var clave = gl_venta_rv.clave[index];
-	//if(clave==gl_list[gl_currt_list_selec].clave){
-		document.getElementById("divrv"+index).remove();
-		gl_venta_rv.listnomb.splice(index, 1);
-		gl_venta_rv.clave.splice(index, 1);
-		gl_venta_rv.index.splice(index, 1);
-		gl_venta_rv.nombre.splice(index, 1);
-		gl_venta_rv.prdol.splice(index, 1);
-		gl_venta_rv.prbsf.splice(index, 1);
-		gl_venta_rv.totalvent.splice(index, 1);
 
-		gl_venta_rv.count--;
-		mostrar_lista_rv()
-	//}
+	document.getElementById("divrv"+index).remove();
+	gl_venta_rv.listnomb.splice(index, 1);
+	gl_venta_rv.clave.splice(index, 1);
+	gl_venta_rv.index.splice(index, 1);
+	gl_venta_rv.nombre.splice(index, 1);
+	gl_venta_rv.prdol.splice(index, 1);
+	gl_venta_rv.prbsf.splice(index, 1);
+	gl_venta_rv.totalvent.splice(index, 1);
+
+	gl_venta_rv.count--;
+	mostrar_lista_rv()
+	input.setAttribute("disabled", "");
 }
 function reset_inputs_rv() {
 	gl_lista_rv = new lista_actual_rv();
