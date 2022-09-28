@@ -246,7 +246,7 @@ function button_borr_venta(index){
 
 	gl_venta_rv.count--;
 	mostrar_lista_rv()
-	input.setAttribute("disabled", "");
+	butt.setAttribute("disabled", "");
 }
 function reset_inputs_rv() {
 	gl_lista_rv = new lista_actual_rv();
