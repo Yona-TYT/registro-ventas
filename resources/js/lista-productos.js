@@ -178,7 +178,6 @@ function add_text_fila(index){
 	return "";
 }
 function button_unselc_style(id){
-	console.log(id)
 	var elm = document.getElementById(id);
 	elm.setAttribute("class", "butt_style");
 }
@@ -191,7 +190,6 @@ function button_selec_product(index){
 	butt.setAttribute("onBlur" , 'button_unselc_style(\''+('buttsel'+index)+'\');')
 	if(gl_curr_butt)gl_curr_butt.setAttribute("class", "butt_style");
 	gl_curr_butt = butt;
-
 
 	var r_nombre = gl_products[index].products.nombre?gl_products[index].products.nombre:"";
 	var r_cantidad = gl_products[index].products.cantidad?gl_products[index].products.cantidad:0;
@@ -213,8 +211,6 @@ function button_selec_product(index){
 	margen_mask.removeAttribute("disabled");
 	precio_mask.removeAttribute("disabled");
 
-
-
 	nombre.value = r_nombre.toLowerCase();
 	cantidad.value = r_cantidad;
 	margen.value = r_margen;
@@ -226,7 +222,35 @@ function button_selec_product(index){
 	update_input_lectura();
 }
 
+function reset_input(){
+	gl_current_selec = null;
+	var nombre = document.getElementById("inputlp10");
+	var cantidad = document.getElementById("inputlp11");
+	var margen = document.getElementById("inputlp12");
+	var precio = document.getElementById("inputlp13");
+	var lectura = document.getElementById("inputlp14");
+
+	var margen_mask = document.getElementById("text_masklp12");
+	var precio_mask = document.getElementById("text_masklp13");
+
+	nombre.setAttribute("disabled","");
+	cantidad.setAttribute("disabled","");
+	margen.setAttribute("disabled","");
+	precio.setAttribute("disabled","");
+	margen_mask.setAttribute("disabled","");
+	precio_mask.setAttribute("disabled","");
+
+	nombre.value = "";
+	cantidad.value = "";
+	margen.value = "";
+	margen_mask.value = "";
+	precio.value = "";
+	precio_mask.value = "";
+	lectura.value = "";
+}
+
 function buscar_lista(text) {
+	reset_input();
 	var result = true;
 	var siz = gl_products.length;
 	var tx_siz = text.length;
@@ -259,11 +283,9 @@ function buscar_lista(text) {
 					el_unselec();
 				}
 			}
-
 			div.setAttribute("class","div_list_style");
 		}
 		else{
-
 			div.setAttribute("class","element_style_hidden");
 		}
 	}

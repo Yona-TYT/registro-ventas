@@ -106,8 +106,6 @@ function crear_datalist(list,id) {
 //Genera los datalist
 function set_datalist_list(index, activ) {
 	var data_lista = document.getElementById('optlist'+index);
-	console.log(index)
-
 	var data_lista = document.getElementById("listproducts");
 	if(activ){
 		gl_data_list[index] = "<option id='optlist"+index+"' value='"+gl_products[index].products.nombre+"'>";
@@ -246,9 +244,17 @@ function set_lev_datalist(siz){
 		input.removeAttribute("list");
 }
 
-function elm_show_list(){
+function elm_show_list(force = false){
 	var input = document.activeElement;
-	input.setAttribute("list","listproducts");
+	if(force){
+		input.setAttribute("onfocus","el_selec(false);");
+		input.blur();
+		input.focus();
+		input.setAttribute("onfocus","el_selec(true);");
+	}
+	else
+		input.setAttribute("list","listproducts");
+
 }
 
 

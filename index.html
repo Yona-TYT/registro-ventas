@@ -107,7 +107,7 @@
 
 		<section class="label_style" id="seccion1">
 			<div class="cajas_style">Buscara productos: 
-				<input class="mask_style" type="search" id="buscar_rv" placeholder="Ingrese Nombre de Producto" onfocus="el_selec(true);" onclick="elm_show_list();">
+				<input class="mask_style" type="search" id="buscar_rv" placeholder="Ingrese Nombre de Producto" onfocus="el_selec(true);" onclick="elm_show_list();"  ondblclick="elm_show_list(true);">
 			</div>
 			<section class="label_style" id="sect_rv"></section>
 			<div class="cajas_style">Total en Dolar: <input class="input_style_td" type="text" id="rv_totaldol" value="0" disabled></div>
@@ -160,7 +160,7 @@
 				<label for="selectlistaname">Nombre de Lista: </label>
 				<input class="mask_style" type="text" id="inputlistaname" oninput="input_to_selec();" onBlur="input_to_selec();" onfocus="el_selec('inputlistaname');">
 			</div>
-			<div class="cajas_style">Buscara productos: <input class="mask_style" type="search" id="buscar" placeholder="Buscar Productos" list="listproducts" onfocus="el_selec(true);" onclick="elm_show_list();">
+			<div class="cajas_style">Buscara productos: <input class="mask_style" type="search" id="buscar" placeholder="Buscar Productos" list="listproducts" onfocus="el_selec(true);" onclick="elm_show_list();" ondblclick="elm_show_list(true);">
 			</div>
 
 			<div class="cajas_style">Por Estado: 
