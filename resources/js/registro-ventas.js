@@ -309,7 +309,7 @@ function guardar_venta() {
 
 	var cl_nombre = document.getElementById("rv_clnombre");
 	if(gl_venta_rv.count>0){
-
+		active_butt();
 		//console.log("Finished:" + (cl_nombre.value == ""?"N/A": cl_nombre.value));
 
 		var input_pend = document.getElementById("pend_mark");
