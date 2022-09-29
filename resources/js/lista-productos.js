@@ -222,9 +222,13 @@ function button_selec_product(index){
 	//Test cambia tamaño de la fuente para ajustar a l espacio pequeño
 	if(nombre.value.length >20)
 		nombre.style.fontSize = "80%";
+	
+	else nombre.style.fontSize = "100%";
 
 	if(precio_mask.value.length>25)
 		precio_mask.style.fontSize = "80%";
+
+	else precio_mask.style.fontSize = "100%";
 	//----------------------------------------------------------------
 
 	//Se actualizan los inputs de solo lectura
@@ -232,6 +236,10 @@ function button_selec_product(index){
 }
 
 function reset_inputs_lp(){
+	if(gl_curr_butt){
+		gl_curr_butt.setAttribute("class", "butt_style");
+		gl_curr_butt = null;
+	}
 	gl_current_selec = null;
 	var nombre = document.getElementById("inputlp10");
 	var cantidad = document.getElementById("inputlp11");
@@ -421,6 +429,8 @@ function update_input_lectura(){
 	//Test cambia tamaño de la fuente para ajustar a l espacio pequeño
 	if(input.length>20)
 		input.style.fontSize = "80%";
+
+	else input.style.fontSize = "100%";
 	//----------------------------------------------------------------
 }
 

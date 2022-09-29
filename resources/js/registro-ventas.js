@@ -98,9 +98,11 @@ function update_list_rv(){
 			//Test cambia tamaño de la fuente para ajustar a l espacio pequeño
 			if(nombre.length>20)
 				input_nomb.style.fontSize = "80%";
+			else 	input_nomb.style.fontSize = "100%";
 
 			if(input_pbsf.value.length>25)
 				input_pbsf.style.fontSize = "80%";
+			else input_pbsf.style.fontSize = "100%";
 			//----------------------------------------------------------------
 
 			gl_lista_rv.index[j] = index;

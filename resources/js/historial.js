@@ -279,12 +279,8 @@ function eliminar_todo(opt){
 	}
 }
 function clear_history(){
-
-	remover_ventas();
-
-	gl_hist_save = new reg_ventas();
-	gl_lista_rv = new reg_ventas();
-
+	var input = document.getElementById("totalhist");
+	input.value = 0;
 	//Restaura los valores de control del historial
 	gl_general.fechalist = new Array();
 	gl_general.fecha = null;
@@ -296,6 +292,9 @@ function clear_history(){
 
 	var secc_his = document.getElementById("historialventa");
 	secc_his.innerHTML = "";
+
+	gl_hist_save = new reg_ventas();
+	remover_ventas();
 }
 
 
