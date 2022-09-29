@@ -25,8 +25,11 @@ function mostrar_lista_menu(){
 		lista.setAttribute("class","header_div");
 		menu.setAttribute("class","element_style_hidden");
 	}
-	else
-		lista.setAttribute("class","element_style_hidden");
+}
+
+function ocultar_lista_menu(){
+	var lista = document.getElementById("allmenu");
+	lista.setAttribute("class","element_style_hidden");
 }
 
 function visible_element(opt) {
