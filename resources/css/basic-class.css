@@ -18,7 +18,7 @@
 
 	position: fixed;
 	width: 100%;
-	top: calc(100% - 45px);
+	top: calc(100% - 52px);
 	z-index: 10;
 }
 
@@ -32,7 +32,7 @@
 .icon_menu {
 	float: right;
 	position: relative;
-	left: calc(-50% + 100px);
+	left: calc(-50% + 150px);
 	text-align: left;
 }
 
