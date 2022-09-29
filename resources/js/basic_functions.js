@@ -245,6 +245,7 @@ function set_lev_datalist(siz){
 }
 
 function elm_show_list(force = false){
+	alert(force);
 	var input = document.activeElement;
 	if(force){
 		input.blur();
