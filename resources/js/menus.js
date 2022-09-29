@@ -18,6 +18,7 @@ function menu_main(){
 
 function mostrar_lista_menu(){
 	var elm = document.activeElement;
+	alert(elm.tagName)
 	if(elm.tagName == "INPUT")
 		return null;
 
