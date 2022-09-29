@@ -42,13 +42,8 @@ function ocultar_lista_menu(){
 }
 
 function visible_element(opt) {
-	var lista = document.getElementById("menulist");
-	lista.setAttribute("class","element_style_hidden");
 
-	//Cambia el titulo del al menu seleccionado
-	var title = document.getElementById("div_title");
-	var menu_opt = document.getElementById("menuopt"+opt);
-	title.innerHTML = menu_opt.innerHTML;
+
 
 	for(var j = 1; j<6;j++){
 		var bot_temp = document.getElementById("butopt"+j);
