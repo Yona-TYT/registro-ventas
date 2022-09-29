@@ -17,6 +17,10 @@ function menu_main(){
 }
 
 function mostrar_lista_menu(){
+	var elm = document.activeElement;
+	if(elm.tagName == "INPUT")
+		return null;
+
 	var lista = document.getElementById("allmenu");
 	var menu = document.getElementById("iconmenu");
 
@@ -31,7 +35,7 @@ gl_menu_sw = false;
 function ocultar_lista_menu(){
 	var lista = document.getElementById("allmenu");
 	var class_name = lista.className;
-	if(class_name != "element_style_hidden"){
+	if(class_name != "element_style_hidden" && gl_mobil){
 		if(gl_menu_sw){
 			lista.setAttribute("class","element_style_hidden");
 			gl_menu_sw = false;
@@ -42,8 +46,8 @@ function ocultar_lista_menu(){
 }
 
 function visible_element(opt) {
-
-
+	var lista = document.getElementById("allmenu");
+	lista.setAttribute("class","element_style_hidden");
 
 	for(var j = 1; j<6;j++){
 		var bot_temp = document.getElementById("butopt"+j);
