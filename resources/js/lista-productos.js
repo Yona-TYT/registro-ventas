@@ -218,11 +218,19 @@ function button_selec_product(index){
 	precio.value = r_precio;
 	precio_mask.value = get_mask(r_precio,gl_mon_b);
 
+	//Test cambia tamaño de la fuente para ajustar a l espacio pequeño
+	if(nombre.value.length >20)
+		nombre.style.fontSize = "80%";
+
+	if(precio_mask.value.length>25)
+		precio_mask.style.fontSize = "80%";
+	//----------------------------------------------------------------
+
 	//Se actualizan los inputs de solo lectura
 	update_input_lectura();
 }
 
-function reset_input(){
+function reset_inputs_lp(){
 	gl_current_selec = null;
 	var nombre = document.getElementById("inputlp10");
 	var cantidad = document.getElementById("inputlp11");
@@ -250,7 +258,7 @@ function reset_input(){
 }
 
 function buscar_lista(text) {
-	reset_input();
+	reset_inputs_lp();
 	var result = true;
 	var siz = gl_products.length;
 	var tx_siz = text.length;
@@ -392,22 +400,27 @@ function update_product_cu(){
 }
 
 function update_input_lectura(){
-		var input = document.getElementById("inputlp14");
+	var input = document.getElementById("inputlp14");
 
-		//Se otienen los valores generles
-		var gen_margen = gl_general.gen_margen;
-		var gen_bsf = gl_general.gen_bs;
+	//Se otienen los valores generles
+	var gen_margen = gl_general.gen_margen;
+	var gen_bsf = gl_general.gen_bs;
 
-		//Se obtienen los valores de cada uno
-		var unimargen = gl_products[gl_current_selec].products.margen;
-		var celd_precio = gl_products[gl_current_selec].products.precio;
+	//Se obtienen los valores de cada uno
+	var unimargen = gl_products[gl_current_selec].products.margen;
+	var celd_precio = gl_products[gl_current_selec].products.precio;
 
-		//Se calculan los precios
-		var dolar = calc_dolarporunidad(gen_margen, unimargen, celd_precio).toFixed(2);
-		var calc = calc_bolivarprecio(gen_bsf, dolar).toFixed(2);
+	//Se calculan los precios
+	var dolar = calc_dolarporunidad(gen_margen, unimargen, celd_precio).toFixed(2);
+	var calc = calc_bolivarprecio(gen_bsf, dolar).toFixed(2);
 
-		//Valores de inputs solo lectura
-		input.value = ""+get_mask(dolar,gl_mon_b)+" / "+get_mask(calc,gl_mon_a);
+	//Valores de inputs solo lectura
+	input.value = ""+get_mask(dolar,gl_mon_b)+" / "+get_mask(calc,gl_mon_a);
+
+	//Test cambia tamaño de la fuente para ajustar a l espacio pequeño
+	if(input.length>20)
+		input.style.fontSize = "80%";
+	//----------------------------------------------------------------
 }
 
 function remove_product(){

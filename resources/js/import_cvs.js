@@ -231,6 +231,8 @@ function recovery_simple_list() {
 
 		gl_result_temp = new Array();
 		alert("Lista Guardada Correctamente.");
+		reset_inputs_lp();
+		reset_inputs_rv();
 
 		var butt = document.getElementById("butlistimport");
 		butt.disabled = false;
@@ -325,6 +327,8 @@ function recovery_data() {
 	gl_result_temp = new Array();
 	save_expdate = new Array;
 	alert("Lista Guardada Correctamente.");
+	reset_inputs_lp();
+	reset_inputs_rv();
 
 	butt.disabled = false;
 	butt.setAttribute("class", "mask_style");
