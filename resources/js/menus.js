@@ -35,7 +35,7 @@ function mostrar_lista_menu(){
 gl_menu_sw = false;
 function ocultar_lista_menu(){
 	var elm = document.activeElement;
-	alert(elm.tagName)
+	//alert(elm.tagName)
 	if(elm.tagName == "BUTTON")
 		return null;
 
