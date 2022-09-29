@@ -25,13 +25,13 @@
 .icon_menu {
 	float: right;
 	position: relative;
-	left: calc(-50% + 180px);
+	left: calc(-50% + 100px);
 	text-align: left;
 }
 
 .icon_menu_start {
 	position: fixed;
-	top: calc(100% - 75px);
+	top: calc(100% - 42px);
 	z-index: 10;
 
 
@@ -42,11 +42,11 @@
 
 .icon_style{
 	background:rgba(55, 64, 145, 0.4);
-border: 1px solid #c0cbd9;
-border-radius: 5px;
-
-	width: 50px;
+	border: 1px solid #c0cbd9;
+	border-radius: 5px;
 	padding: 5px 5px;
+	width: 25px;
+
 
 }
 .cajas_style {
