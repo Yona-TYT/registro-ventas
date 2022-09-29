@@ -1,4 +1,5 @@
 :root {
+	--color-text: #fffffe;
 	--siz-text: 95%;
 	--siz-text-small: 87%;
 	--all-height: 100%;
@@ -11,6 +12,32 @@
 	--cel-siz-name: 100%;
 }
 
+.header_div {
+	background: #C2C8CC;
+	background: rgba(33, 159, 144, 0.7);
+
+
+	margin: 5px auto 0;
+	position: fixed;
+	width: 100%;
+	top: calc(100% - 60px);
+	z-index: 10;
+}
+
+.icon_menu {
+	 float: right;
+
+  position: relative;
+
+  left: calc(-50% + 180px);
+  text-align: left;
+}
+
+.icon_style{
+	width: 50px;
+	padding: 0 10px;
+
+}
 .cajas_style {
 
 	display:var(--caja-disp);

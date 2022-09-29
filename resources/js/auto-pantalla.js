@@ -11,7 +11,7 @@ function check_windows_siz() {
 	var menu_list = document.getElementById("allmenu");
 	var menu_butt = document.getElementById("allbutons");
 
-
+	return gl_mobil = true;
 	if(ancho < 1024){
 		//console.log(+ancho+"  " +font_siz);
 		menu_list.setAttribute("class","");
