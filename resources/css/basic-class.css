@@ -36,8 +36,6 @@
 	text-align: left;
 }
 
-
-
 .icon_style{
 	background:rgba(33, 159, 144, 0.7);
 	border: 1px solid #c0cbd9;
@@ -46,6 +44,10 @@
 	width: 30px;
 
 
+}
+.icon_butt{
+	background:rgba(33, 159, 144, 0);
+	border: 1px solid rgba(33, 159, 144, 0);
 }
 .cajas_style {
 
