@@ -12,8 +12,10 @@ function check_windows_siz() {
 	var menu_butt = document.getElementById("allbutons");
 
 	if(ancho < 1024){
+		console.log(gl_menu_sw)
 		//console.log(+ancho+"  " +font_siz);
-		menu_list.setAttribute("class","header_div");
+		if(gl_menu_sw)
+			menu_list.setAttribute("class","header_div");
 		menu_butt.setAttribute("class","element_style_hidden");	
 		if(!gl_mobil) {
 			//console.log(+ancho+"  " +font_siz);
