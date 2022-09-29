@@ -42,7 +42,7 @@
 		<! Fin del CSS -->
 	</head>
 	<body onLoad="init();" >
-		 <button class="" type="button" id="but_test" onclick="click_test();"> Test</button> 
+		 <!<button class="" type="button" id="but_test" onclick="click_test();"> <!Test</button> 
 
 		<! ---------------- Muestra una ventana emergente  ------------------>
 		<dialog id="dialog" class="input_style_visible">
@@ -56,16 +56,16 @@
 
 			<h1 class="input_style_td">Lista de negocios</h1>
 
-			<div class="icon_menu_start">
-				<img class="input_style_hidden" src="resources/img/svg/menu.svg">
+			<div class="icon_menu_start" id = "iconmenu"  >
+				<img class="icon_style" src="resources/img/svg/menu.svg" onclick="mostrar_lista_menu();">
 			</div>
-			<div class="header_div" id="allmenu">
+			<div class="input_style_hidden" id="allmenu">
 				<div class="icon_menu">
-					<img class="icon_style" src="resources/img/svg/1.svg">
-					<img class="icon_style" src="resources/img/svg/2.svg">
-					<img class="icon_style" src="resources/img/svg/3.svg">
-					<img class="icon_style" src="resources/img/svg/4.svg">
-					<img class="icon_style" src="resources/img/svg/5.svg">
+					<img class="icon_style" src="resources/img/svg/1.svg" onclick="visible_element(1);">
+					<img class="icon_style" src="resources/img/svg/2.svg" onclick="visible_element(3);">
+					<img class="icon_style" src="resources/img/svg/3.svg" onclick="visible_element(4);">
+					<img class="icon_style" src="resources/img/svg/4.svg" onclick="visible_element(2);">
+					<img class="icon_style" src="resources/img/svg/5.svg" onclick="visible_element(5);">
 				</div>
 				<div class="input_style_hidden">
 					<button class="mask_style" type="button" id="butmenu" onclick="mostrar_lista_menu();"> Menu </button>

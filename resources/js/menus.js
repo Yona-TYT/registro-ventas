@@ -17,10 +17,14 @@ function menu_main(){
 }
 
 function mostrar_lista_menu(){
-	var lista = document.getElementById("menulist");
+	var lista = document.getElementById("allmenu");
+	var menu = document.getElementById("iconmenu");
+
 	var class_name = lista.className;
-	if(class_name == "element_style_hidden")
-		lista.setAttribute("class","");
+	if(class_name == "element_style_hidden"){
+		lista.setAttribute("class","header_div");
+		menu.setAttribute("class","element_style_hidden");
+	}
 	else
 		lista.setAttribute("class","element_style_hidden");
 }
