@@ -1,5 +1,5 @@
-gl_curr_list_etd_sel = "Todas";
-gl_data_list = new Array();
+var gl_curr_list_etd_sel = "Todas";
+var gl_data_list = new Array();
 function lista_produc_main() {
 
 	//Comprueba y activa/desactiva el modo editor
@@ -34,7 +34,7 @@ function selec_list_estado(id) {
 	var current_opt = selec.options[selec.selectedIndex];
 	gl_curr_list_etd_sel = current_opt.value;
 
-	console.log(gl_curr_list_etd_sel);
+	//console.log(gl_curr_list_etd_sel);
 	crear_lista_productos();
 }
 
@@ -123,6 +123,7 @@ function load_edit_input(j,i){
 }
 
 function crear_lista_productos() {
+	gl_data_list = new Array();
 	var sect_lista = document.getElementById("listageneral");
 	var data_lista = document.getElementById("listproducts");
 	sect_lista.innerHTML = "";
