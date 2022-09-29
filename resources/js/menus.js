@@ -27,11 +27,17 @@ function mostrar_lista_menu(){
 	}
 }
 
+gl_menu_sw = true;
 function ocultar_lista_menu(){
 	var lista = document.getElementById("allmenu");
 	var class_name = lista.className;
 	if(class_name != "element_style_hidden"){
-		lista.setAttribute("class","element_style_hidden");
+		if(gl_menu_sw){
+			lista.setAttribute("class","element_style_hidden");
+			gl_menu_sw = false;
+			return null;
+		}
+		gl_menu_sw = true;
 	}
 }
 
