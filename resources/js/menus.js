@@ -27,7 +27,7 @@ function mostrar_lista_menu(){
 	}
 }
 
-gl_menu_sw = true;
+gl_menu_sw = false;
 function ocultar_lista_menu(){
 	var lista = document.getElementById("allmenu");
 	var class_name = lista.className;
