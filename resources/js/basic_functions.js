@@ -245,15 +245,18 @@ function set_lev_datalist(siz){
 }
 
 function elm_show_list(force = false){
-	alert(force);
+
 	var input = document.activeElement;
-	if(force){
+	var att = input.getAttribute("list"); 
+	//console.log(att)
+	input.setAttribute("list","listproducts");
+	if(!att){
 		input.blur();
 		input.focus();
 		input.setAttribute("onfocus","el_selec(true);");
 	}
-	else
-		input.setAttribute("list","listproducts");
+	
+
 
 }
 
