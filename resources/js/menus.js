@@ -34,15 +34,16 @@ function ocultar_lista_menu(){
 	var elm = document.activeElement;
 	//alert(elm.tagName)
 
+	if(elm.tagName == "INPUT"){
+		var lista = document.getElementById("allmenu");
+		var class_name = lista.className;
+		if(class_name != "element_style_hidden"){
 
-	var lista = document.getElementById("allmenu");
-	var class_name = lista.className;
-	if(class_name != "element_style_hidden"){
+			lista.setAttribute("class","element_style_hidden");
 
-		lista.setAttribute("class","element_style_hidden");
-
-		return null;
-	
+			return null;
+		
+		}
 	}
 }
 
