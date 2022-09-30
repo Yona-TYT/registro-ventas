@@ -38,11 +38,8 @@ function ocultar_lista_menu(){
 		var lista = document.getElementById("allmenu");
 		var class_name = lista.className;
 		if(class_name != "element_style_hidden"){
-
 			lista.setAttribute("class","element_style_hidden");
-
 			return null;
-		
 		}
 	}
 }
