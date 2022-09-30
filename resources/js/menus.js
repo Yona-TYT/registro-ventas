@@ -56,15 +56,17 @@ function visible_element(opt) {
 	var lista = document.getElementById("allmenu");
 	//lista.setAttribute("class","element_style_hidden");
 
+	var tem_name = gl_mobil?"butico":"butopt";
+	var clas_nam = gl_mobil?"icon_butt":"butt_menu_style";
+
 	for(var j = 1; j<6;j++){
-		var bot_temp = document.getElementById("butopt"+j);
-		bot_temp.setAttribute("class","butt_menu_style");
-		
+		var bot_temp = document.getElementById(tem_name+j);
+		bot_temp.setAttribute("class",clas_nam);
 	}
 
-	var bott = document.getElementById("butopt"+opt);
+	var bott = document.getElementById(tem_name+opt);
 	if(bott)
-		bott.setAttribute("class","butt_selec_style");
+		bott.setAttribute("class",(gl_mobil?"icon_butt_selec":"butt_selec_style"));
 
 	var sec_regvent = document.getElementById("seccion1");
 	var sec_regpro = document.getElementById("seccion2");

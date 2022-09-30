@@ -42,6 +42,11 @@
 	background:rgba(33, 159, 144, 0);
 	border: 1px solid rgba(33, 159, 144, 0);
 }
+.icon_butt_selec{
+	background: rgba(206, 24, 30, 0.5);
+	border: 1px solid rgba(33, 159, 144, 0);
+}
+
 .cajas_style {
 
 	display:var(--caja-disp);
