@@ -183,6 +183,16 @@ function active_butt(){
 }
 
 
+function input_to_one(){
+	var id_list = ["rvinput14", "rvinput24", "rvinput34", "rvinput44"]
+	for (var j = 0; j < (gl_mobil? 1 : id_list.length); j++) {
+		var id = id_list[j];
+		var input = document.getElementById(id);
+		input.value = 1;
+	}
+}
+
+
 function comparar_rv(index) {
 	var nr = gl_venta_rv.count;
 	for (var i = 0; i <nr; i++) {
@@ -367,7 +377,7 @@ function guardar_venta() {
 		agregar_ventas(gl_lista_ventas);				//Guarda los datos de la venta
 		mostrar_ventas(gl_general.clv_max);			//Muestra la venta en el historial
 		//------------------------------------------------------------------------
-		reset_inputs_rv();
+		input_to_one();
 	}
 
 	else {
