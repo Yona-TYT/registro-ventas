@@ -16,13 +16,13 @@ function menu_main(){
 	var select1 = document.getElementById("selcregvent");
 }
 
-function mostrar_lista_menu(){
+function mostrar_lista_menu(is_pc=false){
 	var elm = document.activeElement;
 	//alert(elm.tagName)
 
 	var lista = document.getElementById("allmenu");
 	var class_name = lista.className;
-	if(class_name == "element_style_hidden"){
+	if(class_name == "element_style_hidden" && !is_pc){
 		lista.setAttribute("class","header_div");
 	}
 }
@@ -52,7 +52,7 @@ window.addEventListener("touchmove", function() {
 });
 
 window.addEventListener("mousemove", function() {
-	if(gl_is_touch === null) mostrar_lista_menu();
+	mostrar_lista_menu(true);
 });
 
 /*
@@ -137,7 +137,6 @@ function visible_element(opt) {
 		sec_impdata.setAttribute("class","label_style");
 	}
 
-	lista.setAttribute("class","element_style_hidden");
 }
 
 function mostrar_input() {
