@@ -39,11 +39,10 @@ function ocultar_lista_menu(){
 	var class_name = lista.className;
 	if(class_name != "element_style_hidden"){
 
-			lista.setAttribute("class","element_style_hidden");
+		lista.setAttribute("class","element_style_hidden");
 
-			return null;
-		
-
+		return null;
+	
 	}
 }
 
@@ -119,7 +118,7 @@ function mostrar_input() {
 	var id_name = mask.id;
 
 
-	mask.setAttribute("placeholder", "");
+	mask.setAttribute("placeholder", "Vacio");
 	var id_input = id_name.replace("text_mask", "input"); //remplaza  palabaras en cadenas de texto
 
 	var input = document.getElementById(id_input);

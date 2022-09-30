@@ -199,10 +199,10 @@ function create_table_rp(){
 					input.setAttribute("class","input_style_hidden");
 
 					//para la mask del cuadro
+					tex_mask.setAttribute("placeholder", "Vacio");
 					tex_mask.setAttribute("id", "text_maskrp"+celda_id);
 					tex_mask.setAttribute("onClick", "mostrar_input();");
 					tex_mask.setAttribute("onSelect", "mostrar_input();");
-					tex_mask.setAttribute("onFocus", 'ocultar_input(\''+name_id+'\');');
 					celda.appendChild(tex_mask);
 					celda.appendChild(input);
 				}
@@ -352,7 +352,7 @@ function create_table_lp(){
 					tex_mask.setAttribute("id", "text_masklp"+celda_id);
 					tex_mask.setAttribute("onClick", "mostrar_input();");
 					tex_mask.setAttribute("onSelect", "mostrar_input();");
-					tex_mask.setAttribute("onFocus", 'ocultar_input(\''+name_id+'\');');
+
 					tex_mask.setAttribute("disabled", "");
 					celda.appendChild(tex_mask);
 					celda.appendChild(input);
@@ -364,7 +364,6 @@ function create_table_lp(){
 					input.setAttribute("type", "text");
 					input.setAttribute("readonly", "");
 					input.setAttribute("disabled", "");
-					input.setAttribute("onFocus", "ocultar_input();");
 					celda.appendChild(input);
 				}
 				//Boton de Accion
