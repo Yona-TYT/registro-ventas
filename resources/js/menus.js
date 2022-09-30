@@ -20,8 +20,8 @@ function mostrar_lista_menu(){
 	var elm = document.activeElement;
 	//alert(elm.tagName)
 
+	}
 	var lista = document.getElementById("allmenu");
-
 	var class_name = lista.className;
 	if(class_name == "element_style_hidden"){
 		lista.setAttribute("class","header_div");
@@ -42,15 +42,33 @@ function ocultar_lista_menu(){
 		}
 	}
 }
+var gl_is_touch = null;
+window.addEventListener("touchstart", function() {
+	gl_is_touch = true;
 
+});
 
 window.addEventListener("touchmove", function() {
 	mostrar_lista_menu();
 });
 
 window.addEventListener("mousemove", function() {
-	if(gl_mobil) mostrar_lista_menu();
+	if(gl_is_touch === null) mostrar_lista_menu();
 });
+
+/*
+window.addEventListener('scroll', function() {
+
+    var elm = document.documentElement;
+
+		alert(elm.tagname + " :: "+ document.body.clientHeight)
+//if($(window).scrollTop() + $(window).height() >= $(document).height()) {
+    if ((elm.scrollHeight - elm.scrollTop) >= (document.body.clientHeight)) {
+        console.log(elm.scrollTop);
+
+		mostrar_lista_menu(true);
+	}
+});*/
 
 function visible_element(opt) {
 	var lista = document.getElementById("allmenu");
