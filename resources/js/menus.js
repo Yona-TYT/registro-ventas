@@ -19,8 +19,7 @@ function menu_main(){
 function mostrar_lista_menu(){
 	var elm = document.activeElement;
 	//alert(elm.tagName)
-	if(elm.tagName == "INPUT")
-		return null;
+
 	var lista = document.getElementById("allmenu");
 
 	var class_name = lista.className;
@@ -43,6 +42,11 @@ function ocultar_lista_menu(){
 		}
 	}
 }
+
+
+window.addEventListener("touchmove", function() {
+	mostrar_lista_menu();
+});
 
 function visible_element(opt) {
 	var lista = document.getElementById("allmenu");
@@ -109,6 +113,8 @@ function visible_element(opt) {
 		sec_regpro.setAttribute("class","element_style_hidden");
 		sec_impdata.setAttribute("class","label_style");
 	}
+
+	lista.setAttribute("class","element_style_hidden");
 }
 
 function mostrar_input() {
