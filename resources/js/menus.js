@@ -20,7 +20,6 @@ function mostrar_lista_menu(){
 	var elm = document.activeElement;
 	//alert(elm.tagName)
 
-	}
 	var lista = document.getElementById("allmenu");
 	var class_name = lista.className;
 	if(class_name == "element_style_hidden"){
