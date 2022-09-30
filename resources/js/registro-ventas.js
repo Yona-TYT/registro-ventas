@@ -98,7 +98,7 @@ function update_list_rv(){
 			//Test cambia tamaño de la fuente para ajustar a l espacio pequeño
 			if(nombre.length>20)
 				input_nomb.style.fontSize = "80%";
-			else 	input_nomb.style.fontSize = "100%";
+			else input_nomb.style.fontSize = "100%";
 
 			if(input_pbsf.value.length>25)
 				input_pbsf.style.fontSize = "80%";
@@ -294,7 +294,6 @@ function reset_inputs_rv() {
 			var input_pdbs = document.getElementById("rvinput"+i+""+3);
 			var input_tvent = document.getElementById("rvinput"+i+""+4);
 
-
 			input_nomb.value = "";
 			input_cant.value = "";
 			input_pdol.value = "";
@@ -339,7 +338,7 @@ function guardar_venta() {
 
 		var index = gl_lista_ventas.index;
 
-	//	var indexfec = gl_lista_ventas.indexfec;
+		//var indexfec = gl_lista_ventas.indexfec;
 		//var fechalist = gl_lista_ventas.fechalist[indexfec];
 
 		var hoy = new Date();
@@ -368,7 +367,9 @@ function guardar_venta() {
 		agregar_ventas(gl_lista_ventas);				//Guarda los datos de la venta
 		mostrar_ventas(gl_general.clv_max);			//Muestra la venta en el historial
 		//------------------------------------------------------------------------
+		reset_inputs_rv();
 	}
+
 	else {
 		alert("La lista esta vacia!.");
 	}
