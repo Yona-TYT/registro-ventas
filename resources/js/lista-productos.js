@@ -378,7 +378,7 @@ function update_product_cu(){
 		var sect_div = document.getElementById("divlp"+gl_current_selec);
 		prod_activ?	sect_div.setAttribute("class", "div_list_style") : sect_div.setAttribute("class", "element_style_disable");
 		var values_tx = nombre.value+" Cantidad ("+cantidad.value+") Margen c/u ("+margen_mask.value+") Entrada c/u ("+precio_mask.value+")";
-		sect_div.innerHTML = "<button type='button' class='butt_style' onclick='button_selec_product("+gl_current_selec+");'>Seleccionar</button> "+values_tx;
+		sect_div.innerHTML = "<button type='button' class='butt_style'  id='buttsel"+gl_current_selec+"' onclick='button_selec_product("+gl_current_selec+");'>Seleccionar</button> "+values_tx;
 
 		var product = new reg_curr_prod();
 		var curr_prod = new r_product();
