@@ -17,6 +17,7 @@ function menu_main(){
 }
 
 function mostrar_lista_menu(){
+	gl_menu_sw =false;
 	var elm = document.activeElement;
 	//alert(elm.tagName)
 	if(elm.tagName == "INPUT")
