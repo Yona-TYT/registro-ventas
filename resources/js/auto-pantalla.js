@@ -13,8 +13,9 @@ function check_windows_siz() {
 
 	if(ancho < 1024){
 		//console.log(+ancho+"  " +font_siz);
-		if(gl_menu_sw)
-			menu_list.setAttribute("class","header_div");
+		if(gl_mobil)
+			ocultar_lista_menu();
+
 		menu_butt.setAttribute("class","element_style_hidden");	
 		if(!gl_mobil) {
 			//console.log(+ancho+"  " +font_siz);
