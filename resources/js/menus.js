@@ -48,6 +48,10 @@ window.addEventListener("touchmove", function() {
 	mostrar_lista_menu();
 });
 
+window.addEventListener("mousemove", function() {
+	if(gl_mobil) mostrar_lista_menu();
+});
+
 function visible_element(opt) {
 	var lista = document.getElementById("allmenu");
 	//lista.setAttribute("class","element_style_hidden");
