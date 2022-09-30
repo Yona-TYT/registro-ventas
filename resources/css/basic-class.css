@@ -22,13 +22,6 @@
 	z-index: 10;
 }
 
-.icon_menu_start {
-	position: fixed;
-	top: calc(100% - 45px);
-	z-index: 10;
-	left: 10px;
-}
-
 .icon_menu {
 	float: right;
 	position: relative;
