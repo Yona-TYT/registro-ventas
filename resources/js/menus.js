@@ -52,7 +52,7 @@ window.addEventListener("touchmove", function() {
 });
 
 window.addEventListener("mousemove", function() {
-	mostrar_lista_menu(gl_mobil?false:true);
+	mostrar_lista_menu(true);
 });
 
 /*
