@@ -106,7 +106,7 @@ function update_list_rv(){
 			//----------------------------------------------------------------
 
 			gl_lista_rv.index[j] = index;
-			gl_lista_rv.nombre[j] = nombre;
+			gl_lista_rv.nombre[j] = nombre.toLowerCase();
 			gl_lista_rv.cantidad[j] = cantidad;
 			gl_lista_rv.precio[j] = precio;
 			gl_lista_rv.margen[j] = margen;
@@ -196,14 +196,11 @@ function input_to_one(){
 function comparar_rv(index) {
 	var nr = gl_venta_rv.count;
 	for (var i = 0; i <nr; i++) {
-		var clave = gl_venta_rv.clave[i];
-		if(clave==gl_currt_list_selec){
-			var new_index = gl_venta_rv.index[i];
-			if(new_index == index){
-				return false;
-				break;
-			}
-		}
+		var new_index = gl_venta_rv.index[i];
+		if(new_index == index){
+			return false;
+			break;
+		}	
 	}
 	return true;
 }
