@@ -52,7 +52,7 @@ window.addEventListener("touchmove", function() {
 });
 
 window.addEventListener("mousemove", function() {
-	mostrar_lista_menu(true);
+	mostrar_lista_menu(gl_mobil?false:true);
 });
 
 /*
@@ -71,7 +71,11 @@ window.addEventListener('scroll', function() {
 
 function visible_element(opt) {
 	var lista = document.getElementById("allmenu");
-	//lista.setAttribute("class","element_style_hidden");
+	var elm = document.activeElement;
+	if(elm.className == "icon_butt_selec"){
+		lista.setAttribute("class","element_style_hidden");
+		return null;
+	}
 
 	var tem_name = gl_mobil?"butico":"butopt";
 	var clas_nam = gl_mobil?"icon_butt":"butt_menu_style";
@@ -136,9 +140,6 @@ function visible_element(opt) {
 		sec_regpro.setAttribute("class","element_style_hidden");
 		sec_impdata.setAttribute("class","label_style");
 	}
-	var elm = document.activeElement;
-	if(elm == lista)
-		lista.setAttribute("class","element_style_hidden");
 }
 
 function mostrar_input() {
