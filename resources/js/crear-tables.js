@@ -195,7 +195,7 @@ function create_table_rp(){
 					input.setAttribute("onclick","get_celda_value_rp();");
 					input.setAttribute("onkeyup","get_celda_value_rp();");
 					input.setAttribute("onchange","get_celda_value_rp();");
-					input.setAttribute("onenter",'ocultar_input();');
+					input.setAttribute("onblur",'ocultar_input();');
 					input.setAttribute("class","input_style_hidden");
 
 					//para la mask del cuadro
@@ -347,7 +347,7 @@ function create_table_lp(){
 					input.setAttribute("onclick","update_product_cu();");
 					input.setAttribute("onkeyup","update_product_cu();");
 					input.setAttribute("onchange","update_product_cu();");
-					input.setAttribute("onenter",'ocultar_input();');
+					input.setAttribute("onblur",'ocultar_input();');
 					input.setAttribute("class","input_style_hidden");
 
 					//para la mask del cuadro
