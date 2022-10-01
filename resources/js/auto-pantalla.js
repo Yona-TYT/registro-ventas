@@ -13,10 +13,13 @@ function check_windows_siz() {
 
 	if(ancho < 1024){
 		//console.log(+ancho+"  " +font_siz);
-		if(gl_mobil)
+		if(gl_mobil){
 			ocultar_lista_menu();
 
-		ocultar_input();
+			var elm = document.activeElement;
+			if(elm.tagName == "BUTTON")
+				ocultar_input();
+		}
 
 		menu_butt.setAttribute("class","element_style_hidden");	
 		if(!gl_mobil) {
