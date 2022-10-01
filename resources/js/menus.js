@@ -136,7 +136,9 @@ function visible_element(opt) {
 		sec_regpro.setAttribute("class","element_style_hidden");
 		sec_impdata.setAttribute("class","label_style");
 	}
-
+	var elm = document.activeElement;
+	if(elm == lista)
+		lista.setAttribute("class","element_style_hidden");
 }
 
 function mostrar_input() {
