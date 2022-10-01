@@ -16,6 +16,8 @@ function check_windows_siz() {
 		if(gl_mobil)
 			ocultar_lista_menu();
 
+		ocultar_input();
+
 		menu_butt.setAttribute("class","element_style_hidden");	
 		if(!gl_mobil) {
 			//console.log(+ancho+"  " +font_siz);

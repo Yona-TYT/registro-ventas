@@ -225,7 +225,6 @@ function create_table_rp(){
 					button.innerHTML= "Registrar";
 					button.setAttribute("onclick","guardar_rp();");
 					button.setAttribute("onmouseover", "ocultar_input();");
-					button.setAttribute("ontouchstart", "ocultar_input();");
 					button.setAttribute("id", "buttrp"+j);
 					celda.appendChild(button);
 				}
@@ -379,7 +378,6 @@ function create_table_lp(){
 					button.innerHTML= "Activ / Desact";
 					button.setAttribute("onclick","remove_product();");
 					button.setAttribute("onmouseover", "ocultar_input();");
-					button.setAttribute("ontouchstart", "ocultar_input();");
 					button.setAttribute("id", "buttlp"+celda_id);
 					celda.appendChild(button);
 				}
