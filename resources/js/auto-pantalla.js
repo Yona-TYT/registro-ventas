@@ -17,7 +17,7 @@ function check_windows_siz() {
 			ocultar_lista_menu();
 
 			var elm = document.activeElement;
-			if(elm.tagName == "BUTTON")
+			if(elm.tagName != "INPUT")
 				ocultar_input();
 		}
 
