@@ -122,6 +122,51 @@ function load_edit_input(j,i){
 	input.setAttribute("onFocus", edit_mode?"ocultar_input();":"");
 }
 
+function buscar_lista(text) {
+	reset_inputs_lp();
+	var result = true;
+	var siz = gl_products.length<60? gl_products.length : 60;
+	var tx_siz = text.length;
+	set_lev_datalist(tx_siz);
+	text = text.toLowerCase();
+	//console.log("Finished: "+siz);
+	var test_ok = true;
+	for (var j = 0; j < siz; j++) {
+		var div = document.getElementById("divlp"+j);
+		//Obtine todas las columnas de nombres
+		var nombre = gl_products[j].products.nombre?gl_products[j].products.nombre:"";
+
+		if (nombre!=null) nombre = nombre.toLowerCase();
+		else continue;
+
+		result = nombre.includes(text);
+		//console.log("a:"+tx+"b:"+text.toLowerCase());
+		if(result){
+			if(test_ok){
+				test_ok = false;
+				//Deselecciona el elemento para ocultar teclado en android
+				const regex_a = /[^\w\.@-]/ig;		//Exp Regula, Elimina Caracteres especiales
+				text = text.replaceAll(regex_a, '')
+				nombre = nombre.replaceAll(regex_a, '')
+				//console.log("Text: "+text)
+				var regex_b = new RegExp("(^)" + text + "($)");
+				var test = nombre.search(regex_b);
+				//console.log("Test: "+test+ " TxSiz: "+tx_siz)
+				if( test != -1 && tx_siz>0){
+					el_unselec();
+				}
+			}
+			var prod_activ = gl_products[j].products.active;
+			div.setAttribute("class",(prod_activ?"div_list_style":"element_style_disable"));
+		}
+		else{
+			div.setAttribute("class","element_style_hidden");
+		}
+	}
+}
+
+
+
 function crear_lista_productos() {
 	gl_data_list = new Array();
 	var sect_lista = document.getElementById("listageneral");
@@ -148,34 +193,36 @@ function crear_lista_productos() {
 }
 
 function add_text_fila(index){
-
 	var r_nombre = gl_products[index].products.nombre?gl_products[index].products.nombre:"";
 	r_nombre = r_nombre ?r_nombre.toLowerCase():"";
 	var prod_activ = gl_products[index].products.active;
-
-
-	prod_activ? gl_data_list.push("<option id='optlist"+index+"' value='"+r_nombre+"'>") : gl_data_list.push("");
-
+	
+	var clss_name = "div_list_style"
+	if(prod_activ) {
+		gl_data_list.push("<option id='optlist"+index+"' value='"+r_nombre+"'>") 
+	}
+	else {
+		clss_name = "element_style_disable";
+		gl_data_list.push("");
+	}
 
 	var r_cantidad = gl_products[index].products.cantidad?gl_products[index].products.cantidad:0;
 	var r_margen = gl_products[index].products.margen?gl_products[index].products.margen:0;
 	var r_precio = gl_products[index].products.precio?gl_products[index].products.precio:0;
 	var values_tx = r_nombre+" Cantidad ("+r_cantidad+") Margen c/u ("+get_mask_simple(r_margen,"%")+") Entrada c/u ("+get_mask(r_precio,gl_mon_b)+")";
+	
 
-	var tx = "<div class='"+(prod_activ?"div_list_style":"element_style_disable")+"' id='divlp"+index+"' onclick='button_selec_product("+index+");'><button type='button' id='buttsel"+index+"' class='butt_style'>Seleccionar</button> "+values_tx+"</div>";
+	var tx = "<div class='"+(index<60?clss_name:"element_style_hidden")+"' id='divlp"+index+"' onclick='button_selec_product("+index+");'><button type='button' id='buttsel"+index+"' class='butt_style'>Seleccionar</button> "+values_tx+"</div>";
 
 	if(gl_curr_list_etd_sel == "Todas") {
 		return tx;
 	}
-
 	else if (gl_curr_list_etd_sel == "Activos" && prod_activ){
 		return tx;	
 	}
-
 	else if (gl_curr_list_etd_sel == "Inactivos" && !prod_activ){
 		return tx;
 	}
-
 	return "";
 }
 function button_unselc_style(id){
@@ -264,48 +311,6 @@ function reset_inputs_lp(){
 	precio.value = "";
 	precio_mask.value = "";
 	lectura.value = "";
-}
-
-function buscar_lista(text) {
-	reset_inputs_lp();
-	var result = true;
-	var siz = gl_products.length;
-	var tx_siz = text.length;
-	set_lev_datalist(tx_siz);
-	text = text.toLowerCase();
-	//console.log("Finished: "+siz);
-	var test_ok = true;
-	for (var j = 0; j < siz; j++) {
-		var div = document.getElementById("divlp"+j);
-		//Obtine todas las columnas de nombres
-		var nombre = gl_products[j].products.nombre?gl_products[j].products.nombre:"";
-
-		if (nombre!=null) nombre = nombre.toLowerCase();
-		else continue;
-
-		result = nombre.includes(text);
-		//console.log("a:"+tx+"b:"+text.toLowerCase());
-		if(result){
-			if(test_ok){
-				test_ok = false;
-				//Deselecciona el elemento para ocultar teclado en android
-				const regex_a = /[^\w\.@-]/ig;		//Exp Regula, Elimina Caracteres especiales
-				text = text.replaceAll(regex_a, '')
-				nombre = nombre.replaceAll(regex_a, '')
-				//console.log("Text: "+text)
-				var regex_b = new RegExp("(^)" + text + "($)");
-				var test = nombre.search(regex_b);
-				//console.log("Test: "+test+ " TxSiz: "+tx_siz)
-				if( test != -1 && tx_siz>0){
-					el_unselec();
-				}
-			}
-			div.setAttribute("class","div_list_style");
-		}
-		else{
-			div.setAttribute("class","element_style_hidden");
-		}
-	}
 }
 
 function load_general_data() {

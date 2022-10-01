@@ -1,6 +1,7 @@
 //Datos de los productos
 
 function guardar_rp(){
+	console.log("test")
 	var nombre = document.getElementById("inputrp10");
 	var cantidad = document.getElementById("inputrp11");
 	var margen = document.getElementById("inputrp12");

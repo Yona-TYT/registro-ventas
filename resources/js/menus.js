@@ -172,7 +172,7 @@ function mostrar_input() {
 
 function ocultar_input(id = null) {
 	var current_input = document.activeElement;
-	var current_id_name = current_input.id;
+	var current_id_name = current_input.tagname == "INPUT" ? current_input.id : "";
 	var input_old = current_element;
 
 	//console.log(id +" :: "+current_element +" :: "+current_id_name);
