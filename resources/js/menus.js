@@ -189,9 +189,9 @@ function ocultar_input(id = null) {
 			current_element = input;
 		}
 	}
-	else if(current_id_name!=""){
-		el_selec(current_id_name);
-	}
+	//else if(current_id_name!=""){
+		//el_selec(current_id_name);
+	//}
 	
 	if(input_old ){
 		var id_name_old = input_old.id;
