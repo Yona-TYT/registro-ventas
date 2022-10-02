@@ -2,7 +2,8 @@
 var gl_save_list = new save_list_ex();
 
 var gl_type = [	"application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
-				"application/vnd.ms-excel.sheet.macroEnabled.12", "application/vnd.ms-excel", "text/csv"
+				"application/vnd.ms-excel.sheet.macroEnabled.12", "application/vnd.ms-excel",
+				"text/csv", "text/comma-separated-values"
 			];
 
 function importar_main() {
@@ -49,7 +50,7 @@ function importar_simp_list(elem) {
 	if(file_date){
 		var current_type = file_date.type;
 		//console.log(current_type);
-		if(current_type == gl_type[3]){
+		if(current_type == gl_type[3] || current_type == gl_type[4]){
 			Papa.parse(file_date,{
 				config: {
 					delimiter: ";"
@@ -108,7 +109,7 @@ function importar_advan_list(elem) {
 				});
 			}
 		}
-		if(current_type == gl_type[3]){
+		if(current_type == gl_type[3] || current_type == gl_type[4]){
 			Papa.parse(file_date,{
 				config: {
 					delimiter: ";"
