@@ -10,11 +10,12 @@
 	--alig-text: center;
 	--cel-siz: 100%;
 	--cel-siz-name: 100%;
+	--color-back: rgba(4, 101, 180, 0.5);
 }
 
 .header_div {
 	background: #C2C8CC;
-	background: rgba(33, 159, 144, 0.7);
+	background: var(--color-back);
 
 	position: fixed;
 	width: 100%;
@@ -30,7 +31,7 @@
 }
 
 .icon_style{
-	background:rgba(33, 159, 144, 0.7);
+	background:var(--color-back);
 	border: 1px solid #c0cbd9;
 	border-radius: 5px;
 	padding: 5px 5px;
@@ -72,7 +73,7 @@
 	border-color: #fafafa;
 
 	margin: 10% auto;
-	background-color: rgba(33, 159, 144, 0.7);
+	background-color: var(--color-back);
 }
 
 .colum_selec_style {
@@ -413,11 +414,8 @@
 	width: 100%;
 	height:var(--all-height);
 
-	border-width: var(--all-bord);
-	border-style: solid;
-	border-color: #fafafa;
-
-	background: rgba(55, 64, 145, 0.4);
+	border: var(--all-bord) solid #fafafa;
+	background-color: rgba(55, 64, 145, 0.4);
 	overflow: hidden;
 }
 
@@ -479,7 +477,7 @@
 	width: var(--cel-siz-name);
 
 
-	background-color: #6e3068;
+	background-color: #104d9b;
 	overflow: hidden;
 }
 
@@ -508,16 +506,14 @@
 
 
 tr, .fila_style:nth-child(odd) {
-	background: #aadcf7;
+
 	color: #ffffff;
+	background: rgba(70, 30, 130, 1);
 }
 tr, .fila_style:nth-child(even) {
-	background: #47bafc;
-	color: #ffffff;
-}
 
-tr, .fila_style:hover {
-	background-color: rgba(206, 24, 30, 0.5);
+	color: #ffffff;
+	background: rgba(70, 30, 130, 0.6);
 }
 
 .div_his_list_style:hover {
@@ -554,7 +550,7 @@ tr, .fila_style:hover {
 	border-color: #fafafa;
 
 	margin-left: 0.2%;
-	background-color: rgba(33, 159, 144, 0.3);
+	background-color: var(--color-back);
 }
 
 .butt_style {

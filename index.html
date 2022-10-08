@@ -13,6 +13,7 @@
 		<script src="resources/js/main.js"></script>
 		<script src="resources/js/basic_calc.js"></script>
 		<script src="resources/js/basic_functions.js"></script>
+		<script src="resources/js/import_lista.js"></script>
 		<script src="resources/js/import_cvs.js"></script>
 		<script src="resources/js/export_cvs.js"></script>
 		<script src="resources/js/menus.js"></script>
@@ -118,7 +119,7 @@
 			<section class="label_style" id="sect_rv"></section>
 			<div class="cajas_style">Total en Dolar: <input class="input_style_td" type="text" id="rv_totaldol" value="0" disabled></div>
 			<div class="cajas_style">Total en Bsf: <input class="input_style_td" type="text" id="rv_totalbsf" value="0" disabled></div>
-			<div class="cajas_style">Nombre Cliente: <input class="mask_style" type="text" id="rv_clnombre" placeholder="Ingrese Nombre de Cliente" list="list_datacl"></div>
+			<div class="cajas_style">Nombre Cliente: <input class="mask_style" type="text" id="rv_clnombre" placeholder="Ingrese Nombre de Cliente" onfocus="el_selec(true);" list="list_datacl"></div>
 			<datalist id="list_datacl"></datalist>
 
 			<div class="cajas_style">Pendiente:  <input class="" type="checkbox" id="pend_mark"></div>

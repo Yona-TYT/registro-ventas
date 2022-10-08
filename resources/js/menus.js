@@ -161,6 +161,7 @@ function mostrar_input() {
 		input.setAttribute("class","input_style_visible");
 		mask.setAttribute("disabled", "");
 		input.focus();
+		input.select();
 		if(current_element == input)
 			current_element = null;
 
