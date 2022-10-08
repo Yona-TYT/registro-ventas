@@ -67,11 +67,12 @@ function create_table_rv(){
 				if (siz_c==4){
 					input.setAttribute("class","input_style_visible");
 					input.setAttribute("type", "number");
+					input.setAttribute("value", "1");
 					input.setAttribute("step", "any");
-					celda.appendChild(input);
-					input.setAttribute("onFocus", "ocultar_input();");
+					input.setAttribute("onFocus", "el_selec(true)();");
 					input.setAttribute("onchange","update_list_rv();");
 					input.setAttribute("oninput","update_list_rv();");
+					celda.appendChild(input);
 				}
 
 				//Cuadros de solo lectura

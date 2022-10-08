@@ -62,7 +62,6 @@ function buscar_lista_rv(id, unsel = true) {
 			
 		}
 	}
-
 	update_list_rv();
 }
 function update_list_rv(){
@@ -124,14 +123,13 @@ var nw_desc = new Array();
 function button_reg_venta(nr) {
 	if(gl_lista_rv.index[nr] != null){
 		var butt = document.getElementById("buttrv"+nr+"5");
-		butt.disabled = true;
-		butt.setAttribute("class", "button_style_disable");
+
 
 		var select = document.getElementById("selcregvent");
 		var sel_nombre = select.options[select.selectedIndex].innerHTML;
 
 		var clave = gl_lista_rv.clave[nr];
-//	console.log("Finished:"+clave +"  "+gl_products.clave);
+		//console.log("Finished:"+clave +"  "+gl_products.clave);
 
 		var index = gl_lista_rv.index[nr];
 		var nombre = gl_lista_rv.nombre[nr];
@@ -143,7 +141,10 @@ function button_reg_venta(nr) {
 		var genprecbs = gl_general.gen_bs;
 
 		var comp = comparar_rv(index);
-		if(comp){
+		if(total && total !=0){
+			butt.disabled = true;
+			butt.setAttribute("class", "button_style_disable");
+
 			//Para guardar datos de producto
 			nw_index[gl_venta_rv.count] = index;
 			nw_clave[gl_venta_rv.count] = clave;
@@ -167,7 +168,7 @@ function button_reg_venta(nr) {
 			mostrar_lista_rv();
 		}
 		else {
-			alert("Producto duplicado, use el boton [Quitar].");
+			alert("La cantidad es invalida!.");
 		}
 	}
 }
