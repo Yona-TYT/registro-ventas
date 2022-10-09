@@ -98,6 +98,9 @@
 					Importar Lista
 				</div>
 			</div>
+		<! ---------------- Para las listas datalist ------------------>
+			<datalist id="listproducts"></datalist>
+			<datalist id="list_datacl"></datalist>
 
 		<! ---------------- Seccion Siempre Visible ------------------>
 		<section class="label_style" id="seccion_fija">
@@ -114,13 +117,13 @@
 
 		<section class="label_style" id="seccion1">
 			<div class="cajas_style">Buscara productos: 
-				<input class="mask_style" type="search" id="buscar_rv" placeholder="Ingrese Nombre de Producto" onfocus="el_selec(true);" onclick="elm_show_list();"  ondblclick="elm_show_list(true);">
+				<input class="mask_style" type="search" id="buscar_rv" list="listproducts" placeholder="Ingrese Nombre de Producto" onfocus="el_selec(true);" onclick="elm_show_list();"  ondblclick="elm_show_list(true);">
 			</div>
 			<section class="label_style" id="sect_rv"></section>
 			<div class="cajas_style">Total en Dolar: <input class="input_style_td" type="text" id="rv_totaldol" value="0" disabled></div>
 			<div class="cajas_style">Total en Bsf: <input class="input_style_td" type="text" id="rv_totalbsf" value="0" disabled></div>
 			<div class="cajas_style">Nombre Cliente: <input class="mask_style" type="text" id="rv_clnombre" placeholder="Ingrese Nombre de Cliente" onfocus="el_selec(true);" list="list_datacl"></div>
-			<datalist id="list_datacl"></datalist>
+
 
 			<div class="cajas_style">Pendiente:  <input class="" type="checkbox" id="pend_mark"></div>
 			<div class="cajas_style"><button class="mask_style" type="button" id="buttrvtotal" onclick="guardar_venta();">Registrar Venta</button></div>
@@ -167,24 +170,21 @@
 				<label for="selectlistaname">Nombre de Lista: </label>
 				<input class="mask_style" type="text" id="inputlistaname" oninput="input_to_selec();" onBlur="input_to_selec();" onfocus="el_selec('inputlistaname');">
 			</div>
-			<div class="cajas_style">Buscara productos: <input class="mask_style" type="search" id="buscar" placeholder="Buscar Productos" list="listproducts" onfocus="el_selec(true);" onclick="elm_show_list();" ondblclick="elm_show_list(true);">
+			<div class="cajas_style">Buscara productos: <input class="mask_style" type="search" id="buscar" list="listproducts" placeholder="Buscar Productos" list="listproducts" onfocus="el_selec(true);" onclick="elm_show_list();" ondblclick="elm_show_list(true);">
 			</div>
 
 			<div class="cajas_style">Por Estado: 
 				<select class="mask_style" id="selclistetd"></select>
 			</div>
-			<datalist id="listproducts"></datalist>
-
-				<div class="cajas_style">
-					Margen Global:
-					<input readonly="" class="input_style_edicion_td" id="text_mask04" onclick="mostrar_input();" onselect="mostrar_input();" placeholder ="Ingrese Valor">
-					<input type="number" readwrite="" class="input_style_hidden" onkeyup="update_celdas_generales();" onclick="update_celdas_generales();" onchange="update_celdas_generales();" step="10" min="1" id="input04" onfocus="ocultar_input();" lang="en" placeholder ="Ingrese Valor">
-				</div>
-				<div class="cajas_style">
-					<button class="mask_style" type="button" id="butlistsave" onclick = "produ_datos_to_csv();">
-					Guardar Lista
-				</div>
-
+			<div class="cajas_style">
+				Margen Global:
+				<input readonly="" class="input_style_edicion_td" id="text_mask04" onclick="mostrar_input();" onselect="mostrar_input();" placeholder ="Ingrese Valor">
+				<input type="number" readwrite="" class="input_style_hidden" onkeyup="update_celdas_generales();" onclick="update_celdas_generales();" onchange="update_celdas_generales();" step="10" min="1" id="input04" onfocus="ocultar_input();" lang="en" placeholder ="Ingrese Valor">
+			</div>
+			<div class="cajas_style">
+				<button class="mask_style" type="button" id="butlistsave" onclick = "produ_datos_to_csv();">
+				Guardar Lista
+			</div>
 
 			<section class="label_style" id="sect_lp"></section>
 			<section class="label_style" id="listageneral"></section>
