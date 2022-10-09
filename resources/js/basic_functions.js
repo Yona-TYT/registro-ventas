@@ -260,7 +260,6 @@ function elm_show_list(force = false){
 
 }
 
-
 function action_compatibility(opt){
 	//Compatibilidad para pasar lista a modo de clave individual
 	if(opt == 1){

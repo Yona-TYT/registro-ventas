@@ -178,8 +178,8 @@ function crear_lista_productos() {
 	var siz = gl_products.length;
 
 	//Determina el nivel dependiendo del tamaño de la lista
-	if (siz < 50) gl_list_lv = 0;
-	else if (siz < 100) gl_list_lv = 1;
+	if (siz < 100) gl_list_lv = 0;
+	else if (siz < 250) gl_list_lv = 1;
 	else if (siz < 500) gl_list_lv = 2;
 	else if (siz < 1000) gl_list_lv = 3;
 	else gl_list_lv = 4;
