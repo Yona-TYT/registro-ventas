@@ -52,6 +52,7 @@
 
 	display:var(--caja-disp);
 	margin:2px;
+	padding: 1%;
 }
 
 .table_style{

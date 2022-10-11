@@ -106,6 +106,11 @@ function cursor_no_button(id)
 }
 
 function init(){
+
+	if ('virtualKeyboard' in navigator) {
+		console.log("yes")
+	}
+
 	//Identifica si es firefox
 	gl_browser = is_browser_active("firefox");
 

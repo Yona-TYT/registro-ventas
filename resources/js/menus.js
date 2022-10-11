@@ -16,31 +16,7 @@ function menu_main(){
 	var select1 = document.getElementById("selcregvent");
 }
 
-function mostrar_lista_menu(is_pc=false){
-	var elm = document.activeElement;
-	//alert(elm.tagName)
-
-	var lista = document.getElementById("allmenu");
-	var class_name = lista.className;
-	if(class_name == "element_style_hidden" && !is_pc){
-		lista.setAttribute("class","header_div");
-	}
-}
-
 gl_menu_sw = false;
-function ocultar_lista_menu(){
-	var elm = document.activeElement;
-	//alert(elm.tagName)
-
-	if(elm.tagName == "INPUT"){
-		var lista = document.getElementById("allmenu");
-		var class_name = lista.className;
-		if(class_name != "element_style_hidden"){
-			lista.setAttribute("class","element_style_hidden");
-			return null;
-		}
-	}
-}
 var gl_is_touch = null;
 window.addEventListener("touchstart", function() {
 	gl_is_touch = true;
@@ -52,7 +28,7 @@ window.addEventListener("touchmove", function() {
 });
 
 window.addEventListener("mousemove", function() {
-	mostrar_lista_menu(true);
+	if (gl_is_touch === null)mostrar_lista_menu("tago");
 });
 
 /*
@@ -68,6 +44,33 @@ window.addEventListener('scroll', function() {
 		mostrar_lista_menu(true);
 	}
 });*/
+
+
+function mostrar_lista_menu(is_pc=false){
+	var elm = document.activeElement;
+	alert(is_pc)
+
+	var lista = document.getElementById("allmenu");
+	var class_name = lista.className;
+	if(class_name == "element_style_hidden" && !is_pc){
+		lista.setAttribute("class","header_div");
+	}
+}
+
+function ocultar_lista_menu(){
+	var elm = document.activeElement;
+	//alert(elm.tagName)
+
+	if(elm.tagName == "INPUT"){
+		var lista = document.getElementById("allmenu");
+		var class_name = lista.className;
+		if(class_name != "element_style_hidden"){
+			lista.setAttribute("class","element_style_hidden");
+			return null;
+		}
+	}
+}
+
 
 function visible_element(opt) {
 	var lista = document.getElementById("allmenu");
