@@ -108,7 +108,7 @@ function cursor_no_button(id)
 function init(){
 
 	if ('virtualKeyboard' in navigator) {
-		console.log("yes")
+		alert("yes")
 	}
 
 	//Identifica si es firefox

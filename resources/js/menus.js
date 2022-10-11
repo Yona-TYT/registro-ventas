@@ -48,7 +48,7 @@ window.addEventListener('scroll', function() {
 
 function mostrar_lista_menu(is_pc=false){
 	var elm = document.activeElement;
-	alert(is_pc)
+	//alert(is_pc)
 
 	var lista = document.getElementById("allmenu");
 	var class_name = lista.className;
