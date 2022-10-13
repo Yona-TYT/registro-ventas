@@ -249,15 +249,12 @@ function elm_show_list(force = false){
 	var input = document.activeElement;
 	var att = input.getAttribute("list"); 
 	//console.log(att)
-	input.setAttribute("list","listproducts");
 	if(!att){
+		input.setAttribute("list","listproducts");
 		input.blur();
 		input.focus();
 		input.setAttribute("onfocus","el_selec(true);");
 	}
-	
-
-
 }
 
 function action_compatibility(opt){
