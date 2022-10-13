@@ -125,22 +125,21 @@ function load_edit_input(j,i){
 function buscar_lista(text) {
 	reset_inputs_lp();
 	var result = true;
-	var siz = gl_products.length<60? gl_products.length : 60;
+	var siz = gl_products.length;
 	var tx_siz = text.length;
 	set_lev_datalist(tx_siz);
 	text = text.toLowerCase();
 	//console.log("Finished: "+siz);
 	var test_ok = true;
+	var count = 0;
 	for (var j = 0; j < siz; j++) {
 		var div = document.getElementById("divlp"+j);
 		//Obtine todas las columnas de nombres
 		var nombre = gl_products[j].products.nombre?gl_products[j].products.nombre:"";
-
 		if (nombre!=null) nombre = nombre.toLowerCase();
 		else continue;
-
 		result = nombre.includes(text);
-		//console.log("a:"+tx+"b:"+text.toLowerCase());
+		//console.log("a:"+result+"b:"+text.toLowerCase());
 		if(result){
 			if(test_ok){
 				test_ok = false;
@@ -156,8 +155,9 @@ function buscar_lista(text) {
 					el_unselec();
 				}
 			}
+			count++
 			var prod_activ = gl_products[j].products.active;
-			div.setAttribute("class",(prod_activ?"div_list_style":"element_style_disable"));
+			if (count<60) div.setAttribute("class",(prod_activ?"div_list_style":"element_style_disable"));
 		}
 		else{
 			div.setAttribute("class","element_style_hidden");

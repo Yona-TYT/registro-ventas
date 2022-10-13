@@ -40,6 +40,7 @@ function buscar_lista_rv(id, unsel = true) {
 		if (nombre!=null) nombre = nombre.toLowerCase();
 		else continue;
 		result = nombre.includes(text);
+		//console.log("a:"+result+"b:"+text.toLowerCase());
 		if(result && prod.active){
 			if(test_ok && unsel){
 				test_ok = false;
