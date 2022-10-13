@@ -28,7 +28,7 @@ window.addEventListener("touchmove", function() {
 });
 
 window.addEventListener("mousemove", function() {
-	if (gl_is_touch === null)mostrar_lista_menu(true);
+	if (gl_is_touch === null)mostrar_lista_menu();
 });
 
 /*

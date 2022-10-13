@@ -107,13 +107,14 @@ function cursor_no_button(id)
 
 function init(){
 
-	if ('virtualKeyboard' in navigator) {
+	/*if ('virtualKeyboard' in navigator) {
 
 		navigator.virtualKeyboard.addEventListener('geometrychange', (event) => {
 			const { x, y, width, height } = event.target.boundingRect;
 			alert('Virtual keyboard geometry changed:', x, y, width, height);
 		});
 	}
+	*/
 
 	//Identifica si es firefox
 	gl_browser = is_browser_active("firefox");
